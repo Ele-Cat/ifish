@@ -1,15 +1,18 @@
 <template>
   <div class="layout" @contextmenu="e => e.preventDefault()">
-    <FMainBg />
-    <div class="num">2012</div>
+    <MainBg />
+    <div class="num"><LTime /></div>
     <img src="https://api.vvhan.com/api/moyu" alt="">
     https://www.sojson.com/other/relax.html
     <!-- <video src=""></video> -->
+    <MainFooter />
   </div>
 </template>
 
 <script setup>
-import FMainBg from './components/common/FMainBg.vue';
+import MainBg from './components/common/MainBg.vue';
+import MainFooter from './components/common/MainFooter.vue';
+import LTime from './components/libs/LTime.vue';
 
 document.addEventListener("visibilitychange", handleVisibilityChange, false);
 function handleVisibilityChange() {
@@ -28,6 +31,6 @@ function handleVisibilityChange() {
   overflow: hidden;
 }
 .num {
-  font-family: DS-DIGI;
+  // font-family: DS-DIGI;
 }
 </style>

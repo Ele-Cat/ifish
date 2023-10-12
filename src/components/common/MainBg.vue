@@ -1,7 +1,8 @@
 <template>
-  <img class="cover" :src="coverUrl" alt="">
-  <img class="cover animate__fadeOut" :src="coverUrl" alt="">
-  <div class="mask"></div>
+  <div>
+    <img class="cover" :src="coverUrl" alt="">
+    <img class="cover animate__fadeOut" :src="coverUrl" alt="">
+  </div>
 </template>
 
 <script setup>
@@ -21,6 +22,8 @@ const coverUrl = "https://tucdn.wpon.cn/2023/10/12/05f24414c474e.jpg";
 .animate__fadeOut {
   width: 200vw;
   height: 200vh;
+  left: -50vw;
+  top: -50vh;
   animation: fadeOut ease-in-out 1s both;
 }
 
@@ -33,11 +36,4 @@ const coverUrl = "https://tucdn.wpon.cn/2023/10/12/05f24414c474e.jpg";
     opacity: 0;
   }
 }
-
-.mask {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  z-index: -98;
-  // backdrop-filter: saturate(200%) blur(0px);
-}</style>
+</style>

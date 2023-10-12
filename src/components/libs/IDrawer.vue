@@ -1,33 +1,55 @@
 <template>
-  <div class="i-drawer">
-    <div class="i-drawer-mask"></div>
-    <div class="i-drawer-content-wrapper" :style="{width: '40vw'}">
-      <div class="i-drawer-header">
-        <div class="i-drawer-title">标题</div>
-      </div>
-      <div class="i-drawer-body">
-        <slot />
+  <Teleport to="body">
+    <div class="i-drawer" :class="{show: open}">
+      <div class="i-drawer-mask" @click="closeDrawer"></div>
+      <div class="i-drawer-content-wrapper" :style="{width: '40vw'}">
+        <div class="i-drawer-header">
+          <div class="i-drawer-title">{{ title }}</div>
+          <i class="ifishfont ifish-close" @click="closeDrawer"></i>
+        </div>
+        <perfect-scrollbar class="config-chat">
+          <div class="i-drawer-body">
+            <slot />
+          </div>
+        </perfect-scrollbar>
       </div>
     </div>
-  </div>
+  </Teleport>
 </template>
 
 <script setup>
+const props = defineProps({
+  title: {
+    type: String,
+    default: "标题",
+  },
+  open: {
+    type: Boolean,
+    default: false,
+  }
+})
 
+const emit = defineEmits(["close"]);
+const closeDrawer = () => {
+  emit("close");
+}
 </script>
 
 <style lang="less" scoped>
 .i-drawer {
   position: fixed;
   inset: 0;
-  z-index: 1000;
-  pointer-events: none;
+  z-index: 999;
+  display: none;
+  &.show {
+    display: block;
+  }
   .i-drawer-mask {
     position: absolute;
     inset: 0;
-    z-index: 1000;
+    z-index: 999;
     background: rgba(0, 0, 0, 0.45);
-    pointer-events: auto;
+    transition: all .3s;
   }
   .i-drawer-content-wrapper {
     top: 0;
@@ -42,18 +64,33 @@
     flex-direction: column;
     background-color: var(--theme-bg-color);
     color: var(--theme-text-color);
+    transition: all .3s;
     .i-drawer-header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
       padding: 16px 24px;
       font-size: 16px;
       line-height: 1.5;
       border-bottom: 1px solid var(--grey-4);
+      .i-drawer-title {
+        flex: 1;
+        margin-right: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .ifish-close {
+        cursor: pointer;
+        &:hover {
+          color: var(--grey-9);
+        }
+      }
     }
     .i-drawer-body {
       flex: 1;
-      padding: 24px;
-      overflow: auto;
+      padding: 24px 16px 24px 24px;
+      // overflow: auto;
       font-size: 14px;
     }
   }

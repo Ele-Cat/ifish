@@ -24,6 +24,7 @@ function handleVisibilityChange() {
 </script>
 
 <style lang="less" scoped>
+@import url(//at.alicdn.com/t/c/font_4284553_mm24x29cksj.css);
 .layout {
   width: 100vw;
   height: 100vh;

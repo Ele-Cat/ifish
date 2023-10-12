@@ -1,15 +1,21 @@
 <template>
   <div class="footer">
     <p>&copy; 2023 <a :href="bLink" target="_blank">可樂加冰c</a>. All rights reserved.</p>
-    <p class="cursor">免责声明</p>
-    <Disclaimers />
+    <p class="cursor" @click="disclaimersVisible = true">免责声明</p>
+    <Disclaimers @close="close" :open="disclaimersVisible" />
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import Disclaimers from '@/components/common/Disclaimers.vue';
 
-const bLink = "https://space.bilibili.com/376288070"
+const bLink = "https://space.bilibili.com/376288070";
+
+const disclaimersVisible = ref(false);
+const close = () => {
+  disclaimersVisible.value = false;
+}
 </script>
 
 <style lang="less" scoped>

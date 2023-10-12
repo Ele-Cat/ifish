@@ -39,13 +39,13 @@ setInterval(() => {
 <style lang="less" scoped>
 .l-time {
   text-align: center;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 500;
   color: #fff;
   text-shadow: 2px 20px 28px rgb(0 0 0 / 20%);
   .time {
     font-size: 48px;
-    font-family: DS-DIGI;
+    // font-family: DS-DIGI;
   }
 }
 </style>

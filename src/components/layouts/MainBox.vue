@@ -1,16 +1,26 @@
 <template>
   <div class="main-box">
-    <div class="num"><LTime /></div>
+    <div class="sys-time"><ITime /></div>
     <!-- <img src="https://api.vvhan.com/api/moyu" alt=""> -->
     https://www.sojson.com/other/relax.html
     <!-- <video src=""></video> -->
+
+    <!-- https://api.moyuduck.com/hot/all -->
+
+    <!-- https://txc.qq.com/products/611809 -->
+    <!-- https://support.qq.com/product/611809 -->
   </div>
 </template>
 
 <script setup>
-import LTime from '@/components/libs/LTime.vue';
+import ITime from '@/components/libs/ITime.vue';
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.main-box {
+  margin-top: 36px;
+  .sys-time {
+    padding-top: 36px;
+  }
+}
 </style>

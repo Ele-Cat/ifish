@@ -3,14 +3,26 @@
     <div class="logo">
       <img src="@/assets/images/logo.png" alt="">
     </div>
-    <p class="setting">
+    <p class="setting" @click="changeTheme">
       设置
     </p>
   </div>
 </template>
 
 <script setup>
+let isDark = false;
+let html = document.documentElement;
+if (!isDark) {
+  // html添加theme 属性值
+  html.setAttribute("theme","")
+} else {
+  // html添加theme 属性值
+  html.setAttribute("theme","dark")
+}
 
+const changeTheme = () => {
+  html.setAttribute("theme", "dark")
+}
 </script>
 
 <style lang="less" scoped>

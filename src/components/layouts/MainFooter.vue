@@ -2,7 +2,7 @@
   <div class="footer">
     <p>&copy; 2023 可樂加冰c. All rights reserved.</p>
     <p class="cursor">免责声明</p>
-    <Disclaimers />
+    <!-- <Disclaimers /> -->
   </div>
 </template>
 

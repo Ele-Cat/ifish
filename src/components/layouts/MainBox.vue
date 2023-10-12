@@ -20,7 +20,7 @@ import ITime from '@/components/libs/ITime.vue';
 .main-box {
   margin-top: 36px;
   .sys-time {
-    padding-top: 36px;
+    padding-top: 24px;
   }
 }
 </style>

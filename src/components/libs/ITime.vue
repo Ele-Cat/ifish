@@ -45,6 +45,8 @@ setInterval(() => {
   text-shadow: 2px 20px 28px rgb(0 0 0 / 20%);
   .time {
     font-size: 48px;
+    margin-top: 4px;
+    letter-spacing: 2px;
     // font-family: DS-DIGI;
   }
 }

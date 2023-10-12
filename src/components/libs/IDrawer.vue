@@ -40,13 +40,15 @@
     background: #ffffff;
     display: flex;
     flex-direction: column;
+    background-color: var(--theme-bg-color);
+    color: var(--theme-text-color);
     .i-drawer-header {
       display: flex;
       align-items: center;
       padding: 16px 24px;
       font-size: 16px;
       line-height: 1.5;
-      border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+      border-bottom: 1px solid var(--grey-4);
     }
     .i-drawer-body {
       flex: 1;

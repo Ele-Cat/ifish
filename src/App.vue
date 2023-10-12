@@ -2,7 +2,7 @@
   <div class="layout" @contextmenu="e => e.preventDefault()">
     <MainBg />
     <div class="num"><LTime /></div>
-    <img src="https://api.vvhan.com/api/moyu" alt="">
+    <!-- <img src="https://api.vvhan.com/api/moyu" alt=""> -->
     https://www.sojson.com/other/relax.html
     <!-- <video src=""></video> -->
     <MainFooter />

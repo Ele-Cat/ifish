@@ -1,6 +1,7 @@
 <template>
   <!-- <img class="cover" src="http://www.dmoe.cc/random.php" alt=""> -->
   <img class="cover" src="https://img.zhuayuya.com/wallpaper/img/two/img/wallpa_img_1060.jpg" alt="">
+  <img class="cover animate__fadeOut" src="https://img.zhuayuya.com/wallpaper/img/two/img/wallpa_img_1060.jpg" alt="">
   <div class="mask"></div>
 </template>
 
@@ -30,7 +31,25 @@
   height: 100vh;
   object-fit: cover;
   z-index: -99;
+  transition: all .3s;
 }
+
+.animate__fadeOut {
+  animation-name: fadeOut;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 .mask {
   position: fixed;
   width: 100vw;
@@ -38,5 +57,4 @@
   z-index: -98;
   backdrop-filter: blur(2px);
   // backdrop-filter: saturate(200%) blur(1px);
-}
-</style>
+}</style>

@@ -84,13 +84,13 @@ const closeDrawer = () => {
         cursor: pointer;
         &:hover {
           color: var(--grey-9);
+          transform: rotate(90deg);
         }
       }
     }
     .i-drawer-body {
       flex: 1;
       padding: 24px 16px 24px 24px;
-      // overflow: auto;
       font-size: 14px;
     }
   }

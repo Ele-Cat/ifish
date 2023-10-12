@@ -1,18 +1,17 @@
 <template>
   <div class="layout" @contextmenu="e => e.preventDefault()">
     <MainBg />
-    <div class="num"><LTime /></div>
-    <!-- <img src="https://api.vvhan.com/api/moyu" alt=""> -->
-    https://www.sojson.com/other/relax.html
-    <!-- <video src=""></video> -->
+    <MainHeader />
+    <MainBox />
     <MainFooter />
   </div>
 </template>
 
 <script setup>
-import MainBg from './components/common/MainBg.vue';
-import MainFooter from './components/common/MainFooter.vue';
-import LTime from './components/libs/LTime.vue';
+import MainHeader from '@/components/layouts/MainHeader.vue';
+import MainFooter from '@/components/layouts/MainFooter.vue';
+import MainBox from '@/components/layouts/MainBox.vue';
+import MainBg from '@/components/common/MainBg.vue';
 
 document.addEventListener("visibilitychange", handleVisibilityChange, false);
 function handleVisibilityChange() {
@@ -29,8 +28,5 @@ function handleVisibilityChange() {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-}
-.num {
-  // font-family: DS-DIGI;
 }
 </style>

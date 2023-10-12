@@ -1,7 +1,7 @@
 <template>
   <!-- <img class="cover" src="http://www.dmoe.cc/random.php" alt=""> -->
-  <img class="cover" src="https://img.zhuayuya.com/wallpaper/img/two/img/wallpa_img_1060.jpg" alt="">
-  <img class="cover animate__fadeOut" src="https://img.zhuayuya.com/wallpaper/img/two/img/wallpa_img_1060.jpg" alt="">
+  <img class="cover" src="https://tucdn.wpon.cn/2023/10/12/05f24414c474e.jpg" alt="">
+  <img class="cover animate__fadeOut" src="https://tucdn.wpon.cn/2023/10/12/05f24414c474e.jpg" alt="">
   <div class="mask"></div>
 </template>
 
@@ -55,6 +55,6 @@
   width: 100vw;
   height: 100vh;
   z-index: -98;
-  backdrop-filter: blur(2px);
+  // backdrop-filter: blur(2px);
   // backdrop-filter: saturate(200%) blur(1px);
 }</style>

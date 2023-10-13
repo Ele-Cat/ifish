@@ -90,6 +90,11 @@
   dependencies:
     "undici-types" "~5.25.1"
 
+"@types/web-bluetooth@^0.0.18":
+  "integrity" "sha512-v/ZHEj9xh82usl8LMR3GarzFY1IrbXJw5L4QfQhokjRV91q+SelFqxQWSep1ucXEZ22+dSTwLFkXeur25sPIbw=="
+  "resolved" "https://registry.npmmirror.com/@types/web-bluetooth/-/web-bluetooth-0.0.18.tgz"
+  "version" "0.0.18"
+
 "@vitejs/plugin-vue@^4.2.3":
   "integrity" "sha512-xdguqb+VUwiRpSg+nsc2HtbAUSGak25DXYvpQQi4RVU1Xq1uworyoH/md9Rfd8zMmPR/pSghr309QNcftUVseg=="
   "resolved" "https://registry.npmmirror.com/@vitejs/plugin-vue/-/plugin-vue-4.4.0.tgz"
@@ -189,6 +194,28 @@
   "integrity" "sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ=="
   "resolved" "https://registry.npmmirror.com/@vue/shared/-/shared-3.3.4.tgz"
   "version" "3.3.4"
+
+"@vueuse/core@^10.5.0":
+  "integrity" "sha512-z/tI2eSvxwLRjOhDm0h/SXAjNm8N5ld6/SC/JQs6o6kpJ6Ya50LnEL8g5hoYu005i28L0zqB5L5yAl8Jl26K3A=="
+  "resolved" "https://registry.npmmirror.com/@vueuse/core/-/core-10.5.0.tgz"
+  "version" "10.5.0"
+  dependencies:
+    "@types/web-bluetooth" "^0.0.18"
+    "@vueuse/metadata" "10.5.0"
+    "@vueuse/shared" "10.5.0"
+    "vue-demi" ">=0.14.6"
+
+"@vueuse/metadata@10.5.0":
+  "integrity" "sha512-fEbElR+MaIYyCkeM0SzWkdoMtOpIwO72x8WsZHRE7IggiOlILttqttM69AS13nrDxosnDBYdyy3C5mR1LCxHsw=="
+  "resolved" "https://registry.npmmirror.com/@vueuse/metadata/-/metadata-10.5.0.tgz"
+  "version" "10.5.0"
+
+"@vueuse/shared@10.5.0":
+  "integrity" "sha512-18iyxbbHYLst9MqU1X1QNdMHIjks6wC7XTVf0KNOv5es/Ms6gjVFCAAWTVP2JStuGqydg3DT+ExpFORUEi9yhg=="
+  "resolved" "https://registry.npmmirror.com/@vueuse/shared/-/shared-10.5.0.tgz"
+  "version" "10.5.0"
+  dependencies:
+    "vue-demi" ">=0.14.6"
 
 "@webassemblyjs/ast@^1.11.5", "@webassemblyjs/ast@1.11.6":
   "integrity" "sha512-IN1xI7PwOvLPgjcf180gC1bqn3q/QaOCwYUahIOhbYUu8KA/3tw2RT/T0Gidi1l7Hhj5D/INhJxiICObqpMu4Q=="
@@ -1338,6 +1365,11 @@
   "version" "0.12.5"
 
 "vue-demi@>=0.14.5":
+  "integrity" "sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w=="
+  "resolved" "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.14.6.tgz"
+  "version" "0.14.6"
+
+"vue-demi@>=0.14.6":
   "integrity" "sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w=="
   "resolved" "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.14.6.tgz"
   "version" "0.14.6"

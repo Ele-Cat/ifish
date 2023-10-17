@@ -1,5 +1,5 @@
 <template>
-  <i-drawer width="80vw" title="免责声明" placement="right" :open="open" @close="close">
+  <a-drawer width="80vw" title="免责声明" placement="right" :open="open" @close="close" rootClassName="disclaimers-root">
     <div class="disclaimers-drawer">
       <p class="bold">请注意以下条款和条件，以规避您的风险和损失。如果您不同意本声明，请立即离开本网站。如果您继续访问和使用本网站，则表示您已经阅读、理解并同意接受本声明的所有条款和条件。</p>
       <p>1. 本网站所提供的任何内容和服务仅供用户个人学习、研究和测试之用，不得作为商业用途。本网站的所有信息未来可能会随时更新和更改，不保证其准确性、完整性、及时性、适用性、稳定性和可靠性 ；</p>
@@ -22,12 +22,10 @@
       <p>5. 不论在何种情况下，本网站均不对由于网络连接故障，电力故障，罢工，劳动争议，暴乱，起义，骚乱，火灾，洪水，风暴，爆炸，不可抗力，战争，政府行为，国际、国内法院的命令，黑客攻击，互联网病毒，网络运营商技术调整，政府临时管制或任何其他不能合理控制的原因而造成的本服务不能访问、服务中断、信息及数据的延误、停滞或错误，不能提供或延迟提供服务而承担责任。</p>
       <p class="bold">本网站不承担您就使用本服务所提供的信息或任何链接所引致的任何直接、间接、附带、从属、特殊、继发、惩罚性或惩戒性的损害赔偿。</p>
     </div>
-  </i-drawer>
+  </a-drawer>
 </template>
 
 <script setup>
-import IDrawer from '@/components/libs/IDrawer.vue';
-
 const props = defineProps({
   open: {
     type: Boolean,
@@ -54,6 +52,14 @@ const close = () => {
     &.bold {
       font-weight: bold;
     }
+  }
+}
+</style>
+
+<style lang="less">
+.disclaimers-root {
+  .ant-drawer-content-wrapper {
+    max-width: 500px;
   }
 }
 </style>

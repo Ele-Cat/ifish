@@ -100,7 +100,7 @@ const changeMode = () => {
   height: 22px;
   flex-shrink: 0;
   border: 1px solid var(--theme-color);
-  background-color: var(--grey-1-a7);
+  background-color: var(--grey-1);
   transition: border-color 0.25s;
   cursor: pointer;
   .check {
@@ -110,7 +110,7 @@ const changeMode = () => {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background-color: var(--grey-1);
+    background-color: var(--grey-3);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
     transition: transform 0.25s;
     .icon {

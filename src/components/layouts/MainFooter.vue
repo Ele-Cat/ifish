@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <p>&copy; 2023 <a :href="bLink" target="_blank">可樂加冰c</a>. All rights reserved.</p>
-    <p class="cursor" @click="disclaimersVisible = true">免责声明</p>
+    <p class="disclaimers" @click="disclaimersVisible = true">免责声明</p>
     <Disclaimers @close="close" :open="disclaimersVisible" />
   </div>
 </template>
@@ -24,7 +24,6 @@ const close = () => {
   width: 100%;
   bottom: 0;
   height: 28px;
-  // background-color: rgba(255, 255, 255, 0.6);
   background-color: var(--theme-color);
   display: flex;
   font-size: 12px;
@@ -33,11 +32,17 @@ const close = () => {
   color: var(--theme-text-color);
   a {
     color: var(--theme-text-color);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
-  .cursor {
+  .disclaimers {
     margin-left: 10px;
     cursor: pointer;
-    text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 </style>

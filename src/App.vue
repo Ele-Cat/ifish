@@ -1,10 +1,18 @@
 <template>
-  <div class="layout" @contextmenu="e => e.preventDefault()">
-    <MainBg />
-    <MainHeader />
-    <MainBox />
-    <MainFooter />
-  </div>
+  <a-config-provider
+    :theme="{
+      token: {
+        colorPrimary: '#00b96b',
+      },
+    }"
+  >
+    <div class="layout" @contextmenu="e => e.preventDefault()">
+      <MainBg />
+      <MainHeader />
+      <MainBox />
+      <MainFooter />
+    </div>
+  </a-config-provider>
 </template>
 
 <script setup>

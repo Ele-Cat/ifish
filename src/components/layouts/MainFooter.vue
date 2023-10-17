@@ -24,7 +24,7 @@ const close = () => {
   width: 100%;
   bottom: 0;
   height: 28px;
-  background-color: var(--theme-color);
+  background-color: var(--theme-bg-color-a6);
   display: flex;
   font-size: 12px;
   justify-content: center;

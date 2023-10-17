@@ -7,10 +7,11 @@
   -webkit-text-size-adjust: 100%;
 }
 
-/* 白天颜色 */
+// 白天颜色
 :root {
+  --primary-color: #FD6585;
   --theme-bg-color: rgba(248, 250, 252);
-  --theme-color: rgba(248, 250, 252, 0.6);
+  --theme-bg-color-a6: rgba(248, 250, 252, 0.6);
   --theme-text-color: #2F2F2F;
   --comment-color: #f1f2f3;
   --grey-0: #fff;
@@ -61,10 +62,11 @@
   --comment-btn: #ed9abb;
 }
 
-/* 黑夜颜色 */
+// 黑夜颜色
 [theme="dark"]:root {
+  --primary-color: #FD6585;
   --theme-bg-color: rgba(47, 47, 47);
-  --theme-color: rgba(47, 47, 47, 0.6);
+  --theme-bg-color-a6: rgba(47, 47, 47, 0.6);
   --theme-text-color: #F8FAFC;
   --comment-color: var(--grey-1);
   --grey-0: #222;
@@ -108,7 +110,7 @@
 }
 
 html {
-  background-color: var(--theme-color);
+  background-color: var(--theme-bg-color-a6);
   color: var(--theme-text-color);
   transition: color 300ms, background-color 300ms;
 }

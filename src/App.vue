@@ -2,24 +2,18 @@
   <a-config-provider
     :theme="{
       token: {
-        colorPrimary: '#00b96b',
+        colorPrimary: '#FD6585',
       },
     }"
+    :locale="zhCN"
   >
-    <div class="layout" @contextmenu="e => e.preventDefault()">
-      <MainBg />
-      <MainHeader />
-      <MainBox />
-      <MainFooter />
-    </div>
+    <Layouts />
   </a-config-provider>
 </template>
 
 <script setup>
-import MainHeader from '@/components/layouts/MainHeader.vue';
-import MainFooter from '@/components/layouts/MainFooter.vue';
-import MainBox from '@/components/layouts/MainBox.vue';
-import MainBg from '@/components/common/MainBg.vue';
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import Layouts from '@/components/layouts/Index.vue';
 
 document.addEventListener("visibilitychange", handleVisibilityChange, false);
 function handleVisibilityChange() {

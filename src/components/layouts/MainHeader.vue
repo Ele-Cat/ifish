@@ -26,7 +26,7 @@ const settingVisible = ref(false);
   left: 0;
   right: 0;
   top: 0;
-  background-color: var(--theme-color);
+  background-color: var(--theme-bg-color-a6);
   color: var(--theme-text-color);
   height: 36px;
   padding: 0 20px;

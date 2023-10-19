@@ -6,9 +6,8 @@
     </div>
     <div class="menu">
       <ul>
-        <li>主页</li>
-        <li>导航</li>
-        <li>关于</li>
+        <li v-for="item in menuList" :key="item.value" :class="{active: useSystemStore.activeMenu === item.value}" @click="handleMenuClick(item.value)">{{item.label}}</li>
+        <li @click="feedback">反馈</li>
       </ul>
     </div>
     <div class="setting-box">
@@ -19,12 +18,33 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import ModeSwitch from '@/components/common/ModeSwitch.vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 
 const settingVisible = ref(false);
+
+const menuList = reactive([
+  {
+    value: "home",
+    label: "主页",
+  },
+  {
+    value: "nav",
+    label: "导航",
+  },
+  {
+    value: "about",
+    label: "关于",
+  }
+]);
+const handleMenuClick = (activeMenu) => {
+  useSystemStore.activeMenu = activeMenu;
+}
+const feedback = () => {
+  window.open("https://support.qq.com/product/611809", "_blank");
+}
 </script>
 
 <style lang="less" scoped>
@@ -48,21 +68,22 @@ const settingVisible = ref(false);
     img {
       width: 32px;
       height: 32px;
+      filter: brightness(1);
     }
   }
   .menu {
     flex: 1;
-    padding-top: 12px;
+    padding-top: 24px;
     ul, li {
       list-style: none;
       padding: 0;
       margin: 0;
     }
     li {
-      line-height: 2;
+      line-height: 2.4;
       cursor: pointer;
       font-size: 14px;
-      &:hover {
+      &:hover, &.active {
         color: var(--primary-color);
       }
     }
@@ -75,6 +96,17 @@ const settingVisible = ref(false);
       cursor: pointer;
       font-size: 24px;
       margin-top: 12px;
+    }
+  }
+}
+@media screen and (max-width: 640px) {
+  .sidebar {
+    width: 42px;
+    right: 10px;
+    .menu {
+      li {
+        font-size: 12px;
+      }
     }
   }
 }

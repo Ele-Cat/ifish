@@ -25,6 +25,7 @@
   --grey-8: #222;
   --grey-9: #000;
   --grey-1-a0: rgba(253, 253, 253, 0);
+  --grey-1-a9: rgba(253, 253, 253, 0.9);
   --grey-1-a7: rgba(253, 253, 253, 0.7);
   --grey-1-a5: rgba(253, 253, 253, 0.5);
   --grey-1-a3: rgba(253, 253, 253, 0.3);
@@ -79,6 +80,7 @@
   --grey-7: #ddd;
   --grey-8: #eee;
   --grey-9: #f7f7f7;
+  --grey-1-a9: rgba(34, 34, 34, 0.9);
   --grey-1-a7: rgba(34, 34, 34, 0.7);
   --grey-1-a5: rgba(34, 34, 34, 0.5);
   --grey-1-a3: rgba(34, 34, 34, 0.3);
@@ -159,4 +161,13 @@ img {
 
 p {
   margin: 0;
+}
+
+.ant-drawer {
+  .ant-drawer-content {
+    background-color: var(--grey-1-a9);
+  }
+  .ant-drawer-title, .ant-drawer-close {
+    color: var(--theme-text-color);
+  }
 }

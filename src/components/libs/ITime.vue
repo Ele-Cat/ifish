@@ -50,4 +50,12 @@ setInterval(() => {
     // font-family: DS-DIGI;
   }
 }
+@media screen and (max-width: 640px) {
+  .l-time {
+    font-size: 14px;
+    .time {
+      font-size: 36px;
+    }
+  }
+}
 </style>

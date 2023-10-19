@@ -9,7 +9,7 @@
 
 <script setup>
 import MainBg from '@/components/common/MainBg.vue';
-import SideBar from '@/components/common/SideBar.vue';
+import SideBar from '@/components/layouts/SideBar.vue';
 import MainBox from '@/components/layouts/MainBox.vue';
 import MainFooter from '@/components/layouts/MainFooter.vue';
 </script>

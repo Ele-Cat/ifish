@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-const coverUrl = "https://tucdn.wpon.cn/2023/10/12/05f24414c474e.jpg";
+const coverUrl = "https://imgse.com/content/images/system/home_cover_1601010270144_8921bc.jpg";
 </script>
 
 <style lang="less" scoped>

@@ -61,6 +61,7 @@ const settingVisible = ref(false);
     li {
       line-height: 2;
       cursor: pointer;
+      font-size: 14px;
       &:hover {
         color: var(--primary-color);
       }

@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import pinia from "@/store/pinia";
 import App from "./App.vue";
 
-import {Drawer} from "ant-design-vue";
+import { Drawer } from "ant-design-vue";
 import "ant-design-vue/dist/reset.css";
 import "./global.less";
 

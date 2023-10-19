@@ -20,7 +20,7 @@ import SideBar from '@/components/common/SideBar.vue';
 import { useFetch } from '@vueuse/core'
 
 const { data, error, isDone, isLoading, get } = useFetch('https://api.moyuduck.com/hot/all')
-console.log('data: ', data);
+// console.log('data: ', data);
 </script>
 
 <style lang="less" scoped>

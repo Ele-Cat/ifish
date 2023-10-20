@@ -7,9 +7,11 @@
           <p>{{ renderTitle(newsType.key) }}</p>
           <p>{{ newsType.time }}</p>
         </div>
-        <div class="news-info" v-for="news in newsType.hotTops" :key="news.title">
-          <a :href="news.url" target="_blank">{{ news.title }} - {{ news.hotValue }}</a>
-        </div>
+        <perfect-scrollbar class="config-chat">
+          <div class="news-info" v-for="news in newsType.hotTops" :key="news.title">
+            <a :href="news.url" target="_blank">{{ news.title }} - {{ news.hotValue }}</a>
+          </div>
+        </perfect-scrollbar>
       </div>
     </div>
   </div>
@@ -19,7 +21,7 @@
 import { useFetch } from '@vueuse/core';
 
 const { data: newsData, isFinished, isFetching } = useFetch('https://api.moyuduck.com/hot/all').get().json()
-console.log('data: ', newsData._value);
+console.log('newsData: ', newsData);
 
 const objToArr = (obj) => {
   const arr = [];

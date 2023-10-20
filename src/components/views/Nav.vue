@@ -1,5 +1,7 @@
 <template>
-  <div class="nav"></div>
+  <div class="nav">
+    nav
+  </div>
 </template>
 
 <script setup>

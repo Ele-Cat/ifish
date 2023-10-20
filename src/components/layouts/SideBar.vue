@@ -36,6 +36,11 @@ const menuList = reactive([
     tooltip: "摸鱼主页",
   },
   {
+    value: "news",
+    label: "资讯",
+    tooltip: "新闻资讯",
+  },
+  {
     value: "nav",
     label: "导航",
     tooltip: "快捷导航",

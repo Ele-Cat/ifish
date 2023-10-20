@@ -1,7 +1,6 @@
 <template>
   <div class="main-box">
     <ITime class="sys-time" />
-    <!-- <div class="tip">这是爱摸鱼的第一版，还有很多东西不太完善，更多精彩正在路上，感谢您的支持</div>  -->
     <!-- <img src="https://api.vvhan.com/api/moyu" alt=""> -->
     <!-- https://www.sojson.com/other/relax.html -->
     <!-- <video src=""></video> -->
@@ -10,7 +9,37 @@
     <div class="comp-box">
       <Suspense>
         <template #default>
-          <Home />
+          <Home v-if="useSystemStore.activeMenu === 'home'" />
+        </template>
+        <template #fallback>
+          <div class="default-loading">
+            <a-spin tip="加载中..."></a-spin>
+          </div>
+        </template>
+      </Suspense>
+      <Suspense>
+        <template #default>
+          <News v-if="useSystemStore.activeMenu === 'news'" />
+        </template>
+        <template #fallback>
+          <div class="default-loading">
+            <a-spin tip="加载中..."></a-spin>
+          </div>
+        </template>
+      </Suspense>
+      <Suspense>
+        <template #default>
+          <Nav v-if="useSystemStore.activeMenu === 'nav'" />
+        </template>
+        <template #fallback>
+          <div class="default-loading">
+            <a-spin tip="加载中..."></a-spin>
+          </div>
+        </template>
+      </Suspense>
+      <Suspense>
+        <template #default>
+          <About v-if="useSystemStore.activeMenu === 'about'" />
         </template>
         <template #fallback>
           <div class="default-loading">
@@ -25,13 +54,12 @@
 <script setup>
 import { defineAsyncComponent } from 'vue';
 import ITime from '@/components/libs/ITime.vue';
-import { useFetch } from '@vueuse/core'
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 const Home = defineAsyncComponent(() => import('@/components/views/Home.vue'));
-
-const { data, error, isDone, isLoading, get } = useFetch('https://api.moyuduck.com/hot/all')
-// console.log('data: ', data);
+const News = defineAsyncComponent(() => import('@/components/views/News.vue'));
+const Nav = defineAsyncComponent(() => import('@/components/views/Nav.vue'));
+const About = defineAsyncComponent(() => import('@/components/views/About.vue'));
 </script>
 
 <style lang="less" scoped>

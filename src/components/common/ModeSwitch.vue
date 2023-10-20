@@ -99,7 +99,7 @@ const changeMode = () => {
   width: 40px;
   height: 22px;
   flex-shrink: 0;
-  border: 1px solid var(--theme-bg-color-a6);
+  border: 1px solid var(--theme-bg-color-a8);
   background-color: var(--grey-1);
   transition: border-color 0.25s;
   cursor: pointer;

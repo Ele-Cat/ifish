@@ -1,13 +1,17 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar bf">
     <div class="logo">
-      <img v-if="!useSystemStore.darkMode" src="@/assets/images/logo.png" alt="">
-      <img v-else src="@/assets/images/logo_white.png" alt="">
+      <img v-if="!useSystemStore.darkMode" src="/images/logo.png" alt="">
+      <img v-else src="/images/logo_white.png" alt="">
     </div>
     <div class="menu">
       <ul>
-        <li v-for="item in menuList" :key="item.value" :class="{active: useSystemStore.activeMenu === item.value}" @click="handleMenuClick(item.value)">{{item.label}}</li>
-        <li @click="feedback">反馈</li>
+        <a-tooltip :title="item.tooltip" v-for="item in menuList" :key="item.value" placement="left" :color="useSystemStore.darkMode ? 'black' : 'white'">
+          <li :class="{active: useSystemStore.activeMenu === item.value}" @click="handleMenuClick(item.value)">{{item.label}}</li>
+        </a-tooltip>
+        <a-tooltip title="意见反馈" placement="left" :color="useSystemStore.darkMode ? 'black' : 'white'">
+          <li @click="feedback">反馈</li>
+        </a-tooltip>
       </ul>
     </div>
     <div class="setting-box">
@@ -29,14 +33,17 @@ const menuList = reactive([
   {
     value: "home",
     label: "主页",
+    tooltip: "摸鱼主页",
   },
   {
     value: "nav",
     label: "导航",
+    tooltip: "快捷导航",
   },
   {
     value: "about",
     label: "关于",
+    tooltip: "关于本程序",
   }
 ]);
 const handleMenuClick = (activeMenu) => {
@@ -51,8 +58,7 @@ const feedback = () => {
 .sidebar {
   width: 56px;
   height: 88vh;
-  background-color: var(--theme-bg-color-a6);
-  backdrop-filter: saturate(200%) blur(15px);
+  background-color: var(--theme-bg-color-a8);
   position: fixed;
   z-index: 2;
   bottom: 50px;

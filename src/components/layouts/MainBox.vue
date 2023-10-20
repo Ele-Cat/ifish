@@ -8,16 +8,27 @@
 
     <!-- useSystemStore.activeMenu -->
     <div class="comp-box">
-      123123123123123123123123123123123123123123123123123123123123123123
+      <Suspense>
+        <template #default>
+          <Home />
+        </template>
+        <template #fallback>
+          <div class="default-loading">
+            <a-spin tip="加载中..."></a-spin>
+          </div>
+        </template>
+      </Suspense>
     </div>
   </div>
 </template>
 
 <script setup>
+import { defineAsyncComponent } from 'vue';
 import ITime from '@/components/libs/ITime.vue';
 import { useFetch } from '@vueuse/core'
 import useStore from "@/store";
 const { useSystemStore } = useStore();
+const Home = defineAsyncComponent(() => import('@/components/views/Home.vue'));
 
 const { data, error, isDone, isLoading, get } = useFetch('https://api.moyuduck.com/hot/all')
 // console.log('data: ', data);

@@ -4,7 +4,7 @@
     <a-input class="search" v-model:value="searchContent" placeholder="请输入搜索内容" @focus="inputFocus = true" @blur="inputFocus = false" @pressEnter="handleSearch">
       <template #addonBefore>
         <a-tooltip title="点击切换搜索源" :color="useSystemStore.darkMode ? 'black' : 'white'">
-          <img :src="searchType.icon" alt="" @click="handleShowSearchTypes">
+          <img :src="searchTypes.find(item => item.label === useSystemStore.searchType)['icon']" alt="" @click="handleShowSearchTypes">
         </a-tooltip>
       </template>
       <template #suffix>
@@ -12,7 +12,7 @@
       </template>
     </a-input>
     <div ref="searchTypeRef" class="search-types bf" v-show="searchTypeVisible">
-      <div class="search-type" :class="{active: searchType.value === item.value}" v-for="item in searchTypes" :key="item.value" @click="handleSelectSearchType(item)">
+      <div class="search-type" :class="{active: searchType === item.value}" v-for="item in searchTypes" :key="item.value" @click="handleSelectSearchType(item)">
         <img :src="item.icon" alt="">
         {{ item.label }}
       </div>
@@ -81,7 +81,7 @@ const searchTypes = reactive([
 ])
 const searchTypeRef = ref(null)
 const searchTypeVisible = ref(false);
-const searchType = ref(useSystemStore.searchType || searchTypes[0]);
+const searchType = ref(useSystemStore.searchType);
 const searchContent = ref('');
 const inputFocus = ref(false);
 onClickOutside(searchTypeRef, () => {
@@ -91,13 +91,13 @@ const handleShowSearchTypes = () => {
   searchTypeVisible.value = true;
 }
 const handleSelectSearchType = (item) => {
-  searchType.value = item;
+  searchType.value = item.label;
   searchTypeVisible.value = false;
-  useSystemStore.searchType = item;
+  useSystemStore.searchType = item.label;
 }
 
 const handleSearch = () => {
-  const searchUrl = searchType.value.value;
+  const searchUrl = searchType.value;
   if (!searchContent.value) {
     window.open(searchUrl, "_blank");
   } else {

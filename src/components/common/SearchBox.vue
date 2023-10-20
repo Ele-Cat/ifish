@@ -31,52 +31,52 @@ const searchTypes = reactive([
   {
     label: "百度",
     value: "https://www.baidu.com",
-    icon: "/images/icons/baidu.png",
+    icon: "./images/icons/baidu.png",
   },
   {
     label: "谷歌",
     value: "https://www.google.com",
-    icon: "/images/icons/guge.png",
+    icon: "./images/icons/guge.png",
   },
   {
     label: "必应",
     value: "https://cn.bing.com",
-    icon: "/images/icons/bing.png",
+    icon: "./images/icons/bing.png",
   },
   {
     label: "知乎",
     value: "https://www.zhihu.com",
-    icon: "/images/icons/zhihu.png",
+    icon: "./images/icons/zhihu.png",
   },
   {
     label: "掘金",
     value: "https://juejin.cn",
-    icon: "/images/icons/juejin.png",
+    icon: "./images/icons/juejin.png",
   },
   {
     label: "博客园",
     value: "https://zzk.cnblogs.com",
-    icon: "/images/icons/bokeyuan.png",
+    icon: "./images/icons/bokeyuan.png",
   },
   {
     label: "CSDN",
     value: "https://so.csdn.net/so",
-    icon: "/images/icons/csdn.png",
+    icon: "./images/icons/csdn.png",
   },
   {
     label: "GitHub",
     value: "https://github.com",
-    icon: "/images/icons/github.png",
+    icon: "./images/icons/github.png",
   },
   {
     label: "Gitee",
     value: "https://search.gitee.com",
-    icon: "/images/icons/gitee.png",
+    icon: "./images/icons/gitee.png",
   },
   {
     label: "Bilibili",
     value: "https://search.bilibili.com/all",
-    icon: "/images/icons/bilibili.png",
+    icon: "./images/icons/bilibili.png",
   },
 ])
 const searchTypeRef = ref(null)

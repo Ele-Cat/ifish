@@ -5,6 +5,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 // 白天颜色
@@ -137,6 +138,37 @@ html {
 // ::-webkit-scrollbar {
 //   display: none;
 // }
+// 实现鼠标悬浮才显示滚动条
+.scroll-no-bar {
+  overflow-y: auto;
+  -webkit-mask-image: linear-gradient(to top, transparent, black),
+    linear-gradient(to left, transparent 8px, black 8px);
+  mask-image: linear-gradient(to top, transparent, black),
+    linear-gradient(to left, transparent 8px, black 8px);
+  -webkit-mask-size: 100% 20000px;
+  mask-size: 100% 20000px;
+  -webkit-mask-position: left bottom;
+  mask-position: left bottom;
+  transition: mask-position 0.3s, -webkit-mask-position 0.3s;
+
+  &:hover {
+    -webkit-mask-position: left top;
+    mask-position: left top;
+  }
+}
+
+.ps {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.ps .ps__rail-x:hover, .ps .ps__rail-y:hover, .ps .ps__rail-x:focus, .ps .ps__rail-y:focus, .ps .ps__rail-x.ps--clicking, .ps .ps__rail-y.ps--clicking {
+  background-color: transparent !important;
+}
+
+.ps__rail-y:hover > .ps__thumb-y, .ps__rail-y:focus > .ps__thumb-y, .ps__rail-y.ps--clicking .ps__thumb-y {
+  width: 8px !important;
+}
 
 body {
   cursor: url(/blue.cur), auto;

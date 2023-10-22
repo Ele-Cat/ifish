@@ -7,46 +7,48 @@
 
     <!-- useSystemStore.activeMenu -->
     <div class="comp-box">
-      <Suspense>
-        <template #default>
-          <Home v-if="useSystemStore.activeMenu === 'home'" />
-        </template>
-        <template #fallback>
-          <div class="default-loading">
-            <a-spin tip="加载中..."></a-spin>
-          </div>
-        </template>
-      </Suspense>
-      <Suspense>
-        <template #default>
-          <News v-if="useSystemStore.activeMenu === 'news'" />
-        </template>
-        <template #fallback>
-          <div class="default-loading">
-            <a-spin tip="加载中..."></a-spin>
-          </div>
-        </template>
-      </Suspense>
-      <Suspense>
-        <template #default>
-          <Nav v-if="useSystemStore.activeMenu === 'nav'" />
-        </template>
-        <template #fallback>
-          <div class="default-loading">
-            <a-spin tip="加载中..."></a-spin>
-          </div>
-        </template>
-      </Suspense>
-      <Suspense>
-        <template #default>
-          <About v-if="useSystemStore.activeMenu === 'about'" />
-        </template>
-        <template #fallback>
-          <div class="default-loading">
-            <a-spin tip="加载中..."></a-spin>
-          </div>
-        </template>
-      </Suspense>
+      <perfect-scrollbar class="scroll-bar">
+        <Suspense>
+          <template #default>
+            <Home v-if="useSystemStore.activeMenu === 'home'" />
+          </template>
+          <template #fallback>
+            <div class="default-loading">
+              <a-spin tip="加载中..."></a-spin>
+            </div>
+          </template>
+        </Suspense>
+        <Suspense>
+          <template #default>
+            <News v-if="useSystemStore.activeMenu === 'news'" />
+          </template>
+          <template #fallback>
+            <div class="default-loading">
+              <a-spin tip="加载中..."></a-spin>
+            </div>
+          </template>
+        </Suspense>
+        <Suspense>
+          <template #default>
+            <Nav v-if="useSystemStore.activeMenu === 'nav'" />
+          </template>
+          <template #fallback>
+            <div class="default-loading">
+              <a-spin tip="加载中..."></a-spin>
+            </div>
+          </template>
+        </Suspense>
+        <Suspense>
+          <template #default>
+            <About v-if="useSystemStore.activeMenu === 'about'" />
+          </template>
+          <template #fallback>
+            <div class="default-loading">
+              <a-spin tip="加载中..."></a-spin>
+            </div>
+          </template>
+        </Suspense>
+      </perfect-scrollbar>
     </div>
   </div>
 </template>
@@ -74,6 +76,9 @@ const About = defineAsyncComponent(() => import('@/components/views/About.vue'))
     flex: 1;
     padding: 20px 82px;
     word-wrap: break-word;
+  }
+  .scroll-bar {
+    height: 80vh;
   }
 }
 @media screen and (max-width: 640px) {

@@ -1,16 +1,17 @@
 <template>
   <div class="news">
     <a-spin v-if="isFetching && !isFinished"></a-spin>
-    <div class="news-box" v-else>
-      <div class="news-item" v-for="newsType in objToArr(newsData.data)" :key="newsType.key">
+    <div class="news-box">
+      <div class="news-item bf" v-for="newsType in newsTypes" :key="newsType.key">
         <div class="news-title">
-          <p>{{ renderTitle(newsType.key) }}</p>
-          <p>{{ newsType.time }}</p>
+          <p>{{ newsType.label }}</p>
+          <p :title="`更新时间${newsType['datas']['time']}`">{{ newsType['datas']['time'] }}<ReloadOutlined v-if="!newsType.isFetching" :title="`拉取最新${newsType.label}`" @click="handleRefresh(newsType.value)" /><LoadingOutlined v-else title="拉取中..." /></p>
         </div>
-        <perfect-scrollbar class="config-chat">
-          <div class="news-info" v-for="news in newsType.hotTops" :key="news.title">
-            <a :href="news.url" target="_blank">{{ news.title }} - {{ news.hotValue }}</a>
-          </div>
+        <perfect-scrollbar class="scroll-bar">
+          <a class="news-info" v-for="(news, index) in newsType['datas']['hotTops']" :key="index" :href="news.url" :title="news.title" target="_blank">
+            <span>{{ index + 1 }}.{{ news.title }}</span>
+            <span>{{ news.hotValue }}</span>
+          </a>
         </perfect-scrollbar>
       </div>
     </div>
@@ -18,55 +19,170 @@
 </template>
 
 <script setup>
-import { useFetch } from '@vueuse/core';
+import { reactive, ref } from 'vue';
+import axios from 'axios';
+import { ReloadOutlined, LoadingOutlined } from '@ant-design/icons-vue';
+import { toast } from "@/utils/feedback";
 
-const { data: newsData, isFinished, isFetching } = useFetch('https://api.moyuduck.com/hot/all').get().json()
-console.log('newsData: ', newsData);
+const newsTypes = reactive([
+  {
+    label: "知乎热议",
+    value: "zhihu",
+    datas: [],
+    isFetching: true,
+  },
+  {
+    label: "百度热搜",
+    value: "baidu",
+    datas: [],
+    isFetching: true,
+  },
+  {
+    label: "抖音热搜",
+    value: "douyin",
+    datas: [],
+    isFetching: true,
+  },
+  {
+    label: "微博热搜",
+    value: "weibo",
+    datas: [],
+    isFetching: true,
+  },
+  {
+    label: "b站热搜",
+    value: "bilibili",
+    datas: [],
+    isFetching: true,
+  },
+  {
+    label: "贴吧热议",
+    value: "tieba",
+    datas: [],
+    isFetching: true,
+  },
+  {
+    label: "头条热搜",
+    value: "toutiao",
+    datas: [],
+    isFetching: true,
+  },
+  {
+    label: "历史上的今天",
+    value: "history",
+    datas: [],
+    isFetching: true,
+  },
+  {
+    label: "52破解",
+    value: "pojie52",
+    datas: [],
+    isFetching: true,
+  },
+])
 
-const objToArr = (obj) => {
-  const arr = [];
-  for (const key in obj) {
-    arr.push({
-      key,
-      hotTops: obj[key]["hotTops"],
-      time: obj[key]["time"],
+const isFinished = ref(false);
+axios.get('https://api.moyuduck.com/hot/all').then(res => {
+  for (const key in res.data.data) {
+    newsTypes.map(newsType => {
+      if (newsType.value === key) {
+        newsType["datas"] = res.data.data[key];
+      }
+      newsType["isFetching"] = false;
     })
   }
-  return arr
-}
-const renderTitle = (key) => {
-  const titles = {
-    zhihu: "知乎",
-    douyin: "抖音热搜",
-    weibo: "微博热搜",
-    baidu: "百度热搜",
-    bilibili: "b站热搜",
-    history: "历史上的今天",
-    tieba: "贴吧热议",
-    toutiao: "头条热搜",
-    pojie52: "52破解",
-  }
-  return titles[key];
+  isFinished.value = true;
+})
+
+const handleRefresh = (type) => {
+  newsTypes.map(newsType => {
+    if (newsType["value"] === type) {
+      newsType["isFetching"] = true;
+    }
+  })
+  axios.get(`https://api.moyuduck.com/hot/top?type=${type}`).then(res => {
+    newsTypes.map(newsType => {
+      if (newsType["value"] === type) {
+        newsType["datas"] = res.data.data;
+        newsType["isFetching"] = false;
+        toast({
+          content: `${newsType['label']}拉取成功`
+        })
+      }
+    })
+  })
 }
 </script>
 
 <style lang="less" scoped>
-.news-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  .news-item {
-    width: 33%;
-    height: 200px;
-    overflow: scroll;
-    margin-bottom: 24px;
-    .news-title {
-      display: flex;
-      justify-content: space-between;
+.news {
+  padding: 0 20px;
+  .news-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .news-item {
+      width: 32.3%;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background-color: var(--theme-bg-color-a8);
+      .news-title {
+        display: flex;
+        justify-content: space-between;
+        height: 2em;
+        line-height: 2em;
+        padding: 0 10px;
+        .anticon {
+          margin-left: 6px;
+          cursor: pointer;
+          &:hover {
+            color: var(--primary-color);
+          }
+        }
+      }
+      .scroll-bar {
+        height: 200px;
+        padding: 10px 12px;
+        box-shadow: 0 0 10px inset var(--grey-9-a1);
+        .news-info {
+          display: flex;
+          justify-content: space-between;
+          line-height: 1.6em;
+          color: var(--theme-text-color);
+          text-decoration: none;
+          span {
+            &:nth-of-type(1) {
+              flex: 1;
+              margin-right: 10px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
+          &:hover {
+            color: var(--primary-color);
+          }
+        }
+      }
     }
-    a {
-      color: var(--theme-text-color);
-      text-decoration: none;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .news {
+    .news-box {
+      .news-item {
+        width: 49%;
+        margin-bottom: 12px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 870px) {
+  .news {
+    .news-box {
+      .news-item {
+        width: 100%;
+      }
     }
   }
 }

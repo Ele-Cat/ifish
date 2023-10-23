@@ -1,29 +1,25 @@
 <template>
   <div class="sidebar bf">
     <div class="logo">
-      <img v-if="!useSystemStore.darkMode" src="/images/logo.png" alt="">
+      <img v-if="!useSystemStore.settings.darkMode" src="/images/logo.png" alt="">
       <img v-else src="/images/logo_white.png" alt="">
     </div>
     <div class="menu">
       <ul>
-        <a-tooltip :title="item.tooltip" v-for="item in menuList" :key="item.value" placement="left" :color="useSystemStore.darkMode ? 'black' : 'white'">
+        <a-tooltip :title="item.tooltip" v-for="item in menuList" :key="item.value" placement="left">
           <li :class="{active: useSystemStore.activeMenu === item.value}" @click="handleMenuClick(item.value)">{{item.label}}</li>
         </a-tooltip>
-        <a-tooltip title="意见反馈" placement="left" :color="useSystemStore.darkMode ? 'black' : 'white'">
+        <a-tooltip title="意见反馈" placement="left">
           <li @click="feedback">反馈</li>
         </a-tooltip>
       </ul>
     </div>
     <div class="setting-box">
       <ModeSwitch />
-      <a-tooltip title="系统设置" placement="left" :color="useSystemStore.darkMode ? 'black' : 'white'">
+      <a-tooltip title="系统设置" placement="left">
         <i class="ifishfont ifish-setting" title="设置" @click="settingsVisible = true"></i>
       </a-tooltip>
-      <Suspense>
-        <template #default>
-          <Settings @close="settingsVisible = false" :open="settingsVisible" />
-        </template>
-      </Suspense>
+      <Settings @close="settingsVisible = false" :open="settingsVisible" />
     </div>
   </div>
 </template>
@@ -33,7 +29,7 @@ import { reactive, ref, defineAsyncComponent } from 'vue';
 import ModeSwitch from '@/components/common/ModeSwitch.vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
-const Settings = defineAsyncComponent(() => import('@/components/common/Settings.vue'));
+const Settings = defineAsyncComponent(() => import('@/components/common/Settings/Index.vue'));
 
 const menuList = reactive([
   {
@@ -64,7 +60,7 @@ const feedback = () => {
   window.open("https://support.qq.com/product/611809", "_blank");
 }
 
-const settingsVisible = ref(false);
+const settingsVisible = ref(true);
 </script>
 
 <style lang="less" scoped>
@@ -102,6 +98,7 @@ const settingsVisible = ref(false);
       line-height: 2.4;
       cursor: pointer;
       font-size: 14px;
+      transition: all .3s;
       &:hover, &.active {
         color: var(--primary-color);
       }
@@ -115,6 +112,9 @@ const settingsVisible = ref(false);
       cursor: pointer;
       font-size: 24px;
       margin-top: 12px;
+      &:hover {
+        color: var(--primary-color);
+      }
     }
   }
 }

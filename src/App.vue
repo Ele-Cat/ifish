@@ -12,11 +12,14 @@
 </template>
 
 <script setup>
+import { watch } from 'vue';
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import Layouts from '@/components/layouts/Index.vue';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 dayjs.locale('zh-cn');
+import useStore from "@/store";
+const { useSystemStore } = useStore();
 
 document.addEventListener("visibilitychange", handleVisibilityChange, false);
 function handleVisibilityChange() {
@@ -25,7 +28,16 @@ function handleVisibilityChange() {
   } else {
     document.title = "摸鱼，是一种态度"
   }
+  if (useSystemStore.settings.title) {
+    document.title = useSystemStore.settings.title;
+  }
 }
+
+watch(() => useSystemStore.settings.title, newVal => {
+  document.title = newVal || "摸鱼，是一种态度";
+}, {
+  immediate: true,
+})
 </script>
 
 <style lang="less" scoped>

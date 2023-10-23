@@ -3,7 +3,7 @@
     <div class="bg-blur" v-if="inputFocus"></div>
     <a-input class="search" v-model:value="searchContent" placeholder="请输入搜索内容" @focus="inputFocus = true" @blur="inputFocus = false" @pressEnter="handleSearch">
       <template #addonBefore>
-        <a-tooltip title="点击切换搜索源" :color="useSystemStore.darkMode ? 'black' : 'white'">
+        <a-tooltip title="点击切换搜索源">
           <img :src="searchTypes.find(item => item.value === useSystemStore.searchType)['icon']" alt="" @click="handleShowSearchTypes">
         </a-tooltip>
       </template>

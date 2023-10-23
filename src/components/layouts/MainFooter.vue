@@ -2,11 +2,7 @@
   <div class="footer bf">
     <p>&copy; 2023 <a :href="bLink" target="_blank">可樂加冰c</a>. All rights reserved.</p>
     <p class="disclaimers" @click="disclaimersVisible = true">免责声明</p>
-    <Suspense>
-      <template #default>
-        <Disclaimers @close="disclaimersVisible = false" :open="disclaimersVisible" />
-      </template>
-    </Suspense>
+    <Disclaimers @close="disclaimersVisible = false" :open="disclaimersVisible" />
   </div>
 </template>
 

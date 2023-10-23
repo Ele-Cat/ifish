@@ -54,7 +54,6 @@
   --box-bg-shadow: var(--grey-9-a1);
   --text-color: var(--grey-7);
   --header-text-color: var(--grey-0);
-  --primary-color: var(--color-red);
   --nav-bg: linear-gradient(-225deg, var(--color-cyan-light) 0, var(--color-pink-light) 100%);
   --footer-bg: linear-gradient(-45deg, #ec8c69, #e9546b, #38a1db, #23d5ab);
   --note-border: #cda0c7;
@@ -200,17 +199,27 @@ p {
 }
 
 .ant-drawer {
-  .ant-drawer-content {
-    background-color: var(--grey-1-a9);
-  }
   .ant-drawer-title, .ant-drawer-close {
     color: var(--theme-text-color);
   }
+  .ant-drawer-content {
+    background-color: var(--grey-1-a9);
+    .ant-drawer-body {
+      padding: 24px 12px;
+    }
+  }
+}
+
+.ant-form-item .ant-form-item-label >label {
+  color: var(--theme-text-color);
 }
 
 .ant-tooltip {
   .ant-tooltip-inner {
-    background-color: var(--grey-1-a9);
-    color: var(--theme-text-color);
+    background-color: var(--grey-7);
+    color: var(--grey-2);
+  }
+  .ant-tooltip-arrow:before {
+    background-color: var(--grey-7);
   }
 }

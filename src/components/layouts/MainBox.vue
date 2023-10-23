@@ -8,46 +8,10 @@
     <!-- useSystemStore.activeMenu -->
     <div class="comp-box">
       <perfect-scrollbar class="scroll-bar">
-        <Suspense>
-          <template #default>
-            <Home class="animated fadeIn" v-if="useSystemStore.activeMenu === 'home'" />
-          </template>
-          <template #fallback>
-            <div class="default-loading">
-              <a-spin tip="加载中..."></a-spin>
-            </div>
-          </template>
-        </Suspense>
-        <Suspense>
-          <template #default>
-            <News class="animated fadeIn" v-if="useSystemStore.activeMenu === 'news'" />
-          </template>
-          <template #fallback>
-            <div class="default-loading">
-              <a-spin tip="加载中..."></a-spin>
-            </div>
-          </template>
-        </Suspense>
-        <Suspense>
-          <template #default>
-            <Nav class="animated fadeIn" v-if="useSystemStore.activeMenu === 'nav'" />
-          </template>
-          <template #fallback>
-            <div class="default-loading">
-              <a-spin tip="加载中..."></a-spin>
-            </div>
-          </template>
-        </Suspense>
-        <Suspense>
-          <template #default>
-            <About class="animated zoomIn" v-if="useSystemStore.activeMenu === 'about'" />
-          </template>
-          <template #fallback>
-            <div class="default-loading">
-              <a-spin tip="加载中..."></a-spin>
-            </div>
-          </template>
-        </Suspense>
+        <Home class="animated fadeIn" v-if="useSystemStore.activeMenu === 'home'" />
+        <News class="animated fadeIn" v-if="useSystemStore.activeMenu === 'news'" />
+        <Nav class="animated fadeIn" v-if="useSystemStore.activeMenu === 'nav'" />
+        <About class="animated zoomIn" v-if="useSystemStore.activeMenu === 'about'" />
       </perfect-scrollbar>
     </div>
   </div>

@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import pinia from "@/store/pinia";
 import App from "./App.vue";
 
-import { Drawer, Tooltip, Input, Spin } from "ant-design-vue";
+import { Drawer, Tooltip, Input, Spin, Empty } from "ant-design-vue";
 import "ant-design-vue/dist/reset.css";
 import "./assets/styles/animate.min.css";
 import "./global.less";
@@ -15,6 +15,7 @@ app.use(Drawer);
 app.use(Tooltip);
 app.use(Input);
 app.use(Spin);
+app.use(Empty);
 
 app.use(pinia);
 app.use(PerfectScrollbar, {

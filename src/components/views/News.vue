@@ -8,10 +8,13 @@
           <p :title="`更新时间${newsType['datas']['time']}`">{{ newsType['datas']['time'] }}<ReloadOutlined v-if="!newsType.isFetching" :title="`拉取最新${newsType.label}`" @click="handleRefresh(newsType.value)" /><LoadingOutlined v-else title="拉取中..." /></p>
         </div>
         <perfect-scrollbar class="scroll-bar">
-          <a class="news-info" v-for="(news, index) in newsType['datas']['hotTops']" :key="index" :href="news.url" :title="news.title" target="_blank">
-            <span>{{ index + 1 }}.{{ news.title }}</span>
-            <span>{{ news.hotValue }}</span>
-          </a>
+          <div v-if="newsType['datas']['hotTops']?.length">
+            <a class="news-info" v-for="(news, index) in newsType['datas']['hotTops']" :key="index" :href="news.url" :title="news.title" target="_blank">
+              <span>{{ index + 1 }}.{{ news.title }}</span>
+              <span>{{ news.hotValue }}</span>
+            </a>
+          </div>
+          <a-empty v-else description="暂无数据" />
         </perfect-scrollbar>
       </div>
     </div>
@@ -110,6 +113,11 @@ const handleRefresh = (type) => {
         })
       }
     })
+  }).catch(() => {
+    toast({
+      content: `拉取失败`,
+      type: "error"
+    })
   })
 }
 </script>
@@ -132,6 +140,14 @@ const handleRefresh = (type) => {
         height: 2em;
         line-height: 2em;
         padding: 0 10px;
+        p {
+          &:nth-of-type(1) {
+            background: linear-gradient(to right, #ff9966, #FD6585);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+          }
+        }
         .anticon {
           margin-left: 6px;
           cursor: pointer;
@@ -162,6 +178,20 @@ const handleRefresh = (type) => {
           &:hover {
             color: var(--primary-color);
           }
+        }
+      }
+      .ant-empty {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+html[theme = "dark"] {
+  .news {
+    .news-box {
+      .news-item {
+        .scroll-bar {
+          box-shadow: 0 0 4px inset var(--color-orange);
         }
       }
     }

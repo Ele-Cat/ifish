@@ -14,6 +14,9 @@
 <script setup>
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import Layouts from '@/components/layouts/Index.vue';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
+dayjs.locale('zh-cn');
 
 document.addEventListener("visibilitychange", handleVisibilityChange, false);
 function handleVisibilityChange() {

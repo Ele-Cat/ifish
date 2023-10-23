@@ -1,0 +1,1 @@
+import{_ as e,d as _,e as c}from"./index-769ad853.js";const s={},t={class:"nav bf"};function a(n,o){return _(),c("div",t," 导航开发中... ")}const d=e(s,[["render",a],["__scopeId","data-v-b2e22ebb"]]);export{d as default};

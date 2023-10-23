@@ -137,15 +137,19 @@ const handleRefresh = (type) => {
       .news-title {
         display: flex;
         justify-content: space-between;
+        align-items: baseline;
         height: 2em;
         line-height: 2em;
         padding: 0 10px;
         p {
           &:nth-of-type(1) {
-            background: linear-gradient(to right, #ff9966, #FD6585);
+            background: linear-gradient(to right bottom, #ff9966, #FD6585);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: bold;
+          }
+          &:nth-of-type(2) {
+            font-size: 12px;
           }
         }
         .anticon {
@@ -166,6 +170,7 @@ const handleRefresh = (type) => {
           line-height: 1.6em;
           color: var(--theme-text-color);
           text-decoration: none;
+          transition: all .3s;
           span {
             &:nth-of-type(1) {
               flex: 1;
@@ -187,14 +192,8 @@ const handleRefresh = (type) => {
   }
 }
 html[theme = "dark"] {
-  .news {
-    .news-box {
-      .news-item {
-        .scroll-bar {
-          box-shadow: 0 0 4px inset var(--color-orange);
-        }
-      }
-    }
+  .scroll-bar {
+    box-shadow: 0 0 4px inset var(--color-orange) !important;
   }
 }
 @media screen and (max-width: 1200px) {

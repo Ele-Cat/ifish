@@ -10,7 +10,7 @@
       <perfect-scrollbar class="scroll-bar">
         <Suspense>
           <template #default>
-            <Home v-if="useSystemStore.activeMenu === 'home'" />
+            <Home class="animated fadeIn" v-if="useSystemStore.activeMenu === 'home'" />
           </template>
           <template #fallback>
             <div class="default-loading">
@@ -20,7 +20,7 @@
         </Suspense>
         <Suspense>
           <template #default>
-            <News v-if="useSystemStore.activeMenu === 'news'" />
+            <News class="animated fadeIn" v-if="useSystemStore.activeMenu === 'news'" />
           </template>
           <template #fallback>
             <div class="default-loading">
@@ -30,7 +30,7 @@
         </Suspense>
         <Suspense>
           <template #default>
-            <Nav v-if="useSystemStore.activeMenu === 'nav'" />
+            <Nav class="animated fadeIn" v-if="useSystemStore.activeMenu === 'nav'" />
           </template>
           <template #fallback>
             <div class="default-loading">
@@ -40,7 +40,7 @@
         </Suspense>
         <Suspense>
           <template #default>
-            <About v-if="useSystemStore.activeMenu === 'about'" />
+            <About class="animated zoomIn" v-if="useSystemStore.activeMenu === 'about'" />
           </template>
           <template #fallback>
             <div class="default-loading">

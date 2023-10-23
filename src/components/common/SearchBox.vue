@@ -4,7 +4,7 @@
     <a-input class="search" v-model:value="searchContent" placeholder="请输入搜索内容" @focus="inputFocus = true" @blur="inputFocus = false" @pressEnter="handleSearch">
       <template #addonBefore>
         <a-tooltip title="点击切换搜索源" :color="useSystemStore.darkMode ? 'black' : 'white'">
-          <img :src="searchTypes.find(item => item.label === useSystemStore.searchType)['icon']" alt="" @click="handleShowSearchTypes">
+          <img :src="searchTypes.find(item => item.value === useSystemStore.searchType)['icon']" alt="" @click="handleShowSearchTypes">
         </a-tooltip>
       </template>
       <template #suffix>
@@ -91,9 +91,9 @@ const handleShowSearchTypes = () => {
   searchTypeVisible.value = true;
 }
 const handleSelectSearchType = (item) => {
-  searchType.value = item.label;
+  searchType.value = item.value;
   searchTypeVisible.value = false;
-  useSystemStore.searchType = item.label;
+  useSystemStore.searchType = item.value;
 }
 
 const handleSearch = () => {
@@ -148,6 +148,7 @@ const handleSearch = () => {
       border-radius: 32px;
       color: var(--theme-text-color);
       background-color: var(--grey-1-a5);
+      margin-left: 10px;
       .ant-input {
         background-color: transparent;
         color: var(--theme-text-color);

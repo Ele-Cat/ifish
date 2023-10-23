@@ -2,8 +2,12 @@
   <div class="home">
     <SearchBox />
 
-    <div class="app-box">
-      <img src="https://api.vvhan.com/api/moyu" alt="">
+    <div class="apps-box">
+      <div class="app bf" v-for="app in apps" :key="app.value" @click="handleAppClick(app)">
+        <img :src="app.icon" alt="">
+        <p>{{app.label}}</p>
+      </div>
+      <!-- <img src="https://api.vvhan.com/api/moyu" alt=""> -->
       <!-- https://www.sojson.com/other/relax.html -->
       <!-- <video src=""></video> -->
 
@@ -16,20 +20,61 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import SearchBox from '@/components/common/SearchBox.vue';
 
+const apps = ref([
+  {
+    label: "摸鱼日报",
+    value: "moyu",
+    icon: "./images/apps/moyu.png",
+  },
+  {
+    label: "60s读懂世界",
+    value: "60s",
+    icon: "./images/apps/60s.png",
+  }
+])
+
+const handleAppClick = (app) => {
+  console.log(app);
+}
 </script>
 
 <style lang="less" scoped>
 .home {
-  .app-box {
-    margin-top: 20px;
+  .apps-box {
+    padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    img {
-      height: 68vh;
+    .app {
+      width: 10%;
+      background-color: var(--theme-bg-color-a8);
+      padding: 6px 6px 10px;
+      margin: 6px;
+      border-radius: 10px;
+      cursor: pointer;
+      img {
+        max-width: 100%;
+        filter: brightness(1);
+      }
+      p {
+        font-size: 12px;
+        margin-top: 4px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      &:hover {
+        box-shadow: 0 0 15px var(--theme-bg-color-a8);
+        transform: translateY(-5px);
+        transition: all .3s;
+      }
     }
+    // img {
+    //   height: 68vh;
+    // }
   }
 }
 </style>

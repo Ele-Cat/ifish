@@ -1,6 +1,6 @@
 <template>
   <div class="nav bf">
-    导航开发中...
+    开发中...
   </div>
 </template>
 

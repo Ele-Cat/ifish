@@ -4,7 +4,7 @@
     <p class="disclaimers" @click="disclaimersVisible = true">免责声明</p>
     <Suspense>
       <template #default>
-        <Disclaimers @close="close" :open="disclaimersVisible" />
+        <Disclaimers @close="disclaimersVisible = false" :open="disclaimersVisible" />
       </template>
     </Suspense>
   </div>
@@ -17,9 +17,6 @@ const Disclaimers = defineAsyncComponent(() => import('@/components/common/Discl
 const bLink = "https://space.bilibili.com/376288070";
 
 const disclaimersVisible = ref(false);
-const close = () => {
-  disclaimersVisible.value = false;
-}
 </script>
 
 <style lang="less" scoped>

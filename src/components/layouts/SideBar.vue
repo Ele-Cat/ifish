@@ -16,18 +16,24 @@
     </div>
     <div class="setting-box">
       <ModeSwitch />
-      <i class="ifishfont ifish-setting" title="设置" @click="settingVisible = true"></i>
+      <a-tooltip title="系统设置" placement="left" :color="useSystemStore.darkMode ? 'black' : 'white'">
+        <i class="ifishfont ifish-setting" title="设置" @click="settingsVisible = true"></i>
+      </a-tooltip>
+      <Suspense>
+        <template #default>
+          <Settings @close="settingsVisible = false" :open="settingsVisible" />
+        </template>
+      </Suspense>
     </div>
   </div>
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, defineAsyncComponent } from 'vue';
 import ModeSwitch from '@/components/common/ModeSwitch.vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
-
-const settingVisible = ref(false);
+const Settings = defineAsyncComponent(() => import('@/components/common/Settings.vue'));
 
 const menuList = reactive([
   {
@@ -57,6 +63,8 @@ const handleMenuClick = (activeMenu) => {
 const feedback = () => {
   window.open("https://support.qq.com/product/611809", "_blank");
 }
+
+const settingsVisible = ref(false);
 </script>
 
 <style lang="less" scoped>

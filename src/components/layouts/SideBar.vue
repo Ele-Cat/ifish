@@ -60,7 +60,7 @@ const feedback = () => {
   window.open("https://support.qq.com/product/611809", "_blank");
 }
 
-const settingsVisible = ref(true);
+const settingsVisible = ref(false);
 </script>
 
 <style lang="less" scoped>

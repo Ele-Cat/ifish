@@ -124,7 +124,6 @@ const handleRefresh = (type) => {
 
 <style lang="less" scoped>
 .news {
-  padding: 0 20px;
   .news-box {
     display: flex;
     flex-wrap: wrap;

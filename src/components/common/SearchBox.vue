@@ -136,6 +136,7 @@ const handleSearch = () => {
   .search {
     width: 60%;
     min-width: 320px;
+    margin-left: -5px;
     :deep(.ant-input-group) .ant-input-group-addon:first-child {
       height: 36px;
       border: none;

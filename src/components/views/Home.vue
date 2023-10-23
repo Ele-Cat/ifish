@@ -44,10 +44,12 @@ const handleAppClick = (app) => {
 <style lang="less" scoped>
 .home {
   .apps-box {
-    padding: 20px;
     display: flex;
-    align-items: center;
+    padding: 20px 0;
     .app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 10%;
       background-color: var(--theme-bg-color-a8);
       padding: 6px 6px 10px;
@@ -56,6 +58,7 @@ const handleAppClick = (app) => {
       cursor: pointer;
       img {
         max-width: 100%;
+        max-height: 100px;
         filter: brightness(1);
       }
       p {
@@ -72,9 +75,33 @@ const handleAppClick = (app) => {
         transition: all .3s;
       }
     }
-    // img {
-    //   height: 68vh;
-    // }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .home {
+    .apps-box {
+      .app {
+        width: 12.5%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 870px) {
+  .home {
+    .apps-box {
+      .app {
+        width: 20%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 640px) {
+  .home {
+    .apps-box {
+      .app {
+        width: 33.33%;
+      }
+    }
   }
 }
 </style>

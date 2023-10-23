@@ -55,7 +55,8 @@ const mainComponents = shallowRef({
     word-wrap: break-word;
   }
   .scroll-bar {
-    height: 80vh;
+    height: calc(100vh - 130px - 28px);
+    padding: 0 20px;
   }
 }
 @media screen and (max-width: 640px) {

@@ -1,24 +1,19 @@
 <template>
   <div class="main-box">
     <ITime class="sys-time" />
-    <!-- <img src="https://api.vvhan.com/api/moyu" alt=""> -->
-    <!-- https://www.sojson.com/other/relax.html -->
-    <!-- <video src=""></video> -->
 
-    <!-- useSystemStore.activeMenu -->
     <div class="comp-box">
       <perfect-scrollbar class="scroll-bar">
-        <Home class="animated fadeIn" v-if="useSystemStore.activeMenu === 'home'" />
-        <News class="animated fadeIn" v-if="useSystemStore.activeMenu === 'news'" />
-        <Nav class="animated fadeIn" v-if="useSystemStore.activeMenu === 'nav'" />
-        <About class="animated zoomIn" v-if="useSystemStore.activeMenu === 'about'" />
+        <keep-alive>
+          <component class="animated fadeIn" :is="mainComponents[useSystemStore.activeMenu]" />
+        </keep-alive>
       </perfect-scrollbar>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineAsyncComponent } from 'vue';
+import { shallowRef, defineAsyncComponent } from 'vue';
 import ITime from '@/components/libs/ITime.vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
@@ -26,9 +21,27 @@ const Home = defineAsyncComponent(() => import('@/components/views/Home.vue'));
 const News = defineAsyncComponent(() => import('@/components/views/News.vue'));
 const Nav = defineAsyncComponent(() => import('@/components/views/Nav.vue'));
 const About = defineAsyncComponent(() => import('@/components/views/About.vue'));
+
+const mainComponents = shallowRef({
+  home: Home,
+  news: News,
+  nav: Nav,
+  about: About,
+});
 </script>
 
 <style lang="less" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-leave, .fade-enter-to {
+  height: auto;
+  opacity: 1;
+}
+.fade-enter, .fade-leave-to {
+  height: 0;
+  opacity: 0;
+}
 .main-box {
   display: flex;
   flex-direction: column;

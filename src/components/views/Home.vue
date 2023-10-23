@@ -16,12 +16,14 @@
       <!-- 简报 https://api.qqsuu.cn/api/dm-60s?type=json -->
       <!-- 详细 https://www.zhihu.com/api/v4/columns/c_1261258401923026944/items -->
     </div>
+    <IDialog />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import SearchBox from '@/components/common/SearchBox.vue';
+import IDialog from '@/components/libs/IDialog.vue';
 
 const apps = ref([
   {

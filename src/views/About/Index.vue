@@ -1,6 +1,6 @@
 <template>
   <div class="about bf">
-    <p class="title">【爱摸鱼温馨提示您】</p>
+    <p class="title">【爱摸鱼温馨提示】</p>
     <p>你好，摸鱼人，工作再累，一定不要忘记摸鱼哦 ！</p>
     <p>有事没事起身去茶水间去廊道去天台走走，别老在工位上坐着。</p>
     <p>多喝点水，钱是老板的，但命是自己的 !</p><br />
@@ -56,6 +56,15 @@ const daysToWeekend = computed(() => {
   .announce {
     text-align: right;
     margin-top: 28px;
+  }
+}
+@media screen and (max-width: 870px) {
+  .about {
+    p {
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
   }
 }
 </style>

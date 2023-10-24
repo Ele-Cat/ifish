@@ -34,7 +34,10 @@ getTiangou();
     p {
       line-height: 2;
       text-align: justify;
-      text-align-last: center;
+      // text-align-last: center;
+      &:nth-of-type(1) {
+        text-align: center;
+      }
     }
   }
   button {
@@ -52,6 +55,9 @@ getTiangou();
     box-shadow: 0 0 0.2rem rgba(0, 21, 110, .1);
     cursor: pointer;
     outline: 0;
+    &:hover {
+      box-shadow: 0 0 1.2rem var(--primary-color);
+    }
   }
 }
 </style>

@@ -36,8 +36,8 @@ const apps = ref([
     label: "摸鱼日报",
     value: "moyu",
     icon: "./images/apps/moyu.png",
-    // imageUrl: "https://api.vvhan.com/api/moyu",
-    imageUrl: "https://dayu.qqsuu.cn/moyuribao/apis.php",
+    imageUrl: "https://api.vvhan.com/api/moyu",
+    // imageUrl: "https://dayu.qqsuu.cn/moyuribao/apis.php",
   },
   {
     label: "60s读懂世界",

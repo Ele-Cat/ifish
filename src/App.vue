@@ -41,7 +41,7 @@ watch(() => useSystemStore.settings.title, newVal => {
 </script>
 
 <style lang="less" scoped>
-@import url(//at.alicdn.com/t/c/font_4284553_w82bsx6f77q.css);
+@import url(//at.alicdn.com/t/c/font_4284553_cayu1k9ynv.css);
 .layout {
   width: 100vw;
   height: 100vh;

@@ -8,7 +8,7 @@
       >
         <a-tab-pane v-for="item in settingsNavs" :key="item.value" :tab="item.label">
           <keep-alive>
-            <component :is="settingsComponents[item.value]" />
+            <component :is="item.component" />
           </keep-alive>
         </a-tab-pane>
       </a-tabs>
@@ -19,6 +19,7 @@
 <script setup>
 import { ref, shallowRef, defineAsyncComponent } from 'vue';
 const SettingsBasic = defineAsyncComponent(() => import('./SettingsBasic.vue'));
+const SettingsAppearance = defineAsyncComponent(() => import('./SettingsAppearance.vue'));
 const SettingsShortcutKey = defineAsyncComponent(() => import('./SettingsShortcutKey.vue'));
 
 const props = defineProps({
@@ -38,16 +39,19 @@ const settingsNavs = ref([
   {
     label: "基础设置",
     value: "basic",
+    component: SettingsBasic,
+  },
+  {
+    label: "外观设置",
+    value: "appearance",
+    component: SettingsAppearance,
   },
   {
     label: "快捷键设置",
     value: "shortcutKey",
+    component: SettingsShortcutKey,
   },
 ]);
-const settingsComponents = shallowRef({
-  basic: SettingsBasic,
-  shortcutKey: SettingsShortcutKey,
-});
 </script>
 
 <style lang="less" scoped>

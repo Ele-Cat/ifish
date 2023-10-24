@@ -12,15 +12,12 @@
         </template>
         <a-input v-model:value="formState.title" placeholder="例如：学习网站" @change="handleTitleChange" />
       </a-form-item>
-      <a-form-item label="暗黑模式">
-        <a-switch v-model:checked="formState.darkMode" @change="handleModeChange" />
-      </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 
@@ -31,17 +28,8 @@ const labelCol = {
   },
 };
 
-watch(() => useSystemStore.settings.darkMode, (newVal) => {
-  formState.value.darkMode = newVal;
-}, {
-  immediate: true,
-  deep: true,
-})
 const handleTitleChange = (e) => {
   useSystemStore.changeTitle(e.target.value);
-}
-const handleModeChange = () => {
-  useSystemStore.changeMode();
 }
 </script>
 

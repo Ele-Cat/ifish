@@ -16,6 +16,9 @@
     <!-- 美图API接口 https://api.vvhan.com/api/mobil.girl?type=json -->
     <!-- https://api.vvhan.com/api/girl?type=json -->
 
+    <!-- 美女视频 https://www.nihaowua.com/v/video.php?_t=0.6096279598934722 -->
+    <!-- 美女写真 https://api.moyuduck.com/random/xiezhen -->
+
     <IDialog :title="dialogTitle" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
       <component :is="activeDialogComponent" />
     </IDialog>

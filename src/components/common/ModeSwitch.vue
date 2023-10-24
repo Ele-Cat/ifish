@@ -24,11 +24,4 @@ const changeMode = () => {
 </script>
 
 <style lang="less" scoped>
-.mode-switch-icon {
-  font-size: 24px;
-  cursor: pointer;
-  &:hover {
-    color: var(--primary-color);
-  }
-}
 </style>

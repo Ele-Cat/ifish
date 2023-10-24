@@ -104,19 +104,6 @@ const settingsVisible = ref(false);
       }
     }
   }
-  .setting-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .ifish-setting {
-      cursor: pointer;
-      font-size: 24px;
-      margin-top: 12px;
-      &:hover {
-        color: var(--primary-color);
-      }
-    }
-  }
 }
 @media screen and (max-width: 640px) {
   .sidebar {
@@ -125,6 +112,25 @@ const settingsVisible = ref(false);
     .menu {
       li {
         font-size: 12px;
+      }
+    }
+  }
+}
+</style>
+
+<style lang="less">
+.sidebar {
+  .setting-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .ifishfont {
+      cursor: pointer;
+      font-size: 28px;
+      margin-top: 10px;
+      transition: color .3s ease-in-out;
+      &:hover {
+        color: var(--primary-color);
       }
     }
   }

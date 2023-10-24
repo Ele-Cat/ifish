@@ -15,6 +15,7 @@
       </ul>
     </div>
     <div class="setting-box">
+      <Weather />
       <ModeSwitch />
       <a-tooltip title="系统设置" placement="left">
         <i class="ifishfont ifish-setting" title="设置" @click="settingsVisible = true"></i>
@@ -26,9 +27,10 @@
 
 <script setup>
 import { reactive, ref, defineAsyncComponent } from 'vue';
-import ModeSwitch from '@/components/common/ModeSwitch.vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
+const Weather = defineAsyncComponent(() => import('@/components/common/Weather.vue'));
+const ModeSwitch = defineAsyncComponent(() => import('@/components/common/ModeSwitch.vue'));
 const Settings = defineAsyncComponent(() => import('./Settings/Index.vue'));
 
 const menuList = reactive([

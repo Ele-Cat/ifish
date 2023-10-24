@@ -1,6 +1,7 @@
 <template>
   <div class="nav bf">
     开发中...
+    <!-- https://api.vvhan.com/api/ico?url=www.vvhan.com -->
   </div>
 </template>
 

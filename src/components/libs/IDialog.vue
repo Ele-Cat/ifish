@@ -8,9 +8,7 @@
       @ok="handleOk"
       @cancel="handleCancel"
     >
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <slot />
       <template #title>
         <div ref="modalTitleRef" style="width: 100%; cursor: move">
           {{ title }}
@@ -45,12 +43,9 @@ watch(() => props.visible, newVal => {
 const modalTitleRef = ref(null);
 const { x, y, isDragging } = useDraggable(modalTitleRef);
 const handleOk = (e) => {
-  open.value = false;
   emit("ok");
 };
 const handleCancel = () => {
-  console.log(123);
-  open.value = false;
   emit("cancel");
 };
 

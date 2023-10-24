@@ -4,16 +4,22 @@
       <img :src="app.icon" alt="">
       <p>{{ app.label }}</p>
     </div>
-    <!-- <img src="https://api.vvhan.com/api/moyu" alt=""> -->
     <!-- https://www.sojson.com/other/relax.html -->
     <!-- <video src=""></video> -->
 
-    <!-- 60s读懂世界 -->
-    <!-- 图片 https://api.vvhan.com/api/60s -->
-    <!-- 简报 https://api.qqsuu.cn/api/dm-60s?type=json -->
-    <!-- 详细 https://www.zhihu.com/api/v4/columns/c_1261258401923026944/items -->
-    <IDialog :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false"></IDialog>
-    <a-image :width="200" :style="{ display: 'none' }" :preview="{
+    <!-- https://api.vvhan.com/api/ip -->
+
+    <!-- 随机一句一言API接口 https://api.vvhan.com/api/ian -->
+    <!-- 随机笑话API接口 https://api.vvhan.com/api/joke -->
+    <!-- 随机一句情话API接口 https://api.vvhan.com/api/love -->
+    <!-- 随机一句骚话API接口 https://api.vvhan.com/api/sao -->
+    <!-- 美图API接口 https://api.vvhan.com/api/mobil.girl?type=json -->
+    <!-- https://api.vvhan.com/api/girl?type=json -->
+
+    <IDialog :title="dialogTitle" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
+      <component :is="activeDialogComponent" />
+    </IDialog>
+    <a-image :width="200" style="width:0;height:0" :preview="{
       visible: appImageVisible,
       onVisibleChange: setImagePreviewVisible,
     }" :src="appImageUrl" />
@@ -21,33 +27,46 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import IDialog from '@/components/libs/IDialog.vue';
+import { ref, defineAsyncComponent } from 'vue';
+const IDialog = defineAsyncComponent(() => import('@/components/libs/IDialog.vue'));
+const Tiangou = defineAsyncComponent(() => import('./components/Tiangou.vue'));
 
 const apps = ref([
   {
     label: "摸鱼日报",
     value: "moyu",
     icon: "./images/apps/moyu.png",
-    imageUrl: "https://api.vvhan.com/api/moyu",
+    // imageUrl: "https://api.vvhan.com/api/moyu",
+    imageUrl: "https://dayu.qqsuu.cn/moyuribao/apis.php",
   },
   {
     label: "60s读懂世界",
     value: "60s",
     icon: "./images/apps/60s.png",
     imageUrl: "https://api.vvhan.com/api/60s",
+  },
+  {
+    label: "舔狗日记",
+    value: "tiangou",
+    icon: "./images/apps/tiangou.png",
+    component: Tiangou,
   }
 ])
 
 const dialogVisible = ref(false);
 const appImageVisible = ref(false);
 const appImageUrl = ref("");
+const dialogTitle = ref("");
+const activeDialogComponent = ref(null);
 const handleAppClick = (app) => {
   console.log(app);
-  // dialogVisible.value = true;
   if (["moyu", "60s"].includes(app.value)) {
     appImageUrl.value = app.imageUrl;
     setImagePreviewVisible(true);
+  } else if (["tiangou"].includes(app.value)) {
+    activeDialogComponent.value = app.component;
+    dialogTitle.value = app.label;
+    dialogVisible.value = true;
   }
 }
 
@@ -60,7 +79,9 @@ const setImagePreviewVisible = value => {
 .apps-box {
   display: flex;
   padding: 20px 0;
-
+  :deep(.ant-image) {
+    width: 0 !important;
+  }
   .app {
     display: flex;
     flex-direction: column;

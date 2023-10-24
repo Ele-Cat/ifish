@@ -29,7 +29,7 @@ import { reactive, ref, defineAsyncComponent } from 'vue';
 import ModeSwitch from '@/components/common/ModeSwitch.vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
-const Settings = defineAsyncComponent(() => import('@/components/common/Settings/Index.vue'));
+const Settings = defineAsyncComponent(() => import('./Settings/Index.vue'));
 
 const menuList = reactive([
   {

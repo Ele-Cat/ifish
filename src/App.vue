@@ -14,10 +14,10 @@
 <script setup>
 import { watch } from 'vue';
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
-import Layouts from '@/components/layouts/Index.vue';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 dayjs.locale('zh-cn');
+import Layouts from '@/components/layouts/Index.vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 

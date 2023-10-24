@@ -1,12 +1,12 @@
 <template>
   <div>
-    <a-button type="primary" @click="showModal">Open Modal</a-button>
     <a-modal
       ref="modalRef"
       v-model:open="open"
       :wrap-style="{overflow: 'hidden'}"
-      :body-style="{backgroundColor:'red'}"
+      :footer="null"
       @ok="handleOk"
+      @cancel="handleCancel"
     >
       <p>Some contents...</p>
       <p>Some contents...</p>
@@ -30,22 +30,30 @@ import { ref, computed, watch, watchEffect } from "vue";
 import { useDraggable } from "@vueuse/core";
 
 const props = defineProps({
-  title: {
-    type: String,
-    default: "标题",
-  },
+  visible: { type: Boolean, default: false },
+  title: { type: String, default: "标题" },
 })
+const emit = defineEmits(["ok", "cancel"])
 
 const open = ref(false);
+watch(() => props.visible, newVal => {
+  console.log('newVal: ', newVal);
+  if (newVal) {
+    open.value = true;
+  }
+})
 const modalTitleRef = ref(null);
-const showModal = () => {
-  open.value = true;
-};
 const { x, y, isDragging } = useDraggable(modalTitleRef);
 const handleOk = (e) => {
-  console.log(e);
   open.value = false;
+  emit("ok");
 };
+const handleCancel = () => {
+  console.log(123);
+  open.value = false;
+  emit("cancel");
+};
+
 const startX = ref(0);
 const startY = ref(0);
 const startedDrag = ref(false);
@@ -95,3 +103,24 @@ const transformStyle = computed(() => {
   };
 });
 </script>
+
+<style lang="less">
+.ant-modal {
+  .ant-modal-content {
+    background-color: var(--theme-bg-color-a8);
+    color: var(--theme-text-color);
+  }
+  .ant-modal-header {
+    background-color: transparent;
+  }
+  .ant-modal-title {
+    color: var(--theme-text-color);
+  }
+  .ant-modal-close {
+    color: var(--theme-text-color);
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+</style>

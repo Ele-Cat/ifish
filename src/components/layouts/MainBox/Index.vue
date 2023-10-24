@@ -1,6 +1,6 @@
 <template>
   <div class="main-box">
-    <ITime class="sys-time" />
+    <Time class="sys-time" />
 
     <div class="comp-box">
       <perfect-scrollbar class="scroll-bar">
@@ -14,13 +14,13 @@
 
 <script setup>
 import { shallowRef, defineAsyncComponent } from 'vue';
-import ITime from '@/components/libs/ITime.vue';
+import Time from './Time.vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
-const Home = defineAsyncComponent(() => import('@/components/views/Home.vue'));
-const News = defineAsyncComponent(() => import('@/components/views/News.vue'));
-const Nav = defineAsyncComponent(() => import('@/components/views/Nav.vue'));
-const About = defineAsyncComponent(() => import('@/components/views/About.vue'));
+const Home = defineAsyncComponent(() => import('@/views/Home/Index.vue'));
+const News = defineAsyncComponent(() => import('@/views/News/Index.vue'));
+const Nav = defineAsyncComponent(() => import('@/views/Nav/Index.vue'));
+const About = defineAsyncComponent(() => import('@/views/About/Index.vue'));
 
 const mainComponents = shallowRef({
   home: Home,

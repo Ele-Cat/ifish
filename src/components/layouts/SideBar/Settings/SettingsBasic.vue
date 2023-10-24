@@ -31,11 +31,12 @@ const labelCol = {
   },
 };
 
-// watch(() => useSystemStore.settings.darkMode, (newVal) => {
-//   formState.darkMode = newVal;
-// }, {
-//   immediate: true,
-// })
+watch(() => useSystemStore.settings.darkMode, (newVal) => {
+  formState.value.darkMode = newVal;
+}, {
+  immediate: true,
+  deep: true,
+})
 const handleTitleChange = (e) => {
   useSystemStore.changeTitle(e.target.value);
 }

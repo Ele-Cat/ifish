@@ -133,6 +133,7 @@ const handleRefresh = (type) => {
       overflow: hidden;
       margin-bottom: 14px;
       background-color: var(--theme-bg-color-a8);
+      border-radius: 12px;
       .news-title {
         display: flex;
         justify-content: space-between;
@@ -201,6 +202,7 @@ html[theme = "dark"] {
       .news-item {
         width: 49%;
         margin-bottom: 12px;
+        border-radius: 10px;
       }
     }
   }
@@ -210,6 +212,7 @@ html[theme = "dark"] {
     .news-box {
       .news-item {
         width: 100%;
+        border-radius: 8px;
       }
     }
   }

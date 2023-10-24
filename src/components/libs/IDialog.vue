@@ -35,7 +35,6 @@ const emit = defineEmits(["ok", "cancel"])
 
 const open = ref(false);
 watch(() => props.visible, newVal => {
-  console.log('newVal: ', newVal);
   if (newVal) {
     open.value = true;
   }

@@ -129,7 +129,7 @@ const settingsVisible = ref(false);
     .ifishfont {
       cursor: pointer;
       font-size: 28px;
-      margin-top: 10px;
+      margin-top: 12px;
       transition: color .3s ease-in-out;
       &:hover {
         color: var(--primary-color);

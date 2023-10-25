@@ -2,7 +2,7 @@
   <a-config-provider
     :theme="{
       token: {
-        colorPrimary: '#FD6585',
+        colorPrimary: !useSystemStore.settings.darkMode ? '#FD6585' : '#FF8FA3',
       },
     }"
     :locale="zhCN"

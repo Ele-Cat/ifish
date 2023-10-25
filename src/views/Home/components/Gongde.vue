@@ -47,6 +47,7 @@ const handleMouseup = () => {
     transform: translate(-50%, 0);
     opacity: 0;
     transition: transform 0.3s ease-in-out;
+    z-index: 9;
     &.active {
       animation: up .3s;
     }

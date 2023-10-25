@@ -1,8 +1,11 @@
 <template>
   <div class="apps-box">
     <div class="app bf" v-for="app in apps" :key="app.value" @click="handleAppClick(app)">
-      <img :src="app.icon" alt="">
-      <p>{{ app.label }}</p>
+      <template v-if="!app.isComponent">
+        <img :src="app.icon" alt="">
+        <p>{{ app.label }}</p>
+      </template>
+      <component v-else :is="app.component" />
     </div>
     <!-- https://www.sojson.com/other/relax.html -->
     <!-- <video src=""></video> -->
@@ -19,6 +22,7 @@
     <!-- 美女视频 https://www.nihaowua.com/v/video.php?_t=0.6096279598934722 -->
     <!-- 美女写真 https://api.moyuduck.com/random/xiezhen -->
 
+    <img :src="imageUrl" v-for="imageUrl in imageUrls" :key="imageUrl" v-show="false" alt="">
     <IDialog :title="dialogTitle" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
       <component :is="activeDialogComponent" />
     </IDialog>
@@ -34,6 +38,7 @@ import { ref, defineAsyncComponent } from 'vue';
 const IDialog = defineAsyncComponent(() => import('@/components/libs/IDialog.vue'));
 const Tiangou = defineAsyncComponent(() => import('./components/Tiangou.vue'));
 const Zhibuzhi = defineAsyncComponent(() => import('./components/Zhibuzhi.vue'));
+const Gongde = defineAsyncComponent(() => import('./components/Gongde.vue'));
 
 const apps = ref([
   {
@@ -62,6 +67,12 @@ const apps = ref([
     value: "zhibuzhi",
     icon: "./images/apps/zhibuzhi.png",
     component: Zhibuzhi,
+  },
+  {
+    label: "功德+1",
+    value: "gongde",
+    isComponent: true,
+    component: Gongde,
   }
   // 摸鱼日报API https://dayu.qqsuu.cn/moyuribao/apis.php
   // 摸鱼日历API https://dayu.qqsuu.cn/moyurili/apis.php
@@ -73,13 +84,20 @@ const apps = ref([
   // 摸鱼日报美女视频版API https://dayu.qqsuu.cn/moyuribaoshipin/apis.php
 ])
 
+const imageUrls = ref([])
+apps.value.map(app => {
+  if (app.imageUrl) {
+    imageUrls.value.push(app.imageUrl)
+  }
+})
+
 const dialogVisible = ref(false);
 const appImageVisible = ref(false);
 const appImageUrl = ref("");
 const dialogTitle = ref("");
 const activeDialogComponent = ref(null);
 const handleAppClick = (app) => {
-  console.log(app);
+  // console.log(app);
   if (["moyu", "60s"].includes(app.value)) {
     appImageUrl.value = app.imageUrl;
     setImagePreviewVisible(true);

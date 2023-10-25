@@ -1,8 +1,9 @@
 <template>
   <div class="gongde">
-    <p class="num">功德：{{ useAppStore.gongde }}</p>
+    <p class="num">功德：<span>{{ useAppStore.gongde }}</span></p>
     <p class="tips" ref="tipRef">功德+1</p>
     <img ref="gongdeRef" @mousedown="handleMousedown" @mouseup="handleMouseup" class="gongde-img" src="/images/apps/gongde1.png" alt="">
+    <audio ref="gongdeAudioRef" src="/public/images/apps/gongde3.aac"></audio>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import { ref } from "vue";
 import useStore from "@/store";
 const { useAppStore } = useStore();
 
+const gongdeAudioRef = ref();
 const gongdeRef = ref();
 const tipRef = ref();
 const handleMousedown = () => {
@@ -18,6 +20,7 @@ const handleMousedown = () => {
 }
 const handleMouseup = () => {
   useAppStore.addGongde();
+  gongdeAudioRef.value.play();
   gongdeRef.value.classList.remove("zoomed");
   tipRef.value.classList.add("active");
   setTimeout(() => {
@@ -47,6 +50,7 @@ const handleMouseup = () => {
     transform: translate(-50%, 0);
     opacity: 0;
     transition: transform 0.3s ease-in-out;
+    pointer-events: none;
     z-index: 9;
     &.active {
       animation: up .3s;
@@ -54,8 +58,9 @@ const handleMouseup = () => {
   }
   .gongde-img {
     pointer-events: all;
-    max-width: 80%;
-    transition: transform 0.3s ease-in-out;
+    width: 80%;
+    max-width: 120px;
+    transition: transform 0.1s ease-in-out;
     cursor: url(/images/apps/gongde2.png), auto;
     &.zoomed {
       transform: scale(0.88);

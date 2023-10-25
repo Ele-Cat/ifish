@@ -116,10 +116,16 @@ html {
   background-color: var(--theme-bg-color-a8);
   color: var(--theme-text-color);
   transition: color 300ms, background-color 300ms;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent; 
 }
 // html[theme='dark-mode'] img, video, .image{
 //   filter: invert(1) hue-rotate(180deg);
 // }
+
+:focus {
+  outline: none;
+}
 
 // 鼠标选中文字样式
 ::selection {

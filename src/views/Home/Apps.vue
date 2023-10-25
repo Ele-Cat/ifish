@@ -1,11 +1,13 @@
 <template>
   <div class="apps-box">
-    <div class="app bf" v-for="app in apps" :key="app.value" @click="handleAppClick(app)">
-      <template v-if="!app.isComponent">
-        <img :src="app.icon" alt="">
-        <p>{{ app.label }}</p>
-      </template>
-      <component v-else :is="app.component" />
+    <div class="app" v-for="app in apps" :key="app.value" @click="handleAppClick(app)">
+      <div class="app-inner">
+        <template v-if="!app.isComponent">
+          <img :src="app.icon" alt="">
+          <p :title="app.label">{{ app.label }}</p>
+        </template>
+        <component v-else :is="app.component" />
+      </div>
     </div>
     <!-- https://www.sojson.com/other/relax.html -->
     <!-- <video src=""></video> -->
@@ -73,7 +75,7 @@ const apps = ref([
     value: "gongde",
     isComponent: true,
     component: Gongde,
-  }
+  },
   // 摸鱼日报API https://dayu.qqsuu.cn/moyuribao/apis.php
   // 摸鱼日历API https://dayu.qqsuu.cn/moyurili/apis.php
   // 明星八卦API https://dayu.qqsuu.cn/mingxingbagua/apis.php
@@ -116,41 +118,45 @@ const setImagePreviewVisible = value => {
 <style lang="less" scoped>
 .apps-box {
   display: flex;
+  flex-wrap: wrap;
   padding: 20px 0;
   :deep(.ant-image) {
     width: 0 !important;
   }
   .app {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     width: 10%;
-    background-color: var(--theme-bg-color-a8);
     padding: 6px 6px 10px;
-    margin: 6px;
-    border-radius: 10px;
     cursor: pointer;
-    transition: all .3s ease-in-out;
-
-    img {
-      max-width: 100%;
-      max-height: 120px;
-      filter: brightness(1);
-    }
-
-    p {
-      font-size: 12px;
-      margin-top: 4px;
-      text-align: center;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    &:hover {
-      box-shadow: 0 0 15px var(--theme-bg-color-a8);
-      transform: translateY(-5px);
-      color: var(--primary-color);
+    .app-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px;
+      border-radius: 10px;
+      background-color: var(--theme-bg-color-a8);
+      transition: all .3s ease-in-out;
+      img {
+        max-width: 100%;
+        max-height: 120px;
+        object-fit: contain;
+        filter: brightness(1);
+      }
+      p {
+        max-width: 80%;
+        font-size: 12px;
+        margin-top: 4px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      &:hover {
+        box-shadow: 0 0 15px var(--theme-bg-color-a8);
+        transform: translateY(-5px);
+        color: var(--primary-color);
+      }
     }
   }
 }

@@ -1,15 +1,7 @@
 <template>
   <div>
     <a-form :model="formState" :label-col="labelCol">
-      <a-form-item>
-        <template #label>
-          <a-tooltip placement="topLeft">
-            <template #title>
-              <span>自定义本站的浏览器标题-摸鱼更安全</span>
-            </template>
-            网站标题
-          </a-tooltip>
-        </template>
+      <a-form-item label="网站标题" extra="自定义本站的浏览器标题-摸鱼更安全">
         <a-input v-model:value="formState.title" placeholder="例如：学习网站" @change="handleTitleChange" />
       </a-form-item>
     </a-form>

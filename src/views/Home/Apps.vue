@@ -127,13 +127,13 @@ const setImagePreviewVisible = value => {
     display: flex;
     flex-wrap: wrap;
     width: 10%;
-    padding: 6px 6px 10px;
+    padding: 4px;
     cursor: pointer;
     .app-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 6px;
+      padding: 8px 6px 12px;
       border-radius: 10px;
       background-color: var(--theme-bg-color-a8);
       transition: all .3s ease-in-out;
@@ -144,7 +144,7 @@ const setImagePreviewVisible = value => {
         filter: brightness(1);
       }
       p {
-        max-width: 80%;
+        max-width: 88%;
         font-size: 12px;
         margin-top: 4px;
         text-align: center;

@@ -47,8 +47,8 @@ const apps = ref([
     label: "60s读懂世界",
     value: "60s",
     icon: "./images/apps/60s.png",
-    imageUrl: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
-    // imageUrl: "https://api.vvhan.com/api/60s",
+    imageUrl: "https://api.vvhan.com/api/60s",
+    // imageUrl: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
     // imageUrl: "http://dwz.2xb.cn/zaob",
   },
   {

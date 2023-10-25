@@ -55,7 +55,7 @@ const handleMouseup = () => {
     pointer-events: all;
     max-width: 80%;
     transition: transform 0.3s ease-in-out;
-    cursor: url(images/apps/gongde2.png), auto;
+    cursor: url(/images/apps/gongde2.png), auto;
     &.zoomed {
       transform: scale(0.88);
     }

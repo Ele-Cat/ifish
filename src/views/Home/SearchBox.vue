@@ -4,14 +4,14 @@
     <a-input class="search" v-model:value="searchContent" placeholder="请输入搜索内容" @focus="inputFocus = true" @blur="inputFocus = false" @pressEnter="handleSearch">
       <template #addonBefore>
         <a-tooltip title="点击切换搜索源">
-          <img :src="searchTypes.find(item => item.value === useSystemStore.searchType)['icon']" alt="" @click="handleShowSearchTypes">
+          <img ref="searchTypeRef" :src="searchTypes.find(item => item.value === useSystemStore.searchType)['icon']" alt="" @click="handleToggleSearchTypes">
         </a-tooltip>
       </template>
       <template #suffix>
         <SearchOutlined @click="handleSearch" :style="{fontSize:'18px'}" />
       </template>
     </a-input>
-    <div ref="searchTypeRef" class="search-types bf" v-show="searchTypeVisible">
+    <div class="search-types bf" v-show="searchTypeVisible">
       <div class="search-type" :class="{active: searchType === item.value}" v-for="item in searchTypes" :key="item.value" @click="handleSelectSearchType(item)">
         <img :src="item.icon" alt="">
         {{ item.label }}
@@ -87,8 +87,8 @@ const inputFocus = ref(false);
 onClickOutside(searchTypeRef, () => {
   searchTypeVisible.value = false;
 })
-const handleShowSearchTypes = () => {
-  searchTypeVisible.value = true;
+const handleToggleSearchTypes = () => {
+  searchTypeVisible.value = !searchTypeVisible.value;
 }
 const handleSelectSearchType = (item) => {
   searchType.value = item.value;
@@ -178,6 +178,7 @@ const handleSearch = () => {
     background-color: var(--theme-bg-color-a8);
     border-radius: 8px;
     padding: 12px;
+    z-index: 99;
     .search-type {
       display: flex;
       align-items: center;

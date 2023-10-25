@@ -76,6 +76,14 @@ const apps = ref([
     isComponent: true,
     component: Gongde,
   },
+  {
+    label: "星座运势",
+    value: "xingzuoyunshi",
+    icon: "./images/apps/xingzuoyunshi.png",
+    imageUrl: "https://dayu.qqsuu.cn/xingzuoyunshi/apis.php",
+    // imageUrl: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
+    // imageUrl: "http://dwz.2xb.cn/zaob",
+  },
   // 摸鱼日报API https://dayu.qqsuu.cn/moyuribao/apis.php
   // 摸鱼日历API https://dayu.qqsuu.cn/moyurili/apis.php
   // 明星八卦API https://dayu.qqsuu.cn/mingxingbagua/apis.php
@@ -100,7 +108,7 @@ const dialogTitle = ref("");
 const activeDialogComponent = ref(null);
 const handleAppClick = (app) => {
   // console.log(app);
-  if (["moyu", "60s"].includes(app.value)) {
+  if (["moyu", "60s", "xingzuoyunshi"].includes(app.value)) {
     appImageUrl.value = app.imageUrl;
     setImagePreviewVisible(true);
   } else if (["tiangou", "zhibuzhi"].includes(app.value)) {

@@ -31,6 +31,7 @@ getTiangou();
   justify-content: center;
   .text {
     margin: 20px 40px;
+    user-select: text;
     p {
       line-height: 2;
       text-align: justify;

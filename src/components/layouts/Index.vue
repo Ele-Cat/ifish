@@ -1,6 +1,6 @@
 <template>
-  <div class="layout">
-  <!-- <div class="layout" @contextmenu="e => e.preventDefault()"> -->
+  <!-- <div class="layout"> -->
+  <div class="layout" @contextmenu="e => e.preventDefault()">
     <MainBg />
     <SideBar />
     <MainBox />

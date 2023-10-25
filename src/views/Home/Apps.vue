@@ -81,16 +81,16 @@ const apps = ref([
     value: "xingzuoyunshi",
     icon: "./images/apps/xingzuoyunshi.png",
     imageUrl: "https://dayu.qqsuu.cn/xingzuoyunshi/apis.php",
-    // imageUrl: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
-    // imageUrl: "http://dwz.2xb.cn/zaob",
   },
+  // 音乐 https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&type=json&n=1
+  // https://xiaoapi.cn/API/yy.php?type=qq&msg=夜曲&n=1
+
   // 摸鱼日报API https://dayu.qqsuu.cn/moyuribao/apis.php
   // 摸鱼日历API https://dayu.qqsuu.cn/moyurili/apis.php
   // 明星八卦API https://dayu.qqsuu.cn/mingxingbagua/apis.php
   // 内涵段子API https://dayu.qqsuu.cn/neihanduanzi/apis.php
   // 新闻简报API https://dayu.qqsuu.cn/weiyujianbao/apis.php
   // 情感花园API https://dayu.qqsuu.cn/qingganhuayuan/apis.php
-  // 星座运势API https://dayu.qqsuu.cn/xingzuoyunshi/apis.php
   // 摸鱼日报美女视频版API https://dayu.qqsuu.cn/moyuribaoshipin/apis.php
 ])
 

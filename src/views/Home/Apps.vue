@@ -33,6 +33,7 @@
 import { ref, defineAsyncComponent } from 'vue';
 const IDialog = defineAsyncComponent(() => import('@/components/libs/IDialog.vue'));
 const Tiangou = defineAsyncComponent(() => import('./components/Tiangou.vue'));
+const Zhibuzhi = defineAsyncComponent(() => import('./components/Zhibuzhi.vue'));
 
 const apps = ref([
   {
@@ -53,6 +54,12 @@ const apps = ref([
     value: "tiangou",
     icon: "./images/apps/tiangou.png",
     component: Tiangou,
+  },
+  {
+    label: "这班上的值不值",
+    value: "zhibuzhi",
+    icon: "./images/apps/zhibuzhi.png",
+    component: Zhibuzhi,
   }
   // 摸鱼日报API https://dayu.qqsuu.cn/moyuribao/apis.php
   // 摸鱼日历API https://dayu.qqsuu.cn/moyurili/apis.php
@@ -74,7 +81,7 @@ const handleAppClick = (app) => {
   if (["moyu", "60s"].includes(app.value)) {
     appImageUrl.value = app.imageUrl;
     setImagePreviewVisible(true);
-  } else if (["tiangou"].includes(app.value)) {
+  } else if (["tiangou", "zhibuzhi"].includes(app.value)) {
     activeDialogComponent.value = app.component;
     dialogTitle.value = app.label;
     dialogVisible.value = true;

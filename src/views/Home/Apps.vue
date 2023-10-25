@@ -47,7 +47,8 @@ const apps = ref([
     label: "60s读懂世界",
     value: "60s",
     icon: "./images/apps/60s.png",
-    imageUrl: "https://api.vvhan.com/api/60s",
+    imageUrl: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
+    // imageUrl: "https://api.vvhan.com/api/60s",
   },
   {
     label: "舔狗日记",
@@ -55,12 +56,12 @@ const apps = ref([
     icon: "./images/apps/tiangou.png",
     component: Tiangou,
   },
-  {
-    label: "这班上的值不值",
-    value: "zhibuzhi",
-    icon: "./images/apps/zhibuzhi.png",
-    component: Zhibuzhi,
-  }
+  // {
+  //   label: "这班上的值不值",
+  //   value: "zhibuzhi",
+  //   icon: "./images/apps/zhibuzhi.png",
+  //   component: Zhibuzhi,
+  // }
   // 摸鱼日报API https://dayu.qqsuu.cn/moyuribao/apis.php
   // 摸鱼日历API https://dayu.qqsuu.cn/moyurili/apis.php
   // 明星八卦API https://dayu.qqsuu.cn/mingxingbagua/apis.php

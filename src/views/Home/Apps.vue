@@ -82,6 +82,12 @@ const apps = ref([
     icon: "./images/apps/xingzuoyunshi.png",
     imageUrl: "https://dayu.qqsuu.cn/xingzuoyunshi/apis.php",
   },
+  // {
+  //   label: "音乐播放器",
+  //   value: "yinyue",
+  //   icon: "./images/apps/yinyue.png",
+  //   imageUrl: "https://dayu.qqsuu.cn/xingzuoyunshi/apis.php",
+  // },
   // 音乐 https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&type=json&n=1
   // https://xiaoapi.cn/API/yy.php?type=qq&msg=夜曲&n=1
 
@@ -145,6 +151,7 @@ const setImagePreviewVisible = value => {
       border-radius: 10px;
       background-color: var(--theme-bg-color-a8);
       transition: all .3s ease-in-out;
+      overflow: hidden;
       img {
         max-width: 100%;
         max-height: 120px;
@@ -152,7 +159,7 @@ const setImagePreviewVisible = value => {
         filter: brightness(1);
       }
       p {
-        max-width: 88%;
+        max-width: 96%;
         font-size: 12px;
         margin-top: 4px;
         text-align: center;

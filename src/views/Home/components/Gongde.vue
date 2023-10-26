@@ -39,6 +39,7 @@ const handleMouseup = () => {
   justify-content: space-around;
   .num {
     color: var(--primary-color);
+    font-size: 16px;
   }
   .tips {
     position: absolute;
@@ -80,6 +81,13 @@ const handleMouseup = () => {
   100% {
     opacity: 1;
     top: 24%;
+  }
+}
+@media screen and (max-width: 870px) {
+  .gongde {
+    .num {
+      font-size: 14px;
+    }
   }
 }
 </style>

@@ -68,10 +68,10 @@ const settingsVisible = ref(false);
 <style lang="less" scoped>
 .sidebar {
   width: 56px;
-  height: 88vh;
   background-color: var(--theme-bg-color-a8);
   position: fixed;
   z-index: 2;
+  top: 80px;
   bottom: 50px;
   right: 20px;
   transition: all .3s;

@@ -20,7 +20,7 @@ const disclaimersVisible = ref(false);
   position: fixed;
   width: 100%;
   bottom: 0;
-  height: 28px;
+  height: 32px;
   background-color: var(--theme-bg-color-a8);
   display: flex;
   font-size: 12px;

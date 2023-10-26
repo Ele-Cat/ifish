@@ -86,7 +86,6 @@ const apps = ref([
   //   label: "音乐播放器",
   //   value: "yinyue",
   //   icon: "./images/apps/yinyue.png",
-  //   imageUrl: "https://dayu.qqsuu.cn/xingzuoyunshi/apis.php",
   // },
   // 音乐 https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&type=json&n=1
   // https://xiaoapi.cn/API/yy.php?type=qq&msg=夜曲&n=1

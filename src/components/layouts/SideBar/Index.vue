@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar bf">
+  <div class="sidebar bf" :style="{bottom: useMusicStore.visible ? '120px' : '80px'}">
     <div class="logo">
       <img v-if="!useSystemStore.settings.darkMode" src="/images/logo.png" alt="">
       <img v-else src="/images/logo_white.png" alt="">
@@ -28,7 +28,7 @@
 <script setup>
 import { reactive, ref, defineAsyncComponent } from 'vue';
 import useStore from "@/store";
-const { useSystemStore } = useStore();
+const { useSystemStore, useMusicStore } = useStore();
 const Weather = defineAsyncComponent(() => import('@/components/common/Weather.vue'));
 const ModeSwitch = defineAsyncComponent(() => import('@/components/common/ModeSwitch.vue'));
 const Settings = defineAsyncComponent(() => import('./Settings/Index.vue'));
@@ -72,7 +72,7 @@ const settingsVisible = ref(false);
   position: fixed;
   z-index: 2;
   top: 80px;
-  bottom: 50px;
+  // bottom: 80px;
   right: 20px;
   transition: all .3s;
   border-radius: 56px;
@@ -133,6 +133,16 @@ const settingsVisible = ref(false);
       transition: color .3s ease-in-out;
       &:hover {
         color: var(--primary-color);
+      }
+    }
+  }
+}
+@media screen and (max-width: 640px) {
+  .sidebar {
+    .setting-box {
+      .ifishfont {
+        font-size: 22px;
+        margin-top: 10px;
       }
     }
   }

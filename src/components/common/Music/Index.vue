@@ -36,6 +36,8 @@ watch(() => useMusicStore.visible, newVal => {
 })
 const getTiangou = () => {
   let url= "https://xiaoapi.cn/API/yy.php?type=qq&msg=夜曲"
+  // qq、kg、kw、wy、qqmv、kgmv
+
   // url = 'https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&n=1'
   axios.get(url).then(res => {
     console.log('res: ', res);
@@ -43,10 +45,6 @@ const getTiangou = () => {
 }
 
 // getTiangou();
-
-
-// 音乐 https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&n=1
-// https://xiaoapi.cn/API/yy.php?type=qq&msg=夜曲&n=1
 </script>
 
 <style lang="less" scoped>

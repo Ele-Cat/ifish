@@ -17,6 +17,10 @@ const coverUrl = "https://imgse.com/content/images/system/home_cover_16010102701
   object-fit: cover;
   z-index: -99;
   transition: all .3s;
+
+  background: linear-gradient(135deg,#75f0db,#75dbf0,#8a75f0,#f075c7);
+  background-size: 200% 200%;
+  animation: gradient-move 5s ease infinite alternate;
 }
 
 .animate__fadeOut {
@@ -34,6 +38,15 @@ const coverUrl = "https://imgse.com/content/images/system/home_cover_16010102701
 
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
   }
 }
 </style>

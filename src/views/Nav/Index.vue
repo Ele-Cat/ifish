@@ -71,10 +71,6 @@ const onMove = (val) => {
       display: flex;
       transition: box-shadow 0.2s ease 0s;
       font-size: calc(var(--grid-size) / 6);
-      &:hover {
-        transform: scale(1.01);
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px, rgba(255, 255, 255, 0.4) 0px 0px 3px;
-      }
       .bookmark {
         display: flex;
         background-color: rgba(255, 255, 255, 0.9);
@@ -124,6 +120,15 @@ const onMove = (val) => {
         align-items: center;
         justify-content: center;
         background-color: aqua;
+      }
+      &:hover {
+        transform: scale(1.01);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px, rgba(255, 255, 255, 0.4) 0px 0px 3px;
+        .bookmark {
+          img {
+            filter: brightness(1.05);
+          }
+        }
       }
     }
     p {

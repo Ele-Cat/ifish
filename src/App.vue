@@ -7,8 +7,9 @@
     }"
     :locale="zhCN"
   >
-    <Layouts />
+    <Layouts @click="handleAppClick" @contextmenu.stop="handleAppContextMenu" />
   </a-config-provider>
+  <ContextMenu />
 </template>
 
 <script setup>
@@ -19,7 +20,8 @@ import 'dayjs/locale/zh-cn';
 dayjs.locale('zh-cn');
 import Layouts from '@/components/layouts/Index.vue';
 import useStore from "@/store";
-const { useSystemStore } = useStore();
+const { useSystemStore, useContextMenuStore } = useStore();
+import ContextMenu from "@/components/common/ContextMenu.vue"
 
 document.addEventListener("visibilitychange", handleVisibilityChange, false);
 function handleVisibilityChange() {
@@ -38,6 +40,16 @@ watch(() => useSystemStore.settings.title, newVal => {
 }, {
   immediate: true,
 })
+
+const handleAppClick = () => {
+  useContextMenuStore.hideContextMenu();
+  useContextMenuStore.activeType = "";
+}
+const handleAppContextMenu = (e) => {
+  e.preventDefault();
+  useContextMenuStore.showContextMenu(e.clientX, e.clientY);
+  useContextMenuStore.activeType = "page";
+}
 </script>
 
 <style lang="less" scoped>

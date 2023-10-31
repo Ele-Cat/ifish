@@ -9,7 +9,7 @@
     :move="onMove"
   >
     <template #item="{ element }">
-      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]">
+      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]" @contextmenu.stop="handleAppContextMenu">
         <div class="dataset">
           <div class="bookmark" v-if="element.type === 'bookmark'">
             <img :src="element.data.icon" alt="">
@@ -33,13 +33,19 @@
 import { reactive } from "vue";
 import Draggable from 'vuedraggable';
 import useStore from "@/store";
-const { useAppStore } = useStore();
+const { useAppStore, useContextMenuStore } = useStore();
 
 const apps = reactive(useAppStore.list);
 
 const onMove = (val) => {
   useAppStore.list = apps;
 };
+
+const handleAppContextMenu = (e) => {
+  e.preventDefault();
+  useContextMenuStore.showContextMenu(e.clientX, e.clientY);
+  useContextMenuStore.activeType = "app";
+}
 </script>
 
 <style lang="less">

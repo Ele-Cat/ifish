@@ -49,13 +49,6 @@ const onMove = (val) => {
   --border-radius: 8px;
   --icon-fit: contain;
 }
-body {
-  min-height: 100vh;
-  background-image: url(https://imgse.com/content/images/system/home_cover_1601010270144_8921bc.jpg);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  color: var(--nav-color);
-}
 .apps {
   padding: 20px 0 0;
   max-width: var(--max-page-width);

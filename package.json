@@ -15,7 +15,8 @@
     "pinia": "^2.1.6",
     "pinia-plugin-persist": "^1.0.0",
     "vue": "^3.3.4",
-    "vue3-perfect-scrollbar": "^1.6.1"
+    "vue3-perfect-scrollbar": "^1.6.1",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

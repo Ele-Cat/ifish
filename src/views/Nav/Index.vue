@@ -96,7 +96,7 @@ const onMove = (val) => {
           p {
             text-align: left;
             color: rgb(51, 51, 51);
-            font-size: 0.85em;
+            font-size: 0.95em;
             font-weight: 500;
             line-height: 1.3;
             overflow: hidden;

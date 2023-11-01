@@ -32,6 +32,7 @@ const { useSystemStore, useMusicStore } = useStore();
 const Weather = defineAsyncComponent(() => import('@/components/common/Weather.vue'));
 const ModeSwitch = defineAsyncComponent(() => import('@/components/common/ModeSwitch.vue'));
 const Settings = defineAsyncComponent(() => import('./Settings/Index.vue'));
+import eventBus from '@/utils/eventBus';
 
 const menuList = reactive([
   {
@@ -63,6 +64,10 @@ const feedback = () => {
 }
 
 const settingsVisible = ref(false);
+
+eventBus.on("openSettings", () => {
+  settingsVisible.value = true;
+})
 </script>
 
 <style lang="less" scoped>

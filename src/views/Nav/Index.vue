@@ -23,7 +23,7 @@
           </div>
         </div>
         <!-- <p>{{app.data.title}}{{app.gridSize}}{{app.gridPosition}}</p> -->
-        <p>{{element.data.title}}</p>
+        <p class="title">{{element.data.title}}</p>
       </div>
     </template>
   </Draggable>
@@ -137,7 +137,7 @@ const handleAppContextMenu = (e) => {
         }
       }
     }
-    p {
+    .title {
       position: relative;
       left: 0px;
       display: inline-block;
@@ -148,6 +148,7 @@ const handleAppContextMenu = (e) => {
       white-space: nowrap;
       pointer-events: none;
       font-size: 0.6rem;
+      text-shadow: 0 0 4px var(--grey-0);
     }
     &.column1-row1 {
       grid-column-start: span 1;

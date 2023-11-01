@@ -14,13 +14,16 @@ import useStore from '@/store';
 const { useContextMenuStore } = useStore();
 import { useElementBounding } from '@vueuse/core';
 import { toast } from "@/utils/feedback";
+import eventBus from '@/utils/eventBus';
 
 const contextMenuRef = ref(null);
 
 // 点击菜单条目
 const handleMenuClick = (type) => {
-  if (type === "moveUp") {
-    
+  if (type === "settings") {
+    eventBus.emit("openSettings");
+  } else if (type === "randomBg") {
+
   } else if (type === "moveDown") {
     toast({
       type: "warning",
@@ -46,11 +49,11 @@ watch(() => useContextMenuStore.activeType, (newVal) => {
         },
         {
           label: "随机壁纸",
-          value: "moveDown",
+          value: "randomBg",
         },
         {
           label: "打开设置",
-          value: "edit",
+          value: "settings",
           borderTop: true,
         },
       ]
@@ -58,15 +61,15 @@ watch(() => useContextMenuStore.activeType, (newVal) => {
       contextMenuList.value = [
         {
           label: "布局",
-          value: "moveUp",
+          value: "layout",
         },
         {
           label: "修改",
-          value: "moveDown",
+          value: "edit",
         },
         {
           label: "删除",
-          value: "edit",
+          value: "delete",
           borderTop: true,
         },
       ]
@@ -82,7 +85,7 @@ watch(() => useContextMenuStore.activeType, (newVal) => {
   left: 0;
   // width: 144px;
   // background-color: #fff;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: var(--theme-bg-color-a8);
   border-radius: 6px;
   box-sizing: border-box;
   box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
@@ -95,6 +98,7 @@ watch(() => useContextMenuStore.activeType, (newVal) => {
     list-style: none;
     font-size: 12px;
     color: #000000;
+    color: var(--theme-text-color);
     // border: 1px solid #C4C4C4;
 
     li {
@@ -108,8 +112,7 @@ watch(() => useContextMenuStore.activeType, (newVal) => {
 
       &:hover {
         background-color: #E2E2E2;
-        background-color: rgba(255, 255, 255, 0.3);
-        border-radius: 4px;
+        background-color: var(--theme-bg-color-a8);
       }
     }
 

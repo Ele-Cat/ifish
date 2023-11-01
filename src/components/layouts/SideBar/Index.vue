@@ -45,11 +45,11 @@ const menuList = reactive([
     label: "资讯",
     tooltip: "新闻资讯",
   },
-  // {
-  //   value: "nav",
-  //   label: "导航",
-  //   tooltip: "快捷导航",
-  // },
+  {
+    value: "nav",
+    label: "导航",
+    tooltip: "快捷导航",
+  },
   {
     value: "about",
     label: "关于",

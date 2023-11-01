@@ -1,14 +1,14 @@
 <template>
   <div>
-    <!-- <img class="cover" :src="coverUrl" alt="">
-    <img class="cover animate__fadeOut" :src="coverUrl" alt=""> -->
-    <video class="video" :src="videoUrl" playsinline autoplay loop muted></video>
+    <img class="cover" :src="coverUrl" alt="">
+    <img class="cover animate__fadeOut" :src="coverUrl" alt="">
+    <!-- <video class="video" :src="videoUrl" playsinline autoplay loop muted></video> -->
   </div>
 </template>
 
 <script setup>
 const coverUrl = "https://imgse.com/content/images/system/home_cover_1601010270144_8921bc.jpg";
-const videoUrl = "https://img2.picknewtab.com/wallpapers_video/648fb71175652244eaa103a0/435582351.mp4"
+// const videoUrl = "https://img2.picknewtab.com/wallpapers_video/648fb71175652244eaa103a0/435582351.mp4"
 // const videoUrl = "./images/bg/disney.mp4"
 </script>
 

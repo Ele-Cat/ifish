@@ -133,13 +133,13 @@ const handleRefresh = (type) => {
       overflow: hidden;
       margin-bottom: 14px;
       background-color: var(--theme-bg-color-a8);
-      border-radius: 12px 12px 0 0;
+      border-radius: 8px 8px 0 0;
       .news-title {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        height: 2em;
-        line-height: 2em;
+        height: 2.4em;
+        line-height: 2.6em;
         padding: 0 10px;
         p {
           &:nth-of-type(1) {
@@ -202,7 +202,7 @@ html[theme = "dark"] {
       .news-item {
         width: 49%;
         margin-bottom: 12px;
-        border-radius: 10px 10px 0 0;
+        border-radius: 4px 4px 0 0;
       }
     }
   }
@@ -212,7 +212,7 @@ html[theme = "dark"] {
     .news-box {
       .news-item {
         width: 100%;
-        border-radius: 8px 8px 0 0;
+        border-radius: 0;
       }
     }
   }

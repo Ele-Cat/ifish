@@ -22,12 +22,15 @@ const contextMenuRef = ref(null);
 const handleMenuClick = (type) => {
   if (type === "settings") {
     eventBus.emit("openSettings");
-  } else if (type === "randomBg") {
-
-  } else if (type === "moveDown") {
+  } else if (["addApps", "randomBg", "layout", "edit"].includes(type)) {
     toast({
       type: "warning",
-      content: "提醒",
+      content: "开发中...",
+    });
+  } else if (type === "delete") {
+    toast({
+      type: "warning",
+      content: "开发中...",
     });
   }
   useContextMenuStore.activeType = "";
@@ -45,7 +48,7 @@ watch(() => useContextMenuStore.activeType, (newVal) => {
       contextMenuList.value = [
         {
           label: "添加导航",
-          value: "moveUp",
+          value: "addApps",
         },
         {
           label: "随机壁纸",

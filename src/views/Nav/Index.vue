@@ -148,6 +148,7 @@ const handleAppContextMenu = (e) => {
       white-space: nowrap;
       pointer-events: none;
       font-size: 0.6rem;
+      color: #FFF;
       text-shadow: 0 0 4px var(--grey-0);
     }
     &.column1-row1 {

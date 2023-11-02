@@ -9,7 +9,7 @@
     :move="onMove"
   >
     <template #item="{ element }">
-      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]" @contextmenu.stop="handleAppContextMenu">
+      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]" @click="handleAppClick(element)" @contextmenu.stop="handleAppContextMenu">
         <div class="dataset">
           <div class="bookmark" v-if="element.type === 'bookmark'">
             <img :src="element.data.icon" alt="">
@@ -46,6 +46,12 @@ const handleAppContextMenu = (e) => {
   useContextMenuStore.showContextMenu(e.clientX, e.clientY);
   useContextMenuStore.activeType = "app";
 }
+
+const handleAppClick = (app) => {
+  if (app.type === "bookmark") {
+    window.open(app.data.url, "_blank");
+  }
+}
 </script>
 
 <style lang="less">
@@ -68,12 +74,12 @@ const handleAppContextMenu = (e) => {
   .app {
     position: relative;
     padding: 0 calc(var(--grid-size) / 6) calc(var(--grid-size) / 3);
+    cursor: pointer;
     .dataset {
       width: 100%;
       height: 100%;
       border-radius: var(--border-radius);
       overflow: hidden;
-      cursor: pointer;
       display: flex;
       transition: box-shadow 0.2s ease 0s;
       font-size: calc(var(--grid-size) / 6);
@@ -127,15 +133,6 @@ const handleAppContextMenu = (e) => {
         justify-content: center;
         background-color: aqua;
       }
-      &:hover {
-        transform: scale(1.01);
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px, rgba(255, 255, 255, 0.4) 0px 0px 3px;
-        .bookmark {
-          img {
-            filter: brightness(1.05);
-          }
-        }
-      }
     }
     .title {
       position: relative;
@@ -150,6 +147,17 @@ const handleAppContextMenu = (e) => {
       font-size: 0.6rem;
       color: #FFF;
       text-shadow: 0 0 4px var(--grey-0);
+    }
+    &:hover {
+      .dataset {
+        transform: scale(1.01);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px, rgba(255, 255, 255, 0.4) 0px 0px 3px;
+        .bookmark {
+          img {
+            filter: brightness(1.05);
+          }
+        }
+      }
     }
     &.column1-row1 {
       grid-column-start: span 1;

@@ -6,6 +6,14 @@ export const useSystemStore = defineStore("ifishSystem", {
       settings: {
         title: "",
         darkMode: false,
+        lock: {
+          key: "Ctrl + L",
+          target: "_self",
+          actionList: [
+            "https://www.baidu.com",
+          ],
+          action: "https://www.baidu.com",
+        },
       },
       activeMenu: "home", // 当前聚焦的工具栏目
       searchType: "https://www.baidu.com",
@@ -27,6 +35,9 @@ export const useSystemStore = defineStore("ifishSystem", {
         // html添加theme 属性值
         html.setAttribute("theme", "dark");
       }
+    },
+    lock() {
+      window.open(this.settings.lock.action, this.settings.lock.target);
     },
   },
   persist: {

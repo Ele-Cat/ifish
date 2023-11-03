@@ -6,6 +6,10 @@ export const useSystemStore = defineStore("ifishSystem", {
       settings: {
         title: "",
         darkMode: false,
+        bg: {
+          url: "https://imgse.com/content/images/system/home_cover_1601010270144_8921bc.jpg",
+          type: "image",
+        },
         lock: {
           key: "Ctrl + L",
           target: "_self",

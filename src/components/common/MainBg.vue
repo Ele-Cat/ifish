@@ -1,12 +1,26 @@
 <template>
   <div>
-    <img class="cover" :src="coverUrl" alt="">
-    <img class="cover animate__fadeOut" :src="coverUrl" alt="">
+    <img v-if="type === 'image'" class="cover" :src="url" alt="">
+    <img v-if="type === 'image'" class="cover animate__fadeOut" :src="url" alt="">
     <!-- <video class="video" :src="videoUrl" playsinline autoplay loop muted></video> -->
   </div>
 </template>
 
 <script setup>
+import { watch, ref } from "vue";
+import useStore from "@/store";
+const { useSystemStore } = useStore();
+
+const type = ref(useSystemStore.settings.bg.type);
+const url = ref(useSystemStore.settings.bg.url);
+watch(() => useSystemStore.settings.bg, newVal => {
+  type.value = newVal.type;
+  url.value = newVal.url;
+}, {
+  immediate: true,
+  deep: true,
+})
+
 const coverUrl = "https://imgse.com/content/images/system/home_cover_1601010270144_8921bc.jpg";
 // const videoUrl = "https://img2.picknewtab.com/wallpapers_video/648fb71175652244eaa103a0/435582351.mp4"
 // const videoUrl = "./images/bg/disney.mp4"

@@ -12,18 +12,18 @@
       <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]" @click="handleAppClick(element)" @contextmenu.stop="handleAppContextMenu">
         <div class="dataset">
           <div class="bookmark" v-if="element.type === 'bookmark'">
-            <img :src="element.data.icon" alt="">
+            <img :src="element.icon" alt="">
             <div class="description" v-if="element.gridSize[1] == 2 && element.gridSize[0] == 1">
-              <p>{{element.data.title}}</p>
-              <span>{{element.data.description}}</span>
+              <p>{{element.title}}</p>
+              <span>{{element.description}}</span>
             </div>
           </div>
           <div class="comp" v-else>
-            {{element.data.title}}
+            {{element.title}}
           </div>
         </div>
-        <!-- <p>{{app.data.title}}{{app.gridSize}}{{app.gridPosition}}</p> -->
-        <p class="title">{{element.data.title}}</p>
+        <!-- <p>{{app.title}}{{app.gridSize}}{{app.gridPosition}}</p> -->
+        <p class="title">{{element.title}}</p>
       </div>
     </template>
   </Draggable>
@@ -35,10 +35,10 @@ import Draggable from 'vuedraggable';
 import useStore from "@/store";
 const { useAppStore, useContextMenuStore } = useStore();
 
-const apps = reactive(useAppStore.list);
+const apps = reactive(useAppStore.lists);
 
 const onMove = (val) => {
-  useAppStore.list = apps;
+  useAppStore.lists = apps;
 };
 
 const handleAppContextMenu = (e) => {
@@ -49,7 +49,7 @@ const handleAppContextMenu = (e) => {
 
 const handleAppClick = (app) => {
   if (app.type === "bookmark") {
-    window.open(app.data.url, "_blank");
+    window.open(app.url, "_blank");
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-form :model="formState" :label-col="labelCol">
-      <a-form-item label="暗黑模式">
+      <a-form-item label="暗黑模式" extra="切换键：Ctrl + Q">
         <a-switch v-model:checked="formState.darkMode" @change="handleModeChange" />
       </a-form-item>
     </a-form>

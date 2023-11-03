@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-bg">
     <img v-if="type === 'image'" class="cover" :src="url" alt="">
     <img v-if="type === 'image'" class="cover animate__fadeOut" :src="url" alt="">
     <!-- <video class="video" :src="videoUrl" playsinline autoplay loop muted></video> -->
@@ -44,7 +44,6 @@ const coverUrl = "https://imgse.com/content/images/system/home_cover_16010102701
   object-fit: cover;
   z-index: -99;
   transition: all .3s;
-
   background: linear-gradient(135deg,#75f0db,#75dbf0,#8a75f0,#f075c7);
   background-size: 200% 200%;
   animation: gradient-move 5s ease infinite alternate;

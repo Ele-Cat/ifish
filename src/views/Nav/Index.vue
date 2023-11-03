@@ -26,13 +26,15 @@
       </div>
     </template>
   </Draggable>
+  <AppDialog />
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, defineAsyncComponent } from "vue";
 import Draggable from 'vuedraggable';
 import useStore from "@/store";
 const { useAppStore, useContextMenuStore } = useStore();
+const AppDialog = defineAsyncComponent(() => import('@/components/common/AppDialog/Index.vue'));
 
 const apps = reactive(useAppStore.lists);
 

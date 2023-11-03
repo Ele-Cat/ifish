@@ -54,24 +54,6 @@ const settingsNavs = ref([
 ]);
 </script>
 
-<style lang="less" scoped>
-.settings-drawer {
-  :deep(.ant-tabs) {
-    color: var(--theme-text-color);
-    .ant-tabs-tab {
-      justify-content: flex-end;
-      padding: 8px 12px;
-      &+.ant-tabs-tab {
-        margin: 6px 0 0 0;
-      }
-    }
-    .ant-tabs-tabpane {
-      padding: 4px 0 0 12px;
-    }
-  }
-}
-</style>
-
 <style lang="less">
 .settings-root {
   .ant-drawer-content-wrapper {

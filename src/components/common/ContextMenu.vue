@@ -21,8 +21,12 @@ const contextMenuRef = ref(null);
 
 // 点击菜单条目
 const handleMenuClick = (type) => {
-  if (type === "settings") {
-    eventBus.emit("openSettings");
+  if (type === "addApps") {
+    // eventBus.emit("addApps");
+    toast({
+      type: "warning",
+      content: "开发中...",
+    });
   } else if (type === "randomBg") {
     // 输出分类id[36(4K专区)|6(美女模特)|30(爱情美图)|9(风景大片)|15(小清新)|26(动漫卡通)|11(明星风尚)|14(萌宠动物)|5(游戏壁纸)|12(汽车天下)|10(炫酷时尚)|29(月历壁纸)|7(影视剧照)|13(节日美图)|22(军事天地)|16(劲爆体育)|18(BABY秀)|35(文字控)]
     // https://api.7585.net.cn/360/api.php?return=json
@@ -30,12 +34,16 @@ const handleMenuClick = (type) => {
       toast({
         content: "壁纸切换成功！",
       });
-      useSystemStore.settings.bg = {
-        url: res.data.imgurl,
-        type: "image"
-      }
+      useSystemStore.settings.wallpaper.url = res.data.imgurl
+      useSystemStore.settings.wallpaper.type = "image"
+      // useSystemStore.settings.wallpaper = {
+      //   url: res.data.imgurl,
+      //   type: "image"
+      // }
     })
-  } else if (["addApps", "layout", "edit"].includes(type)) {
+  } else if (type === "settings") {
+    eventBus.emit("openSettings");
+  } else if (["layout", "edit"].includes(type)) {
     toast({
       type: "warning",
       content: "开发中...",

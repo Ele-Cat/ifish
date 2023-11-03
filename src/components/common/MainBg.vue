@@ -11,9 +11,9 @@ import { watch, ref } from "vue";
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 
-const type = ref(useSystemStore.settings.bg.type);
-const url = ref(useSystemStore.settings.bg.url);
-watch(() => useSystemStore.settings.bg, newVal => {
+const type = ref(useSystemStore.settings.wallpaper.type);
+const url = ref(useSystemStore.settings.wallpaper.url);
+watch(() => useSystemStore.settings.wallpaper, newVal => {
   type.value = newVal.type;
   url.value = newVal.url;
 }, {

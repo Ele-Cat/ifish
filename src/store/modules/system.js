@@ -6,7 +6,9 @@ export const useSystemStore = defineStore("ifishSystem", {
       settings: {
         title: "",
         darkMode: false,
-        bg: {
+        wallpaper: {
+          blur: 0,
+          mask: 0,
           url: "https://imgse.com/content/images/system/home_cover_1601010270144_8921bc.jpg",
           type: "image",
         },

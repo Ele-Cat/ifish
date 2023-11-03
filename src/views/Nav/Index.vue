@@ -22,7 +22,6 @@
             {{element.title}}
           </div>
         </div>
-        <!-- <p>{{app.title}}{{app.gridSize}}{{app.gridPosition}}</p> -->
         <p class="title">{{element.title}}</p>
       </div>
     </template>

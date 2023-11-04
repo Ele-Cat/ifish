@@ -1,3 +1,44 @@
+export const systemComponents = [
+  {
+    type: "image",
+    title: "摸鱼日报",
+    icon: "./images/apps/moyu.png",
+    url: "https://api.vvhan.com/api/moyu",
+    // url: "https://dayu.qqsuu.cn/moyuribao/apis.php",
+  },
+  {
+    type: "image",
+    title: "60s读懂世界",
+    icon: "./images/apps/60s.png",
+    url: "https://api.vvhan.com/api/60s",
+    // url: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
+    // url: "http://dwz.2xb.cn/zaob",
+  },
+  {
+    type: "component",
+    title: "舔狗日记",
+    icon: "./images/apps/tiangou.png",
+    component: "tiangou",
+  },
+  {
+    type: "component",
+    title: "这班上的值不值",
+    icon: "./images/apps/zhibuzhi.png",
+    component: "zhibuzhi",
+  },
+  {
+    type: "component",
+    title: "功德+1",
+    component: "gongde",
+  },
+  {
+    type: "image",
+    title: "星座运势",
+    icon: "./images/apps/xingzuoyunshi.png",
+    url: "https://dayu.qqsuu.cn/xingzuoyunshi/apis.php",
+  },
+]
+
 export const lists = [
   {
     id: "ZGr1TVTtF59q1mne2m2GU",

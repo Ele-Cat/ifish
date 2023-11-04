@@ -1,20 +1,20 @@
 <template>
   <div class="system-tags">
     <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol">
-      <a-form-item label="网址" name="url">
-        <a-input v-model:value="formState.url" placeholder="请输入网址" />
+      <a-form-item label="网站地址" name="url">
+        <a-input v-model:value="formState.url" placeholder="请输入网站地址" />
       </a-form-item>
-      <a-form-item label="名称" name="title">
-        <a-input v-model:value="formState.title" placeholder="请输入名称" />
+      <a-form-item label="网站名称" name="title">
+        <a-input v-model:value="formState.title" placeholder="请输入网站名称" />
       </a-form-item>
-      <a-form-item label="介绍" name="description">
-        <a-input v-model:value="formState.description" placeholder="请输入介绍" />
+      <a-form-item label="网站介绍" name="description">
+        <a-input v-model:value="formState.description" placeholder="请输入网站介绍" />
       </a-form-item>
-      <a-form-item label="图标" name="icon">
+      <a-form-item label="网站图标" name="icon">
         <ImageEditor :imageInfo="{
           url: formState.icon,
-          width: 80,
-          height: 80,
+          width: 88,
+          height: 88,
         }" :aspectRatio="1" allowClear @use="onIconUpload"></ImageEditor>
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 14, offset: 3 }">
@@ -42,11 +42,11 @@ const labelCol = {
 };
 const validateUrl = async (_rule, value) => {
   if (!value) {
-    return Promise.reject('请输入网址');
+    return Promise.reject('请输入网站地址');
   }
   let pattern = /^(http|https):\/\/([a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]\.)+[a-zA-Z]{2,}(\/\S*)?$/;
   if (!pattern.test(value)) {
-    return Promise.reject('请输入正确网址');
+    return Promise.reject('请输入正确网站地址');
   } else {
     return Promise.resolve();
   }
@@ -56,10 +56,10 @@ const rules = {
     { required: true, validator: validateUrl, trigger: ['change', 'blur'] }
   ],
   title: [
-    { required: true, message: '请输入名称', trigger: ['change', 'blur'] },
+    { required: true, message: '请输入网站名称', trigger: ['change', 'blur'] },
   ],
   icon: [
-    { required: true, message: '请上传图标', trigger: ['change', 'blur'] },
+    { required: true, message: '请上传网站图标', trigger: ['change', 'blur'] },
   ],
 };
 

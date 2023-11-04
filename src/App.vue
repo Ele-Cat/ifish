@@ -49,12 +49,14 @@ watch(() => useSystemStore.settings.title, newVal => {
 
 const handleAppClick = () => {
   useContextMenuStore.hideContextMenu();
-  useContextMenuStore.activeType = "";
+  useContextMenuStore.activeApp = {};
 }
 const handleAppContextMenu = (e) => {
   e.preventDefault();
   useContextMenuStore.showContextMenu(e.clientX, e.clientY);
-  useContextMenuStore.activeType = "page";
+  useContextMenuStore.activeApp = {
+    type: "page"
+  };
 }
 </script>
 

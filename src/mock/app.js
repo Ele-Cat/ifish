@@ -71,7 +71,8 @@ export const lists = [
   },
   {
     id: "W7Ahwk5hkhSjm6jZuZD4C",
-    type: "chatGpt",
+    type: "component",
+    component: "chatGpt",
     title: "chatGpt",
     gridSize: [2, 2],
   },
@@ -117,8 +118,9 @@ export const lists = [
   },
   {
     id: "Thd9V1s6vrHuiNa4NbsPH",
-    type: "calendar",
-    title: "calendar",
+    type: "component",
+    component: "calendar",
+    title: "日历",
     gridSize: [1, 1],
   },
   {

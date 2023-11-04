@@ -83,7 +83,7 @@ const handleMouseup = () => {
     top: 24%;
   }
 }
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 768px) {
   .gongde {
     .num {
       font-size: 14px;

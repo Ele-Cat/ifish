@@ -101,22 +101,5 @@ const transformStyle = computed(() => {
 </script>
 
 <style lang="less">
-.ant-modal {
-  .ant-modal-content {
-    background-color: var(--theme-bg-color-a8);
-    color: var(--theme-text-color);
-  }
-  .ant-modal-header {
-    background-color: transparent;
-  }
-  .ant-modal-title {
-    color: var(--theme-text-color);
-  }
-  .ant-modal-close {
-    color: var(--theme-text-color);
-    &:hover {
-      color: var(--primary-color);
-    }
-  }
-}
+
 </style>

@@ -207,7 +207,7 @@ html[theme = "dark"] {
     }
   }
 }
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 768px) {
   .news {
     .news-box {
       .news-item {

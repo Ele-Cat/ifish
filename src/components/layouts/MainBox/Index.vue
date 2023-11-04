@@ -51,18 +51,17 @@ const mainComponents = shallowRef({
   }
   .comp-box {
     flex: 1;
-    padding: 20px 82px;
     word-wrap: break-word;
   }
   .scroll-bar {
     height: calc(100vh - 130px - 28px);
-    padding: 0 20px;
+    padding: 20px 102px;
   }
 }
 @media screen and (max-width: 640px) {
   .main-box {
-    .comp-box {
-      padding: 20px 56px;
+    .scroll-bar {
+      padding: 20px 76px;
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="system-tags">
-    <p v-for="i in 50" :key="i">系统书签列表</p>
+    <p v-for="i in 50" :key="i">系统默认书签列表</p>
   </div>
 </template>
 

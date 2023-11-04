@@ -201,7 +201,7 @@ const handleSearch = () => {
     }
   }
 }
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 768px) {
   .search-box {
     .search {
       min-width: 280px;

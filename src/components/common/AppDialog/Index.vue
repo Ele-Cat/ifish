@@ -1,7 +1,7 @@
 <template>
-  <IDialog title="添加导航" :width="880" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
+  <IDialog title="添加导航" :width="800" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
     <a-tabs class="add-box" v-model:activeKey="activeMenu" tab-position="left">
-      <a-tab-pane v-for="tab in tabList" :key="tab.value">
+      <a-tab-pane v-for="tab in tabList" :disabled="tab.disabled" :key="tab.value">
         <template #tab>
           <span>
             <component :is="tab.icon" />
@@ -29,22 +29,25 @@ const SystemComponents = defineAsyncComponent(() => import('./SystemComponents.v
 
 const tabList = reactive([
   {
-    label: "系统书签",
+    label: "定制书签",
     value: "1",
-    icon: TagsFilled,
-    component: SystemTags,
-  },
-  {
-    label: "自定义书签",
-    value: "2",
     icon: TagFilled,
     component: CustomTags,
+    disabled: false,
+  },
+  {
+    label: "系统书签",
+    value: "2",
+    icon: TagsFilled,
+    component: SystemTags,
+    disabled: true,
   },
   {
     label: "系统组件",
     value: "3",
     icon: AppstoreFilled,
     component: SystemComponents,
+    disabled: true,
   },
 ])
 const dialogVisible = ref(false);
@@ -58,11 +61,8 @@ eventBus.on("addApps", () => {
 <style lang="less" scoped>
 .add-box {
   padding-top: 20px;
-  :deep(.ant-tabs-tab) {
-    justify-content: flex-start !important;
-  }
   .scroll-bar {
-    height: calc(60vh);
+    height: 60vh;
   }
 }
 </style>

@@ -183,7 +183,7 @@ const setImagePreviewVisible = value => {
   }
 }
 
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 768px) {
   .apps-box {
     .app {
       width: 20%;

@@ -47,8 +47,34 @@
     &+.ant-tabs-tab {
       margin: 6px 0 0 0 !important;
     }
+    &.ant-tabs-tab-disabled {
+      color: var(--grey-6);
+    }
   }
   .ant-tabs-tabpane {
     padding: 4px 0 0 12px !important;
   }
+}
+
+.ant-modal {
+  .ant-modal-content {
+    background-color: var(--theme-bg-color-a8);
+    color: var(--theme-text-color);
+  }
+  .ant-modal-header {
+    background-color: transparent;
+  }
+  .ant-modal-title {
+    color: var(--theme-text-color);
+  }
+  .ant-modal-close {
+    color: var(--theme-text-color);
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.ant-btn-primary:disabled {
+  color: var(--grey-6);
 }

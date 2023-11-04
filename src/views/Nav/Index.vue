@@ -9,7 +9,7 @@
     :move="onMove"
   >
     <template #item="{ element }">
-      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]" @click="handleAppClick(element)" @contextmenu.stop="handleAppContextMenu">
+      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]" @click="handleAppClick(element)" @contextmenu.stop="e => handleAppContextMenu(e, element)">
         <div class="dataset">
           <div class="bookmark" v-if="element.type === 'bookmark'">
             <img :src="element.icon" alt="">
@@ -42,10 +42,10 @@ const onMove = (val) => {
   useAppStore.lists = apps;
 };
 
-const handleAppContextMenu = (e) => {
+const handleAppContextMenu = (e, app) => {
   e.preventDefault();
   useContextMenuStore.showContextMenu(e.clientX, e.clientY);
-  useContextMenuStore.activeType = "app";
+  useContextMenuStore.activeApp = app;
 }
 
 const handleAppClick = (app) => {

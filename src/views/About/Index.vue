@@ -58,7 +58,7 @@ const daysToWeekend = computed(() => {
     margin-top: 28px;
   }
 }
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 768px) {
   .about {
     p {
       text-align: center;

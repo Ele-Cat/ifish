@@ -1,6 +1,6 @@
 <template>
   <div class="system-tags">
-    系统组件
+    系统小组件
   </div>
 </template>
 

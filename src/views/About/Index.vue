@@ -39,6 +39,7 @@ const daysToWeekend = computed(() => {
 .about {
   background-color: var(--theme-bg-color-a8);
   padding: 20px;
+  border-radius: 12px;
   p {
     text-align: center;
     line-height: 1.8;

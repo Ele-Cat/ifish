@@ -38,7 +38,11 @@ setInterval(() => {
 
 <style lang="less" scoped>
 .l-time {
-  text-align: center;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-size: 18px;
   font-weight: 500;
   color: #fff;

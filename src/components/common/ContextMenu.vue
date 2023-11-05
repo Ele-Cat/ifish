@@ -56,7 +56,7 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
     // const { x, y, top, right, bottom, left, width, height } = useElementBounding(contextMenuRef);
     // console.log('x, y, top, right, bottom, left, width, height: ', x, y, top, right, bottom, left, width, height);
     if (newVal.type === "page") {
-      if (useSystemStore.activeMenu === "nav") {
+      if (useSystemStore.activeMenu === "home") {
         contextMenuList.value = [
           {
             label: "添加导航",

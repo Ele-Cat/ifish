@@ -1,200 +1,184 @@
 <template>
-  <div class="apps-box">
-    <div class="app" v-for="app in apps" :key="app.value" @click="handleAppClick(app)">
-      <div class="app-inner">
-        <template v-if="!app.isComponent">
-          <img :src="app.icon" alt="">
-          <p :title="app.label">{{ app.label }}</p>
-        </template>
-        <component v-else :is="app.component" />
+  <Draggable
+    :list="apps"
+    :animation="100"
+    item-key="id"
+    class="list-group apps"
+    :forceFallback="true"
+    ghost-class="ghost"
+    :move="onMove"
+  >
+    <template #item="{ element }">
+      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]" @click="handleAppClick(element)" @contextmenu.stop="e => handleAppContextMenu(e, element)">
+        <div class="dataset">
+          <div class="bookmark" v-if="element.type === 'bookmark'">
+            <img :src="element.icon" alt="">
+            <div class="description" v-if="element.gridSize[1] == 2 && element.gridSize[0] == 1">
+              <p>{{element.title}}</p>
+              <span>{{element.description}}</span>
+            </div>
+          </div>
+          <div class="comp" v-else>
+            {{element.title}}
+          </div>
+        </div>
+        <p class="title">{{element.title}}</p>
       </div>
-    </div>
-    <!-- https://www.sojson.com/other/relax.html -->
-    <!-- <video src=""></video> -->
-
-    <!-- https://api.vvhan.com/api/ip -->
-
-    <!-- 随机一句一言API接口 https://api.vvhan.com/api/ian -->
-    <!-- 随机笑话API接口 https://api.vvhan.com/api/joke -->
-    <!-- 随机一句情话API接口 https://api.vvhan.com/api/love -->
-    <!-- 随机一句骚话API接口 https://api.vvhan.com/api/sao -->
-    <!-- 美图API接口 https://api.vvhan.com/api/mobil.girl?type=json -->
-    <!-- https://api.vvhan.com/api/girl?type=json -->
-
-    <!-- 美女视频 https://www.nihaowua.com/v/video.php?_t=0.6096279598934722 -->
-    <!-- 美女写真 https://api.moyuduck.com/random/xiezhen -->
-
-    <img :src="imageUrl" v-for="imageUrl in imageUrls" :key="imageUrl" v-show="false" alt="">
-    <IDialog :title="dialogTitle" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
-      <component :is="activeDialogComponent" />
-    </IDialog>
-    <a-image :width="200" style="width:0;height:0" :preview="{
-      visible: appImageVisible,
-      onVisibleChange: setImagePreviewVisible,
-    }" :src="appImageUrl" />
-  </div>
+    </template>
+  </Draggable>
+  <AppDialog />
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent } from 'vue';
-const IDialog = defineAsyncComponent(() => import('@/components/libs/IDialog.vue'));
-const Tiangou = defineAsyncComponent(() => import('./components/Tiangou.vue'));
-const Zhibuzhi = defineAsyncComponent(() => import('./components/Zhibuzhi.vue'));
-const Gongde = defineAsyncComponent(() => import('./components/Gongde.vue'));
+import { reactive, defineAsyncComponent } from "vue";
+import Draggable from 'vuedraggable';
+import useStore from "@/store";
+const { useAppStore, useContextMenuStore } = useStore();
+const AppDialog = defineAsyncComponent(() => import('@/components/common/AppDialog/Index.vue'));
 
-const apps = ref([
-  {
-    label: "摸鱼日报",
-    value: "moyu",
-    icon: "./images/apps/moyu.png",
-    imageUrl: "https://api.vvhan.com/api/moyu",
-    // imageUrl: "https://dayu.qqsuu.cn/moyuribao/apis.php",
-  },
-  {
-    label: "60s读懂世界",
-    value: "60s",
-    icon: "./images/apps/60s.png",
-    imageUrl: "https://api.vvhan.com/api/60s",
-    // imageUrl: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
-    // imageUrl: "http://dwz.2xb.cn/zaob",
-  },
-  {
-    label: "舔狗日记",
-    value: "tiangou",
-    icon: "./images/apps/tiangou.png",
-    component: Tiangou,
-  },
-  {
-    label: "这班上的值不值",
-    value: "zhibuzhi",
-    icon: "./images/apps/zhibuzhi.png",
-    component: Zhibuzhi,
-  },
-  {
-    label: "功德+1",
-    value: "gongde",
-    isComponent: true,
-    component: Gongde,
-  },
-  {
-    label: "星座运势",
-    value: "xingzuoyunshi",
-    icon: "./images/apps/xingzuoyunshi.png",
-    imageUrl: "https://dayu.qqsuu.cn/xingzuoyunshi/apis.php",
-  },
-  // {
-  //   label: "音乐播放器",
-  //   value: "yinyue",
-  //   icon: "./images/apps/yinyue.png",
-  // },
-  // 音乐 https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&type=json&n=1
-  // https://xiaoapi.cn/API/yy.php?type=qq&msg=夜曲&n=1
+const apps = reactive(useAppStore.lists);
 
-  // 摸鱼日报API https://dayu.qqsuu.cn/moyuribao/apis.php
-  // 摸鱼日历API https://dayu.qqsuu.cn/moyurili/apis.php
-  // 明星八卦API https://dayu.qqsuu.cn/mingxingbagua/apis.php
-  // 内涵段子API https://dayu.qqsuu.cn/neihanduanzi/apis.php
-  // 新闻简报API https://dayu.qqsuu.cn/weiyujianbao/apis.php
-  // 情感花园API https://dayu.qqsuu.cn/qingganhuayuan/apis.php
-  // 摸鱼日报美女视频版API https://dayu.qqsuu.cn/moyuribaoshipin/apis.php
-])
+const onMove = (val) => {
+  useAppStore.lists = apps;
+};
 
-const imageUrls = ref([])
-apps.value.map(app => {
-  if (app.imageUrl) {
-    imageUrls.value.push(app.imageUrl)
-  }
-})
-
-const dialogVisible = ref(false);
-const appImageVisible = ref(false);
-const appImageUrl = ref("");
-const dialogTitle = ref("");
-const activeDialogComponent = ref(null);
-const handleAppClick = (app) => {
-  // console.log(app);
-  if (["moyu", "60s", "xingzuoyunshi"].includes(app.value)) {
-    appImageUrl.value = app.imageUrl;
-    setImagePreviewVisible(true);
-  } else if (["tiangou", "zhibuzhi"].includes(app.value)) {
-    activeDialogComponent.value = app.component;
-    dialogTitle.value = app.label;
-    dialogVisible.value = true;
-  }
+const handleAppContextMenu = (e, app) => {
+  e.preventDefault();
+  useContextMenuStore.showContextMenu(e.clientX, e.clientY);
+  useContextMenuStore.activeApp = app;
 }
 
-const setImagePreviewVisible = value => {
-  appImageVisible.value = value;
-};
+const handleAppClick = (app) => {
+  if (app.type === "bookmark") {
+    window.open(app.url, "_blank");
+  }
+}
 </script>
 
-<style lang="less" scoped>
-.apps-box {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 20px 0;
-  :deep(.ant-image) {
-    width: 0 !important;
-  }
+<style lang="less">
+:root {
+  --max-page-width: 1360px;
+  --grid-size: 5.5rem;
+  --border-radius: 8px;
+  --icon-fit: contain;
+}
+.apps {
+  padding: 40px 0 0;
+  max-width: var(--max-page-width);
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--grid-size));
+  grid-template-rows: repeat(auto-fill, var(--grid-size));
+  grid-auto-flow: dense;
+  grid-auto-rows: var(--grid-size);
+  justify-content: center;
   .app {
-    display: flex;
-    flex-wrap: wrap;
-    width: 10%;
-    padding: 4px;
+    position: relative;
+    padding: 0 calc(var(--grid-size) / 6) calc(var(--grid-size) / 3);
     cursor: pointer;
-    .app-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 8px 6px 12px;
-      border-radius: 10px;
-      background-color: var(--theme-bg-color-a8);
-      transition: all .3s ease-in-out;
+    .dataset {
+      width: 100%;
+      height: 100%;
+      border-radius: var(--border-radius);
       overflow: hidden;
-      img {
-        max-width: 100%;
-        max-height: 120px;
-        object-fit: contain;
-        filter: brightness(1);
+      display: flex;
+      transition: box-shadow 0.2s ease 0s;
+      font-size: calc(var(--grid-size) / 6);
+      .bookmark {
+        display: flex;
+        background-color: rgba(255, 255, 255, 0.9);
+        img {
+          height: 100%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin: auto;
+          overflow-clip-margin: content-box;
+          overflow: clip;
+          object-fit: var(--icon-fit, cover);
+        }
+        .description {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 3px 6px;
+          p {
+            text-align: left;
+            color: rgb(51, 51, 51);
+            font-size: 0.95em;
+            font-weight: 500;
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            font-size: 0.6em;
+            margin-top: 0.3em;
+            color: rgb(102, 102, 102);
+            line-height: 1.3;
+            word-break: break-all;
+          }
+        }
       }
-      p {
-        max-width: 96%;
-        font-size: 12px;
-        margin-top: 4px;
-        text-align: center;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      &:hover {
-        box-shadow: 0 0 15px var(--theme-bg-color-a8);
-        transform: translateY(-5px);
-        color: var(--primary-color);
+      .comp {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: aqua;
       }
     }
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .apps-box {
-    .app {
-      width: 12.5%;
+    .title {
+      position: relative;
+      left: 0px;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      pointer-events: none;
+      font-size: 0.6rem;
+      color: #FFF;
+      text-shadow: 0 0 4px var(--grey-0);
     }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .apps-box {
-    .app {
-      width: 20%;
+    &:hover {
+      .dataset {
+        transform: scale(1.01);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px, rgba(255, 255, 255, 0.4) 0px 0px 3px;
+        .bookmark {
+          img {
+            filter: brightness(1.05);
+          }
+        }
+      }
     }
-  }
-}
-
-@media screen and (max-width: 640px) {
-  .apps-box {
-    .app {
-      width: 33.33%;
+    &.column1-row1 {
+      grid-column-start: span 1;
+      grid-row-start: span 1;
+    }
+    &.column2-row1 {
+      grid-column-start: span 2;
+      grid-row-start: span 1;
+    }
+    &.column2-row2 {
+      grid-column-start: span 2;
+      grid-row-start: span 2;
+    }
+    &.column3-row2 {
+      grid-column-start: span 3;
+      grid-row-start: span 2;
+    }
+    &.column4-row2 {
+      grid-column-start: span 4;
+      grid-row-start: span 2;
     }
   }
 }

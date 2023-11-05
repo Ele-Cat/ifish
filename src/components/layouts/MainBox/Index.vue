@@ -54,14 +54,14 @@ const mainComponents = shallowRef({
     word-wrap: break-word;
   }
   .scroll-bar {
-    height: calc(100vh - 130px - 28px);
-    padding: 20px 102px;
+    height: calc(100vh - 140px);
+    padding: 10px 102px 0;
   }
 }
 @media screen and (max-width: 640px) {
   .main-box {
     .scroll-bar {
-      padding: 20px 76px;
+      padding: 10px 76px 0;
     }
   }
 }

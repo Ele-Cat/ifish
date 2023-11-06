@@ -1,0 +1,1 @@
+.nav{background-color:var(--theme-bg-color-a8);height:74vh;display:flex;align-items:center;justify-content:center;border-radius:12px}.navs{background-color:var(--theme-bg-color-a8);display:flex;border-radius:12px;padding:12px}.navs .nav-box{width:50%}.navs a{color:var(--theme-text-color);margin-right:20px;text-decoration:none}.navs a img{width:20px;height:20px;margin-right:4px}

@@ -101,7 +101,7 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
           borderTop: true,
         },
       ]
-    } else {
+    } else if (newVal.type === "component") {
       contextMenuList.value = [
         {
           label: "布局",

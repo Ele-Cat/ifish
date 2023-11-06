@@ -51,6 +51,7 @@ const coverUrl = "https://imgse.com/content/images/system/home_cover_16010102701
 
 .animate__fadeOut {
   width: 200vw;
+  max-width: 200vw;
   height: 200vh;
   left: -50vw;
   top: -50vh;

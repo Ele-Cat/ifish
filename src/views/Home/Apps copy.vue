@@ -37,10 +37,9 @@
 
 <script setup>
 import { ref, defineAsyncComponent } from 'vue';
-const IDialog = defineAsyncComponent(() => import('@/components/libs/IDialog.vue'));
-const Tiangou = defineAsyncComponent(() => import('./components/Tiangou.vue'));
-const Zhibuzhi = defineAsyncComponent(() => import('./components/Zhibuzhi.vue'));
-const Gongde = defineAsyncComponent(() => import('./components/Gongde.vue'));
+const Tiangou = defineAsyncComponent(() => import('@/components/common/Apps/Tiangou.vue'));
+const Zhibuzhi = defineAsyncComponent(() => import('@/components/common/Apps/Zhibuzhi.vue'));
+const Gongde = defineAsyncComponent(() => import('@/components/common/Apps/Gongde.vue'));
 
 const apps = ref([
   {

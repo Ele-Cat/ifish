@@ -192,15 +192,18 @@ const handleCancel = () => {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.02);
-  border: 1px dashed var(--theme-text-color);
-  border-radius: 8px;
   cursor: pointer;
   transition: border-color 0.3s;
   color: var(--theme-text-color);
   font-size: 14px;
-
-  &:hover {
-    border-color: var(--primary-color);
+  img, .img-upload {
+    width: 100%;
+    height: 100%;
+    border: 1px dashed var(--theme-text-color);
+    border-radius: 8px;
+    &:hover {
+      border-color: var(--primary-color);
+    }
   }
   .img-remove {
     position: absolute;
@@ -209,7 +212,7 @@ const handleCancel = () => {
     border-radius: 50%;
     background-color: #FFFFFF;
     font-size: 22px;
-    color: #F05F57;
+    color: var(--primary-color);
     z-index: 9;
     &:hover {
       color: red;

@@ -9,17 +9,17 @@
     :move="onMove"
   >
     <template #item="{ element }">
-      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]" @click="handleAppClick(element)" @contextmenu.stop="e => handleAppContextMenu(e, element)">
+      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]">
         <div class="dataset">
-          <div class="bookmark" v-if="element.type === 'bookmark'">
+          <div class="bookmark" v-if="element.type === 'bookmark'" @click="handleAppClick(element)" @contextmenu.stop="e => handleAppContextMenu(e, element)">
             <img :src="element.icon" alt="">
             <div class="description" v-if="element.gridSize[1] == 2 && element.gridSize[0] == 1">
               <p>{{element.title}}</p>
               <span>{{element.description}}</span>
             </div>
           </div>
-          <div class="comp" v-else>
-            {{element.title}}
+          <div class="comp" v-else @contextmenu.stop="e => handleAppContextMenu(e, element)">
+            <component :is="components[element.component]" :app="element" />
           </div>
         </div>
         <p class="title">{{element.title}}</p>
@@ -35,6 +35,16 @@ import Draggable from 'vuedraggable';
 import useStore from "@/store";
 const { useAppStore, useContextMenuStore } = useStore();
 const AppDialog = defineAsyncComponent(() => import('@/components/common/AppDialog/Index.vue'));
+const ImgPreview = defineAsyncComponent(() => import('@/components/common/Apps/ImgPreview.vue'));
+const Tiangou = defineAsyncComponent(() => import('@/components/common/Apps/Tiangou.vue'));
+const Zhibuzhi = defineAsyncComponent(() => import('@/components/common/Apps/Zhibuzhi.vue'));
+const Gongde = defineAsyncComponent(() => import('@/components/common/Apps/Gongde.vue'));
+const components = {
+  imgpreview: ImgPreview,
+  tiangou: Tiangou,
+  zhibuzhi: Zhibuzhi,
+  gongde: Gongde,
+}
 
 const apps = reactive(useAppStore.lists);
 
@@ -75,7 +85,6 @@ const handleAppClick = (app) => {
   .app {
     position: relative;
     padding: 0 calc(var(--grid-size) / 6) calc(var(--grid-size) / 3);
-    cursor: pointer;
     .dataset {
       width: 100%;
       height: 100%;
@@ -84,6 +93,7 @@ const handleAppClick = (app) => {
       display: flex;
       transition: box-shadow 0.2s ease 0s;
       font-size: calc(var(--grid-size) / 6);
+      cursor: pointer;
       .bookmark {
         display: flex;
         background-color: rgba(255, 255, 255, 0.9);
@@ -132,7 +142,7 @@ const handleAppClick = (app) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: aqua;
+        background-color: var(--theme-bg-color-a8);
       }
     }
     .title {

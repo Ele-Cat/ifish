@@ -22,7 +22,6 @@
 import { ref, defineAsyncComponent, reactive } from "vue";
 import { TagsFilled, TagFilled, AppstoreFilled } from '@ant-design/icons-vue';
 import eventBus from '@/utils/eventBus';
-const IDialog = defineAsyncComponent(() => import('@/components/libs/IDialog.vue'));
 const SystemTags = defineAsyncComponent(() => import('./SystemTags.vue'));
 const CustomTags = defineAsyncComponent(() => import('./CustomTags.vue'));
 const SystemComponents = defineAsyncComponent(() => import('./SystemComponents.vue'));
@@ -46,7 +45,7 @@ const tabList = reactive([
     value: "3",
     icon: AppstoreFilled,
     component: SystemComponents,
-    disabled: true,
+    // disabled: true,
   },
 ])
 const dialogVisible = ref(false);

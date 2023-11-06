@@ -1,18 +1,30 @@
 <template>
   <div class="system-tags">
     <div class="system-tag" v-for="(component, index) in systemComponents" :key="index" @click="addSystemComp(component)">
-      <img :src="component.icon" alt="">
+      <div v-if="component.icon">
+        <img :src="component.icon" alt="">
+      </div>
+      <component v-else :is="components[component.component]" type="preview" />
       <p>{{ component.title }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
+import { defineAsyncComponent } from 'vue';
 import useStore from "@/store";
 const { useAppStore } = useStore();
 import { systemComponents } from "@/mock/app";
 import { uuid } from "@/utils/utils";
 import { toast } from "@/utils/feedback";
+const Tiangou = defineAsyncComponent(() => import('@/components/common/Apps/Tiangou.vue'));
+const Zhibuzhi = defineAsyncComponent(() => import('@/components/common/Apps/Zhibuzhi.vue'));
+const Gongde = defineAsyncComponent(() => import('@/components/common/Apps/Gongde.vue'));
+const components = {
+  tiangou: Tiangou,
+  zhibuzhi: Zhibuzhi,
+  gongde: Gongde,
+}
 
 const addSystemComp = (comp) => {
   useAppStore.lists.push({

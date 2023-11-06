@@ -1,1 +1,0 @@
-import{_ as a,o as e,j as s,F as r,k as c,d as n}from"./index-630212a8.js";const o={},_={class:"system-tags"};function d(l,m){return e(),s("div",_,[(e(),s(r,null,c(50,t=>n("p",{key:t},"系统默认书签列表")),64))])}const i=a(o,[["render",d]]);export{i as default};

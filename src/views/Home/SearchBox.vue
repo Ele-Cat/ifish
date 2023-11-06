@@ -160,6 +160,7 @@ const handleSearch = () => {
     }
     img{
       width: 24px;
+      max-width: 24px;
       border-radius: 50%;
       filter: brightness(1);
       cursor: pointer;

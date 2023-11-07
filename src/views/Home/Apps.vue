@@ -6,6 +6,8 @@
     class="list-group apps"
     :forceFallback="true"
     ghost-class="ghost"
+    :fallback-tolerance="8"
+    :delay="10"
     :move="onMove"
   >
     <template #item="{ element }">

@@ -12,7 +12,8 @@
             {{ leftNavs.title }} - {{ topNavs.title }} - {{ navs.title }}
             <div style="display:flex;flex-wrap:wrap;align-items:center;">
               <a :href="nav.url" target="_blank" v-for="nav in navs.nav" :key="nav.title" style="display:flex;flex-wrap:wrap;align-items:center;">
-                <img v-lazyload="renderIcon(nav.url)" style="height:20px;" alt="">{{ nav.name }}
+                <!-- <img v-lazyload="renderIcon(nav.url)" style="height:20px;" alt=""> -->
+                {{ nav.name }}
               </a>
             </div>
           </div>
@@ -27,7 +28,8 @@
           {{ leftNavs.title }} - {{ navs.title }}
           <div style="display:flex;flex-wrap:wrap;align-items:center;">
             <a :href="nav.url" target="_blank" v-for="nav in navs.nav" :key="nav.title" style="display:flex;flex-wrap:wrap;align-items:center;">
-              <img v-lazyload="renderIcon(nav.url)" style="height:20px;" alt="">{{ nav.name }}
+              <!-- <img v-lazyload="renderIcon(nav.url)" style="height:20px;" alt=""> -->
+              {{ nav.name }}
             </a>
           </div>
         </div>

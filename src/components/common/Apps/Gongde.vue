@@ -34,7 +34,7 @@ const handleMouseup = () => {
   tipRef.value.classList.add("active");
   setTimeout(() => {
     tipRef.value.classList.remove("active");
-  }, 350)
+  }, 550)
 }
 </script>
 
@@ -61,9 +61,10 @@ const handleMouseup = () => {
     opacity: 0;
     transition: transform 0.3s ease-in-out;
     pointer-events: none;
+    color: var(--primary-color);
     z-index: 9;
     &.active {
-      animation: up .3s;
+      animation: up .5s linear;
     }
   }
   .gongde-img {
@@ -84,12 +85,12 @@ const handleMouseup = () => {
     top: 80%;
   }
   50% {
-    opacity: 0.6;
+    opacity: 0.4;
     top: 50%;
   }
   100% {
     opacity: 1;
-    top: 24%;
+    top: 22%;
   }
 }
 @media screen and (max-width: 768px) {

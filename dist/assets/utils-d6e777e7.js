@@ -1,1 +1,0 @@
-function a(o){const e="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";let n="";for(let r=0;r<o;r++){const t=Math.floor(Math.random()*e.length);n+=e.charAt(t)}return n}function s(o){return new Promise((e,n)=>{const r=new FileReader;r.readAsDataURL(o),r.onload=()=>e(r.result),r.onerror=t=>n(t)})}export{s as f,a as u};

@@ -38,14 +38,12 @@ const tabList = reactive([
     value: "2",
     icon: TagsFilled,
     component: SystemTags,
-    disabled: true,
   },
   {
     label: "系统组件",
     value: "3",
     icon: AppstoreFilled,
     component: SystemComponents,
-    // disabled: true,
   },
 ])
 const dialogVisible = ref(false);

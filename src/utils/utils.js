@@ -28,3 +28,12 @@ export function fileToBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
+
+/**
+ * 获取网站ico
+ * @param {String} url 网站地址
+ */
+export function renderIco(url) {
+  const apiUrl = "https://api.vvhan.com/api/ico?url=";
+  return apiUrl + url.replace(/^https?:\/\//i, '');
+}

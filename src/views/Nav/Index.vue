@@ -42,9 +42,7 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import useStore from "@/store";
-const { useNavStore } = useStore();
-console.log('useNavStore: ', useNavStore.lists);
+import { renderIco } from "@/utils/utils";
 
 import lists from "@/mock/nav";
 import navs from "@/mock/navs";
@@ -64,9 +62,7 @@ const handleJump = nav => {
 }
 
 const renderIcon = computed(() => (url) => {
-  // https://api.vvhan.com/api/ico?url=www.vvhan.com
-  const apiUrl = "https://api.vvhan.com/api/ico?url=";
-  return apiUrl + url.replace(/^https?:\/\//i, '');
+  return renderIco(url);
 })
 </script>
 

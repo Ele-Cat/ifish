@@ -14,7 +14,7 @@
       <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]">
         <div class="dataset">
           <div class="bookmark" v-if="element.type === 'bookmark'" @click="handleAppClick(element)" @contextmenu.stop="e => handleAppContextMenu(e, element)">
-            <img :src="element.icon" alt="">
+            <img v-lazyload="element.icon" alt="">
             <div class="description" v-if="element.gridSize[1] == 2 && element.gridSize[0] == 1">
               <p>{{element.title}}</p>
               <span>{{element.description}}</span>

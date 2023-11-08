@@ -129,30 +129,30 @@ ul, li {
     .scroll-bar {
       height: calc(100vh - 280px);
       .nav-title {
-        margin-top: 10px;
+        margin: 10px 0 6px 0;
       }
       .nav-list {
         list-style: none;
-        padding: 12px 8px;
+        padding: 12px 8px 8px;
         margin: 0;
         font-size: 14px;
         display: flex;
         flex-wrap: wrap;
         li {
-          padding: 0 18px 10px 0;
+          margin: 0 18px 10px 0;
           transition: all .3s;
           span {
             display: flex;
             align-items: center;
             cursor: pointer;
-          }
-          img {
-            height: 18px;
-            margin-right: 4px;
-            border-radius: 4px;
-          }
-          &:hover {
-            color: var(--primary-color);
+            img {
+              height: 20px;
+              margin-right: 4px;
+              border-radius: 4px;
+            }
+            &:hover {
+              color: var(--primary-color);
+            }
           }
         }
       }

@@ -1,5 +1,4 @@
 <template>
-  {{ useContextMenuStore.activeApp }}
   <div ref="contextMenuRef" class="custom-menu bf" v-show="useContextMenuStore.menuVisible"
     :style="{ top: useContextMenuStore.menuTop + 'px', left: useContextMenuStore.menuLeft + 'px' }" @contextmenu="e => e.preventDefault()">
     <ul>
@@ -10,7 +9,7 @@
         @click.stop="handleMenuClick(contextMenu.value)">
         {{ contextMenu.label }}<CaretRightOutlined class="caret-right" v-if="contextMenu.value === 'layout'" />
         <ul class="layout-box bf" v-if="contextMenu.value === 'layout'">
-          <li v-for="item in appLayout" @click="handleEditLayout(item)" :class="{active: useContextMenuStore?.activeApp?.gridSize[0] === item?.value[0] && useContextMenuStore?.activeApp?.gridSize[1] === item?.value[1]}" :key="item.label">{{ item.label }}</li>
+          <li v-for="item in appLayout" @click="handleEditLayout(item)" :class="{active: liActive(item)}" :key="item.label">{{ item.label }}</li>
         </ul>
       </li>
     </ul>
@@ -47,7 +46,7 @@ const handleMenuClick = (type) => {
     })
   } else if (type === "settings") {
     eventBus.emit("openSettings");
-  } else if (["layout", "edit"].includes(type)) {
+  } else if (type === "edit") {
     toast({
       type: "warning",
       content: "开发中...",
@@ -59,6 +58,14 @@ const handleMenuClick = (type) => {
   useContextMenuStore.menuVisible = false;
 }
 
+const liActive = (item) => {
+  const activeApp = useContextMenuStore.activeApp
+  if (activeApp && activeApp.gridSize) {
+    return activeApp?.gridSize[0] === item?.value[0] && activeApp?.gridSize[1] === item?.value[1]
+  } else {
+    return false;
+  }
+}
 const handleEditLayout = (item) => {
   useAppStore.lists.map(app => {
     if (app.id === useContextMenuStore.activeApp.id) {
@@ -165,11 +172,12 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
       height: 28px;
       line-height: 28px;
       padding: 0 20px;
+      border-radius: 4px;
       // overflow: hidden;
       .caret-right {
         position: absolute;
         right: 4px;
-        top: 7px;
+        top: 8px;
       }
       &.red {
         color: #ff4d4f;
@@ -190,9 +198,10 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
         display: none;
         li {
           list-style: none;
+          border-radius: 4px;
           padding: 0 10px;
           &.active, &:hover {
-            background-color: var(--theme-bg-color-a8);
+            background-color: var(--theme-bg-color);
           }
         }
       }

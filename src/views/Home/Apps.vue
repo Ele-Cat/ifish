@@ -14,7 +14,7 @@
       <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]">
         <div class="dataset">
           <div class="bookmark" v-if="element.type === 'bookmark'" @click="handleAppClick(element)" @contextmenu.stop="e => handleAppContextMenu(e, element)">
-            <img v-lazyload="element.icon" alt="">
+            <img class="logo" v-lazyload="element.icon" alt="">
             <div class="description" v-if="element.gridSize[1] == 2 && element.gridSize[0] == 1">
               <p>{{element.title}}</p>
               <span>{{element.description}}</span>
@@ -97,17 +97,13 @@ const handleAppClick = (app) => {
       font-size: calc(var(--grid-size) / 6);
       cursor: pointer;
       .bookmark {
+        flex: 1;
         display: flex;
         background-color: rgba(255, 255, 255, 0.9);
-        img {
-          height: 100%;
-          background-repeat: no-repeat;
-          background-size: cover;
-          margin: auto;
-          overflow-clip-margin: content-box;
-          overflow: clip;
-          object-fit: var(--icon-fit, cover);
-        }
+        // .logo {
+        //   height: 100%;
+        //   object-fit: cover;
+        // }
         .description {
           flex: 1;
           display: flex;
@@ -187,10 +183,18 @@ const handleAppClick = (app) => {
     &.column3-row2 {
       grid-column-start: span 3;
       grid-row-start: span 2;
+      .logo {
+        width: 100%;
+        object-fit: cover;
+      }
     }
     &.column4-row2 {
       grid-column-start: span 4;
       grid-row-start: span 2;
+      .logo {
+        width: 100%;
+        object-fit: cover;
+      }
     }
   }
 }

@@ -13,15 +13,17 @@
 import { ref, computed } from "vue";
 import useStore from "@/store";
 const { useAppStore } = useStore();
-import navs from "@/mock/navs";
+import nav from "@/mock/nav";
 import { toast } from "@/utils/feedback";
 import { renderIco, uuid } from "@/utils/utils";
 
 const navList = ref([]);
-navs.map(nav1 => {
+nav.map(nav1 => {
   nav1.nav.map(nav2 => {
     nav2.nav.map(nav3 => {
-      navList.value.push(nav3);
+      nav3.nav.map(nav4 => {
+        navList.value.push(nav4);
+      })
     })
   })
 })

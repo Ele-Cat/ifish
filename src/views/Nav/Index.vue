@@ -7,9 +7,11 @@
     </div>
     <div class="nav-box">
       <div class="nav-top">
-        <ul>
-          <li v-for="(item, index) in navsTop" :class="{active: activeTop === index}" :key="index" @click="handleClickNavTop(index)">{{ item }}</li>
-        </ul>
+        <perfect-scrollbar>
+          <ul>
+            <li v-for="(item, index) in navsTop" :class="{active: activeTop === index}" :key="index" @click="handleClickNavTop(index)">{{ item }}</li>
+          </ul>
+        </perfect-scrollbar>
       </div>
       <perfect-scrollbar class="scroll-bar">
         <div class="nav-box" v-for="(navs, index) in activeNavs" :key="index">
@@ -67,11 +69,12 @@ ul, li {
 .navs {
   background-color: var(--theme-bg-color-a8);
   display: flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   border-radius: 12px;
   padding: 12px;
   .nav-left {
     width: 120px;
+    min-width: 120px;
     margin-right: 20px;
     text-align: right;
     border-right: 1px solid var(--theme-bg-color-a8);
@@ -99,6 +102,7 @@ ul, li {
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     // height: 70vh;
     .nav-top {
       padding-bottom: 12px;
@@ -110,6 +114,7 @@ ul, li {
           position: relative;
           line-height: 2.2;
           cursor: pointer;
+          white-space: nowrap;
           transition: all .3s;
           &.active, &:hover {
             color: var(--primary-color);
@@ -127,7 +132,7 @@ ul, li {
       }
     }
     .scroll-bar {
-      height: calc(100vh - 280px);
+      height: calc(100vh - 272px);
       .nav-title {
         margin: 10px 0 6px 0;
       }

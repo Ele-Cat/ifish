@@ -32,7 +32,7 @@ export default {
   },
 };
 
-import defaultImg from "@/assets/avatar.svg";
+import defaultImg from "@/assets/website.svg";
 // 指令
 const defineDirective = (app) => {
   // 图片懒加载指令

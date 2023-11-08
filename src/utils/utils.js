@@ -34,6 +34,7 @@ export function fileToBase64(file) {
  * @param {String} url 网站地址
  */
 export function renderIco(url) {
-  const apiUrl = "https://api.vvhan.com/api/ico?url=";
-  return apiUrl + url.replace(/^https?:\/\//i, '');
+  // const apiUrl = "https://api.vvhan.com/api/ico?url=" + url.replace(/^https?:\/\//i, '');
+  const apiUrl = "https://api.iowen.cn/favicon/" + url.replace(/^https?:\/\//i, '') + ".png";
+  return apiUrl;
 }

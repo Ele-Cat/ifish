@@ -1,7 +1,7 @@
 <template>
   <div class="system-tags">
     <div class="system-tag" v-for="(nav, idx) in navList" :key="idx" @click="addSystemTag(nav)">
-      <a-tooltip :title="nav.desc" placement="topLeft">
+      <a-tooltip :title="`${nav.name}：${nav.desc}`">
         <img v-lazyload="renderIcon(nav.url)" :alt="nav.name">
         <p>{{ nav.name }}</p>
       </a-tooltip>
@@ -73,6 +73,7 @@ const addSystemTag = (nav) => {
         border-radius: 6px;
       }
       p {
+        width: 72px;
         text-align: center;
         overflow: hidden;
         text-overflow: ellipsis;

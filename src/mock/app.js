@@ -12,8 +12,7 @@ export const systemComponents = [
     title: "60s读懂世界",
     component: "imgpreview",
     icon: "./images/apps/60s.png",
-    url: "https://api.vvhan.com/api/60s",
-    // url: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
+    url: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
     // url: "http://dwz.2xb.cn/zaob",
   },
   {

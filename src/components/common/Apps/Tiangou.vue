@@ -1,6 +1,6 @@
 <template>
   <img :src="app.icon" alt="" @click.stop="dialogVisible = true">
-  <IDialog :title="dialogTitle" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
+  <IDialog title="舔狗日记" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
     <div class="tiangou">
       <img src="/images/apps/tiangou.jpg" alt="">
       <div class="text">

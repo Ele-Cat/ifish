@@ -16,7 +16,7 @@
           <p class="nav-title">{{ navs.title }}</p>
           <ul class="nav-list">
             <li v-for="(nav, sIndex) in navs.nav" :key="sIndex" @click="handleJump(nav)">
-              <a-tooltip :title="nav.desc" placement="topLeft">
+              <a-tooltip :title="`${nav.name}：${nav.desc}`" placement="topLeft">
                 <img v-lazyload="renderIcon(nav.url)" alt="">
                 <p>{{ nav.name }}</p>
               </a-tooltip>

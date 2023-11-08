@@ -1,20 +1,31 @@
 <template>
+  {{ useContextMenuStore.activeApp }}
   <div ref="contextMenuRef" class="custom-menu bf" v-show="useContextMenuStore.menuVisible"
     :style="{ top: useContextMenuStore.menuTop + 'px', left: useContextMenuStore.menuLeft + 'px' }" @contextmenu="e => e.preventDefault()">
     <ul>
-      <li v-for="contextMenu in contextMenuList" :key="contextMenu.type" :class="{ 'border-top': contextMenu.borderTop, 'red': contextMenu.value === 'delete' }"
-        @click.stop="handleMenuClick(contextMenu.value)">{{ contextMenu.label }}</li>
+      <li 
+        v-for="contextMenu in contextMenuList" 
+        :key="contextMenu.value" 
+        :class="{ 'border-top': contextMenu.borderTop, 'red': contextMenu.value === 'delete', 'layout-li': contextMenu.value === 'layout' }"
+        @click.stop="handleMenuClick(contextMenu.value)">
+        {{ contextMenu.label }}<CaretRightOutlined class="caret-right" v-if="contextMenu.value === 'layout'" />
+        <ul class="layout-box bf" v-if="contextMenu.value === 'layout'">
+          <li v-for="item in appLayout" @click="handleEditLayout(item)" :class="{active: useContextMenuStore?.activeApp?.gridSize[0] === item?.value[0] && useContextMenuStore?.activeApp?.gridSize[1] === item?.value[1]}" :key="item.label">{{ item.label }}</li>
+        </ul>
+      </li>
     </ul>
   </div>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
+import { CaretRightOutlined } from '@ant-design/icons-vue';
 import axios from 'axios';
 import useStore from '@/store';
 const { useContextMenuStore, useSystemStore, useAppStore } = useStore();
 import { useElementBounding } from '@vueuse/core';
 import { toast } from "@/utils/feedback";
+import { appLayout } from "@/utils/enums";
 import eventBus from '@/utils/eventBus';
 
 const contextMenuRef = ref(null);
@@ -45,6 +56,16 @@ const handleMenuClick = (type) => {
     useAppStore.lists.splice(useAppStore.lists.findIndex(app => app.id == id), 1)
   }
   useContextMenuStore.activeApp = {}; 
+  useContextMenuStore.menuVisible = false;
+}
+
+const handleEditLayout = (item) => {
+  useAppStore.lists.map(app => {
+    if (app.id === useContextMenuStore.activeApp.id) {
+      app.gridSize = item.value;
+    }
+  })
+  // useContextMenuStore.activeApp = {};
   useContextMenuStore.menuVisible = false;
 }
 
@@ -130,8 +151,7 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
   box-sizing: border-box;
   box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
   z-index: 99;
-  overflow: hidden;
-
+  // overflow: hidden;
   >ul {
     padding: 0;
     margin: 0;
@@ -140,27 +160,54 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
     color: #000000;
     color: var(--theme-text-color);
     // border: 1px solid #C4C4C4;
-
     li {
+      position: relative;
       height: 28px;
       line-height: 28px;
       padding: 0 20px;
-      overflow: hidden;
+      // overflow: hidden;
+      .caret-right {
+        position: absolute;
+        right: 4px;
+        top: 7px;
+      }
       &.red {
         color: #ff4d4f;
       }
-
       &:hover {
         background-color: #E2E2E2;
         background-color: var(--theme-bg-color-a8);
       }
+      .layout-box {
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        left: 100%;
+        top: 0;
+        width: 51px;
+        border-radius: 4px;
+        background-color: var(--theme-bg-color-a8);
+        display: none;
+        li {
+          list-style: none;
+          padding: 0 10px;
+          &.active, &:hover {
+            background-color: var(--theme-bg-color-a8);
+          }
+        }
+      }
+      &.layout-li {
+        &:hover {
+          .layout-box {
+            display: block;
+          }
+        }
+      }
     }
-
     .border-top {
       border-top: 1px solid #EDEDED;
     }
   }
-
   &.show {
     display: block;
   }

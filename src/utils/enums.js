@@ -107,3 +107,26 @@ export const workHours = [
     value: 1,
   },
 ]
+
+export const appLayout = [
+  {
+    label: "1 × 1",
+    value: [1, 1],
+  },
+  {
+    label: "1 × 2",
+    value: [1, 2],
+  },
+  {
+    label: "2 × 2",
+    value: [2, 2],
+  },
+  {
+    label: "2 × 3",
+    value: [2, 3],
+  },
+  {
+    label: "2 × 4",
+    value: [2, 4],
+  },
+]

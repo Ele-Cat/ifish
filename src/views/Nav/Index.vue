@@ -18,7 +18,7 @@
           <p class="nav-title">{{ navs.title }}</p>
           <ul class="nav-list">
             <li v-for="(nav, sIndex) in navs.nav" :key="sIndex" @click="handleJump(nav)">
-              <a-tooltip :title="`${nav.name}：${nav.desc}`" placement="topLeft">
+              <a-tooltip :title="nav.desc && `${nav.name}：${nav.desc}`" placement="topLeft">
                 <img v-lazyload="renderIcon(nav.url)" alt="">
                 <p>{{ nav.name }}</p>
               </a-tooltip>
@@ -34,6 +34,8 @@
 import { computed, ref } from "vue";
 import { renderIco } from "@/utils/utils";
 import nav from "@/mock/nav";
+import useStore from "@/store";
+const { useNavStore } = useStore();
 
 const renderIcon = computed(() => (url) => {
   return renderIco(url);
@@ -43,17 +45,19 @@ const navsLeft = nav.map(nav => nav.title);
 const navsTop = computed(() => {
   return nav[activeLeft.value]["nav"].map(nav => nav.title);
 })
-const activeLeft = ref(0);
-const activeTop = ref(0);
+const activeLeft = ref(useNavStore.active[0] || 0);
+const activeTop = ref(useNavStore.active[1] || 0);
 const activeNavs = computed(() => {
   return nav[activeLeft.value]["nav"][activeTop.value]["nav"];
 })
 const handleClickNavLeft = (idx) => {
   activeLeft.value = idx;
   activeTop.value = 0;
+  useNavStore.toggleActive(idx, 0);
 }
 const handleClickNavTop = (idx) => {
   activeTop.value = idx;
+  useNavStore.toggleActive(activeLeft.value, idx);
 }
 const handleJump = nav => {
   window.open(nav.url, "_blank");

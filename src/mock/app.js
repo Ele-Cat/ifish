@@ -55,7 +55,7 @@ export const lists = [
     id: "mojf5GydjsGGGGIqTD6E1",
     type: "component",
     title: "60s读懂世界",
-    url: "https://api.vvhan.com/api/60s",
+    url: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
     icon: "./images/apps/60s.png",
     component: "imgpreview",
     gridSize: [2, 2],

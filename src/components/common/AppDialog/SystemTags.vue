@@ -1,7 +1,7 @@
 <template>
   <div class="system-tags">
     <div class="system-tag" v-for="(nav, idx) in navList" :key="idx" @click="addSystemTag(nav)">
-      <a-tooltip :title="`${nav.name}：${nav.desc}`">
+      <a-tooltip :title="nav.desc && `${nav.name}：${nav.desc}`">
         <img v-lazyload="renderIcon(nav.url)" :alt="nav.name">
         <p>{{ nav.name }}</p>
       </a-tooltip>
@@ -82,6 +82,7 @@ const addSystemTag = (nav) => {
     }
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px, rgba(255, 255, 255, 0.4) 0px 0px 3px;
+      background-color: var(--theme-bg-color-a8);
       color: var(--primary-color);
     }
   }

@@ -842,245 +842,42 @@ const nav = [
             "title": "音频/视频",
             "nav": [
               {
-                "icon": "https://howlerjs.com/assets/images/favicon.ico",
-                "name": "howler.js",
-                "desc": "现代 Web 音频 javascript 库",
-                "url": "https://howlerjs.com/",
-                "urls": { "Github": "https://github.com/goldfire/howler.js" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
-              },
-              {
                 "name": "DPlayer",
                 "desc": "哇，这么可爱的HTML5 danmaku视频播放器",
-                "url": "http://dplayer.js.org/#/zh-Hans/",
-                "urls": {
-                  "英文": "http://dplayer.js.org/#/home",
-                  "中文": "http://dplayer.js.org/#/zh-Hans/",
-                  "Github": "https://github.com/MoePlayer/DPlayer"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://dplayer.diygod.dev/zh/",
               },
               {
                 "name": "APlayer",
                 "desc": "哇，这么可爱的HTML5音乐播放器",
-                "url": "https://aplayer.js.org/#/zh-Hans/",
-                "urls": {
-                  "英文": "http://aplayer.js.org/",
-                  "中文": "https://aplayer.js.org/#/zh-Hans/",
-                  "Github": "https://github.com/MoePlayer/APlayer"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://github.com/MoePlayer/APlayer",
               }
             ],
-            "collapsed": false,
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "图形",
             "nav": [
               {
-                "icon": "https://threejs.org/files/favicon.ico",
                 "name": "three.js",
                 "desc": "JavaScript 3D引擎",
-                "url": "https://threejs.org/",
-                "urls": {
-                  "英文": "https://threejs.org/",
-                  "中文": "http://techbrood.com/threejs/docs",
-                  "Github": "https://github.com/mrdoob/three.js"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "http://techbrood.com/threejs/docs",
               },
               {
                 "name": "flowy",
                 "desc": "创建流程图的最小JavaScript库",
                 "url": "https://github.com/alyssaxuu/flowy",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://echarts.apache.org/examples/images/favicon.png",
                 "name": "incubator-echarts",
                 "desc": "浏览器的功能强大的交互式图表和可视化库",
                 "url": "http://echarts.apache.org/",
-                "urls": {
-                  "Github": "https://github.com/apache/incubator-echarts"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars1.githubusercontent.com/u/1562726?s=200&v=4",
                 "name": "d3",
                 "desc": "借助SVG，Canvas和HTML使数据栩栩如生。",
-                "url": "https://github.com/d3/d3",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
+                "url": "https://d3js.org/",
               }
             ],
-            "collapsed": false,
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
-          {
-            "title": "UI组件库",
-            "nav": [
-              {
-                "icon": "https://getuikit.com/images/favicon.png",
-                "name": "uikit",
-                "desc": "一款轻量级、模块化的前端框架可快速构建强大的web前端界面",
-                "url": "http://www.getuikit.net/",
-                "urls": {
-                  "英文": "https://getuikit.com/docs/installation",
-                  "中文": "http://www.getuikit.net/",
-                  "Github": "https://github.com/uikit/uikit"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
-              }
-            ],
-            "collapsed": false,
-            "createdAt": "2021-01-23T01:32:06.423Z"
-          },
-          {
-            "title": "原生APP交互webview桥接",
-            "nav": [
-              {
-                "name": "JsBridge",
-                "desc": "android java和javascript桥接，灵感来自微信webview jsbridge",
-                "url": "https://github.com/lzyzsd/JsBridge",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
-              },
-              {
-                "name": "DSBridge-Android",
-                "desc": "一个现代的跨平台JavaScript桥接，通过它您可以在JavaScript和本机之间同步或异步地调用彼此的功能",
-                "url": "https://github.com/wendux/DSBridge-Android",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
-              }
-            ],
-            "collapsed": false,
-            "createdAt": "2021-01-23T01:32:06.423Z"
-          },
-          {
-            "title": "参数验证",
-            "nav": [
-              {
-                "name": "joi",
-                "desc": "对象模式验证",
-                "url": "https://github.com/hapijs/joi",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
-              },
-              {
-                "name": "validator.js",
-                "desc": "字符串验证插件、表单验证",
-                "url": "https://github.com/chriso/validator.js",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
-              },
-              {
-                "name": "async-validator",
-                "desc": "异步验证器",
-                "url": "https://github.com/yiminghe/async-validator",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
-              },
-              {
-                "name": "yup",
-                "desc": "无效的简单对象架构验证",
-                "url": "https://runkit.com/jquense/yup",
-                "urls": {
-                  "Github": "https://github.com/jquense/yup#using-a-custom-locale-dictionary"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
-              }
-            ],
-            "collapsed": false,
-            "createdAt": "2021-01-23T01:32:06.423Z"
-          },
-          {
-            "title": "数据库",
-            "nav": [
-              {
-                "icon": "https://avatars2.githubusercontent.com/u/18673496?s=200&v=4",
-                "name": "localForage",
-                "desc": "离线存储，使用简单但功能强大的API包装IndexedDB，WebSQL或localStorage。",
-                "url": "https://github.com/localForage/localForage",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
-              }
-            ],
-            "collapsed": false,
-            "createdAt": "2021-01-23T01:32:06.423Z"
-          },
-          {
-            "title": "步骤引导",
-            "nav": [
-              {
-                "icon": "https://avatars2.githubusercontent.com/u/2010360?s=200&v=4",
-                "name": "introjs",
-                "desc": "为您的网站和项目提供新功能介绍和逐步用户指南的更好方法",
-                "url": "https://introjs.com/",
-                "urls": { "Github": "https://github.com/usablica/intro.js" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
-              },
-              {
-                "icon": "https://avatars3.githubusercontent.com/u/17297725?s=200&v=4",
-                "name": "shepherd",
-                "desc": "引导您的用户浏览您的应用程序",
-                "url": "https://shepherdjs.dev/",
-                "urls": {
-                  "Github": "https://github.com/shipshapecode/shepherd"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
-              },
-              {
-                "name": "bootstrap-tour",
-                "desc": "使用Twitter Bootstrap Popovers快速方便地进行产品浏览",
-                "url": "http://bootstraptour.com/",
-                "urls": {
-                  "Github": "https://github.com/sorich87/bootstrap-tour"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
-              }
-            ],
-            "collapsed": false,
-            "createdAt": "2021-01-23T01:32:06.423Z"
-          }
         ],
       },
       {
@@ -1093,67 +890,28 @@ const nav = [
                 "name": "TypeScript",
                 "desc": "TypeScript 是一种由微软开发的自由和开源的编程语言，它是JavaScript的一个超集",
                 "url": "https://www.tslang.cn/index.html",
-                "urls": {
-                  "英文": "http://www.typescriptlang.org/",
-                  "中文": "https://www.tslang.cn/index.html",
-                  "Github": "https://github.com/Microsoft/TypeScript"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "TypeSearch",
                 "desc": "搜索typescript 类型包 @types/node",
                 "url": "https://microsoft.github.io/TypeSearch/",
-                "urls": { "Github": "https://github.com/Microsoft/TypeSearch" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "name": "DefinitelyTyped",
-                "desc": "高质量TypeScript类型定义的存储库",
-                "url": "http://definitelytyped.org/",
-                "urls": {
-                  "Github": "https://github.com/DefinitelyTyped/DefinitelyTyped"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
-              },
-              {
-                "icon": "https://avatars0.githubusercontent.com/u/46634674?s=200&v=4",
                 "name": "typescript-eslint",
                 "desc": "Monorepo用于所有工具，使ESLint能够支持TypeScript",
                 "url": "https://github.com/typescript-eslint/typescript-eslint",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "awesome-typescript",
                 "desc": "用于客户端和服务器端开发的强大TypeScript资源的集合。在TypeScript中编写精彩的JavaScript",
                 "url": "https://github.com/dzharii/awesome-typescript",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "TypeScript 入门教程",
                 "desc": "TypeScript 入门教程",
                 "url": "https://ts.xcatliu.com/",
-                "urls": {
-                  "Github": "https://github.com/xcatliu/typescript-tutorial"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           }
         ],
       },
@@ -1167,334 +925,133 @@ const nav = [
                 "name": "Vue.js",
                 "desc": "渐进式JavaScript 框架",
                 "url": "https://cn.vuejs.org/",
-                "urls": {
-                  "英文": "https://vuejs.org/index.html",
-                  "中文": "https://cn.vuejs.org/",
-                  "Github": "https://github.com/vuejs/vue"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "Vue Router",
                 "desc": "Vue Router 是 Vue.js 官方的路由管理器",
                 "url": "https://router.vuejs.org/zh/",
-                "urls": {
-                  "英文": "https://router.vuejs.org/",
-                  "中文": "https://router.vuejs.org/zh/",
-                  "Github": "https://github.com/vuejs/vue-router"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "Vuex",
                 "desc": "Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。",
                 "url": "https://vuex.vuejs.org/zh/",
-                "urls": {
-                  "英文": "https://vuex.vuejs.org/",
-                  "中文": "https://vuex.vuejs.org/zh/",
-                  "Github": "https://github.com/vuejs/vuex"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "vue-devtools",
                 "desc": "vue.js调试工具",
-                "url": "https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd",
-                "urls": { "Github": "https://github.com/vuejs/vue-devtools" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://github.com/vuejs/vue-devtools",
               },
               {
                 "name": "vue-cli",
                 "desc": "Vue.js开发的标准脚手架工具",
                 "url": "https://cli.vuejs.org/zh/",
-                "urls": {
-                  "英文": "https://cli.vuejs.org/",
-                  "中文": "https://cli.vuejs.org/zh/",
-                  "Github": "https://github.com/vuejs/vue-cli"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "vuepress",
                 "desc": "Vue 驱动的静态网站生成器",
                 "url": "https://vuepress.vuejs.org/zh/",
-                "urls": {
-                  "英文": "https://vuepress.vuejs.org/",
-                  "中文": "https://vuepress.vuejs.org/zh/",
-                  "Github": "https://github.com/vuejs/vuepress"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "Vue SSR",
                 "desc": "Vue服务端渲染、SEO解决方案",
-                "url": "https://vuepress.vuejs.org/zh/",
-                "urls": {
-                  "英文": "https://ssr.vuejs.org/",
-                  "中文": "https://ssr.vuejs.org/zh/",
-                  "Github": "https://github.com/vuejs/vue-ssr-docs"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://cn.vuejs.org/guide/scaling-up/ssr.html",
               },
               {
                 "name": "vue-class-component",
                 "desc": "用于类式Vue组件的ECMAScript / TypeScript装饰器。",
                 "url": "https://github.com/vuejs/vue-class-component",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "eslint-plugin-vue",
                 "desc": "Vue.js的官方ESLint插件",
                 "url": "https://eslint.vuejs.org/",
-                "urls": {
-                  "Github": "https://github.com/vuejs/eslint-plugin-vue"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "vite",
                 "desc": "Vite是一个经过验证的Web开发人员构建工具，可在开发过程中通过本机ES模块导入为您的代码提供服务，并将其与Rollup捆绑在一起进行生产",
                 "url": "https://github.com/vitejs/vite",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "Vue 组合式 API",
                 "desc": "Vue 组合式 API在线文档阅读",
                 "url": "https://composition-api.vuejs.org/zh",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "PC端UI组件库",
             "nav": [
               {
-                "icon": "https://avatars0.githubusercontent.com/u/20693613?s=200&v=4",
-                "name": "iView",
-                "desc": "一套基于 Vue.js 的高质量UI 组件库",
-                "url": "https://www.iviewui.com/docs/guide/install",
-                "urls": {
-                  "英文": "https://www.iviewui.com/",
-                  "中文": "https://www.iviewui.com/docs/guide/install",
-                  "Github": "https://github.com/iview/iview"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
-              },
-              {
-                "icon": "https://avatars2.githubusercontent.com/u/12810740?s=200&v=4",
-                "name": "Element",
+                "name": "ElementUI",
                 "desc": "一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库",
-                "url": "http://element-cn.eleme.io/#/zh-CN",
-                "urls": {
-                  "英文": "http://element-cn.eleme.io/#/en-US",
-                  "中文": "http://element-cn.eleme.io/#/zh-CN",
-                  "Github": "https://github.com/ElemeFE/element"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://element.eleme.cn/#/zh-CN",
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/12810740?s=200&v=4",
                 "name": "Element Plus",
                 "desc": "支持Vue3.0的Element",
-                "url": "https://element-plus.org/#/zh-CN",
-                "urls": {
-                  "Github": "https://github.com/element-plus/element-plus"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://element-plus.gitee.io/zh-CN/",
               },
               {
-                "icon": "https://avatars0.githubusercontent.com/u/22283362?s=200&v=4",
-                "name": "Muse-UI",
-                "desc": "基于 Vue 2.0 优雅的 Material Design UI 组件库",
-                "url": "https://muse-ui.org/#/zh-CN",
-                "urls": {
-                  "英文": "https://muse-ui.org/#/en-US/",
-                  "中文": "https://muse-ui.org/#/zh-CN",
-                  "Github": "https://github.com/museui/muse-ui"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
-              },
-              {
-                "icon": "https://qn.antdv.com/favicon.ico",
                 "name": "Ant Design Vue",
                 "desc": "这里是 Ant Design 的 Vue 实现，开发和服务于企业级后台产品",
                 "url": "https://antdv.com/docs/vue/introduce-cn/",
-                "urls": {
-                  "英文": "https://antdv.com/docs/vue/introduce/",
-                  "中文": "https://antdv.com/docs/vue/introduce-cn/",
-                  "Github": "https://github.com/vueComponent/ant-design-vue"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/22138497?s=200&v=4",
                 "name": "vuetify",
                 "desc": "让Vue和Material Design的强大力量在开发上助您一臂之力",
                 "url": "https://vuetifyjs.com/zh-Hans/",
-                "urls": {
-                  "英文": "https://vuetifyjs.com/en/",
-                  "中文": "https://vuetifyjs.com/zh-Hans/",
-                  "Github": "https://github.com/vuetifyjs/vuetify"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars1.githubusercontent.com/u/22965283?s=200&v=4",
                 "name": "bootstrap-vue",
                 "desc": "BootstrapVue为Vue.js提供了最全面的Bootstrap 4组件和网格系统实现之一，并提供了广泛的自动WAI-ARIA可访问性标记",
-                "url": "https://bootstrap-vue.js.org/",
-                "urls": {
-                  "Github": "https://github.com/bootstrap-vue/bootstrap-vue"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://bootstrap-vue.org/",
               },
               {
-                "icon": "https://avatars0.githubusercontent.com/u/23659108?s=200&v=4",
                 "name": "vue-material",
                 "desc": "Vue material简单，轻巧，完全符合Google Material Design规范",
-                "url": "https://vuematerial.io",
-                "urls": {
-                  "Github": "https://github.com/vuematerial/vue-material"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://www.creative-tim.com/vuematerial/",
               },
               {
-                "icon": "https://avatars1.githubusercontent.com/u/26799900?s=200&v=4",
                 "name": "buefy",
                 "desc": "Buefy是一个基于Bulma框架和设计的Vue.js响应式UI组件的轻量级库。",
                 "url": "https://buefy.org",
-                "urls": { "Github": "https://github.com/buefy/buefy" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "移动端UI组件库",
             "nav": [
               {
-                "icon": "https://avatars2.githubusercontent.com/u/11404085?s=200&v=4",
                 "name": "vant",
                 "desc": "轻量、可靠的移动端 Vue 组件库",
-                "url": "https://youzan.github.io/vant/#/zh-CN/intro",
-                "urls": {
-                  "英文": "https://youzan.github.io/vant/#/en-US/intro",
-                  "中文": "https://youzan.github.io/vant/#/zh-CN/intro",
-                  "Github": "https://github.com/youzan/vant"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://vant-ui.github.io/vant/#/zh-CN",
               },
               {
                 "name": "vux",
                 "desc": "一个凑合的 Vue.js 移动端 UI 组件库",
                 "url": "https://vux.li/",
-                "urls": {
-                  "中文": "https://vux.li/",
-                  "Github": "https://github.com/airyland/vux"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars0.githubusercontent.com/u/27521938?s=200&v=4",
                 "name": "cube-ui",
                 "desc": "基于 Vue.js 实现的精致移动端组件库",
                 "url": "https://didi.github.io/cube-ui/#/zh-CN",
-                "urls": {
-                  "英文": "https://didi.github.io/cube-ui/#/en-US",
-                  "中文": "https://didi.github.io/cube-ui/#/zh-CN",
-                  "Github": "https://github.com/didi/cube-ui"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars0.githubusercontent.com/u/27521938?s=200&v=4",
                 "name": "Mand Mobile",
                 "desc": "面向金融场景的Vue移动端UI组件库，丰富、灵活、实用，快速搭建优质的金融类产品，让复杂的金融场景变简单",
                 "url": "https://didi.github.io/mand-mobile/#/zh-CN/home",
-                "urls": {
-                  "英文": "https://didi.github.io/mand-mobile/#/en-US/home",
-                  "中文": "https://didi.github.io/mand-mobile/#/zh-CN/home",
-                  "Github": "https://github.com/didi/mand-mobile"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/12810740?s=200&v=4",
                 "name": "Mint UI",
                 "desc": "基于 Vue.js 的移动端组件库",
                 "url": "http://mint-ui.github.io/#!/zh-cn",
-                "urls": {
-                  "英文": "http://mint-ui.github.io/#!/en",
-                  "中文": "http://mint-ui.github.io/#!/zh-cn",
-                  "Github": "https://github.com/ElemeFE/mint-ui/"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "NutUI",
                 "desc": "一套京东风格的轻量级移动端Vue组件库",
                 "url": "https://nutui.jd.com",
-                "urls": { "Github": "https://github.com/jdf2e/nutui" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "其他组件/插件",
@@ -1502,47 +1059,24 @@ const nav = [
               {
                 "name": "vue-awesome-swiper",
                 "desc": "基于swiper封装的轮播图组件",
-                "url": "https://surmon-china.github.io/vue-awesome-swiper/",
-                "urls": {
-                  "Github": "https://github.com/surmon-china/vue-awesome-swiper"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://github.surmon.me/vue-awesome-swiper",
               },
               {
                 "name": "vue-meta",
                 "desc": "管理Vue 2.0组件中的页面元信息。支持SSR + Streaming",
                 "url": "https://github.com/nuxt/vue-meta",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "vue-scroller",
                 "desc": "Vue Scroller是Vonic UI 的基础组件。为了平滑滚动，拉动刷新和无限加载。",
                 "url": "https://wangdahoo.github.io/vue-scroller/#/",
-                "urls": {
-                  "Github": "https://github.com/wangdahoo/vue-scroller"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "vue-infinite-loading",
                 "desc": "Vue.js的无限滚动插件(支持向上和向下)",
                 "url": "https://peachscript.github.io/vue-infinite-loading/zh/",
-                "urls": {
-                  "Github": "https://github.com//PeachScript/vue-infinite-loading"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "开箱即用",
@@ -1550,44 +1084,24 @@ const nav = [
               {
                 "name": "iview-admin",
                 "desc": "基于iView的Vue 2.0管理系统模板",
-                "url": "https://admin.iviewui.com/login",
-                "urls": { "Github": "https://github.com/iview/iview-admin" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://admin.iviewui.com",
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "nuxt服务端渲染框架",
             "nav": [
               {
-                "icon": "https://avatars2.githubusercontent.com/u/23360933?s=200&v=4",
                 "name": "nuxt",
                 "desc": "Vue.js 通用应用框架",
-                "url": "https://zh.nuxtjs.org/",
-                "urls": {
-                  "英文": "https://nuxtjs.org/",
-                  "中文": "https://zh.nuxtjs.org/",
-                  "Github": "https://github.com/nuxt/nuxt.js"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://nuxt.com/",
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/23360933?s=200&v=4",
                 "name": "创建nuxt的脚手架工具",
                 "desc": "create-nuxt-app",
                 "url": "https://github.com/nuxt/create-nuxt-app",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           }
         ],
       },
@@ -1600,58 +1114,24 @@ const nav = [
               {
                 "name": "React",
                 "desc": "用于构建用户界面的 JavaScript 库",
-                "url": "https://zh-hans.reactjs.org/",
-                "urls": {
-                  "英文": "https://reactjs.org/",
-                  "中文": "https://zh-hans.reactjs.org/",
-                  "Github": "https://github.com/facebook/react/"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://zh-hans.react.dev/",
               },
               {
                 "name": "React Router",
                 "desc": "React 路由管理",
                 "url": "https://react-router.docschina.org/",
-                "urls": {
-                  "英文": "https://reacttraining.com/react-router/",
-                  "中文": "https://react-router.docschina.org/",
-                  "Github": "https://github.com/ReactTraining/react-router"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/13142323?s=200&v=4",
                 "name": "Redux",
                 "desc": "React 状态管理",
                 "url": "http://www.redux.org.cn/docs/react-redux/api.html",
-                "urls": {
-                  "英文": "https://redux.js.org/basics/usagewithreact",
-                  "中文": "http://www.redux.org.cn/docs/react-redux/api.html",
-                  "Github": "https://github.com/reduxjs/redux"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "create-react-app",
                 "desc": "React官方脚手架",
-                "url": "https://www.html.cn/create-react-app/",
-                "urls": {
-                  "英文": "https://facebook.github.io/create-react-app/",
-                  "中文": "https://www.html.cn/create-react-app/",
-                  "Github": "https://github.com/facebook/create-react-app"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://create-react-app.dev/",
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "Redux相关",
@@ -1660,45 +1140,23 @@ const nav = [
                 "name": "React Redux",
                 "desc": "Redux的官方React绑定(通常配合redux使用)",
                 "url": "https://react-redux.js.org/",
-                "urls": { "Github": "https://github.com/reduxjs/react-redux" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "redux-actions",
                 "desc": "Redux的Flux标准action实用程序(用于生成action)",
                 "url": "https://redux-actions.js.org/",
-                "urls": {
-                  "Github": "https://github.com/redux-utilities/redux-actions"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "redux-thunk",
                 "desc": "Redux的Thunk中间件, 用于处理异步逻辑",
                 "url": "https://github.com/reduxjs/redux-thunk",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/24776643?s=200&v=4",
                 "name": "redux-saga",
                 "desc": "一个旨在使应用程序副作用（即异步事物，如数据获取和不纯的东西，如访问浏览器缓存）更容易管理，执行更高效，易于测试，以及更好地处理故障的库",
                 "url": "https://redux-saga.js.org/",
-                "urls": {
-                  "Github": "https://github.com/redux-saga/redux-saga"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "React Native相关",
@@ -1706,193 +1164,89 @@ const nav = [
               {
                 "name": "React Native",
                 "desc": "使用React构建原生APP程序的框架",
-                "url": "https://reactnative.cn/docs/0.51/tutorial.html",
-                "urls": {
-                  "英文": "https://facebook.github.io/react-native/docs/getting-started.html",
-                  "中文": "https://reactnative.cn/docs/0.51/tutorial.html",
-                  "Github": "https://github.com/facebook/react-native"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://reactnative.cn/",
               },
               {
-                "icon": "https://avatars0.githubusercontent.com/u/29647600?s=200&v=4",
                 "name": "React Navigation",
                 "desc": "为您的本地应用程序提供路由和导航",
-                "url": "https://reactnavigation.org/zh-Hans/",
-                "urls": {
-                  "英文": "https://reactnavigation.org/en/",
-                  "中文": "https://reactnavigation.org/zh-Hans/",
-                  "Github": "https://github.com/react-navigation/react-navigation"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://reactnavigation.org/",
               },
               {
-                "icon": "https://avatars0.githubusercontent.com/u/12504344?s=200&v=4",
                 "name": "expo",
                 "desc": "用于制作跨平台移动应用程序的Expo平台",
-                "url": "https://docs.expo.io",
-                "urls": { "Github": "https://github.com/expo/expo" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://docs.expo.dev/index.html",
               },
               {
-                "icon": "https://avatars1.githubusercontent.com/u/12101536?s=200&v=4",
                 "name": "ant-design-mobile-rn",
                 "desc": "一个基于 React Native 的 UI 组件库",
                 "url": "https://rn.mobile.ant.design/index-cn",
-                "urls": {
-                  "英文": "https://rn.mobile.ant.design/",
-                  "中文": "https://rn.mobile.ant.design/index-cn",
-                  "Github": "https://github.com/ant-design/ant-design-mobile-rn"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "PC端UI组件库",
             "nav": [
               {
-                "icon": "https://avatars1.githubusercontent.com/u/12101536?s=200&v=4",
                 "name": "Ant Design",
                 "desc": "Ant Design - A UI Design Language",
-                "url": "https://ant.design/docs/react/introduce-cn",
-                "urls": {
-                  "英文": "https://ant.design/docs/react/introduce",
-                  "中文": "https://ant.design/docs/react/introduce-cn",
-                  "Github": "https://github.com/ant-design/ant-design"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://ant-design.antgroup.com/docs/react/introduce-cn",
               },
               {
-                "icon": "https://material-ui.com/static/favicon.ico",
                 "name": "MATERIAL-UI",
                 "desc": "React 组件用于更快速、更简便的 web 开发。你也可以建立你自己的设计系统，或者从 Material Design 开始",
                 "url": "https://material-ui.com/zh/",
-                "urls": {
-                  "英文": "https://material-ui.com/",
-                  "中文": "https://material-ui.com/zh/",
-                  "Github": "https://github.com/mui-org/material-ui"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/12810740?s=200&v=4",
                 "name": "element",
                 "desc": "elementUI组件库",
                 "url": "https://elemefe.github.io/element-react/#/zh-CN/quick-start",
-                "urls": {
-                  "英文": "https://elemefe.github.io/element-react/#/en-US/quick-start",
-                  "中文": "https://elemefe.github.io/element-react/#/zh-CN/quick-start",
-                  "Github": "https://github.com/ElemeFE/element-react"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars0.githubusercontent.com/u/6853419?s=200&v=4",
                 "name": "react-bootstrap",
                 "desc": "基于Bootstrap 3构建的组件库",
-                "url": "https://react-bootstrap.github.io/getting-started/introduction",
-                "urls": {
-                  "Github": "https://github.com/react-bootstrap/react-bootstrap"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://react-bootstrap.github.io/docs/getting-started/introduction",
               },
               {
                 "name": "evergreen",
                 "desc": "Evergreen是一个React UI框架，用于在Web上构建雄心勃勃的产品。由Segment带给您。",
                 "url": "https://evergreen.segment.com/",
-                "urls": { "Github": "https://github.com/segmentio/evergreen" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "@alifd/next",
                 "desc": "@alifd/next 是 Alibaba Fusion Design 的官方 React 实现, 赋能企业中后台产品开发",
-                "url": "https://fusion.design/component/doc/102",
-                "urls": { "Github": "https://github.com/alibaba-fusion/next" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://fusion.design/pc",
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/11404085?s=200&v=4",
                 "name": "zent",
                 "desc": "Zent 是有赞 PC 端 WebUI 规范的 React 实现，提供了一整套基础的 UI 组件以及一些常用的业务组件",
                 "url": "https://youzan.github.io/zent/zh/guides/install",
-                "urls": { "Github": "https://github.com/youzan/zent" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "React95",
                 "desc": "装修一新的现代的应用程序做出React Windows95的UI组件。",
-                "url": "https://arturbien.github.io/React95",
-                "urls": { "Github": "https://github.com/arturbien/React95" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://storybook.react95.io/",
               },
               {
-                "icon": "https://avatars1.githubusercontent.com/u/19635045?s=200&v=4",
                 "name": "rsuite",
                 "desc": "React Suite 是一套 React 组件库，为后台产品而生。同时也是一个具有贴心设计以及对开发者友好的 UI 框架",
                 "url": "https://rsuitejs.com",
-                "urls": { "Github": "https://github.com/rsuite/rsuite" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/54212428?s=200&v=4",
                 "name": "chakra-ui",
                 "desc": "适用于您的React应用程序的简单，模块化和可访问的UI组件",
                 "url": "https://chakra-ui.com/",
-                "urls": { "Github": "https://github.com/chakra-ui/chakra-ui" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "移动端UI组件库",
             "nav": [
               {
-                "icon": "https://avatars1.githubusercontent.com/u/12101536?s=200&v=4",
                 "name": "Ant Design Mobile",
                 "desc": "一个基于 Preact / React / React Native 的 UI 组件库",
-                "url": "https://mobile.ant.design/index-cn",
-                "urls": {
-                  "英文": "https://mobile.ant.design/",
-                  "中文": "https://mobile.ant.design/index-cn",
-                  "Github": "https://github.com/ant-design/ant-design-mobile/stargazers/"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://mobile.ant.design/zh/guide/quick-start",
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "其他组件库",
@@ -1901,279 +1255,143 @@ const nav = [
                 "name": "React Helmet",
                 "desc": "这个可重用的反应组件将管理对文档头的所有更改",
                 "url": "https://github.com/nfl/react-helmet",
-                "urls": { "Github": "https://github.com/nfl/react-helmet" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-image-crop",
                 "desc": "用于React的响应式图像裁剪工具",
                 "url": "https://github.com/DominicTobias/react-image-crop",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "React Helmet",
                 "desc": "这个可重用的反应组件将管理对文档头的所有更改",
                 "url": "https://github.com/nfl/react-helmet",
-                "urls": { "Github": "https://github.com/nfl/react-helmet" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-transition-group",
                 "desc": "当React组件进入或离开DOM时执行动画的简单方法",
                 "url": "https://reactcommunity.org/react-transition-group/",
-                "urls": {
-                  "英文": "https://reactcommunity.org/react-transition-group/",
-                  "Github": "https://github.com/reactjs/react-transition-group"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "React Loadable",
                 "desc": "用于加载具有promise的组件的更高阶组件 - 路由懒加载",
                 "url": "https://github.com/jamiebuilds/react-loadable",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-swipe",
                 "desc": "基于swipe.js封装的react组件/走马灯",
-                "url": "https://github.com/voronianski/react-swipe",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
+                "url": "https://voronianski.github.io/react-swipe/demo/?continuous=true",
               },
               {
                 "name": "Ant Motion",
                 "desc": "使用 Ant Motion 能够快速在 React 框架中使用动画,我们提供了单项，组合动画，以及整套解决方案",
-                "url": "https://motion.ant.design/",
-                "urls": {
-                  "Github": "https://github.com/ant-design/ant-motion/"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://motion.ant.design/index-cn",
               },
               {
                 "desc": "网络视频播放器使用React库从头开始构建HTML5世界",
                 "name": "video-react",
                 "url": "https://video-react.js.org/",
-                "urls": {
-                  "Github": "https://github.com/video-react/video-react"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-keeper",
                 "desc": "一个react路由库，更适合移动端使用，拥有缓存等功能",
                 "url": "https://github.com/vifird/react-keeper",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "Fusion Design",
                 "desc": "基于React构建的Web可配置组件库",
                 "url": "https://fusion.design",
-                "urls": { "Github": "https://github.com/alibaba-fusion/next" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars0.githubusercontent.com/u/13690587?s=200&v=4",
                 "name": "recharts",
                 "desc": "基于 React和D3 的组合式图表库",
                 "url": "http://recharts.org/zh-CN/",
-                "urls": { "Github": "https://github.com/recharts/recharts" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-json-view",
                 "desc": "JSON查看器",
                 "url": "https://mac-s-g.github.io/react-json-view/demo/dist/",
-                "urls": {
-                  "Github": "https://github.com/mac-s-g/react-json-view"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "BizCharts",
                 "desc": "基于G2和React的强大数据可视化库",
-                "url": "https://bizcharts.net/products/bizCharts",
-                "urls": { "Github": "https://github.com/alibaba/BizCharts" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://bizcharts.taobao.com/products/bizCharts",
               },
               {
                 "name": "react-draggable",
                 "desc": "一个简单的组件，用于使元素可拖动",
                 "url": "https://github.com/mzabriskie/react-draggable",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-slick",
                 "desc": "react走马灯组件",
                 "url": "https://react-slick.neostack.com/",
-                "urls": { "Github": "https://github.com/akiran/react-slick" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-color",
                 "desc": "react 拾色器",
                 "url": "http://casesandberg.github.io/react-color/",
-                "urls": {
-                  "Github": "https://github.com/casesandberg/react-color"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars1.githubusercontent.com/u/50559490?s=200&v=4",
                 "name": "react-intl",
                 "desc": "国际化React应用程序。这个库提供了React组件和一个API，用于格式化日期，数字和字符串，包括复数形式和处理翻译",
-                "url": "https://github.com/formatjs/react-intl",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
+                "url": "https://formatjs.io/",
               },
               {
-                "icon": "https://avatars3.githubusercontent.com/u/1763971?s=200&v=4",
                 "name": "react-data-grid",
                 "desc": "使用React构建的类似于Excel的网格组件，具有编辑器，键盘导航，复制和粘贴等功能",
                 "url": "http://adazzle.github.io/react-data-grid/",
-                "urls": {
-                  "Github": "https://github.com/adazzle/react-data-grid"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://cloud.githubusercontent.com/assets/29597/11736841/c0497158-9f87-11e5-8dfe-9c0be97d4286.png",
                 "name": "react-virtualized",
                 "desc": "React组件可有效呈现大型列表和表格数据",
-                "url": "http://www.reactvirtualized.com",
-                "urls": {
-                  "Github": "https://github.com/bvaughn/react-virtualized"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://github.com/bvaughn/react-virtualized",
               },
               {
-                "icon": "https://avatars3.githubusercontent.com/u/5078602?s=200&v=4",
                 "name": "react-live",
                 "desc": "一个用于实时编辑React组件的灵活组件库",
                 "url": "https://react-live.netlify.com/",
-                "urls": {
-                  "Github": "https://github.com/FormidableLabs/react-live"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://jaredpalmer.com/formik/img/favicon.png",
                 "name": "formik",
                 "desc": "在React中轻松创建表单",
-                "url": "https://jaredpalmer.com/formik/docs/overview",
-                "urls": { "Github": "https://github.com/jaredpalmer/formik" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://formik.org/",
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "拖拽组件",
             "nav": [
               {
                 "name": "react-move",
-                "icon": "https://github.com/favicon.ico",
-                "url": "https://github.com/daybrush/moveable/tree/master/packages/react-moveable",
                 "desc": "一个React组件，它创建可移动，可拖动，可调整大小，可缩放，可旋转，可扭曲，可收缩，可分组，可捕捉。",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
+                "url": "https://daybrush.com/moveable/",
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/25307599?s=200&v=4",
                 "name": "react-dnd",
                 "desc": "React DnD是一组React实用程序，可帮助您构建复杂的拖放接口，同时保持组件分离",
                 "url": "https://react-dnd.github.io/react-dnd/about",
-                "urls": { "Github": "https://github.com/react-dnd/react-dnd" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-beautiful-dnd",
                 "desc": "漂亮的和可访问的拖放列表",
-                "url": "https://github.com/atlassian/react-beautiful-dnd",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
+                "url": "https://react-beautiful-dnd.netlify.app",
               },
               {
                 "name": "react-rnd",
                 "desc": "一个可调整大小且可拖动的React组件。",
                 "url": "https://bokuweb.github.io/react-rnd/stories",
-                "urls": { "Github": "https://github.com/bokuweb/react-rnd" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "开箱即用",
             "nav": [
               {
-                "icon": "https://avatars1.githubusercontent.com/u/12101536?s=200&v=4",
                 "name": "ANT DESIGN PRO",
                 "desc": "开箱即用的中台前端/设计解决方案",
                 "url": "https://pro.ant.design/",
-                "urls": {
-                  "中文": "https://pro.ant.design/",
-                  "Github": "https://github.com/ant-design/ant-design-pro/"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "单元测试",
@@ -2182,75 +1400,38 @@ const nav = [
                 "name": "enzyme",
                 "desc": "适用于React的JavaScript测试实用程序",
                 "url": "https://enzymejs.github.io/enzyme/",
-                "urls": { "Github": "https://github.com/enzymejs/enzyme" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "Jest",
                 "desc": "Jest是一个令人愉快的JavaScript测试框架，专注于简单性。",
                 "url": "https://jestjs.io/zh-Hans/",
-                "urls": { "Github": "https://github.com/facebook/jest" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "umi/dva",
             "nav": [
               {
-                "icon": "https://avatars2.githubusercontent.com/u/33895495?s=200&v=4",
                 "name": "umijs",
                 "desc": "插件化的企业级前端应用框架。",
-                "url": "https://umijs.org/zh-CN",
-                "urls": {
-                  "英文": "https://umijs.org/",
-                  "中文": "https://umijs.org/zh-CN",
-                  "Github": "https://github.com/umijs/umi"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://umijs.org/",
               },
               {
-                "icon": "https://avatars1.githubusercontent.com/u/20552239?s=200&v=4",
                 "name": "DvaJS",
                 "desc": "基于React和Redux的轻量级和elm风格框架",
                 "url": "https://dvajs.com/",
-                "urls": { "Github": "https://github.com/dvajs/dva" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/33895495?s=200&v=4",
                 "name": "umijs/hooks",
                 "desc": "你可以将 umi hooks 使用在任何地方，和任意组件库搭配使用。虽然我们的代码示例都是基于 ant design 的，但是并不代表我们的 Hooks 只能和 ant design 配合使用",
-                "url": "https://hooks.umijs.org/",
-                "urls": {
-                  "中文": "https://hooks.umijs.org/",
-                  "Github": "https://github.com/umijs/hooks"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://ahooks.js.org/",
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/33895495?s=200&v=4",
                 "name": "umi-plugin-cache-route",
                 "desc": "路由缓存，类似vue keep-alive",
                 "url": "https://www.npmjs.com/package/umi-plugin-cache-route",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "知识",
@@ -2259,93 +1440,48 @@ const nav = [
                 "name": "React.js 小书",
                 "desc": "这是一本关于 React.js 的小书",
                 "url": "http://huziketang.mangojuice.top/books/react/",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "TypeScript-React-Starter",
                 "desc": "TypeScript和React的入门模板，带有详细的README，描述了如何将两者结合使用。",
                 "url": "https://github.com/Microsoft/TypeScript-React-Starter",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-redux-typescript-guide",
                 "desc": "TypeScript中的React和 Redux - 使用说明",
                 "url": "https://piotrwitek.github.io/react-redux-typescript-guide/",
-                "urls": {
-                  "Github": "https://github.com/piotrwitek/react-redux-typescript-guide"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "其他",
             "nav": [
               {
-                "icon": "https://avatars1.githubusercontent.com/u/17475736?s=200&v=4",
                 "name": "Mobx",
                 "desc": "简单、可扩展的状态管理",
                 "url": "https://cn.mobx.js.org/",
-                "urls": {
-                  "英文": "https://mobx.js.org/",
-                  "中文": "https://cn.mobx.js.org/",
-                  "Github": "https://github.com/mobxjs/mobx"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "next.js",
                 "desc": "服务端渲染框架、SEO解决方案",
                 "url": "https://www.nextjs.cn/",
-                "urls": {
-                  "英文": "https://nextjs.org/",
-                  "中文": "https://www.nextjs.cn/",
-                  "Github": "https://github.com/zeit/next.js"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "nwb",
                 "desc": "适用于Web的React，Preact，Inferno和Vanilla JS应用，React库和其他npm模块的工具包，无需配置",
                 "url": "https://github.com/insin/nwb",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "ahooks",
                 "desc": "为 React Hooks 而生",
                 "url": "https://ahooks.js.org/zh-CN",
-                "urls": { "Github": "https://github.com/alibaba/hooks" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "react-app-rewired",
                 "desc": "覆盖create-react-app webpack配置而不弹出",
                 "url": "https://github.com/timarney/react-app-rewired",
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "urls": {},
-                "rate": 5,
-                "top": false
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           }
         ],
       },
@@ -2359,107 +1495,48 @@ const nav = [
                 "name": "Angular",
                 "desc": "一个框架，移动 & 桌面",
                 "url": "https://www.angular.cn/",
-                "urls": {
-                  "英文": "https://angular.io/",
-                  "中文": "https://www.angular.cn/",
-                  "Github": "https://github.com/angular/angular"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "angular-cli",
                 "desc": "用于Angular CLI脚手架工具",
                 "url": "https://cli.angular.io/",
-                "urls": {
-                  "英文": "https://cli.angular.io/",
-                  "Github": "https://github.com/angular/angular-cli"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
                 "name": "augury",
                 "desc": "Angular调试和可视化工具",
-                "url": "https://augury.angular.io/",
-                "urls": {
-                  "英文": "https://augury.angular.io/",
-                  "Github": "https://github.com/rangle/augury"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://augury.rangle.io/",
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "PC端UI组件库",
             "nav": [
               {
-                "icon": "https://avatars2.githubusercontent.com/u/30223759?s=200&v=4",
                 "name": "NG-ZORRO",
                 "desc": "基于Ant Design的Angular企业级UI组件",
                 "url": "http://ng.ant.design/docs/introduce/zh",
-                "urls": {
-                  "英文": "http://ng.ant.design/docs/introduce/en",
-                  "中文": "http://ng.ant.design/docs/introduce/zh",
-                  "Github": "https://github.com/NG-ZORRO/ng-zorro-antd"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars3.githubusercontent.com/u/14283866?s=200&v=4",
                 "name": "ng-bootstrap",
                 "desc": "基于Bootstrap 4的Angular组件",
-                "url": "https://ng-bootstrap.github.io/#/components/accordion/examples",
-                "urls": {
-                  "英文": "https://ng-bootstrap.github.io/#/components/accordion/examples",
-                  "Github": "https://github.com/ng-bootstrap/ng-bootstrap"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://ng-bootstrap.github.io/#/getting-started",
               },
               {
-                "icon": "https://avatars2.githubusercontent.com/u/12810740?s=200&v=4",
                 "name": "element-angular",
                 "desc": "Element Angular组件库",
                 "url": "https://element-angular.faas.ele.me/guide/install",
-                "urls": {
-                  "英文": "https://element-angular.faas.ele.me/",
-                  "中文": "https://element-angular.faas.ele.me/guide/install",
-                  "Github": "https://github.com/ElemeFE/element-angular"
-                },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
               },
               {
-                "icon": "https://avatars1.githubusercontent.com/u/3494069?s=200&v=4",
                 "name": "primeng",
                 "desc": "PrimeNG是Angular的丰富UI组件的集合",
-                "url": "https://www.primefaces.org/primeng/#/button",
-                "urls": { "Github": "https://github.com/primefaces/primeng" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://primeng.org/",
               },
               {
                 "name": "material",
                 "desc": "Material Design是一个统一的视觉，动作和交互设计系统的规范，适用于不同的设备。",
-                "url": "https://www.primefaces.org/primeng/#/button",
-                "urls": { "Github": "https://github.com/angular/material" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://github.com/angular/material",
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           },
           {
             "title": "移动端UI组件库",
@@ -2467,14 +1544,9 @@ const nav = [
               {
                 "name": "material",
                 "desc": "Material Design是一个统一的视觉，动作和交互设计系统的规范，适用于不同的设备。",
-                "url": "https://www.primefaces.org/primeng/#/button",
-                "urls": { "Github": "https://github.com/angular/material" },
-                "createdAt": "2021-01-23T01:32:06.423Z",
-                "rate": 5,
-                "top": false
+                "url": "https://github.com/angular/material",
               }
             ],
-            "createdAt": "2021-01-23T01:32:06.423Z"
           }
         ],
       },

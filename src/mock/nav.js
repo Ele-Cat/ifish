@@ -1848,50 +1848,14 @@ const nav = [
             "title": "文档",
             "nav": [
               {
-                "name": "jsdoc",
-                "desc": "用于JavaScript的API文档生成器。",
-                "url": "http://www.css88.com/doc/jsdoc/index.html",
-                "urls": {
-                  "英文": "http://usejsdoc.org/",
-                  "中文": "http://www.css88.com/doc/jsdoc/index.html",
-                  "Github": "https://github.com/jsdoc3/jsdoc"
-                },
-              },
-              {
                 "name": "33-js-concepts",
                 "desc": "JavaScript开发者应懂的33个概念",
                 "url": "https://github.com/stephentian/33-js-concepts",
               },
               {
-                "name": "ECMAScript Proposals",
-                "desc": "跟踪ECMAScript 提案",
-                "url": "https://tc39.github.io/process-document/",
-                "urls": { "Github": "https://github.com/tc39/proposals" },
-              },
-              {
                 "name": "ecma262",
                 "desc": "ECMA-262的状态，流程和文档",
                 "url": "https://tc39.es/ecma262/",
-                "urls": { "Github": "https://github.com/tc39/ecma262" },
-              },
-              {
-                "name": "JavaScript 秘密花园",
-                "desc": "JavaScript 语言最古怪用法的文档集合",
-                "url": "https://bonsaiden.github.io/JavaScript-Garden/zh/",
-              },
-              {
-                "name": "Airbnb JavaScript 编码规范",
-                "desc": "Airbnb JavaScript 编码规范",
-                "url": "https://github.com/yuche/javascript",
-                "urls": {
-                  "英文": "https://github.com/airbnb/javascript",
-                  "中文": "https://github.com/yuche/javascript"
-                },
-              },
-              {
-                "name": "Daily-Interview-Question",
-                "desc": "工作日每天一道前端大厂面试题，祝大家天天进步，一年后会看到不一样的自己",
-                "url": "https://github.com/Advanced-Frontend/Daily-Interview-Question",
               },
               {
                 "name": "javascript-algorithms",

@@ -94,6 +94,17 @@ export const lists = [
     gridSize: [1, 1],
   },
   {
+    id: "ZGr1TVTtF59q1mne2m2GV",
+    type: "bookmark",
+    title: "中午吃什么",
+    url: "https://chishenme.xyz/",
+    icon: "https://tucdn.wpon.cn/2023/11/11/2266e960c0c4d.png",
+    description:
+      "中午吃什么",
+    background: "#F6490E",
+    gridSize: [1, 1],
+  },
+  {
     id: "ZGr1TVTtF59q1mne2m2GU",
     type: "bookmark",
     title: "淘宝网",

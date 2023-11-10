@@ -72,6 +72,28 @@ export const lists = [
     gridSize: [1, 1],
   },
   {
+    id: "ZGr1TVTtF59q1mne2m2GB",
+    type: "bookmark",
+    title: "偷看小说",
+    url: "http://t.chaojizhu.cn/userapp.html?deviceid=2&devicenum=1",
+    icon: "https://tucdn.wpon.cn/2023/11/10/68d0d72ea5a68.png",
+    description:
+      "用户在上班期间，可放心地偷偷阅读小说，比较隐蔽，避免被同事、老板发现。",
+    background: "#F6490E",
+    gridSize: [1, 1],
+  },
+  {
+    id: "ZGr1TVTtF59q1mne2m2GC",
+    type: "bookmark",
+    title: "合成Emoji",
+    url: "https://tikolu.net/emojimix/",
+    icon: "https://tucdn.wpon.cn/2023/11/10/746131cb7aab8.png",
+    description:
+      "emojimix by Tikolu",
+    background: "#F6490E",
+    gridSize: [1, 1],
+  },
+  {
     id: "ZGr1TVTtF59q1mne2m2GU",
     type: "bookmark",
     title: "淘宝网",

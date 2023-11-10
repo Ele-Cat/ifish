@@ -109,9 +109,9 @@ ul, li {
     overflow: hidden;
     // height: 70vh;
     .nav-top {
-      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--theme-bg-color-a8);
       ul {
-        border-bottom: 1px solid var(--theme-bg-color-a8);
         display: flex;
         li {
           margin-right: 12px;
@@ -125,7 +125,7 @@ ul, li {
             &:after {
               content: "";
               position: absolute;
-              bottom: -1px;
+              bottom: 0px;
               left: 0;
               width: 100%;
               height: 2px;

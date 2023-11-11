@@ -135,10 +135,10 @@ const dynamicList = reactive([
     cover: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/435582351.mp4?x-oss-process=video/snapshot,t_0,f_jpg,w_620,h_0,m_fast",
     video: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/435582351.mp4",
   },
-  // {
-  //   cover: "./images/bg/disney.jpg",
-  //   video: "./images/bg/disney.mp4",
-  // }
+  {
+    cover: "https://cccimg.com/view.php/8c5365fffd039027233c94ff3ce19bc8.jpg",
+    video: "https://cccimg.com/view.php/833a1f6e6ecbeba1da5f52531c71167c.mp4",
+  }
 ]);
 
 const handleUse = (item) => {

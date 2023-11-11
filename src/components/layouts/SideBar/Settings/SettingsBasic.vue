@@ -16,7 +16,7 @@ const { useSystemStore } = useStore();
 const formState = ref({...useSystemStore.settings});
 const labelCol = {
   style: {
-    width: '80px',
+    width: '88px',
   },
 };
 

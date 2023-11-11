@@ -2,8 +2,9 @@ import { useSystemStore } from "@/store/modules/system";
 
 const ctrlKey = 17,
   commandKey = 91, // mac command
-  qKey = 81, // mac command
-  lKey = 76; // 锁定l
+  lKey = 76, // 锁定l
+  eKey = 69, // 背景e
+  qKey = 81; // mac command
 
 // 把这几个的Ctrl+组合键屏蔽掉，影响体验，具体看本文件底部的keyCodes键盘字典
 const ignoreKeyMap = [73, 77, 79, 80, 83, 85];
@@ -11,6 +12,7 @@ const ignoreKeyMap = [73, 77, 79, 80, 83, 85];
 
 const keymap = {
   [lKey]: lock,
+  [eKey]: randomWallpaper,
   [qKey]: darkMode,
 };
 
@@ -58,6 +60,10 @@ function lock() {
 
 function darkMode() {
   useSystemStore().changeMode();
+}
+
+function randomWallpaper() {
+  useSystemStore().randomWallpaper();
 }
 
 // 键盘按键字典

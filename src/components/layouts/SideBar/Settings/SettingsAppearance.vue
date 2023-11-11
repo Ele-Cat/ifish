@@ -15,18 +15,15 @@
         </a-row>
       </a-form-item>
       <a-form-item label="桌面壁纸">
-        <a-button type="primary" @click="dialogVisible = true">设定壁纸</a-button>
-        <a-image class="wallpaper" :src="useSystemStore.settings.wallpaper.url" alt="" />
+        <a-button type="primary" @click="eventBus.emit('openBgSettings')">设定壁纸</a-button>
       </a-form-item>
     </a-form>
   </div>
-  <IDialog title="桌面壁纸设置" :width="800" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
-    <Wallpaper />
-  </IDialog>
 </template>
 
 <script setup>
 import { ref, watch, defineAsyncComponent } from 'vue';
+import eventBus from '@/utils/eventBus';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 const Wallpaper = defineAsyncComponent(() => import('@/components/common/Wallpaper/Index.vue'));
@@ -34,7 +31,7 @@ const Wallpaper = defineAsyncComponent(() => import('@/components/common/Wallpap
 const formState = ref({...useSystemStore.settings});
 const labelCol = {
   style: {
-    width: '80px',
+    width: '88px',
   },
 };
 const dialogVisible = ref(false);
@@ -43,7 +40,6 @@ watch(() => useSystemStore.settings.darkMode, (newVal) => {
   formState.value.darkMode = newVal;
 }, {
   immediate: true,
-  deep: true,
 })
 const handleModeChange = () => {
   useSystemStore.changeMode();
@@ -54,9 +50,6 @@ const handleModeChange = () => {
 .settings-appearance {
   .ant-image {
     margin-top: 12px;
-  }
-  .wallpaper {
-    border-radius: 8px;
   }
 }
 </style>

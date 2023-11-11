@@ -8,22 +8,6 @@
 </template>
 
 <script setup>
-import useStore from "@/store";
-import { watch } from "vue";
-const { useSystemStore } = useStore();
-let html = document.documentElement;
-
-watch(() => useSystemStore.settings.darkMode, (newVal) => {
-  if (newVal) {
-    html.setAttribute("theme", "dark");
-  }
-}, {
-  immediate: true,
-})
-
-const changeMode = () => {
-  useSystemStore.changeMode();
-}
 </script>
 
 <style lang="less" scoped>

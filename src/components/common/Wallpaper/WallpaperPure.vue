@@ -1,6 +1,6 @@
 <template>
   <div>
-    WallpaperPure
+    开发中
   </div>
 </template>
 

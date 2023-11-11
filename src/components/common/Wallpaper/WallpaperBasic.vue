@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-spin :spinning="spinning">
+    <a-spin tip="加载中..." :spinning="loading">
       <div class="wallpaper-list">
         <div class="wallpaper-item" v-for="(item, index) in wallpaperList" :key="index">
           <img :src="item" alt="">
@@ -15,7 +15,7 @@
         </div>
       </div>
     </a-spin>
-    <a-button type="primary" @click="getWallpaper" style="margin-top:12px;">换一批</a-button>
+    <a-button type="primary" :disabled="loading" @click="getWallpaper" style="margin-top:12px;">换一批</a-button>
     <a-image
       :width="200"
       :style="{ display: 'none' }"
@@ -37,14 +37,14 @@ const { useSystemStore } = useStore();
 import { toast } from "@/utils/feedback";
 
 const wallpaperList = ref([]);
-const spinning = ref(false);
+const loading = ref(false);
 
 const getWallpaper = () => {
-  spinning.value = true;
+  loading.value = true;
   const apiUrl = `https://api.7585.net.cn/360/api.php?return=jsonpro`
   axios.get(apiUrl).then(res => {
-    wallpaperList.value = res.data.imgurls;
-    spinning.value = false;
+    wallpaperList.value = res.data.imgurls.splice(0, 9);
+    loading.value = false;
   })
 }
 
@@ -62,7 +62,7 @@ const handlePreview = (url) => {
 
 const handleUse = (url) => {
   useSystemStore.settings.wallpaper.url = url;
-  useSystemStore.settings.wallpaper.type = "image";
+  useSystemStore.settings.wallpaper.type = "basic";
   toast({
     content: "壁纸切换成功！",
   });
@@ -73,14 +73,17 @@ const handleUse = (url) => {
 .wallpaper-list {
   display: flex;
   flex-wrap: wrap;
-  min-height: 270px;
+  min-height: 370px;
   .wallpaper-item {
     position: relative;
-    width: 24%;
+    width: 32%;
     margin: 3px;
+    border-radius: 8px;
+    overflow: hidden;
     img {
       width: 100%;
       height: 100%;
+      transition: all .3s;
     }
     .mask {
       position: absolute;
@@ -97,6 +100,7 @@ const handleUse = (url) => {
         margin: 0 8px;
         display: flex;
         align-items: center;
+        transition: all .3s;
         .anticon {
           margin-right: 4px;
         }
@@ -106,6 +110,9 @@ const handleUse = (url) => {
       }
     }
     &:hover {
+      img {
+        transform: scale(1.1);
+      }
       .mask {
         display: flex;
       }

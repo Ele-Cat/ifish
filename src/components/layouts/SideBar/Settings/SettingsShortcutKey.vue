@@ -1,43 +1,51 @@
 <template>
   <div>
     <a-form :model="formState" :label-col="labelCol">
-      <a-form-item label="老板键" extra="快捷切换键，暂不支持修改">
-        <a-input v-model:value="formState.lock.key" readonly placeholder="例如：Ctrl + L" />
-      </a-form-item>
-      <a-form-item label="切换时">
-        <a-select v-model:value="formState.lock.target">
-          <a-select-option value="_self">在本页打开</a-select-option>
-          <a-select-option value="_blank">打开新页</a-select-option>
-        </a-select>
-      </a-form-item>
-      <a-form-item label="打开">
-        <a-select v-model:value="formState.lock.action" :options="formState.lock.actionList.map(item => ({ value: item }))">
-          <template #dropdownRender="{ menuNode: menu }">
-            <v-nodes :vnodes="menu" />
-            <a-divider style="margin: 4px 0" />
-            <a-space style="padding: 4px 8px">
-              <a-input ref="inputRef" v-model:value="addAction" placeholder="请输入要打开的网址" />
-              <a-button type="primary" @click="handleAddAction">
-                <template #icon>
-                  <PlusOutlined />
-                </template>
-                添加
-              </a-button>
-            </a-space>
-            <a-space align="center" style="padding: 4px 8px;">
-              <p>移除第</p>
-              <a-input-number :min="1" :max="formState.lock.actionList.length" v-model:value="removeIndex" placeholder="序号" style="width: 76px;" />
-              <p>个网址</p>
-              <a-button type="primary" danger @click="handleRemoveAction">
-                <template #icon>
-                  <MinusOutlined />
-                </template>
-                移除
-              </a-button>
-            </a-space>
-          </template>
-        </a-select>
-      </a-form-item>
+      <a-card title="老板键" size="small">
+        <a-form-item label="快捷键">
+          <a-input v-model:value="formState.lock.key" readonly placeholder="例如：Ctrl + L" />
+        </a-form-item>
+        <a-form-item label="切换时">
+          <a-select v-model:value="formState.lock.target">
+            <a-select-option value="_self">在本页打开</a-select-option>
+            <a-select-option value="_blank">打开新页</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item label="打开网址" class="bottom-0">
+          <a-select v-model:value="formState.lock.action" :options="formState.lock.actionList.map(item => ({ value: item }))">
+            <template #dropdownRender="{ menuNode: menu }">
+              <v-nodes :vnodes="menu" />
+              <a-divider style="margin: 4px 0" />
+              <p style="padding: 4px 8px">配置：</p>
+              <a-space style="padding: 4px 8px">
+                <a-input size="small" ref="inputRef" v-model:value="addAction" placeholder="请输入要打开的网址" />
+                <a-button size="small" type="primary" @click="handleAddAction">
+                  <template #icon>
+                    <PlusOutlined />
+                  </template>
+                  添加
+                </a-button>
+              </a-space>
+              <a-space class="action-box" align="center" style="padding: 4px 8px;">
+                <p>移除第</p>
+                <a-input-number size="small" :min="1" :max="formState.lock.actionList.length" v-model:value="removeIndex" placeholder="序号" style="width: 78px;" />
+                <p>个网址</p>
+                <a-button size="small" type="primary" danger @click="handleRemoveAction">
+                  <template #icon>
+                    <MinusOutlined />
+                  </template>
+                  移除
+                </a-button>
+              </a-space>
+            </template>
+          </a-select>
+        </a-form-item>
+      </a-card>
+      <a-card title="随机背景" size="small" style="margin-top:12px;">
+        <a-form-item label="快捷键" class="bottom-0">
+          <a-input v-model:value="formState.wallpaper.key" readonly placeholder="例如：Ctrl + E" />
+        </a-form-item>
+      </a-card>
     </a-form>
   </div>
 </template>
@@ -64,7 +72,7 @@ const VNodes = defineComponent({
 const formState = ref({...useSystemStore.settings});
 const labelCol = {
   style: {
-    width: '80px',
+    width: '88px',
   },
 };
 
@@ -114,5 +122,21 @@ const handleRemoveAction = () => {
 </script>
 
 <style lang="less" scoped>
-
+.ant-form-item {
+  margin-bottom: 12px;
+  &.bottom-0 {
+    margin-bottom: 0;
+  }
+}
+.action-box {
+  p {
+    font-size: 12px;
+  }
+}
+:deep(.ant-card) {
+  background-color: var(--theme-bg-color-a8);
+  .ant-card-head {
+    color: var(--theme-text-color);
+  }
+}
 </style>

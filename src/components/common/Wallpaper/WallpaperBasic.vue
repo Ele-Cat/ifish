@@ -73,7 +73,7 @@ const handleUse = (url) => {
 .wallpaper-list {
   display: flex;
   flex-wrap: wrap;
-  min-height: 370px;
+  min-height: 360px;
   .wallpaper-item {
     position: relative;
     width: 32%;

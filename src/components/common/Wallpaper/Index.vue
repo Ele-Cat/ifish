@@ -1,5 +1,5 @@
 <template>
-  <IDialog title="桌面壁纸设置" :width="800" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
+  <IDialog title="桌面壁纸设置" :width="800" :mask="false" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
     <div class="wallpaper">
       <a-tabs
         v-model:activeKey="activeKey"

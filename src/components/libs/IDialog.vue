@@ -4,6 +4,7 @@
       ref="modalRef"
       v-model:open="open"
       :width="width"
+      :mask="mask"
       :wrap-style="{overflow: 'hidden'}"
       :footer="null"
       @ok="handleOk"
@@ -32,6 +33,7 @@ const props = defineProps({
   visible: { type: Boolean, default: false },
   title: { type: String, default: "标题" },
   width: { type: [String, Number], default: 520 },
+  mask: { type: Boolean, default: true },
 })
 const emit = defineEmits(["ok", "cancel"])
 

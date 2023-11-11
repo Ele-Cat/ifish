@@ -16,11 +16,16 @@
 </template>
 
 <script setup>
-// https://movetab.jianyueku.com/api/wallpaper_video/search?offset=24&page=1
 import { reactive } from "vue";
+import axios from 'axios';
 import useStore from '@/store';
 const { useSystemStore } = useStore();
 import { toast } from "@/utils/feedback";
+
+const apiUrl = "https://movetab.jianyueku.com/api/wallpaper_video/search?offset=24&page=1"
+axios.get(apiUrl).then(res => {
+  console.log('res: ', res);
+})
 
 const dynamicList = reactive([
   {

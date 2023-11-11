@@ -34,6 +34,7 @@ import axios from 'axios';
 import { EyeOutlined, CheckOutlined } from '@ant-design/icons-vue';
 import useStore from '@/store';
 const { useSystemStore } = useStore();
+import { toast } from "@/utils/feedback";
 
 const wallpaperList = ref([]);
 const spinning = ref(false);
@@ -62,6 +63,9 @@ const handlePreview = (url) => {
 const handleUse = (url) => {
   useSystemStore.settings.wallpaper.url = url;
   useSystemStore.settings.wallpaper.type = "image";
+  toast({
+    content: "壁纸切换成功！",
+  });
 }
 </script>
 

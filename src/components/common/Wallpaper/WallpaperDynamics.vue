@@ -21,6 +21,7 @@ import useStore from '@/store';
 const { useSystemStore } = useStore();
 import { toast } from "@/utils/feedback";
 
+// https://movetab.jianyueku.com/api/wallpaper_video/search?offset=24&page=1
 const dynamicList = reactive([
   {
     cover: "https://img.zhuayuya.com/wallpaper/video/liulangdiqiu.jpg",
@@ -131,17 +132,13 @@ const dynamicList = reactive([
     video: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/607001859.mp4",
   },
   {
-    cover: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/958846646.mp4?x-oss-process=video/snapshot,t_0,f_jpg,w_620,h_0,m_fast",
-    video: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/958846646.mp4",
-  },
-  {
     cover: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/435582351.mp4?x-oss-process=video/snapshot,t_0,f_jpg,w_620,h_0,m_fast",
     video: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/435582351.mp4",
   },
-  {
-    cover: "./images/bg/disney.jpg",
-    video: "./images/bg/disney.mp4",
-  }
+  // {
+  //   cover: "./images/bg/disney.jpg",
+  //   video: "./images/bg/disney.mp4",
+  // }
 ]);
 
 const handleUse = (item) => {

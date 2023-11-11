@@ -6,6 +6,7 @@ export const useSystemStore = defineStore("ifishSystem", {
       settings: {
         title: "",
         darkMode: false,
+        appRadius: 8,
         wallpaper: {
           blur: 0,
           mask: 0,

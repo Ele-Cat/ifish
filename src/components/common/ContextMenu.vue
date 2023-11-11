@@ -37,12 +37,20 @@ const handleMenuClick = (type) => {
   } else if (type === "randomBg") {
     // 输出分类id[36(4K专区)|6(美女模特)|30(爱情美图)|9(风景大片)|15(小清新)|26(动漫卡通)|11(明星风尚)|14(萌宠动物)|5(游戏壁纸)|12(汽车天下)|10(炫酷时尚)|29(月历壁纸)|7(影视剧照)|13(节日美图)|22(军事天地)|16(劲爆体育)|18(BABY秀)|35(文字控)]
     // https://api.7585.net.cn/360/api.php?return=json
-    axios.get(`https://api.7585.net.cn/360/api.php?return=json`).then(res => {
+    let bgApi = {
+      url: `https://bing.img.run/rand.php?type=json`,
+      return: 'pic'
+    };
+    bgApi = {
+      url: `https://api.7585.net.cn/360/api.php?return=json`,
+      return: 'imgurl'
+    };
+    axios.get(bgApi.url).then(res => {
       toast({
         content: "壁纸切换成功！",
       });
-      useSystemStore.settings.wallpaper.url = res.data.imgurl
-      useSystemStore.settings.wallpaper.type = "image"
+      useSystemStore.settings.wallpaper.url = res.data[bgApi.return];
+      useSystemStore.settings.wallpaper.type = "image";
     })
   } else if (type === "settings") {
     eventBus.emit("openSettings");

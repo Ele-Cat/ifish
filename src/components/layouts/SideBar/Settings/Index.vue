@@ -4,7 +4,7 @@
       <a-tabs
         v-model:activeKey="activeKey"
         tab-position="left"
-        :style="{ minHeight: '200px' }"
+        :style="{ minHeight: '400px' }"
       >
         <a-tab-pane v-for="item in settingsNavs" :key="item.value" :tab="item.label">
           <keep-alive>

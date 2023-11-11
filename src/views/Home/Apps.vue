@@ -12,7 +12,7 @@
   >
     <template #item="{ element }">
       <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]">
-        <div class="dataset">
+        <div class="dataset" :style="{borderRadius: `${useSystemStore.settings.appRadius}${element.gridSize[0] === element.gridSize[1] ? '%' : 'px'}`}">
           <div class="bookmark" v-if="element.type === 'bookmark'" @click="handleAppClick(element)" @contextmenu.stop="e => handleAppContextMenu(e, element)">
             <img class="logo" v-lazyload="element.icon" alt="">
             <div class="description" v-if="element.gridSize[1] == 2 && element.gridSize[0] == 1">
@@ -29,13 +29,36 @@
     </template>
   </Draggable>
   <AppDialog />
+
+  <!-- 随机一句一言API接口 https://api.vvhan.com/api/ian -->
+  <!-- 随机笑话API接口 https://api.vvhan.com/api/joke -->
+  <!-- 随机一句情话API接口 https://api.vvhan.com/api/love -->
+  <!-- 随机一句骚话API接口 https://api.vvhan.com/api/sao -->
+  <!-- 美图API接口 https://api.vvhan.com/api/mobil.girl?type=json -->
+  <!-- https://api.vvhan.com/api/girl?type=json -->
+
+  <!-- 美女视频 https://www.nihaowua.com/v/video.php?_t=0.6096279598934722 -->
+  <!-- 美女写真 https://api.moyuduck.com/random/xiezhen -->
+
+  <!-- 猫咪进化 https://likexia.gitee.io/cat-zh/# -->
+  <!-- 超级进化 https://g8hh.github.io/evolve/ -->
+  <!-- 音乐 https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&type=json&n=1
+  https://xiaoapi.cn/API/yy.php?type=qq&msg=夜曲&n=1
+
+  摸鱼日报API https://dayu.qqsuu.cn/moyuribao/apis.php
+  摸鱼日历API https://dayu.qqsuu.cn/moyurili/apis.php
+  明星八卦API https://dayu.qqsuu.cn/mingxingbagua/apis.php
+  内涵段子API https://dayu.qqsuu.cn/neihanduanzi/apis.php
+  新闻简报API https://dayu.qqsuu.cn/weiyujianbao/apis.php
+  情感花园API https://dayu.qqsuu.cn/qingganhuayuan/apis.php
+  摸鱼日报美女视频版API https://dayu.qqsuu.cn/moyuribaoshipin/apis.php -->
 </template>
 
 <script setup>
 import { reactive, defineAsyncComponent } from "vue";
 import Draggable from 'vuedraggable';
 import useStore from "@/store";
-const { useAppStore, useContextMenuStore } = useStore();
+const { useAppStore, useContextMenuStore, useSystemStore } = useStore();
 const AppDialog = defineAsyncComponent(() => import('@/components/common/AppDialog/Index.vue'));
 const ImgPreview = defineAsyncComponent(() => import('@/components/common/Apps/ImgPreview.vue'));
 const Tiangou = defineAsyncComponent(() => import('@/components/common/Apps/Tiangou.vue'));

@@ -1,5 +1,12 @@
 <template>
-  <a-drawer width="80vw" title="系统设置" placement="right" :open="open" @close="close" rootClassName="settings-root">
+  <a-drawer
+    width="80vw"
+    title="系统设置"
+    placement="right"
+    :open="open"
+    @close="close"
+    rootClassName="settings-root"
+  >
     <div class="settings-drawer">
       <a-tabs
         v-model:activeKey="activeKey"
@@ -22,22 +29,25 @@
 </template>
 
 <script setup>
-import { ref, shallowRef, defineAsyncComponent } from 'vue';
-const SettingsBasic = defineAsyncComponent(() => import('./SettingsBasic.vue'));
-const SettingsAppearance = defineAsyncComponent(() => import('./SettingsAppearance.vue'));
-const SettingsShortcutKey = defineAsyncComponent(() => import('./SettingsShortcutKey.vue'));
+import { ref, shallowRef, defineAsyncComponent } from "vue";
+const SettingsBasic = defineAsyncComponent(() => import("./SettingsBasic.vue"));
+const SettingsAppearance = defineAsyncComponent(() => import("./SettingsAppearance.vue"));
+const SettingsShortcutKey = defineAsyncComponent(() =>
+  import("./SettingsShortcutKey.vue")
+);
+const SettingsExport = defineAsyncComponent(() => import("./SettingsExport.vue"));
 
 const props = defineProps({
   open: {
     type: Boolean,
     default: false,
-  }
-})
-const emit = defineEmits(['close']);
+  },
+});
+const emit = defineEmits(["close"]);
 
 const close = () => {
   emit("close");
-}
+};
 
 const activeKey = ref("basic");
 const settingsNavs = ref([
@@ -55,6 +65,11 @@ const settingsNavs = ref([
     label: "快捷键设置",
     value: "shortcutKey",
     component: SettingsShortcutKey,
+  },
+  {
+    label: "导入导出",
+    value: "export",
+    component: SettingsExport,
   },
 ]);
 </script>

@@ -43,6 +43,16 @@ export const systemComponents = [
 
 export const lists = [
   {
+    id: "ZGr1TVTtF59q1mne2m2G1",
+    type: "bookmark",
+    title: "Chat GPT",
+    url: "https://ele-cat.gitee.io/comp-gpt/",
+    icon: "https://tucdn.wpon.cn/2023/11/12/de06798bb176a.ico",
+    description: "免费、无登录、不限次数的GPT网站",
+    background: "#F6490E",
+    gridSize: [2, 2],
+  },
+  {
     id: "GcLhcPXJ4xL-2ZawhA3Sz",
     type: "component",
     title: "摸鱼日报",
@@ -111,7 +121,7 @@ export const lists = [
     url: "https://dayu.qqsuu.cn/xingzuoyunshi/apis.php",
     icon: "./images/apps/xingzuoyunshi.png",
     component: "imgpreview",
-    gridSize: [2, 2],
+    gridSize: [1, 1],
   },
   {
     id: "LGLaNrO8s02Vm9ocuTLWd",
@@ -134,7 +144,7 @@ export const lists = [
     title: "舔狗日记",
     icon: "./images/apps/tiangou.png",
     component: "tiangou",
-    gridSize: [2, 2],
+    gridSize: [1, 1],
   },
   {
     id: "ZD7KSlhCyXR9MSYVMpxkv",

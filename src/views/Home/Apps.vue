@@ -11,20 +11,42 @@
     :move="onMove"
   >
     <template #item="{ element }">
-      <div class="app" :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]">
-        <div class="dataset" :style="{borderRadius: `${useSystemStore.settings.appRadius}${element.gridSize[0] === element.gridSize[1] ? '%' : 'px'}`}">
-          <div class="bookmark" v-if="element.type === 'bookmark'" @click="handleAppClick(element)" @contextmenu.stop="e => handleAppContextMenu(e, element)">
-            <img class="logo" v-lazyload="element.icon" alt="">
-            <div class="description" v-if="element.gridSize[1] == 2 && element.gridSize[0] == 1">
-              <p>{{element.title}}</p>
-              <span>{{element.description}}</span>
+      <div
+        class="app"
+        :class="[`column${element.gridSize[1]}-row${element.gridSize[0]}`]"
+      >
+        <div
+          class="dataset"
+          :style="{
+            borderRadius: `${useSystemStore.settings.appRadius}${
+              element.gridSize[0] === element.gridSize[1] ? '%' : 'px'
+            }`,
+          }"
+        >
+          <div
+            class="bookmark"
+            v-if="element.type === 'bookmark'"
+            @click="handleAppClick(element)"
+            @contextmenu.stop="(e) => handleAppContextMenu(e, element)"
+          >
+            <img class="logo" v-lazyload="element.icon" alt="" />
+            <div
+              class="description"
+              v-if="element.gridSize[1] == 2 && element.gridSize[0] == 1"
+            >
+              <p>{{ element.title }}</p>
+              <span>{{ element.description }}</span>
             </div>
           </div>
-          <div class="comp" v-else @contextmenu.stop="e => handleAppContextMenu(e, element)">
+          <div
+            class="comp"
+            v-else
+            @contextmenu.stop="(e) => handleAppContextMenu(e, element)"
+          >
             <component :is="components[element.component]" :app="element" />
           </div>
         </div>
-        <p class="title">{{element.title}}</p>
+        <p class="title">{{ element.title }}</p>
       </div>
     </template>
   </Draggable>
@@ -55,39 +77,58 @@
 </template>
 
 <script setup>
-import { reactive, defineAsyncComponent } from "vue";
-import Draggable from 'vuedraggable';
+import { ref, defineAsyncComponent, watch } from "vue";
+import Draggable from "vuedraggable";
 import useStore from "@/store";
 const { useAppStore, useContextMenuStore, useSystemStore } = useStore();
-const AppDialog = defineAsyncComponent(() => import('@/components/common/AppDialog/Index.vue'));
-const ImgPreview = defineAsyncComponent(() => import('@/components/common/Apps/ImgPreview.vue'));
-const Tiangou = defineAsyncComponent(() => import('@/components/common/Apps/Tiangou.vue'));
-const Zhibuzhi = defineAsyncComponent(() => import('@/components/common/Apps/Zhibuzhi.vue'));
-const Gongde = defineAsyncComponent(() => import('@/components/common/Apps/Gongde.vue'));
+const AppDialog = defineAsyncComponent(() =>
+  import("@/components/common/AppDialog/Index.vue")
+);
+const ImgPreview = defineAsyncComponent(() =>
+  import("@/components/common/Apps/ImgPreview.vue")
+);
+const Tiangou = defineAsyncComponent(() =>
+  import("@/components/common/Apps/Tiangou.vue")
+);
+const Zhibuzhi = defineAsyncComponent(() =>
+  import("@/components/common/Apps/Zhibuzhi.vue")
+);
+const Gongde = defineAsyncComponent(() => import("@/components/common/Apps/Gongde.vue"));
 const components = {
   imgpreview: ImgPreview,
   tiangou: Tiangou,
   zhibuzhi: Zhibuzhi,
   gongde: Gongde,
-}
+};
 
-const apps = reactive(useAppStore.lists);
+const apps = ref([]);
+
+watch(
+  () => useAppStore.lists,
+  (newVal) => {
+    apps.value = newVal;
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
 
 const onMove = (val) => {
-  useAppStore.lists = apps;
+  useAppStore.lists = apps.value;
 };
 
 const handleAppContextMenu = (e, app) => {
   e.preventDefault();
   useContextMenuStore.showContextMenu(e.clientX, e.clientY);
   useContextMenuStore.activeApp = app;
-}
+};
 
 const handleAppClick = (app) => {
   if (app.type === "bookmark") {
     window.open(app.url, "_blank");
   }
-}
+};
 </script>
 
 <style lang="less">
@@ -177,7 +218,7 @@ const handleAppClick = (app) => {
       white-space: nowrap;
       pointer-events: none;
       font-size: 0.6rem;
-      color: #FFF;
+      color: #fff;
       text-shadow: 0 0 4px var(--grey-0);
     }
     &:hover {

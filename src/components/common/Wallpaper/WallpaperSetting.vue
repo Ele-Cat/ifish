@@ -38,6 +38,6 @@ const handleWallpaperAction = () => {
 
 <style lang="less" scoped>
 .wallpaper-setting {
-  width: 460px;
+  width: 60%;
 }
 </style>

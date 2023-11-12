@@ -3,6 +3,7 @@
     <img v-if="useSystemStore.settings.wallpaper.type === 'basic'" class="cover" :src="useSystemStore.settings.wallpaper.url" alt="">
     <img v-if="useSystemStore.settings.wallpaper.type === 'basic'" class="cover animate__fadeOut" :src="useSystemStore.settings.wallpaper.url" alt="">
     <video v-if="useSystemStore.settings.wallpaper.type === 'dynamics'" class="video" :src="useSystemStore.settings.wallpaper.url" playsinline autoplay loop muted></video>
+    <div v-if="useSystemStore.settings.wallpaper.type === 'pure'" class="pure" :style="{backgroundImage: `linear-gradient(${useSystemStore.settings.wallpaper.angle}deg, ${useSystemStore.settings.wallpaper.pure[0]} 15%, ${useSystemStore.settings.wallpaper.pure[1]} 150%)`}"></div>
     <div class="mask" :style="{backgroundColor: `rgba(0, 0, 0, ${useSystemStore.settings.wallpaper.mask / 100})`,backdropFilter: `blur(${useSystemStore.settings.wallpaper.blur}px)`}"></div>
   </div>
 </template>
@@ -57,6 +58,13 @@ const coverUrl = "https://imgse.com/content/images/system/home_cover_16010102701
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  .pure {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
   }
   .mask {
     position: fixed;

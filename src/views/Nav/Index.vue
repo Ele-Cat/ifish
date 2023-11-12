@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, nextTick, ref, watch } from "vue";
 import { renderIco } from "@/utils/utils";
 import nav from "@/mock/nav";
 import useStore from "@/store";
@@ -47,8 +47,15 @@ const navsTop = computed(() => {
 })
 const activeLeft = ref(useNavStore.active[0] || 0);
 const activeTop = ref(useNavStore.active[1] || 0);
-const activeNavs = computed(() => {
-  return nav[activeLeft.value]["nav"][activeTop.value]["nav"];
+const activeNavs = ref([])
+watch(() => [activeLeft.value, activeTop.value], () => {
+  activeNavs.value = [];
+  nextTick(() => {
+    activeNavs.value = nav[activeLeft.value]["nav"][activeTop.value]["nav"];
+  })
+}, {
+  immediate: true,
+  deep: true,
 })
 const handleClickNavLeft = (idx) => {
   activeLeft.value = idx;

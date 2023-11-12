@@ -106,10 +106,11 @@ const handleRefresh = (type) => {
   axios.get(`https://api.moyuduck.com/hot/top?type=${type}`).then(res => {
     newsTypes.map(newsType => {
       if (newsType["value"] === type) {
-        newsType["datas"] = res.data.data;
+        newsType["datas"] = res.data.data || [];
         newsType["isFetching"] = false;
         toast({
-          content: `${newsType['label']}拉取成功`
+          type: res.data.data ? "success" : "warning",
+          content: res.data.data ? `${newsType['label']}拉取成功` : `${newsType['label']}拉取失败`,
         })
       }
     })

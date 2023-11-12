@@ -8,7 +8,7 @@
           :key="index"
           @click="handleUse(item)"
         >
-          <img :src="`${item.cover}`" alt="" />
+          <img :src="item.cover" alt="" />
         </div>
       </div>
     </perfect-scrollbar>
@@ -26,6 +26,34 @@ const dynamicList = reactive([
   {
     cover: "https://cccimg.com/view.php/8c5365fffd039027233c94ff3ce19bc8.jpg",
     video: "https://cccimg.com/view.php/833a1f6e6ecbeba1da5f52531c71167c.mp4",
+  },
+  {
+    cover: "https://cccimg.com/down.php/ea0fdc0c6194f6558543248bd337f9c4.jfif",
+    video: "https://cccimg.com/view.php/ecbece3b29cffc9509a5db599a91207e.mp4",
+  },
+  {
+    cover: "https://cccimg.com/down.php/9bf7051fbc872ddff66e48ce22442a28.jfif",
+    video: "https://cccimg.com/view.php/5454915ce374f45716715c8000d74bc3.mp4",
+  },
+  {
+    cover: "https://cccimg.com/down.php/2dab9f565c4e1175bfe222a65f1de17d.jfif",
+    video: "https://cccimg.com/view.php/873b4311cf2c195f739628ad52b5ae9a.mp4",
+  },
+  {
+    cover: "https://cccimg.com/down.php/1cf9f71098180c440999e4807c5b5782.jfif",
+    video: "https://cccimg.com/view.php/a969571aaffeb3e342d55c1f7a601291.mp4",
+  },
+  {
+    cover: "https://cccimg.com/down.php/ac5d65e6a304543a5b7983a8e2fc6e90.jfif",
+    video: "https://cccimg.com/view.php/d363a7c6380f1fc31662d4226382642c.mp4",
+  },
+  {
+    cover: "https://cccimg.com/down.php/254bb9fa338a41520b63986860c6e626.jfif",
+    video: "https://cccimg.com/view.php/3a97bdf35a27c87721eed467287eb757.mp4",
+  },
+  {
+    cover: "https://cccimg.com/down.php/b5d434ab3180b893ebb0810de0ee8a54.jfif",
+    video: "https://cccimg.com/view.php/7b31e7a405b9f482189431f8f3d98e8c.mp4",
   },
   {
     cover: "https://img.zhuayuya.com/wallpaper/video/liulangdiqiu.jpg",
@@ -130,14 +158,6 @@ const dynamicList = reactive([
   {
     cover: "https://img.zhuayuya.com/wallpaper/video/wallpa_video_1022.jpg",
     video: "https://img.zhuayuya.com/wallpaper/video/wallpa_video_1022.mp4",
-  },
-  {
-    cover: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/607001859.mp4?x-oss-process=video/snapshot,t_0,f_jpg,w_620,h_0,m_fast",
-    video: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/607001859.mp4",
-  },
-  {
-    cover: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/435582351.mp4?x-oss-process=video/snapshot,t_0,f_jpg,w_620,h_0,m_fast",
-    video: "https://movetab.jianyueku.com/pick-source/img/wallpaper_video/wallpapers_video/648fb71175652244eaa103a0/435582351.mp4",
   },
 ]);
 

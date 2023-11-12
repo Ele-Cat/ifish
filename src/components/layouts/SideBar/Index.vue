@@ -68,6 +68,10 @@ const settingsVisible = ref(false);
 eventBus.on("openSettings", () => {
   settingsVisible.value = true;
 })
+
+eventBus.on("closeSettings", () => {
+  settingsVisible.value = false;
+})
 </script>
 
 <style lang="less" scoped>

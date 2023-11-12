@@ -15,7 +15,7 @@
         </a-row>
       </a-form-item>
       <a-form-item label="桌面壁纸">
-        <a-button type="primary" @click="eventBus.emit('openBgSettings')">设定壁纸</a-button>
+        <a-button type="primary" @click="handleSetWallpaper">设定壁纸</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -43,6 +43,11 @@ watch(() => useSystemStore.settings.darkMode, (newVal) => {
 })
 const handleModeChange = () => {
   useSystemStore.changeMode();
+}
+
+const handleSetWallpaper = () => {
+  eventBus.emit("closeSettings");
+  eventBus.emit('openBgSettings');
 }
 </script>
 

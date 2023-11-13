@@ -4,7 +4,7 @@
       <DoubleLeftOutlined />
     </div>
     <div class="music-ctrl bf" :class="[useMusicStore.visible ? 'show' : '' ]">
-      <MusicCtrl />
+      <MusicCtrl @showMusicList="musicListVisible = true" />
     </div>
 
     <MusicList :open="musicListVisible" @close="musicListVisible = false" />
@@ -17,8 +17,8 @@ import axios from 'axios';
 import { DoubleLeftOutlined } from '@ant-design/icons-vue';
 import useStore from "@/store";
 const { useMusicStore } = useStore();
-import MusicCtrl from './MusicCtrl.vue'
-import MusicList from './MusicList.vue'
+import MusicCtrl from './MusicCtrl.vue';
+import MusicList from './MusicList.vue';
 
 const handleToggleMusicVisible = () => {
   useMusicStore.toggleVisible();
@@ -52,6 +52,7 @@ const getTiangou = () => {
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 1001;
   .toggle-icon {
     position: absolute;
     width: 28px;

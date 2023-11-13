@@ -61,7 +61,7 @@ const handleAppContextMenu = (e) => {
 </script>
 
 <style lang="less" scoped>
-@import url(//at.alicdn.com/t/c/font_4284553_schd61qmwoo.css);
+@import url(//at.alicdn.com/t/c/font_4284553_831y6d0ai3j.css);
 .layout {
   width: 100vw;
   height: 100vh;

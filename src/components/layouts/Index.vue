@@ -5,7 +5,7 @@
     <SideBar />
     <MainBox />
     <MainFooter v-show="!useMusicStore.visible" />
-    <!-- <Music /> -->
+    <Music />
     <Wallpaper />
   </div>
 </template>

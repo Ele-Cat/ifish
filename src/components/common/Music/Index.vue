@@ -1,50 +1,73 @@
 <template>
   <div class="music">
-    <div class="toggle-icon bf" :title="useMusicStore.visible ? '关闭播放器' : '打开播放器'" :class="[useMusicStore.visible ? 'down' : 'up' ]"  @click="handleToggleMusicVisible">
+    <div
+      class="toggle-icon bf"
+      :title="useMusicStore.visible ? '关闭播放器' : '打开播放器'"
+      :class="[useMusicStore.visible ? 'down' : 'up']"
+      @click="handleToggleMusicVisible"
+    >
       <DoubleLeftOutlined />
     </div>
-    <div class="music-ctrl bf" :class="[useMusicStore.visible ? 'show' : '' ]">
-      <MusicCtrl @showMusicList="musicListVisible = true" />
+    <div class="music-ctrl bf" :class="[useMusicStore.visible ? 'show' : '']">
+      <MusicCtrl
+        @showSearch="showSearchF"
+        @toggleMusicList="musicListVisible = !musicListVisible"
+      />
     </div>
 
-    <MusicList :open="musicListVisible" @close="musicListVisible = false" />
+    <MusicList
+      :open="musicListVisible"
+      @showSearch="showSearchF"
+      @close="musicListVisible = false"
+    />
+
+    <IDialog
+      title="搜索音乐"
+      :visible="dialogVisible"
+      @ok="dialogVisible = false"
+      @cancel="dialogVisible = false"
+    >
+      <MusicSearch />
+    </IDialog>
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import axios from 'axios';
-import { DoubleLeftOutlined } from '@ant-design/icons-vue';
+import { onMounted, ref, watch } from "vue";
+import { DoubleLeftOutlined } from "@ant-design/icons-vue";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
-import MusicCtrl from './MusicCtrl.vue';
-import MusicList from './MusicList.vue';
+import MusicCtrl from "./MusicCtrl.vue";
+import MusicList from "./MusicList.vue";
+import MusicSearch from "./MusicSearch.vue";
+
+onMounted(() => {
+  useMusicStore.settings.playing = false;
+});
 
 const handleToggleMusicVisible = () => {
   useMusicStore.toggleVisible();
-}
+};
 
 const musicListVisible = ref(false);
-watch(() => useMusicStore.visible, newVal => {
-  if (newVal) {
-    // if (!useMusicStore.musicList.length) {
-    //   musicListVisible.value = true;
-    // }
+watch(
+  () => useMusicStore.visible,
+  (newVal) => {
+    if (newVal) {
+      // if (!useMusicStore.musicList.length) {
+      //   musicListVisible.value = true;
+      // }
+    }
+  },
+  {
+    immediate: true,
   }
-}, {
-  immediate: true,
-})
-const getTiangou = () => {
-  let url= "https://xiaoapi.cn/API/yy.php?type=qq&msg=夜曲"
-  // qq、kg、kw、wy、qqmv、kgmv
+);
 
-  // url = 'https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&n=1'
-  axios.get(url).then(res => {
-    console.log('res: ', res);
-  })
-}
-
-// getTiangou();
+const dialogVisible = ref(false);
+const showSearchF = () => {
+  dialogVisible.value = true;
+};
 </script>
 
 <style lang="less" scoped>
@@ -62,7 +85,7 @@ const getTiangou = () => {
     right: 20px;
     background-color: var(--theme-bg-color-a8);
     color: var(--theme-text-color);
-    transition: top .45s ease-in-out;
+    transition: top 0.45s ease-in-out;
     border-radius: 10px 10px 0 0;
     cursor: pointer;
     &.up {
@@ -89,7 +112,7 @@ const getTiangou = () => {
     width: 100%;
     bottom: -64px;
     background-color: var(--theme-bg-color-a8);
-    transition: bottom .3s ease-in-out;
+    transition: bottom 0.3s ease-in-out;
     &.show {
       bottom: 0;
     }

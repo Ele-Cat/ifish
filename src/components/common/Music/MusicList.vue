@@ -1,49 +1,153 @@
 <template>
-  <a-drawer width="80vw" title="播放列表" placement="right" :open="open" @close="close" rootClassName="disclaimers-root">
-    <div class="music-list">
-      <a-input @click="dialogVisible = true" readonly placeholder="搜索">
+  <a-drawer
+    width="80vw"
+    title="播放列表"
+    placement="right"
+    :open="open"
+    @close="close"
+    rootClassName="disclaimers-root"
+  >
+    <div class="music-box">
+      <a-input
+        @click="handleShowSearch"
+        readonly
+        placeholder="搜索"
+        style="border-radius: 20px"
+      >
         <template #prefix>
           <SearchOutlined />
         </template>
       </a-input>
-      
+
       <div>
-        播放列表
-        {{ useMusicStore.musicList }}
+        <p class="title">播放列表（共{{ useMusicStore.musicList.length }}首）</p>
+        <div class="music-list">
+          <div
+            class="music-item"
+            v-for="(item, index) in useMusicStore.musicList"
+            :key="index"
+            :class="{ active: useMusicStore.activeIndex === index }"
+            @click="handlePlayNow(index)"
+          >
+            <div class="music-cover">
+              <img :src="item.cover" alt="" />
+            </div>
+            <div class="music-info">
+              <p>{{ item.name }}</p>
+              <span>{{ item.singer }}</span>
+            </div>
+            <div class="music-action">
+              <a-dropdown placement="bottomLeft" arrow>
+                <EllipsisOutlined />
+                <template #overlay>
+                  <a-menu>
+                    <a-menu-item>
+                      <a href="javascript:;" @click="handlePlayNow(index)">播放</a>
+                    </a-menu-item>
+                    <a-menu-item>
+                      <a href="javascript:;" @click="handleRemove(index)">移除</a>
+                    </a-menu-item>
+                    <a-menu-item>
+                      <a href="javascript:;" @click="handleDownload(item)">下载</a>
+                    </a-menu-item>
+                  </a-menu>
+                </template>
+              </a-dropdown>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </a-drawer>
-  <IDialog title="搜索音乐" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
-    <MusicSearch />
-  </IDialog>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { SearchOutlined } from '@ant-design/icons-vue';
-import useStore from '@/store';
+import { SearchOutlined, EllipsisOutlined } from "@ant-design/icons-vue";
+import useStore from "@/store";
 const { useMusicStore } = useStore();
-import MusicSearch from './MusicSearch.vue';
+import { downloadFile } from "@/utils/utils";
 
 const props = defineProps({
   open: {
     type: Boolean,
     default: false,
-  }
-})
-const emit = defineEmits(['close']);
+  },
+});
+const emit = defineEmits(["close", "showSearch"]);
 
 const close = () => {
   emit("close");
-}
+};
 
-const dialogVisible = ref(false);
+const handleShowSearch = () => {
+  emit("showSearch");
+};
+
+// 立即播放
+const handlePlayNow = (idx) => {
+  useMusicStore.playMusic(idx);
+};
+// 移除
+const handleRemove = (idx) => {
+  useMusicStore.musicList.splice(idx, 1);
+  if (idx < useMusicStore.activeIndex) {
+    useMusicStore.activeIndex--;
+  }
+};
+// 下载
+const handleDownload = (item) => {
+  downloadFile(item.url);
+};
 </script>
 
 <style lang="less" scoped>
-.music-list {
-  .search-box, .ant-input {
+.music-box {
+  padding-bottom: 40px;
+  .search-box,
+  .ant-input {
     cursor: pointer;
+  }
+  .title {
+    padding: 12px 8px;
+    font-size: 16px;
+  }
+  .music-list {
+    padding: 4px;
+    .music-item {
+      display: flex;
+      padding: 4px 8px 4px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--theme-bg-color-a8);
+      .music-cover {
+        width: 44px;
+        height: 44px;
+        object-fit: cover;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .music-info {
+        padding: 0 12px;
+        flex: 1;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        span {
+          font-size: 12px;
+        }
+      }
+      .music-action {
+        display: flex;
+        align-items: center;
+      }
+      &:hover,
+      &.active {
+        color: var(--primary-color);
+        background-color: var(--theme-bg-color-a8);
+      }
+    }
   }
 }
 </style>

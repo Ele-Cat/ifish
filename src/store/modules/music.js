@@ -9,6 +9,7 @@ export const useMusicStore = defineStore("ifishMusic", {
         playing: false,
         mute: false,
         volume: 80,
+        currentTime: 0,
         mode: "listCycle", // listCycle列表循环 singleCycle单曲循环 randomPlay随机播放
       },
       musicList: [],
@@ -20,6 +21,9 @@ export const useMusicStore = defineStore("ifishMusic", {
   actions: {
     toggleVisible() {
       this.visible = !this.visible
+      if (!this.visible) {
+        this.settings.playing = false;
+      }
     },
     changeMode(mode) {
       this.settings.mode = mode;
@@ -38,6 +42,11 @@ export const useMusicStore = defineStore("ifishMusic", {
         this.settings.mute = false;
         this.settings.volume = 20;
       }
+    },
+    playMusic(idx) {
+      this.settings.playing = true;
+      this.activeIndex = idx;
+      this.activeMusic = this.musicList[idx];
     },
   },
   persist: {

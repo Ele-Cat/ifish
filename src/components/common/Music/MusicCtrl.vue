@@ -1,60 +1,265 @@
 <template>
   <div class="music-box">
-    <img class="cover" src="https://y.qq.com/music/photo_new/T002R300x300M000004BLMpS3oSu0b_2.jpg" alt="">
-    <div class="info">
-      王杰 - 一无所有 (是否我真的一无所有)
+    <div class="info" v-if="!useMusicStore.musicList.length">
+      暂无音乐，请选择<span class="add" @click="handleShowSearch">添加</span>
+    </div>
+    <div class="info" v-else>
+      <img
+        class="cover"
+        :class="{ playing: useMusicStore.settings.playing }"
+        :src="playingMusic.cover"
+        alt=""
+      />
+      {{ playingMusic.name }} - {{ playingMusic.singer }}
+      <div class="progress-box">
+        <p>{{ secToMs(musicCurrentTime) }}</p>
+        <a-slider
+          class="play-slider"
+          :min="0"
+          :max="musicDuration"
+          @change="handleDurationChange"
+          v-model:value="musicCurrentTime"
+          :tipFormatter="tipFormatter"
+        />
+        <p>{{ secToMs(musicDuration) }}</p>
+      </div>
     </div>
     <div class="ctrl">
-      <a-tooltip :title="`上一首`">
-        <VerticalRightOutlined />
+      <a-tooltip :title="`上一首：${prevMusic}`">
+        <VerticalRightOutlined @click="handlePrev" />
       </a-tooltip>
       <a-tooltip :title="useMusicStore.settings.playing ? '点击暂停' : '点击播放'">
-        <PlayCircleOutlined class="play" @click="useMusicStore.settings.playing = true" v-if="!useMusicStore.settings.playing" />
-        <PauseCircleOutlined class="pause" @click="useMusicStore.settings.playing = false" v-else />
+        <PlayCircleOutlined
+          class="play"
+          @click="handlePlay"
+          v-if="!useMusicStore.settings.playing"
+        />
+        <PauseCircleOutlined class="pause" @click="handlePause" v-else />
       </a-tooltip>
-      <a-tooltip :title="`下一首`">
-        <VerticalLeftOutlined />
+      <a-tooltip :title="`下一首：${nextMusic}`">
+        <VerticalLeftOutlined @click="handleNext" />
       </a-tooltip>
       <a-tooltip :title="`播放列表`">
-        <MenuUnfoldOutlined @click="handleShowMusicList" />
+        <MenuUnfoldOutlined @click="handleToggleMusicList" />
       </a-tooltip>
 
       <div class="mode">
         <a-tooltip :title="`切换模式`">
-          <i class="ifishfont ifish-musicListLoop" title="列表循环" v-if="useMusicStore.settings.mode === 'listCycle'" @click="handleChangeMode('singleCycle')"></i>
-          <i class="ifishfont ifish-musicSingleCycle" title="单曲循环" v-if="useMusicStore.settings.mode === 'singleCycle'" @click="handleChangeMode('randomPlay')"></i>
-          <i class="ifishfont ifish-musicRandomPlay" title="随机播放" v-if="useMusicStore.settings.mode === 'randomPlay'" @click="handleChangeMode('listCycle')"></i>
+          <i
+            class="ifishfont ifish-musicListLoop"
+            title="列表循环"
+            v-if="useMusicStore.settings.mode === 'listCycle'"
+            @click="handleChangeMode('singleCycle')"
+          ></i>
+          <i
+            class="ifishfont ifish-musicSingleCycle"
+            title="单曲循环"
+            v-if="useMusicStore.settings.mode === 'singleCycle'"
+            @click="handleChangeMode('randomPlay')"
+          ></i>
+          <i
+            class="ifishfont ifish-musicRandomPlay"
+            title="随机播放"
+            v-if="useMusicStore.settings.mode === 'randomPlay'"
+            @click="handleChangeMode('listCycle')"
+          ></i>
         </a-tooltip>
       </div>
       <div class="volume" :title="`当前音量：${useMusicStore.settings.volume}`">
-        <i class="ifishfont ifish-volumeDisable" v-if="useMusicStore.settings.mute || useMusicStore.settings.volume === 0" @click="handleToggleMute(true)"></i>
-        <i class="ifishfont ifish-volumeLow" v-else-if="useMusicStore.settings.volume >= 0 && useMusicStore.settings.volume < 30" @click="handleToggleMute(false)"></i>
-        <i class="ifishfont ifish-volumeMiddle" v-else-if="useMusicStore.settings.volume >= 30 && useMusicStore.settings.volume < 60" @click="handleToggleMute(false)"></i>
+        <i
+          class="ifishfont ifish-volumeDisable"
+          v-if="useMusicStore.settings.mute || useMusicStore.settings.volume === 0"
+          @click="handleToggleMute(true)"
+        ></i>
+        <i
+          class="ifishfont ifish-volumeLow"
+          v-else-if="
+            useMusicStore.settings.volume >= 0 && useMusicStore.settings.volume < 30
+          "
+          @click="handleToggleMute(false)"
+        ></i>
+        <i
+          class="ifishfont ifish-volumeMiddle"
+          v-else-if="
+            useMusicStore.settings.volume >= 30 && useMusicStore.settings.volume < 60
+          "
+          @click="handleToggleMute(false)"
+        ></i>
         <i class="ifishfont ifish-volumeHigh" v-else @click="handleToggleMute(false)"></i>
-        <a-slider class="volume-slider" :min="0" :max="100" v-model:value="useMusicStore.settings.volume" />
+        <a-slider
+          class="volume-slider"
+          :min="0"
+          :max="100"
+          v-model:value="useMusicStore.settings.volume"
+        />
       </div>
+      <audio
+        ref="audioRef"
+        controls
+        :src="playingMusic.url"
+        :loop="useMusicStore.settings.mode === 'singleCycle'"
+        @timeupdate="updateProgress"
+        @loadeddata="audioLoaded"
+        @ended="audioEnded"
+        @error="audioEnded"
+        v-show="false"
+      ></audio>
     </div>
   </div>
 </template>
 
 <script setup>
-import { PlayCircleOutlined, PauseCircleOutlined, VerticalRightOutlined, VerticalLeftOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
-const emit = defineEmits(['showMusicList']);
-import useStore from '@/store';
+import {
+  PlayCircleOutlined,
+  PauseCircleOutlined,
+  VerticalRightOutlined,
+  VerticalLeftOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons-vue";
+const emit = defineEmits(["toggleMusicList", "showSearch"]);
+import useStore from "@/store";
+import { computed, nextTick, ref, watch } from "vue";
 const { useMusicStore } = useStore();
+import { secToMs, getRandomIntInRange } from "@/utils/utils";
 
 // https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&type=json&n=1
 
-const handleShowMusicList = () => {
-  emit("showMusicList")
-}
+const handleToggleMusicList = () => {
+  emit("toggleMusicList");
+};
+const handleShowSearch = () => {
+  emit("showSearch");
+};
 
 const handleChangeMode = (mode) => {
   useMusicStore.changeMode(mode);
-}
+};
 const handleToggleMute = (flag) => {
   useMusicStore.toggleMute(flag);
-}
+};
+
+const playingMusic = ref({});
+const musicCurrentTime = ref(0);
+const musicDuration = ref(1000);
+const audioRef = ref(null);
+watch(
+  () => [useMusicStore.activeMusic, useMusicStore.settings.playing],
+  () => {
+    playingMusic.value = useMusicStore.activeMusic;
+    nextTick(() => {
+      if (audioRef.value) {
+        // console.log("audioRef: ", audioRef);
+        musicDuration.value = parseInt(audioRef.value.duration);
+        audioRef.value.volume = useMusicStore.settings.volume / 100;
+
+        if (useMusicStore.settings.playing) {
+          audioRef.value.play();
+        }
+      }
+    });
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+const audioLoaded = () => {
+  musicDuration.value = parseInt(audioRef.value.duration);
+  musicCurrentTime.value = audioRef.value.currentTime =
+    useMusicStore.settings.currentTime;
+};
+const updateProgress = (e) => {
+  const { currentTime, duration } = e.target;
+  musicCurrentTime.value = useMusicStore.settings.currentTime = parseInt(currentTime);
+  musicDuration.value = parseInt(duration);
+};
+const tipFormatter = (val) => {
+  return secToMs(val);
+};
+const handleDurationChange = (currentTime) => {
+  useMusicStore.settings.currentTime = currentTime;
+  if (audioRef.value) {
+    nextTick(() => {
+      audioRef.value.currentTime = currentTime;
+    });
+  }
+};
+
+watch(
+  () => [useMusicStore.settings.volume, useMusicStore.settings.mute],
+  () => {
+    if (audioRef.value) {
+      nextTick(() => {
+        audioRef.value.volume = useMusicStore.settings.volume / 100;
+        audioRef.value.muted = useMusicStore.settings.mute;
+      });
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+const handlePlay = () => {
+  useMusicStore.settings.playing = true;
+  audioRef.value.play();
+};
+
+const handlePause = () => {
+  useMusicStore.settings.playing = false;
+  audioRef.value.pause();
+};
+
+const prevMusic = computed(() => {
+  let prevIndex =
+    useMusicStore.activeIndex === 0
+      ? useMusicStore.musicList.length - 1
+      : useMusicStore.activeIndex - 1;
+  return useMusicStore.musicList[prevIndex]
+    ? useMusicStore.musicList[prevIndex]["name"]
+    : "";
+});
+const handlePrev = () => {
+  let prevIndex =
+    useMusicStore.activeIndex === 0
+      ? useMusicStore.musicList.length - 1
+      : useMusicStore.activeIndex - 1;
+  useMusicStore.playMusic(prevIndex);
+};
+
+const nextMusic = computed(() => {
+  let nextIndex =
+    useMusicStore.activeIndex === useMusicStore.musicList.length - 1
+      ? 0
+      : useMusicStore.activeIndex + 1;
+  return useMusicStore.musicList[nextIndex]
+    ? useMusicStore.musicList[nextIndex]["name"]
+    : "";
+});
+const handleNext = () => {
+  let nextIndex =
+    useMusicStore.activeIndex === useMusicStore.musicList.length - 1
+      ? 0
+      : useMusicStore.activeIndex + 1;
+  useMusicStore.playMusic(nextIndex);
+};
+
+const audioEnded = () => {
+  if (useMusicStore.settings.mode === "listCycle") {
+    handleNext();
+  } else if (useMusicStore.settings.mode === "singleCycle") {
+    useMusicStore.playMusic(useMusicStore.activeIndex);
+  } else if (useMusicStore.settings.mode === "randomPlay") {
+    useMusicStore.playMusic(
+      getRandomIntInRange(
+        0,
+        useMusicStore.musicList.length - 1,
+        useMusicStore.activeIndex
+      )
+    );
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -63,21 +268,45 @@ const handleToggleMute = (flag) => {
   display: flex;
   align-items: center;
   padding: 0 12px;
-  .cover {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--theme-text-color);
-  }
   .info {
     flex: 1;
-    margin: 0 12px;
+    margin: 0 12px 0 0;
+    display: flex;
+    align-items: center;
+    .add {
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+    .cover {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--theme-text-color);
+      margin-right: 12px;
+      &.playing {
+        animation: rotate 10s infinite linear;
+      }
+    }
+    .progress-box {
+      width: 240px;
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+      p {
+        font-size: 12px;
+      }
+      .play-slider {
+        flex: 1;
+        width: 160px;
+        margin: 0 8px;
+      }
+    }
   }
   .ctrl {
     font-size: 22px;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     .anticon {
       margin: 0 8px;
       cursor: pointer;
@@ -85,14 +314,16 @@ const handleToggleMute = (flag) => {
         color: var(--primary-color);
       }
     }
-    .play, .pause {
+    .play,
+    .pause {
       font-size: 32px;
     }
-    .mode, .volume {
+    .mode,
+    .volume {
       margin: 0 8px;
       cursor: pointer;
       position: relative;
-      top: -3px;
+      top: -2px;
       i {
         font-size: 24px;
       }
@@ -101,7 +332,7 @@ const handleToggleMute = (flag) => {
       }
     }
     .mode {
-      top: -1px;
+      top: 0;
       i {
         font-size: 28px;
       }
@@ -114,6 +345,14 @@ const handleToggleMute = (flag) => {
         width: 66px;
       }
     }
+  }
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
   }
 }
 </style>

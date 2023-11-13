@@ -181,6 +181,9 @@ const handleRefresh = (type) => {
               white-space: nowrap;
             }
           }
+          &:visited {
+            color: var(--grey-6);
+          }
           &:hover {
             color: var(--primary-color);
           }

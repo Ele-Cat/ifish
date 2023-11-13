@@ -173,7 +173,7 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
       height: 28px;
       line-height: 28px;
       padding: 0 20px;
-      border-radius: 4px;
+      // border-radius: 4px;
       // overflow: hidden;
       .caret-right {
         position: absolute;

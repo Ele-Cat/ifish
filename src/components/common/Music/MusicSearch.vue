@@ -21,8 +21,11 @@
       </a-col>
     </a-row>
     <div class="search-history" v-if="useMusicStore.searchHistory.length">
-      <p class="title">搜索历史：
-        <span class="clear" @click="handleSearchClear"><DeleteOutlined />清空历史搜索</span>
+      <p class="title">
+        搜索历史：
+        <span class="clear" @click="handleSearchClear"
+          ><DeleteOutlined />清空历史搜索</span
+        >
       </p>
       <div class="search-history-box">
         <p
@@ -30,7 +33,8 @@
           :key="index"
           @click="handleSearchRes(item)"
         >
-          <span class="text" title="点击搜索">{{ item }}</span><CloseOutlined title="点击移除" @click.stop="handleSearchDelete(item)" />
+          <span class="text" title="点击搜索">{{ item }}</span
+          ><CloseOutlined title="点击移除" @click.stop="handleSearchDelete(item)" />
         </p>
       </div>
     </div>
@@ -85,7 +89,12 @@
 
 <script setup>
 import { ref } from "vue";
-import { SearchOutlined, EllipsisOutlined, CloseOutlined, DeleteOutlined } from "@ant-design/icons-vue";
+import {
+  SearchOutlined,
+  EllipsisOutlined,
+  CloseOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons-vue";
 import axios from "axios";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
@@ -106,6 +115,7 @@ const handleSearch = (searchTextValue) => {
 const handleSearchRes = (item) => {
   searchText.value = item;
   searchLoading.value = true;
+  // https://api.lolimi.cn/API/qqdg/api.php?msg=%E5%A4%A9%E5%90%8E&p=117&sc=15
   axios.get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item}`).then((res) => {
     searchResult.value = res.data.list || [];
     searchLoading.value = false;
@@ -166,29 +176,29 @@ const handleDownload = async (item, idx) => {
 // 获取音乐信息
 const getMusic = async (item, idx) => {
   const promise1 = new Promise((resolve, reject) => {
-    axios.get(
-      `https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}-${item.singer}&n=1`
-    ).then(res => {
-      if (res.data.code === 200) {
-        resolve(res.data);
-      } else {
-        reject();
-      }
-    });
-  })
+    axios
+      .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}-${item.singer}&n=1`)
+      .then((res) => {
+        if (res.data.code === 200) {
+          resolve(res.data);
+        } else {
+          reject();
+        }
+      });
+  });
   const promise2 = new Promise((resolve, reject) => {
-    axios.get(
-      `https://api.lolimi.cn/API/kggc/api.php?msg=${item.name}-${item.singer}&n=1`
-    ).then(res => {
-      if (res.data.code === 1) {
-        resolve(res.data.data);
-      } else {
-        reject();
-      }
-    });
-  })
+    axios
+      .get(`https://api.lolimi.cn/API/kggc/api.php?msg=${item.name}-${item.singer}&n=1`)
+      .then((res) => {
+        if (res.data.code === 1) {
+          resolve(res.data.data);
+        } else {
+          reject();
+        }
+      });
+  });
   const values = await Promise.all([promise1, promise2]);
-  return {...values[0], ...values[1]};
+  return { ...values[0], ...values[1] };
 };
 </script>
 

@@ -12,6 +12,24 @@
         alt=""
       />
       {{ playingMusic.name }} - {{ playingMusic.singer }}
+    </div>
+    <div class="center">
+      <div class="prev-next">
+        <a-tooltip :title="`上一首${prevMusic ? '：' : ''}${prevMusic}`">
+          <VerticalRightOutlined @click="handlePrev" />
+        </a-tooltip>
+        <a-tooltip :title="useMusicStore.settings.playing ? '点击暂停' : '点击播放'">
+          <PlayCircleOutlined
+            class="play"
+            @click="handlePlay"
+            v-if="!useMusicStore.settings.playing"
+          />
+          <PauseCircleOutlined class="pause" @click="handlePause" v-else />
+        </a-tooltip>
+        <a-tooltip :title="`下一首${nextMusic ? '：' : ''}${nextMusic}`">
+          <VerticalLeftOutlined @click="handleNext" />
+        </a-tooltip>
+      </div>
       <div class="progress-box">
         <p>{{ secToMs(musicCurrentTime) }}</p>
         <a-slider
@@ -26,24 +44,6 @@
       </div>
     </div>
     <div class="ctrl">
-      <a-tooltip :title="`上一首${prevMusic ? '：' : ''}${prevMusic}`">
-        <VerticalRightOutlined @click="handlePrev" />
-      </a-tooltip>
-      <a-tooltip :title="useMusicStore.settings.playing ? '点击暂停' : '点击播放'">
-        <PlayCircleOutlined
-          class="play"
-          @click="handlePlay"
-          v-if="!useMusicStore.settings.playing"
-        />
-        <PauseCircleOutlined class="pause" @click="handlePause" v-else />
-      </a-tooltip>
-      <a-tooltip :title="`下一首${nextMusic ? '：' : ''}${nextMusic}`">
-        <VerticalLeftOutlined @click="handleNext" />
-      </a-tooltip>
-      <a-tooltip :title="`播放列表`">
-        <MenuUnfoldOutlined @click="handleToggleMusicList" />
-      </a-tooltip>
-
       <div class="mode">
         <a-tooltip :title="musicMode">
           <i
@@ -66,6 +66,9 @@
           ></i>
         </a-tooltip>
       </div>
+      <a-tooltip :title="`播放列表`">
+        <MenuUnfoldOutlined @click="handleToggleMusicList" />
+      </a-tooltip>
       <div class="volume" :title="`当前音量：${useMusicStore.settings.volume}`">
         <i
           class="ifishfont ifish-volumeDisable"
@@ -136,10 +139,10 @@ const musicMode = computed(() => {
   const modes = {
     listCycle: "列表循环",
     singleCycle: "单曲循环",
-    randomPlay: "随机播放"
-  }
+    randomPlay: "随机播放",
+  };
   return modes[useMusicStore.settings.mode];
-})
+});
 const handleChangeMode = (mode) => {
   useMusicStore.changeMode(mode);
 };
@@ -262,6 +265,10 @@ const handleNext = () => {
 
 const audioEnded = () => {
   if (useMusicStore.settings.mode === "listCycle") {
+    if (useMusicStore.musicList.length === 1) {
+      useMusicStore.activeIndex--;
+      useMusicStore.activeIndex++;
+    }
     handleNext();
   } else if (useMusicStore.settings.mode === "singleCycle") {
     useMusicStore.playMusic(useMusicStore.activeIndex);
@@ -284,7 +291,6 @@ const audioEnded = () => {
   align-items: center;
   padding: 0 12px;
   .info {
-    flex: 1;
     margin: 0 12px 0 0;
     display: flex;
     align-items: center;
@@ -302,9 +308,27 @@ const audioEnded = () => {
         animation: rotate 10s infinite linear;
       }
     }
+  }
+  .center {
+    font-size: 22px;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .prev-next {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      .play,
+      .pause {
+        font-size: 36px;
+      }
+    }
     .progress-box {
-      width: 240px;
-      margin-left: 20px;
+      width: 50%;
+      min-width: 120px;
       display: flex;
       align-items: center;
       p {
@@ -312,26 +336,22 @@ const audioEnded = () => {
       }
       .play-slider {
         flex: 1;
-        width: 160px;
         margin: 0 12px;
       }
+    }
+  }
+  .anticon {
+    margin: 0 8px;
+    cursor: pointer;
+    &:hover {
+      color: var(--primary-color);
     }
   }
   .ctrl {
     font-size: 22px;
     display: flex;
     align-items: center;
-    .anticon {
-      margin: 0 8px;
-      cursor: pointer;
-      &:hover {
-        color: var(--primary-color);
-      }
-    }
-    .play,
-    .pause {
-      font-size: 32px;
-    }
+
     .mode,
     .volume {
       margin: 0 8px;

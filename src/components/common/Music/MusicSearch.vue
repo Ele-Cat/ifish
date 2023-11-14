@@ -154,7 +154,7 @@ const handleDownload = async (item, idx) => {
 // 获取音乐信息
 const getMusic = async (item, idx) => {
   const { data } = await axios.get(
-    `https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}&n=${idx + 1}`
+    `https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}${item.singer}&n=${idx + 1}`
   );
   return data;
 };

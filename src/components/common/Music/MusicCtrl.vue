@@ -8,6 +8,7 @@
         class="cover"
         :class="{ playing: useMusicStore.settings.playing }"
         :src="playingMusic.cover"
+        onerror="this.src='./images/music.png'"
         alt=""
       />
       {{ playingMusic.name }} - {{ playingMusic.singer }}
@@ -25,7 +26,7 @@
       </div>
     </div>
     <div class="ctrl">
-      <a-tooltip :title="`上一首：${prevMusic}`">
+      <a-tooltip :title="`上一首${prevMusic ? '：' : ''}${prevMusic}`">
         <VerticalRightOutlined @click="handlePrev" />
       </a-tooltip>
       <a-tooltip :title="useMusicStore.settings.playing ? '点击暂停' : '点击播放'">
@@ -36,7 +37,7 @@
         />
         <PauseCircleOutlined class="pause" @click="handlePause" v-else />
       </a-tooltip>
-      <a-tooltip :title="`下一首：${nextMusic}`">
+      <a-tooltip :title="`下一首${nextMusic ? '：' : ''}${nextMusic}`">
         <VerticalLeftOutlined @click="handleNext" />
       </a-tooltip>
       <a-tooltip :title="`播放列表`">
@@ -96,7 +97,7 @@
       <audio
         ref="audioRef"
         controls
-        :src="playingMusic.url"
+        :src="playingMusic?.url"
         :loop="useMusicStore.settings.mode === 'singleCycle'"
         @timeupdate="updateProgress"
         @loadeddata="audioLoaded"
@@ -151,9 +152,9 @@ const musicCurrentTime = ref(0);
 const musicDuration = ref(1000);
 const audioRef = ref(null);
 watch(
-  () => [useMusicStore.activeMusic, useMusicStore.settings.playing],
+  () => [useMusicStore.activeIndex, useMusicStore.settings.playing],
   () => {
-    playingMusic.value = useMusicStore.activeMusic;
+    playingMusic.value = useMusicStore.musicList[useMusicStore.activeIndex];
     nextTick(() => {
       if (audioRef.value) {
         // console.log("audioRef: ", audioRef);
@@ -210,16 +211,19 @@ watch(
 );
 
 const handlePlay = () => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
   useMusicStore.settings.playing = true;
   audioRef.value.play();
 };
 
 const handlePause = () => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
   useMusicStore.settings.playing = false;
   audioRef.value.pause();
 };
 
 const prevMusic = computed(() => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return "";
   let prevIndex =
     useMusicStore.activeIndex === 0
       ? useMusicStore.musicList.length - 1
@@ -229,6 +233,7 @@ const prevMusic = computed(() => {
     : "";
 });
 const handlePrev = () => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
   let prevIndex =
     useMusicStore.activeIndex === 0
       ? useMusicStore.musicList.length - 1
@@ -237,6 +242,7 @@ const handlePrev = () => {
 };
 
 const nextMusic = computed(() => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return "";
   let nextIndex =
     useMusicStore.activeIndex === useMusicStore.musicList.length - 1
       ? 0
@@ -246,6 +252,7 @@ const nextMusic = computed(() => {
     : "";
 });
 const handleNext = () => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
   let nextIndex =
     useMusicStore.activeIndex === useMusicStore.musicList.length - 1
       ? 0
@@ -290,7 +297,6 @@ const audioEnded = () => {
       height: 50px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--theme-text-color);
       margin-right: 12px;
       &.playing {
         animation: rotate 10s infinite linear;
@@ -331,7 +337,7 @@ const audioEnded = () => {
       margin: 0 8px;
       cursor: pointer;
       position: relative;
-      top: -2px;
+      top: -1px;
       i {
         font-size: 24px;
       }

@@ -31,7 +31,7 @@
             @click="handlePlayNow(index)"
           >
             <div class="music-cover">
-              <img :src="item.cover" alt="" />
+              <img :src="item.cover" onerror="this.src='./images/music.png'" alt="" />
             </div>
             <div class="music-info">
               <p>{{ item.name }}</p>

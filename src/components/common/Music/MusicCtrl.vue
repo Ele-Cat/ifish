@@ -114,6 +114,7 @@
 </template>
 
 <script setup>
+import { computed, nextTick, ref, watch } from "vue";
 import {
   PlayCircleOutlined,
   PauseCircleOutlined,
@@ -123,11 +124,8 @@ import {
 } from "@ant-design/icons-vue";
 const emit = defineEmits(["toggleMusicList", "showSearch"]);
 import useStore from "@/store";
-import { computed, nextTick, ref, watch } from "vue";
 const { useMusicStore } = useStore();
 import { secToMs, getRandomIntInRange } from "@/utils/utils";
-
-// https://xiaoapi.cn/API/yy_sq.php?msg=夜曲&type=json&n=1
 
 const handleToggleMusicList = () => {
   emit("toggleMusicList");

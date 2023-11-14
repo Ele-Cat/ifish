@@ -305,7 +305,7 @@ const audioEnded = () => {
       object-fit: cover;
       margin-right: 12px;
       &.playing {
-        animation: rotate 10s infinite linear;
+        animation: rotate 20s infinite linear;
       }
     }
   }
@@ -320,14 +320,14 @@ const audioEnded = () => {
     .prev-next {
       display: flex;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       .play,
       .pause {
         font-size: 36px;
       }
     }
     .progress-box {
-      width: 50%;
+      width: 66%;
       min-width: 120px;
       display: flex;
       align-items: center;
@@ -337,6 +337,12 @@ const audioEnded = () => {
       .play-slider {
         flex: 1;
         margin: 0 12px;
+        :deep(.ant-slider-rail) {
+          background-color: var(--theme-text-color);
+        }
+        :deep(.ant-slider-track) {
+          background-color: var(--primary-color);
+        }
       }
     }
   }

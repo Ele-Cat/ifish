@@ -30,6 +30,8 @@
     >
       <MusicSearch />
     </IDialog>
+
+    <!-- <MusicFullScreen /> -->
   </div>
 </template>
 
@@ -41,6 +43,7 @@ const { useMusicStore } = useStore();
 import MusicCtrl from "./MusicCtrl.vue";
 import MusicList from "./MusicList.vue";
 import MusicSearch from "./MusicSearch.vue";
+import MusicFullScreen from "./MusicFullScreen.vue";
 
 onMounted(() => {
   useMusicStore.settings.playing = false;
@@ -90,13 +93,13 @@ const showSearchF = () => {
     border-radius: 10px 10px 0 0;
     cursor: pointer;
     &.up {
-      top: -54px;
+      top: -36px;
       .anticon {
         transform: rotate(90deg);
       }
     }
     &.down {
-      top: -86px;
+      top: -78px;
       .anticon {
         transform: rotate(-90deg);
       }
@@ -109,9 +112,9 @@ const showSearchF = () => {
   }
   .music-ctrl {
     position: absolute;
-    height: 64px;
+    height: 74px;
     width: 100%;
-    bottom: -64px;
+    bottom: -74px;
     background-color: var(--theme-bg-color-a8);
     transition: bottom 0.3s ease-in-out;
     &.show {

@@ -21,7 +21,10 @@
 
       <div>
         <p class="title">播放列表（共{{ useMusicStore.musicList.length }}首）</p>
-        <a-empty v-if="!useMusicStore.musicList.length" description="暂无歌曲，请搜索添加"></a-empty>
+        <a-empty
+          v-if="!useMusicStore.musicList.length"
+          description="暂无歌曲，请搜索添加"
+        ></a-empty>
         <perfect-scrollbar class="scroll-bar">
           <div class="music-list">
             <div
@@ -98,6 +101,9 @@ const handleRemove = (idx) => {
     useMusicStore.activeIndex--;
   } else if (idx === useMusicStore.activeIndex) {
     useMusicStore.settings.currentTime = 0;
+    if (useMusicStore.activeIndex === useMusicStore.musicList.length - 1) {
+      useMusicStore.activeIndex = 0;
+    }
     useMusicStore.activeIndex++;
     useMusicStore.activeIndex--;
     useMusicStore.musicList.splice(idx, 1);

@@ -5,7 +5,10 @@
     <div class="comp-box">
       <perfect-scrollbar class="scroll-bar">
         <keep-alive>
-          <component class="animated fadeIn" :is="mainComponents[useSystemStore.activeMenu]" />
+          <component
+            class="animated fadeIn"
+            :is="mainComponents[useSystemStore.activeMenu]"
+          />
         </keep-alive>
       </perfect-scrollbar>
     </div>
@@ -13,14 +16,14 @@
 </template>
 
 <script setup>
-import { shallowRef, defineAsyncComponent } from 'vue';
-import Time from './Time.vue';
+import { shallowRef, defineAsyncComponent } from "vue";
+import Time from "./Time.vue";
 import useStore from "@/store";
 const { useSystemStore } = useStore();
-const Home = defineAsyncComponent(() => import('@/views/Home/Index.vue'));
-const News = defineAsyncComponent(() => import('@/views/News/Index.vue'));
-const Nav = defineAsyncComponent(() => import('@/views/Nav/Index.vue'));
-const About = defineAsyncComponent(() => import('@/views/About/Index.vue'));
+const Home = defineAsyncComponent(() => import("@/views/Home/Index.vue"));
+const News = defineAsyncComponent(() => import("@/views/News/Index.vue"));
+const Nav = defineAsyncComponent(() => import("@/views/Nav/Index.vue"));
+const About = defineAsyncComponent(() => import("@/views/About/Index.vue"));
 
 const mainComponents = shallowRef({
   home: Home,
@@ -31,14 +34,17 @@ const mainComponents = shallowRef({
 </script>
 
 <style lang="less" scoped>
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.3s;
 }
-.fade-leave, .fade-enter-to {
+.fade-leave,
+.fade-enter-to {
   height: auto;
   opacity: 1;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   height: 0;
   opacity: 0;
 }
@@ -54,7 +60,7 @@ const mainComponents = shallowRef({
     word-wrap: break-word;
   }
   .scroll-bar {
-    height: calc(100vh - 160px);
+    height: calc(100vh - 180px);
     padding: 10px 102px 0;
   }
 }

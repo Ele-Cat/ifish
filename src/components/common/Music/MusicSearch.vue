@@ -41,7 +41,7 @@
     <div class="search-list">
       <p class="title">搜索结果：</p>
       <a-spin :spinning="searchLoading" tip="加载中...">
-        <perfect-scrollbar class="scroll-bar">
+        <perfect-scrollbar class="scroll-bar" @ps-scroll-y="onSearchScroll">
           <a-empty v-if="!searchResult.length"></a-empty>
           <ul>
             <li
@@ -49,7 +49,7 @@
               :key="index"
               @click="handlePlayNow(item, index)"
             >
-              <p title="立即播放">{{ item.name }} - {{ item.singer }}</p>
+              <p title="立即播放">{{ item.song }} - {{ item.singers }}</p>
               <div class="search-action">
                 <a-dropdown placement="bottomLeft" arrow>
                   <EllipsisOutlined />
@@ -88,7 +88,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import {
   SearchOutlined,
   EllipsisOutlined,
@@ -99,7 +99,6 @@ import axios from "axios";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import { uuid, downloadFile } from "@/utils/utils";
-import { toast } from "@/utils/feedback";
 
 const searchText = ref("");
 const searchResult = ref([]);
@@ -112,14 +111,35 @@ const handleSearch = (searchTextValue) => {
   handleSearchRes(searchTextValue);
 };
 
+const pageSize = 15;
+let pageNo = ref(1);
+let noMore = ref(false);
 const handleSearchRes = (item) => {
   searchText.value = item;
   searchLoading.value = true;
-  // https://api.lolimi.cn/API/qqdg/api.php?msg=%E5%A4%A9%E5%90%8E&p=117&sc=15
-  axios.get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item}`).then((res) => {
-    searchResult.value = res.data.list || [];
+
+  const url = `https://api.lolimi.cn/API/qqdg/api.php?msg=${item}&p=${pageNo.value}&sc=${pageSize}`;
+  // const url = `https://xiaoapi.cn/API/yy_sq.php?msg=${item}`
+  axios.get(url).then((res) => {
+    if (res.data.code === 1) {
+      searchResult.value = [...searchResult.value, ...res.data.data] || [];
+      if (res.data.data.length < pageSize) {
+        noMore.value = true;
+      }
+    } else {
+      noMore.value = true;
+    }
     searchLoading.value = false;
   });
+};
+
+const onSearchScroll = (event) => {
+  if (noMore.value) return;
+  let el = event.target;
+  if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
+    pageNo.value++;
+    handleSearchRes(searchText.value);
+  }
 };
 
 const handleSearchClear = () => {
@@ -159,7 +179,7 @@ const handleAddToList = async (item, idx) => {
 // 下一首播放
 const handlePlayNext = async (item, idx) => {
   const { cover, name, singer, url, content } = await getMusic(item, idx);
-  useMusicStore.musicList.splice(useMusicStore.activeIndex, 0, {
+  useMusicStore.musicList.splice(useMusicStore.activeIndex + 1, 0, {
     id: uuid(21),
     cover,
     name,
@@ -177,7 +197,7 @@ const handleDownload = async (item, idx) => {
 const getMusic = async (item, idx) => {
   const promise1 = new Promise((resolve, reject) => {
     axios
-      .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}-${item.singer}&n=1`)
+      .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.song}-${item.singer}&n=1`)
       .then((res) => {
         if (res.data.code === 200) {
           resolve(res.data);
@@ -188,7 +208,7 @@ const getMusic = async (item, idx) => {
   });
   const promise2 = new Promise((resolve, reject) => {
     axios
-      .get(`https://api.lolimi.cn/API/kggc/api.php?msg=${item.name}-${item.singer}&n=1`)
+      .get(`https://api.lolimi.cn/API/kggc/api.php?msg=${item.song}-${item.singer}&n=1`)
       .then((res) => {
         if (res.data.code === 1) {
           resolve(res.data.data);
@@ -210,7 +230,7 @@ const getMusic = async (item, idx) => {
     margin-top: 12px;
     padding: 2px;
     .title {
-      margin-bottom: 4px;
+      margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;

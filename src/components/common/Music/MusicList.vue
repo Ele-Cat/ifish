@@ -1,6 +1,6 @@
 <template>
   <a-drawer
-    width="80vw"
+    width="350px"
     title="播放列表"
     placement="right"
     :open="open"
@@ -161,14 +161,6 @@ const handleDownload = (item) => {
         background-color: var(--theme-bg-color-a8);
       }
     }
-  }
-}
-</style>
-
-<style lang="less">
-.disclaimers-root {
-  .ant-drawer-content-wrapper {
-    max-width: 500px;
   }
 }
 </style>

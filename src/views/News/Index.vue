@@ -85,6 +85,7 @@ const newsTypes = reactive([
 ])
 
 const isFinished = ref(false);
+// http://hot.lolimi.cn
 axios.get('https://api.moyuduck.com/hot/all').then(res => {
   for (const key in res.data.data) {
     newsTypes.map(newsType => {

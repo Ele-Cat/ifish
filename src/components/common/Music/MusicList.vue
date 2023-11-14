@@ -21,6 +21,7 @@
 
       <div>
         <p class="title">播放列表（共{{ useMusicStore.musicList.length }}首）</p>
+        <a-empty v-if="!useMusicStore.musicList.length" description="暂无歌曲，请搜索添加"></a-empty>
         <div class="music-list">
           <div
             class="music-item"

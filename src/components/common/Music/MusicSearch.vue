@@ -36,7 +36,7 @@
       <p class="title">搜索结果：</p>
       <a-spin :spinning="searchLoading" tip="加载中...">
         <perfect-scrollbar class="scroll-bar">
-          <a-empty v-if="searchResult.length === 0"></a-empty>
+          <a-empty v-if="!searchResult.length"></a-empty>
           <ul>
             <li
               v-for="(item, index) in searchResult"

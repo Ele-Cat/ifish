@@ -44,7 +44,7 @@
       </a-tooltip>
 
       <div class="mode">
-        <a-tooltip :title="`切换模式`">
+        <a-tooltip :title="musicMode">
           <i
             class="ifishfont ifish-musicListLoop"
             title="列表循环"
@@ -131,6 +131,14 @@ const handleShowSearch = () => {
   emit("showSearch");
 };
 
+const musicMode = computed(() => {
+  const modes = {
+    listCycle: "列表循环",
+    singleCycle: "单曲循环",
+    randomPlay: "随机播放"
+  }
+  return modes[useMusicStore.settings.mode];
+})
 const handleChangeMode = (mode) => {
   useMusicStore.changeMode(mode);
 };

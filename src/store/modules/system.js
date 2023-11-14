@@ -69,6 +69,8 @@ export const useSystemStore = defineStore("ifishSystem", {
       }
     },
     randomWallpaper() {
+      // https://api.lolimi.cn/?action=doc&id=98
+      // https://api.lolimi.cn/API/360bz/api.php?type=text
       const action = this.settings.wallpaper.actionList.find(action => action.value === this.settings.wallpaper.action)
       axios.get(action.url).then(res => {
         toast({

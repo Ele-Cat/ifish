@@ -30,7 +30,7 @@
           :key="index"
           @click="handleSearchRes(item)"
         >
-          <span class="text">{{ item }}</span><CloseOutlined @click.stop="handleSearchDelete(item)" />
+          <span class="text" title="点击搜索">{{ item }}</span><CloseOutlined title="点击移除" @click.stop="handleSearchDelete(item)" />
         </p>
       </div>
     </div>
@@ -45,7 +45,7 @@
               :key="index"
               @click="handlePlayNow(item, index)"
             >
-              <p>{{ item.name }} - {{ item.singer }}</p>
+              <p title="立即播放">{{ item.name }} - {{ item.singer }}</p>
               <div class="search-action">
                 <a-dropdown placement="bottomLeft" arrow>
                   <EllipsisOutlined />
@@ -89,7 +89,7 @@ import { SearchOutlined, EllipsisOutlined, CloseOutlined, DeleteOutlined } from 
 import axios from "axios";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
-import { downloadFile } from "@/utils/utils";
+import { uuid, downloadFile } from "@/utils/utils";
 import { toast } from "@/utils/feedback";
 
 const searchText = ref("");
@@ -125,6 +125,7 @@ const handleSearchDelete = (item) => {
 const handlePlayNow = async (item, idx) => {
   const { cover, name, singer, url } = await getMusic(item, idx);
   useMusicStore.musicList.push({
+    id: uuid(21),
     cover,
     name,
     singer,
@@ -136,6 +137,7 @@ const handlePlayNow = async (item, idx) => {
 const handleAddToList = async (item, idx) => {
   const { cover, name, singer, url } = await getMusic(item, idx);
   useMusicStore.musicList.push({
+    id: uuid(21),
     cover,
     name,
     singer,
@@ -146,6 +148,7 @@ const handleAddToList = async (item, idx) => {
 const handlePlayNext = async (item, idx) => {
   const { cover, name, singer, url } = await getMusic(item, idx);
   useMusicStore.musicList.splice(useMusicStore.activeIndex, 0, {
+    id: uuid(21),
     cover,
     name,
     singer,
@@ -159,6 +162,7 @@ const handleDownload = async (item, idx) => {
 };
 // 获取音乐信息
 const getMusic = async (item, idx) => {
+  // https://api.lolimi.cn/API/qqdg/api.php
   const { data } = await axios.get(
     `https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}-${item.singer}&n=1`
   );
@@ -199,6 +203,8 @@ const getMusic = async (item, idx) => {
     }
     .search-history-box {
       display: flex;
+      flex-wrap: wrap;
+      padding-top: 6px;
       p {
         font-size: 12px;
         line-height: 20px;
@@ -208,8 +214,9 @@ const getMusic = async (item, idx) => {
         margin-inline-end: 8px;
         padding-inline: 7px;
         white-space: nowrap;
-        background: rgba(0, 0, 0, 0.02);
+        background: var(--theme-bg-color-a8);
         border: 1px solid #d9d9d9;
+        margin-bottom: 4px;
         border-radius: 4px;
         opacity: 1;
         transition: all 0.2s;
@@ -222,8 +229,9 @@ const getMusic = async (item, idx) => {
             color: var(--primary-color);
           }
         }
-        &:hover {
-          .text {
+        .text {
+          cursor: pointer;
+          &:hover {
             color: var(--primary-color);
           }
         }
@@ -244,6 +252,9 @@ const getMusic = async (item, idx) => {
         white-space: nowrap;
         cursor: pointer;
         padding: 8px 6px;
+        &:hover {
+          color: var(--primary-color);
+        }
       }
       .search-action {
         display: flex;
@@ -252,13 +263,15 @@ const getMusic = async (item, idx) => {
       .anticon {
         margin-left: 20px;
         padding: 0 6px;
+        &:hover {
+          color: var(--primary-color);
+        }
       }
       &:nth-of-type(2n) {
         background-color: var(--theme-bg-color-a8);
       }
       &:hover {
         background-color: var(--theme-bg-color);
-        color: var(--primary-color);
       }
     }
   }

@@ -93,9 +93,16 @@ const handlePlayNow = (idx) => {
 };
 // 移除
 const handleRemove = (idx) => {
-  useMusicStore.musicList.splice(idx, 1);
   if (idx < useMusicStore.activeIndex) {
+    useMusicStore.musicList.splice(idx, 1);
     useMusicStore.activeIndex--;
+  } else if (idx === useMusicStore.activeIndex) {
+    useMusicStore.settings.currentTime = 0;
+    useMusicStore.activeIndex++;
+    useMusicStore.activeIndex--;
+    useMusicStore.musicList.splice(idx, 1);
+  } else {
+    useMusicStore.musicList.splice(idx, 1);
   }
 };
 // 下载

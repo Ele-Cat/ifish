@@ -1,3 +1,5 @@
+import axios from "axios";
+
 /**
  * 生成固定长度随机字符串
  * @param {Number} length 字符串长度
@@ -43,15 +45,25 @@ export function renderIco(url) {
  * 下载文件
  * @param {String} url 下载地址
  */
-export function downloadFile(url) {
+export function downloadFile(downloadUrl) {
+  // axios.get(downloadUrl, {
+  //   responseType: 'blob' // 重点
+  // })
+  // .then(response => {
+  //   const url = window.URL.createObjectURL(new Blob([response.data]));
+  //   const link = document.createElement('a');
+  //   link.href = url;
+  //   link.setAttribute('download', 'example.flac'); // 自定义文件名
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // });
+  // return
+
   // 创建一个新的a标签
   const link = document.createElement('a');
-  link.href = url;
-
-  // 设置下载属性为true
-  link.setAttribute('download', true);
-
-  // 模拟点击事件进行下载
+  link.href = downloadUrl;
+  link.setAttribute('download', 'example.flac');
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

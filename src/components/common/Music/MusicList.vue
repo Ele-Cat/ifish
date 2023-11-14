@@ -20,7 +20,9 @@
       </a-input>
 
       <div>
-        <p class="title">播放列表（共{{ useMusicStore.musicList.length }}首）</p>
+        <p class="title">
+          <UnorderedListOutlined />播放列表（共 {{ useMusicStore.musicList.length }} 首）
+        </p>
         <a-empty
           v-if="!useMusicStore.musicList.length"
           description="暂无歌曲，请搜索添加"
@@ -69,7 +71,11 @@
 
 <script setup>
 import { ref } from "vue";
-import { SearchOutlined, EllipsisOutlined } from "@ant-design/icons-vue";
+import {
+  SearchOutlined,
+  UnorderedListOutlined,
+  EllipsisOutlined,
+} from "@ant-design/icons-vue";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import { downloadFile } from "@/utils/utils";
@@ -127,6 +133,10 @@ const handleDownload = (item) => {
   .title {
     padding: 12px 8px;
     font-size: 16px;
+    display: flex;
+    .anticon {
+      margin: 2px 4px 0 0;
+    }
   }
   .scroll-bar {
     max-height: calc(100vh - 260px);

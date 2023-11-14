@@ -44,31 +44,6 @@
       </div>
     </div>
     <div class="ctrl">
-      <div class="mode">
-        <a-tooltip :title="musicMode">
-          <i
-            class="ifishfont ifish-musicListLoop"
-            title="列表循环"
-            v-if="useMusicStore.settings.mode === 'listCycle'"
-            @click="handleChangeMode('singleCycle')"
-          ></i>
-          <i
-            class="ifishfont ifish-musicSingleCycle"
-            title="单曲循环"
-            v-if="useMusicStore.settings.mode === 'singleCycle'"
-            @click="handleChangeMode('randomPlay')"
-          ></i>
-          <i
-            class="ifishfont ifish-musicRandomPlay"
-            title="随机播放"
-            v-if="useMusicStore.settings.mode === 'randomPlay'"
-            @click="handleChangeMode('listCycle')"
-          ></i>
-        </a-tooltip>
-      </div>
-      <a-tooltip :title="`播放列表`">
-        <MenuUnfoldOutlined @click="handleToggleMusicList" />
-      </a-tooltip>
       <div class="volume" :title="`当前音量：${useMusicStore.settings.volume}`">
         <i
           class="ifishfont ifish-volumeDisable"
@@ -97,6 +72,32 @@
           v-model:value="useMusicStore.settings.volume"
         />
       </div>
+      <div class="mode">
+        <a-tooltip :title="musicMode">
+          <i
+            class="ifishfont ifish-musicListLoop"
+            title="列表循环"
+            v-if="useMusicStore.settings.mode === 'listCycle'"
+            @click="handleChangeMode('singleCycle')"
+          ></i>
+          <i
+            class="ifishfont ifish-musicSingleCycle"
+            title="单曲循环"
+            v-if="useMusicStore.settings.mode === 'singleCycle'"
+            @click="handleChangeMode('randomPlay')"
+          ></i>
+          <i
+            class="ifishfont ifish-musicRandomPlay"
+            title="随机播放"
+            v-if="useMusicStore.settings.mode === 'randomPlay'"
+            @click="handleChangeMode('listCycle')"
+          ></i>
+        </a-tooltip>
+      </div>
+      <a-divider type="vertical" />
+      <a-tooltip :title="`播放列表`" placement="topRight">
+        <MenuUnfoldOutlined @click="handleToggleMusicList" />
+      </a-tooltip>
       <audio
         ref="audioRef"
         controls
@@ -374,7 +375,7 @@ const audioEnded = () => {
     .mode {
       top: 0;
       i {
-        font-size: 28px;
+        font-size: 32px;
       }
     }
     .volume {

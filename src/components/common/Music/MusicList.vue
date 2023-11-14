@@ -1,6 +1,6 @@
 <template>
   <a-drawer
-    width="350px"
+    width="360px"
     title="播放列表"
     placement="right"
     :open="open"

@@ -5,6 +5,7 @@
       v-model:open="open"
       :width="width"
       :mask="mask"
+      :zIndex="zIndex"
       :wrap-style="{overflow: 'hidden'}"
       :footer="null"
       @ok="handleOk"
@@ -34,6 +35,7 @@ const props = defineProps({
   title: { type: String, default: "标题" },
   width: { type: [String, Number], default: 520 },
   mask: { type: Boolean, default: true },
+  zIndex: { type: Number, default: 1000 },
 })
 const emit = defineEmits(["ok", "cancel"])
 

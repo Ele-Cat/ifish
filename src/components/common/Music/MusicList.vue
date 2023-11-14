@@ -37,7 +37,7 @@
               <p>{{ item.name }}</p>
               <span>{{ item.singer }}</span>
             </div>
-            <div class="music-action">
+            <div class="music-action" @click.stop>
               <a-dropdown placement="bottomLeft" arrow>
                 <EllipsisOutlined />
                 <template #overlay>

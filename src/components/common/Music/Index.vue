@@ -24,6 +24,7 @@
     <IDialog
       title="搜索音乐"
       :visible="dialogVisible"
+      :zIndex="1002"
       @ok="dialogVisible = false"
       @cancel="dialogVisible = false"
     >

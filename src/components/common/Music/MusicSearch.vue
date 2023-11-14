@@ -1,7 +1,7 @@
 <template>
   <div class="search">
-    <a-row :gutter="10">
-      <a-col :span="21">
+    <a-row :gutter="12">
+      <a-col :span="20">
         <a-input
           v-model:value="searchText"
           @pressEnter="(e) => handleSearch(e.target.value)"
@@ -21,14 +21,16 @@
       </a-col>
     </a-row>
     <div class="search-history" v-if="useMusicStore.searchHistory.length">
-      <p class="title">搜索历史：</p>
+      <p class="title">搜索历史：
+        <span class="clear" @click="handleSearchClear"><DeleteOutlined />清空历史搜索</span>
+      </p>
       <div class="search-history-box">
         <p
           v-for="(item, index) in useMusicStore.searchHistory"
           :key="index"
           @click="handleSearchRes(item)"
         >
-          {{ item }}<CloseOutlined @click.stop="handleSearchDel(item)" />
+          <span class="text">{{ item }}</span><CloseOutlined @click.stop="handleSearchDelete(item)" />
         </p>
       </div>
     </div>
@@ -83,11 +85,12 @@
 
 <script setup>
 import { ref } from "vue";
-import { SearchOutlined, EllipsisOutlined, CloseOutlined } from "@ant-design/icons-vue";
+import { SearchOutlined, EllipsisOutlined, CloseOutlined, DeleteOutlined } from "@ant-design/icons-vue";
 import axios from "axios";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import { downloadFile } from "@/utils/utils";
+import { toast } from "@/utils/feedback";
 
 const searchText = ref("");
 const searchResult = ref([]);
@@ -109,9 +112,12 @@ const handleSearchRes = (item) => {
   });
 };
 
-const handleSearchDel = (item) => {
+const handleSearchClear = () => {
+  useMusicStore.searchHistory = [];
+};
+
+const handleSearchDelete = (item) => {
   const idx = useMusicStore.searchHistory.indexOf(item);
-  console.log("idx: ", idx);
   useMusicStore.searchHistory.splice(idx, 1);
 };
 
@@ -149,14 +155,22 @@ const handlePlayNext = async (item, idx) => {
 // 下载
 const handleDownload = async (item, idx) => {
   const { url } = await getMusic(item, idx);
-  downloadFile(url);
+  url && downloadFile(url);
 };
 // 获取音乐信息
 const getMusic = async (item, idx) => {
   const { data } = await axios.get(
-    `https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}${item.singer}&n=${idx + 1}`
+    `https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}-${item.singer}&n=1`
   );
-  return data;
+  if (data.code === 200) {
+    return data;
+  } else {
+    toast({
+      type: "warning",
+      content: data.msg,
+    })
+    return {};
+  }
 };
 </script>
 
@@ -169,6 +183,19 @@ const getMusic = async (item, idx) => {
     padding: 2px;
     .title {
       margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .clear {
+        color: var(--grey-6);
+        cursor: pointer;
+        .anticon {
+          margin-right: 4px;
+        }
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
     }
     .search-history-box {
       display: flex;
@@ -192,6 +219,11 @@ const getMusic = async (item, idx) => {
           cursor: pointer;
           transition: all 0.2s;
           &:hover {
+            color: var(--primary-color);
+          }
+        }
+        &:hover {
+          .text {
             color: var(--primary-color);
           }
         }

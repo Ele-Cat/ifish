@@ -313,7 +313,7 @@ const audioEnded = () => {
       .play-slider {
         flex: 1;
         width: 160px;
-        margin: 0 8px;
+        margin: 0 12px;
       }
     }
   }

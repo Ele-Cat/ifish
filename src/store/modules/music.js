@@ -20,9 +20,6 @@ export const useMusicStore = defineStore("ifishMusic", {
   actions: {
     toggleVisible() {
       this.visible = !this.visible
-      if (!this.visible) {
-        this.settings.playing = false;
-      }
     },
     changeMode(mode) {
       this.settings.mode = mode;

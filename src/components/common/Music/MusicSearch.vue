@@ -123,36 +123,39 @@ const handleSearchDelete = (item) => {
 
 // 立即播放
 const handlePlayNow = async (item, idx) => {
-  const { cover, name, singer, url } = await getMusic(item, idx);
+  const { cover, name, singer, url, content } = await getMusic(item, idx);
   useMusicStore.musicList.push({
     id: uuid(21),
     cover,
     name,
     singer,
     url,
+    content,
   });
   useMusicStore.playMusic(useMusicStore.musicList.length - 1);
 };
 // 添加到播放列表
 const handleAddToList = async (item, idx) => {
-  const { cover, name, singer, url } = await getMusic(item, idx);
+  const { cover, name, singer, url, content } = await getMusic(item, idx);
   useMusicStore.musicList.push({
     id: uuid(21),
     cover,
     name,
     singer,
     url,
+    content,
   });
 };
 // 下一首播放
 const handlePlayNext = async (item, idx) => {
-  const { cover, name, singer, url } = await getMusic(item, idx);
+  const { cover, name, singer, url, content } = await getMusic(item, idx);
   useMusicStore.musicList.splice(useMusicStore.activeIndex, 0, {
     id: uuid(21),
     cover,
     name,
     singer,
     url,
+    content,
   });
 };
 // 下载
@@ -162,19 +165,30 @@ const handleDownload = async (item, idx) => {
 };
 // 获取音乐信息
 const getMusic = async (item, idx) => {
-  // https://api.lolimi.cn/API/qqdg/api.php
-  const { data } = await axios.get(
-    `https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}-${item.singer}&n=1`
-  );
-  if (data.code === 200) {
-    return data;
-  } else {
-    toast({
-      type: "warning",
-      content: data.msg,
-    })
-    return {};
-  }
+  const promise1 = new Promise((resolve, reject) => {
+    axios.get(
+      `https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}-${item.singer}&n=1`
+    ).then(res => {
+      if (res.data.code === 200) {
+        resolve(res.data);
+      } else {
+        reject();
+      }
+    });
+  })
+  const promise2 = new Promise((resolve, reject) => {
+    axios.get(
+      `https://api.lolimi.cn/API/kggc/api.php?msg=${item.name}-${item.singer}&n=1`
+    ).then(res => {
+      if (res.data.code === 1) {
+        resolve(res.data.data);
+      } else {
+        reject();
+      }
+    });
+  })
+  const values = await Promise.all([promise1, promise2]);
+  return {...values[0], ...values[1]};
 };
 </script>
 

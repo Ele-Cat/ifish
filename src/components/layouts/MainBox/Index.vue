@@ -54,7 +54,7 @@ const mainComponents = shallowRef({
     word-wrap: break-word;
   }
   .scroll-bar {
-    height: calc(100vh - 140px);
+    height: calc(100vh - 160px);
     padding: 10px 102px 0;
   }
 }

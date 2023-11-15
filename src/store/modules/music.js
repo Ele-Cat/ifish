@@ -18,9 +18,11 @@ export const useMusicStore = defineStore("ifishMusic", {
     };
   },
   actions: {
+    // 控制音乐控件的显隐
     toggleVisible() {
       this.visible = !this.visible
     },
+    // 切换播放模式
     changeMode(mode) {
       this.settings.mode = mode;
       const modes = {
@@ -32,6 +34,7 @@ export const useMusicStore = defineStore("ifishMusic", {
         content: `已切换为${modes[mode]}模式`
       })
     },
+    // 切换是否静音
     toggleMute(flag) {
       this.settings.mute = !this.settings.mute;
       if (flag && this.settings.volume === 0) {
@@ -39,6 +42,7 @@ export const useMusicStore = defineStore("ifishMusic", {
         this.settings.volume = 20;
       }
     },
+    // 执行播放
     playMusic(idx) {
       this.settings.playing = true;
       this.activeIndex = idx;

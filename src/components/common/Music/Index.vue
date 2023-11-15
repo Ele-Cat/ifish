@@ -1,5 +1,17 @@
 <template>
   <div class="music">
+    <audio
+      ref="audioRef"
+      controls
+      :src="playingMusic?.url"
+      :loop="useMusicStore.settings.mode === 'singleCycle'"
+      @timeupdate="updateProgress"
+      @loadeddata="audioLoaded"
+      @ended="audioEnded"
+      @error="audioEnded"
+      v-show="false"
+    ></audio>
+
     <div
       class="toggle-icon bf"
       :title="useMusicStore.visible ? '隐藏播放器' : '显示播放器'"
@@ -10,24 +22,34 @@
     </div>
     <div class="music-ctrl bf" :class="[useMusicStore.visible ? 'show' : '']">
       <MusicCtrl
-        @showSearch="showSearchF"
+        :musicCurrentTime="musicCurrentTime"
+        :musicDuration="musicDuration"
+        :prevMusic="prevMusic"
+        :nextMusic="nextMusic"
+        :musicMode="musicMode"
+        @showSearch="musicSearchVisible = true"
         @toggleMusicList="musicListVisible = !musicListVisible"
         @showLyric="lyricVisible = true"
+        @handlePlay="handlePlay"
+        @handlePause="handlePause"
+        @handlePrev="handlePrev"
+        @handleNext="handleNext"
+        @handleDurationChange="handleDurationChange"
       />
     </div>
 
     <MusicList
       :open="musicListVisible"
-      @showSearch="showSearchF"
+      @showSearch="musicSearchVisible = true"
       @close="musicListVisible = false"
     />
 
     <IDialog
       title="搜索音乐"
-      :visible="dialogVisible"
+      :visible="musicSearchVisible"
       :zIndex="1002"
-      @ok="dialogVisible = false"
-      @cancel="dialogVisible = false"
+      @ok="musicSearchVisible = false"
+      @cancel="musicSearchVisible = false"
     >
       <MusicSearch />
     </IDialog>
@@ -37,7 +59,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, nextTick, computed } from "vue";
 import { DoubleLeftOutlined } from "@ant-design/icons-vue";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
@@ -50,31 +72,159 @@ onMounted(() => {
   useMusicStore.settings.playing = false;
 });
 
-const handleToggleMusicVisible = () => {
-  useMusicStore.toggleVisible();
-};
-
 const musicListVisible = ref(false);
+const musicSearchVisible = ref(false);
+const lyricVisible = ref(false);
+
+const audioRef = ref(null);
+const playingMusic = ref({});
 watch(
-  () => useMusicStore.visible,
-  (newVal) => {
-    if (newVal) {
-      // if (!useMusicStore.musicList.length) {
-      //   musicListVisible.value = true;
-      // }
+  () => [useMusicStore.activeIndex, useMusicStore.settings.playing],
+  () => {
+    playingMusic.value = useMusicStore.musicList[useMusicStore.activeIndex] || {};
+    nextTick(() => {
+      if (audioRef.value) {
+        // console.log("audioRef: ", audioRef);
+        musicDuration.value = parseInt(audioRef.value.duration);
+        audioRef.value.volume = useMusicStore.settings.volume / 100;
+
+        if (useMusicStore.settings.playing) {
+          audioRef.value.play();
+        }
+      }
+    });
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+watch(
+  () => [useMusicStore.settings.volume, useMusicStore.settings.mute],
+  () => {
+    if (audioRef.value) {
+      nextTick(() => {
+        audioRef.value.volume = useMusicStore.settings.volume / 100;
+        audioRef.value.muted = useMusicStore.settings.mute;
+      });
     }
   },
   {
     immediate: true,
+    deep: true,
   }
 );
+const musicCurrentTime = ref(0);
+const musicDuration = ref(1000);
 
-const dialogVisible = ref(false);
-const showSearchF = () => {
-  dialogVisible.value = true;
+// 音频加载完成时
+const audioLoaded = () => {
+  musicDuration.value = parseInt(audioRef.value.duration);
+  musicCurrentTime.value = audioRef.value.currentTime =
+    useMusicStore.settings.currentTime;
+};
+// 音频播放时
+const updateProgress = (e) => {
+  const { currentTime, duration } = e.target;
+  musicCurrentTime.value = useMusicStore.settings.currentTime = parseInt(currentTime);
+  musicDuration.value = parseInt(duration);
 };
 
-const lyricVisible = ref(false);
+// 播放列表显隐
+const handleToggleMusicVisible = () => {
+  useMusicStore.toggleVisible();
+};
+
+// 点击播放
+const handlePlay = () => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
+  useMusicStore.settings.playing = true;
+  audioRef.value.play();
+};
+// 点击暂停
+const handlePause = () => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
+  useMusicStore.settings.playing = false;
+  audioRef.value.pause();
+};
+// 上一首
+const prevMusic = computed(() => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return "";
+  let prevIndex =
+    useMusicStore.activeIndex === 0
+      ? useMusicStore.musicList.length - 1
+      : useMusicStore.activeIndex - 1;
+  return useMusicStore.musicList[prevIndex]
+    ? useMusicStore.musicList[prevIndex]["name"]
+    : "";
+});
+// 播放上一首
+const handlePrev = () => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
+  let prevIndex =
+    useMusicStore.activeIndex === 0
+      ? useMusicStore.musicList.length - 1
+      : useMusicStore.activeIndex - 1;
+  useMusicStore.playMusic(prevIndex);
+};
+// 下一首
+const nextMusic = computed(() => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return "";
+  let nextIndex =
+    useMusicStore.activeIndex === useMusicStore.musicList.length - 1
+      ? 0
+      : useMusicStore.activeIndex + 1;
+  return useMusicStore.musicList[nextIndex]
+    ? useMusicStore.musicList[nextIndex]["name"]
+    : "";
+});
+// 播放下一首
+const handleNext = () => {
+  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
+  let nextIndex =
+    useMusicStore.activeIndex === useMusicStore.musicList.length - 1
+      ? 0
+      : useMusicStore.activeIndex + 1;
+  useMusicStore.playMusic(nextIndex);
+};
+// 播放结束或遇到错误时
+const audioEnded = () => {
+  if (useMusicStore.settings.mode === "listCycle") {
+    if (useMusicStore.musicList.length === 1) {
+      useMusicStore.activeIndex--;
+      useMusicStore.activeIndex++;
+    }
+    handleNext();
+  } else if (useMusicStore.settings.mode === "singleCycle") {
+    useMusicStore.playMusic(useMusicStore.activeIndex);
+  } else if (useMusicStore.settings.mode === "randomPlay") {
+    useMusicStore.playMusic(
+      getRandomIntInRange(
+        0,
+        useMusicStore.musicList.length - 1,
+        useMusicStore.activeIndex
+      )
+    );
+  }
+};
+// 进度被拖拽时
+const handleDurationChange = (currentTime) => {
+  useMusicStore.settings.currentTime = currentTime;
+  if (audioRef.value) {
+    nextTick(() => {
+      audioRef.value.currentTime = currentTime;
+    });
+  }
+};
+// 播放模式
+const musicMode = computed(() => {
+  const modes = {
+    listCycle: "列表循环",
+    singleCycle: "单曲循环",
+    randomPlay: "随机播放",
+  };
+  return modes[useMusicStore.settings.mode];
+});
 </script>
 
 <style lang="less" scoped>

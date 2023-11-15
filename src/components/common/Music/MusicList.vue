@@ -207,7 +207,9 @@ const handleDownload = (item) => {
         display: flex;
         align-items: center;
       }
-      &:hover,
+      &:hover {
+        color: var(--primary-color);
+      }
       &.active {
         color: var(--primary-color);
         background-color: var(--theme-bg-color-a8);

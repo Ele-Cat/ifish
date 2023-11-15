@@ -32,14 +32,14 @@
         </a-tooltip>
       </div>
       <div class="progress-box">
-        <p>{{ secToMs(musicCurrentTime) }}</p>
+        <p>{{ secToMs(currentTime) }}</p>
         <a-slider
           class="play-slider"
           :min="0"
           :max="musicDuration"
           @change="handleDurationChange"
-          v-model:value="musicCurrentTime"
-          :tipFormatter="tipFormatter"
+          v-model:value="currentTime"
+          :tipFormatter="progressTipFormatter"
         />
         <p>{{ secToMs(musicDuration) }}</p>
       </div>
@@ -99,17 +99,6 @@
       <a-tooltip :title="`播放列表`" placement="topRight">
         <MenuUnfoldOutlined @click="handleToggleMusicList" />
       </a-tooltip>
-      <audio
-        ref="audioRef"
-        controls
-        :src="playingMusic?.url"
-        :loop="useMusicStore.settings.mode === 'singleCycle'"
-        @timeupdate="updateProgress"
-        @loadeddata="audioLoaded"
-        @ended="audioEnded"
-        @error="audioEnded"
-        v-show="false"
-      ></audio>
     </div>
   </div>
 </template>
@@ -123,10 +112,49 @@ import {
   VerticalLeftOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons-vue";
-const emit = defineEmits(["toggleMusicList", "showSearch", "showLyric"]);
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import { secToMs, getRandomIntInRange } from "@/utils/utils";
+const emit = defineEmits(["toggleMusicList", "showSearch", "showLyric", "handlePlay"]);
+const props = defineProps({
+  musicCurrentTime: {
+    // 当前播放进度
+    type: Number,
+    default: 0,
+  },
+  musicDuration: {
+    // 音乐时长
+    type: Number,
+    default: 0,
+  },
+  prevMusic: {
+    // 上一首
+    type: String,
+    default: "",
+  },
+  nextMusic: {
+    // 下一首
+    type: String,
+    default: "",
+  },
+  musicMode: {
+    // 播放模式
+    type: String,
+    default: "",
+  },
+});
+
+const currentTime = ref(0);
+watch(
+  () => props.musicCurrentTime,
+  (newVal) => {
+    currentTime.value = newVal;
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
 
 const handleToggleMusicList = () => {
   emit("toggleMusicList");
@@ -135,154 +163,52 @@ const handleShowSearch = () => {
   emit("showSearch");
 };
 
-const musicMode = computed(() => {
-  const modes = {
-    listCycle: "列表循环",
-    singleCycle: "单曲循环",
-    randomPlay: "随机播放",
-  };
-  return modes[useMusicStore.settings.mode];
-});
+// 切换模式
 const handleChangeMode = (mode) => {
   useMusicStore.changeMode(mode);
 };
+// 切换是否静音
 const handleToggleMute = (flag) => {
   useMusicStore.toggleMute(flag);
 };
 
 const playingMusic = ref({});
-const musicCurrentTime = ref(0);
-const musicDuration = ref(1000);
-const audioRef = ref(null);
 watch(
   () => [useMusicStore.activeIndex, useMusicStore.settings.playing],
   () => {
-    playingMusic.value = useMusicStore.musicList[useMusicStore.activeIndex];
-    nextTick(() => {
-      if (audioRef.value) {
-        // console.log("audioRef: ", audioRef);
-        musicDuration.value = parseInt(audioRef.value.duration);
-        audioRef.value.volume = useMusicStore.settings.volume / 100;
-
-        if (useMusicStore.settings.playing) {
-          audioRef.value.play();
-        }
-      }
-    });
+    playingMusic.value = useMusicStore.musicList[useMusicStore.activeIndex] || {};
   },
   {
     immediate: true,
     deep: true,
   }
 );
-const audioLoaded = () => {
-  musicDuration.value = parseInt(audioRef.value.duration);
-  musicCurrentTime.value = audioRef.value.currentTime =
-    useMusicStore.settings.currentTime;
-};
-const updateProgress = (e) => {
-  const { currentTime, duration } = e.target;
-  musicCurrentTime.value = useMusicStore.settings.currentTime = parseInt(currentTime);
-  musicDuration.value = parseInt(duration);
-};
-const tipFormatter = (val) => {
+
+// 进度条时间格式化
+const progressTipFormatter = (val) => {
   return secToMs(val);
 };
+// 拖拽进度条
 const handleDurationChange = (currentTime) => {
-  useMusicStore.settings.currentTime = currentTime;
-  if (audioRef.value) {
-    nextTick(() => {
-      audioRef.value.currentTime = currentTime;
-    });
-  }
+  emit("handleDurationChange", currentTime);
 };
-
-watch(
-  () => [useMusicStore.settings.volume, useMusicStore.settings.mute],
-  () => {
-    if (audioRef.value) {
-      nextTick(() => {
-        audioRef.value.volume = useMusicStore.settings.volume / 100;
-        audioRef.value.muted = useMusicStore.settings.mute;
-      });
-    }
-  },
-  {
-    immediate: true,
-    deep: true,
-  }
-);
-
+// 执行播放
 const handlePlay = () => {
-  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
-  useMusicStore.settings.playing = true;
-  audioRef.value.play();
+  emit("handlePlay");
 };
-
+// 执行暂停
 const handlePause = () => {
-  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
-  useMusicStore.settings.playing = false;
-  audioRef.value.pause();
+  emit("handlePause");
 };
-
-const prevMusic = computed(() => {
-  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return "";
-  let prevIndex =
-    useMusicStore.activeIndex === 0
-      ? useMusicStore.musicList.length - 1
-      : useMusicStore.activeIndex - 1;
-  return useMusicStore.musicList[prevIndex]
-    ? useMusicStore.musicList[prevIndex]["name"]
-    : "";
-});
+// 播放上一首
 const handlePrev = () => {
-  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
-  let prevIndex =
-    useMusicStore.activeIndex === 0
-      ? useMusicStore.musicList.length - 1
-      : useMusicStore.activeIndex - 1;
-  useMusicStore.playMusic(prevIndex);
+  emit("handlePrev");
 };
-
-const nextMusic = computed(() => {
-  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return "";
-  let nextIndex =
-    useMusicStore.activeIndex === useMusicStore.musicList.length - 1
-      ? 0
-      : useMusicStore.activeIndex + 1;
-  return useMusicStore.musicList[nextIndex]
-    ? useMusicStore.musicList[nextIndex]["name"]
-    : "";
-});
+// 播放下一首
 const handleNext = () => {
-  if (!useMusicStore.musicList.length || useMusicStore.activeIndex < 0) return;
-  let nextIndex =
-    useMusicStore.activeIndex === useMusicStore.musicList.length - 1
-      ? 0
-      : useMusicStore.activeIndex + 1;
-  useMusicStore.playMusic(nextIndex);
+  emit("handleNext");
 };
-
-const audioEnded = () => {
-  if (useMusicStore.settings.mode === "listCycle") {
-    if (useMusicStore.musicList.length === 1) {
-      useMusicStore.activeIndex--;
-      useMusicStore.activeIndex++;
-    }
-    handleNext();
-  } else if (useMusicStore.settings.mode === "singleCycle") {
-    useMusicStore.playMusic(useMusicStore.activeIndex);
-  } else if (useMusicStore.settings.mode === "randomPlay") {
-    useMusicStore.playMusic(
-      getRandomIntInRange(
-        0,
-        useMusicStore.musicList.length - 1,
-        useMusicStore.activeIndex
-      )
-    );
-  }
-};
-
+// 展开歌词面板
 const showLyric = () => {
   emit("showLyric");
 };

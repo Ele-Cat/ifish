@@ -1,5 +1,5 @@
 <template>
-  <div class="music-fullscreen">
+  <div ref="fullscreenRef" class="music-fullscreen" :class="{open: open}">
     <div class="bg">
       <img :src="playingMusic.cover" alt="" />
       <div class="mask"></div>
@@ -20,15 +20,30 @@
         </p>
       </perfect-scrollbar>
     </div>
+    <div class="action">
+      <DoubleRightOutlined class="close" title="关闭歌词" @click="handleClose" />
+      <CompressOutlined title="关闭全屏" v-if="isFullscreen" @click="toggle" />
+      <ExpandOutlined title="开启全屏" v-else @click="toggle" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { computed, nextTick, ref, watch } from "vue";
+import { DoubleRightOutlined, CompressOutlined, ExpandOutlined } from '@ant-design/icons-vue';
+import { useFullscreen } from '@vueuse/core';
 import useStore from "@/store";
-import { Item } from "ant-design-vue/es/menu";
 const { useMusicStore } = useStore();
 
+const emit = defineEmits(["close"]);
+const props = defineProps({
+  open: {
+    type: Boolean,
+    default: false,
+  }
+})
+
+const fullscreenRef = ref(null);
 const playingMusic = ref({});
 watch(
   () => [useMusicStore.activeIndex, useMusicStore.settings.playing],
@@ -44,7 +59,11 @@ watch(
 const lyricList = computed(() => {
   const list = [];
   // console.log("playingMusic.content: ", playingMusic.value.content);
-  const contents = playingMusic.value.content.split("\n");
+  if (!playingMusic.value?.content?.length) {
+    // 重拉歌词
+    return list;
+  }
+  const contents = playingMusic.value?.content.split("\n");
   // console.log("contents: ", contents);
   contents.map((content) => {
     let matches = content.match(/\[(.*?)\]/);
@@ -61,17 +80,27 @@ const lyricList = computed(() => {
   });
   return list;
 });
+
+const handleClose = () => {
+  emit("close");
+}
+
+const { isFullscreen, toggle } = useFullscreen(fullscreenRef);
 </script>
 
 <style lang="less" scoped>
 .music-fullscreen {
   position: fixed;
-  top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: var(--theme-bg-color);
   display: flex;
+  top: 100vh;
+  transition: top .15s ease-in-out;
+  &.open {
+    top: 0;
+  }
   .bg {
     position: absolute;
     width: 100%;
@@ -124,6 +153,26 @@ const lyricList = computed(() => {
           font-size: 2rem;
           color: var(--primary-color);
         }
+      }
+    }
+  }
+  .action {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+    font-size: 24px;
+    .anticon {
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: all .3s;
+      &.close {
+        transform: rotate(90deg);
+      }
+      &:hover {
+        color: var(--primary-color);
       }
     }
   }

@@ -12,6 +12,7 @@
       <MusicCtrl
         @showSearch="showSearchF"
         @toggleMusicList="musicListVisible = !musicListVisible"
+        @showLyric="lyricVisible = true"
       />
     </div>
 
@@ -31,7 +32,7 @@
       <MusicSearch />
     </IDialog>
 
-    <!-- <MusicFullScreen /> -->
+    <MusicFullScreen :open="lyricVisible" @close="lyricVisible = false" />
   </div>
 </template>
 
@@ -72,6 +73,8 @@ const dialogVisible = ref(false);
 const showSearchF = () => {
   dialogVisible.value = true;
 };
+
+const lyricVisible = ref(false);
 </script>
 
 <style lang="less" scoped>

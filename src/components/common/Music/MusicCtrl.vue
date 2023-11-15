@@ -10,6 +10,7 @@
         :src="playingMusic.cover"
         onerror="this.src='./images/music.png'"
         alt=""
+        @click="showLyric"
       />
       {{ playingMusic.name }} - {{ playingMusic.singer }}
     </div>
@@ -122,7 +123,7 @@ import {
   VerticalLeftOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons-vue";
-const emit = defineEmits(["toggleMusicList", "showSearch"]);
+const emit = defineEmits(["toggleMusicList", "showSearch", "showLyric"]);
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import { secToMs, getRandomIntInRange } from "@/utils/utils";
@@ -281,6 +282,10 @@ const audioEnded = () => {
     );
   }
 };
+
+const showLyric = () => {
+  emit("showLyric");
+}
 </script>
 
 <style lang="less" scoped>

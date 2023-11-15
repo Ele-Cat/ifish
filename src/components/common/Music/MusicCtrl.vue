@@ -342,7 +342,7 @@ const showLyric = () => {
         flex: 1;
         margin: 0 12px;
         :deep(.ant-slider-rail) {
-          background-color: var(--theme-text-color);
+          background-color: #FFF;
         }
         :deep(.ant-slider-track) {
           background-color: var(--primary-color);
@@ -387,6 +387,12 @@ const showLyric = () => {
       align-items: center;
       .volume-slider {
         width: 66px;
+      }
+      :deep(.ant-slider-rail) {
+        background-color: #FFF;
+      }
+      :deep(.ant-slider-track) {
+        background-color: var(--primary-color);
       }
     }
   }

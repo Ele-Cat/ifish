@@ -23,15 +23,15 @@
     </div>
     <div class="action">
       <DoubleRightOutlined class="close" title="关闭歌词" @click="handleClose" />
-      <CompressOutlined title="关闭全屏" v-if="isFullscreen" @click="toggle" />
-      <ExpandOutlined title="开启全屏" v-else @click="toggle" />
+      <FullscreenExitOutlined title="关闭全屏" v-if="isFullscreen" @click="toggle" />
+      <FullscreenOutlined title="开启全屏" v-else @click="toggle" />
     </div>
   </div>
 </template>
 
 <script setup>
 import { computed, nextTick, ref, watch } from "vue";
-import { DoubleRightOutlined, CompressOutlined, ExpandOutlined } from '@ant-design/icons-vue';
+import { DoubleRightOutlined, FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons-vue';
 import axios from "axios";
 import { useFullscreen } from '@vueuse/core';
 import useStore from "@/store";
@@ -46,6 +46,8 @@ const props = defineProps({
 })
 
 const fullscreenRef = ref(null);
+const { isFullscreen, toggle, exit } = useFullscreen(fullscreenRef);
+
 const playingMusic = ref({});
 watch(
   () => [useMusicStore.activeIndex, useMusicStore.settings.playing],
@@ -99,10 +101,9 @@ const solveLyric = (content) => {
 }
 
 const handleClose = () => {
+  exit();
   emit("close");
 }
-
-const { isFullscreen, toggle } = useFullscreen(fullscreenRef);
 </script>
 
 <style lang="less" scoped>

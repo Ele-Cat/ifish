@@ -21,11 +21,11 @@
 
       <div>
         <p class="title">
-          <span><UnorderedListOutlined />播放列表（共 {{ useMusicStore.musicList.length }} 首）</span>
-          <a-popconfirm
-            title="确认清空列表？"
-            @confirm="handleClearList"
+          <span
+            ><UnorderedListOutlined />播放列表（共
+            {{ useMusicStore.musicList.length }} 首）</span
           >
+          <a-popconfirm title="确认清空列表？" @confirm="handleClearList">
             <span><DeleteOutlined />清空列表</span>
           </a-popconfirm>
         </p>
@@ -105,7 +105,7 @@ const handleShowSearch = () => {
 
 const handleClearList = () => {
   useMusicStore.musicList = [];
-}
+};
 
 // 立即播放
 const handlePlayNow = (idx) => {
@@ -173,16 +173,16 @@ const handleDownload = (item) => {
       border-radius: 8px;
       cursor: pointer;
       border-bottom: 1px solid var(--theme-bg-color-a8);
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
       .music-cover {
-        width: 36px;
-        height: 36px;
+        width: 40px;
+        height: 40px;
         object-fit: cover;
         border-radius: 6px;
         overflow: hidden;
       }
       .music-info {
-        padding: 0 12px;
+        padding: 0 10px;
         flex: 1;
         font-size: 16px;
         display: flex;

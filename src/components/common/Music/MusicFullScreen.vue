@@ -1,11 +1,17 @@
 <template>
-  <div ref="fullscreenRef" class="music-fullscreen" :class="{open: open}">
+  <div ref="fullscreenRef" class="music-fullscreen" :class="{ open: open }">
     <div class="bg">
       <img :src="playingMusic.cover" alt="" />
       <div class="mask"></div>
     </div>
     <div class="music-info">
-      <img class="cover" @click="flag = !flag" :class="{playing: flag || useMusicStore.settings.playing}" :src="playingMusic.cover" alt="" />
+      <img
+        class="cover"
+        @click="flag = !flag"
+        :class="{ playing: flag || useMusicStore.settings.playing }"
+        :src="playingMusic.cover"
+        alt=""
+      />
       <p>{{ playingMusic.name }}</p>
       <span>{{ playingMusic.singer }}</span>
     </div>
@@ -31,9 +37,13 @@
 
 <script setup>
 import { computed, nextTick, ref, watch } from "vue";
-import { DoubleRightOutlined, FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons-vue';
+import {
+  DoubleRightOutlined,
+  FullscreenOutlined,
+  FullscreenExitOutlined,
+} from "@ant-design/icons-vue";
 import axios from "axios";
-import { useFullscreen } from '@vueuse/core';
+import { useFullscreen } from "@vueuse/core";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 
@@ -42,8 +52,8 @@ const props = defineProps({
   open: {
     type: Boolean,
     default: false,
-  }
-})
+  },
+});
 
 const flag = ref(false);
 
@@ -70,18 +80,22 @@ const lyricList = computed(() => {
   } else {
     list = solveLyric(playingMusic.value?.content);
   }
-  
+
   return list;
 });
 
 const getLyric = () => {
-  axios.get(`https://api.lolimi.cn/API/kggc/api.php?msg=${playingMusic.value.name}-${playingMusic.value.singer}&n=1`).then(res => {
-    const { content } = res.data.data;
-    if (res.data.code === 1) {
-      useMusicStore.musicList[useMusicStore.activeIndex]["content"] = content;
-    }
-  })
-}
+  axios
+    .get(
+      `https://api.lolimi.cn/API/kggc/api.php?msg=${playingMusic.value.name}-${playingMusic.value.singer}&n=1`
+    )
+    .then((res) => {
+      const { content } = res.data.data;
+      if (res.data.code === 1) {
+        useMusicStore.musicList[useMusicStore.activeIndex]["content"] = content;
+      }
+    });
+};
 
 const solveLyric = (content) => {
   const list = [];
@@ -100,12 +114,12 @@ const solveLyric = (content) => {
     }
   });
   return list;
-}
+};
 
 const handleClose = () => {
   exit();
   emit("close");
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -117,7 +131,7 @@ const handleClose = () => {
   background-color: var(--theme-bg-color);
   display: flex;
   top: 100vh;
-  transition: top .15s ease-in-out;
+  transition: top 0.15s ease-in-out;
   &.open {
     top: 0;
   }
@@ -152,7 +166,7 @@ const handleClose = () => {
     .cover {
       max-width: 56%;
       margin-bottom: 20px;
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
       &.playing {
         max-width: 80%;
       }
@@ -176,14 +190,14 @@ const handleClose = () => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 88px 50px;
+      padding: 88px 60px 44px 0;
       p {
         width: 100%;
         color: #eee;
         margin: 2px 0;
         padding: 12px 0;
         text-align: center;
-        transition: all .3s;
+        transition: all 0.3s;
         cursor: pointer;
         border-radius: 8px;
         &:hover {
@@ -204,12 +218,12 @@ const handleClose = () => {
     right: 30px;
     display: flex;
     flex-direction: column;
-    color: #FFF;
+    color: #fff;
     font-size: 24px;
     .anticon {
       margin-bottom: 20px;
       cursor: pointer;
-      transition: all .3s;
+      transition: all 0.3s;
       &.close {
         transform: rotate(90deg);
       }

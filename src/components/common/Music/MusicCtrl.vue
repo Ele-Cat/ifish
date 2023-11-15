@@ -4,14 +4,14 @@
       暂无音乐，请选择<span class="add" @click="handleShowSearch">添加</span>
     </div>
     <div class="info" v-else>
-      <img
-        class="cover"
-        :class="{ playing: useMusicStore.settings.playing }"
-        :src="playingMusic.cover"
-        onerror="this.src='./images/music.png'"
-        alt=""
-        @click="showLyric"
-      />
+      <div class="cover" @click="showLyric">
+        <img
+          :class="{ playing: useMusicStore.settings.playing }"
+          :src="playingMusic.cover"
+          onerror="this.src='./images/music.png'"
+          alt=""
+        />
+      </div>
       {{ playingMusic.name }} - {{ playingMusic.singer }}
     </div>
     <div class="center">
@@ -303,13 +303,51 @@ const showLyric = () => {
       cursor: pointer;
     }
     .cover {
+      position: relative;
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      object-fit: cover;
       margin-right: 12px;
-      &.playing {
-        animation: rotate 20s infinite linear;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        &.playing {
+          animation: rotate 20s infinite linear;
+        }
+      }
+      &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: rgba(0, 0, 0, .3);
+        top: 0;
+        left: 0;
+        z-index: 1;
+        display: none;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        border: 2px solid #FFF;
+        border-radius: 6px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-mask: conic-gradient( from -90deg at 16px 16px, red 90deg, transparent 0deg);
+        -webkit-mask-position:-8px -8px;
+        z-index: 2;
+        display: none;
+      }
+      &:hover {
+        &::before, &::after {
+          display: block;
+        }
       }
     }
   }

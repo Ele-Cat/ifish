@@ -10,6 +10,7 @@
       <span>{{ playingMusic.singer }}</span>
     </div>
     <div class="music-lyric">
+      <p class="no-lyric" v-if="!lyricList.length">暂无歌词</p>
       <perfect-scrollbar class="scroll-bar">
         <p
           v-for="(item, index) in lyricList"
@@ -31,6 +32,7 @@
 <script setup>
 import { computed, nextTick, ref, watch } from "vue";
 import { DoubleRightOutlined, CompressOutlined, ExpandOutlined } from '@ant-design/icons-vue';
+import axios from "axios";
 import { useFullscreen } from '@vueuse/core';
 import useStore from "@/store";
 const { useMusicStore } = useStore();
@@ -57,14 +59,29 @@ watch(
 );
 
 const lyricList = computed(() => {
-  const list = [];
-  // console.log("playingMusic.content: ", playingMusic.value.content);
+  let list = [];
   if (!playingMusic.value?.content?.length) {
     // 重拉歌词
-    return list;
+    getLyric();
+  } else {
+    list = solveLyric(playingMusic.value?.content);
   }
-  const contents = playingMusic.value?.content.split("\n");
-  // console.log("contents: ", contents);
+  
+  return list;
+});
+
+const getLyric = () => {
+  axios.get(`https://api.lolimi.cn/API/kggc/api.php?msg=${playingMusic.value.name}-${playingMusic.value.singer}&n=1`).then(res => {
+    const { content } = res.data.data;
+    if (res.data.code === 1) {
+      useMusicStore.musicList[useMusicStore.activeIndex]["content"] = content;
+    }
+  })
+}
+
+const solveLyric = (content) => {
+  const list = [];
+  const contents = content.split("\n");
   contents.map((content) => {
     let matches = content.match(/\[(.*?)\]/);
     if (matches) {
@@ -79,7 +96,7 @@ const lyricList = computed(() => {
     }
   });
   return list;
-});
+}
 
 const handleClose = () => {
   emit("close");
@@ -139,18 +156,36 @@ const { isFullscreen, toggle } = useFullscreen(fullscreenRef);
   }
   .music-lyric {
     flex: 1;
-    font-size: 1.8rem;
-    padding: 50px 0;
+    font-size: 1.4rem;
+    padding: 88px 0;
+    .no-lyric {
+      height: 100%;
+      display: flex;
+      font-size: 2rem;
+      justify-content: center;
+      align-items: center;
+    }
     .scroll-bar {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 0 50px;
       p {
+        width: 100%;
         color: #eee;
-        margin: 12px 0;
+        margin: 2px 0;
+        padding: 12px 0;
+        text-align: center;
+        transition: all .3s;
+        cursor: pointer;
+        border-radius: 8px;
+        &:hover {
+          background-color: var(--grey-1-a9);
+          color: var(--primary-color);
+        }
         &.active {
-          font-size: 2rem;
+          font-size: 1.8rem;
           color: var(--primary-color);
         }
       }

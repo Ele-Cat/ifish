@@ -87,6 +87,21 @@ export function secToMs(sec) {
 }
 
 /**
+ * 分:秒 转 秒
+ * @param {String} timeString 分:秒
+ * @returns 
+ */
+export function msToSec(timeString) {
+  var timeArray = timeString.split(':');
+  var minutes = parseInt(timeArray[0], 10);
+  var secondsArray = timeArray[1].split('.');
+  var seconds = parseInt(secondsArray[0], 10);
+  var milliseconds = parseInt(secondsArray[1], 10);
+  var totalSeconds = minutes * 60 + seconds + milliseconds / 100;
+  return totalSeconds;
+}
+
+/**
  * 获取一个随机整数，这个数在一个范围内，而且不等于输入的参数
  * @param {*} min 最小值
  * @param {*} max 最大值

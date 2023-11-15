@@ -92,7 +92,7 @@
           <template #title>
             <span>播放列表</span>
           </template>
-          <MenuUnfoldOutlined @click="handleToggleMusicList" />
+          <MenuUnfoldOutlined />
         </a-popover>
       </div>
     </div>
@@ -101,8 +101,9 @@
       <perfect-scrollbar class="scroll-bar">
         <p
           v-for="(item, index) in lyricList"
-          :class="{ active: index === 6 }"
+          :class="{ active: index === activeLyricIndex }"
           :key="index"
+          @click="handleLyricJump(item, index)"
         >
           {{ item.lyric }}
         </p>
@@ -133,7 +134,7 @@ import axios from "axios";
 import { useFullscreen } from "@vueuse/core";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
-import { secToMs } from "@/utils/utils";
+import { secToMs, msToSec } from "@/utils/utils";
 
 const emit = defineEmits([
   "close",
@@ -192,43 +193,6 @@ watch(
   }
 );
 
-const currentTime = ref(0);
-watch(
-  () => props.musicCurrentTime,
-  (newVal) => {
-    currentTime.value = newVal;
-  },
-  {
-    immediate: true,
-    deep: true,
-  }
-);
-
-const lyricList = computed(() => {
-  let list = [];
-  if (!playingMusic.value?.content?.length) {
-    // 重拉歌词
-    getLyric();
-  } else {
-    list = solveLyric(playingMusic.value?.content);
-  }
-
-  return list;
-});
-
-const getLyric = () => {
-  axios
-    .get(
-      `https://api.lolimi.cn/API/kggc/api.php?msg=${playingMusic.value.name}-${playingMusic.value.singer}&n=1`
-    )
-    .then((res) => {
-      const { content } = res.data.data || {};
-      if (res.data.code === 1) {
-        useMusicStore.musicList[useMusicStore.activeIndex]["content"] = content;
-      }
-    });
-};
-
 const solveLyric = (content) => {
   const list = [];
   const contents = content.split("\n");
@@ -246,6 +210,51 @@ const solveLyric = (content) => {
     }
   });
   return list;
+};
+
+const lyricList = computed(() => {
+  let list = [];
+  if (!playingMusic.value?.content?.length) {
+    // 重拉歌词
+    getLyric();
+  } else {
+    list = solveLyric(playingMusic.value?.content);
+  }
+
+  return list;
+});
+
+const currentTime = ref(0);
+const activeLyricIndex = ref(0);
+watch(
+  () => props.musicCurrentTime,
+  (newVal) => {
+    currentTime.value = newVal;
+    // console.log("lyricList: ", lyricList.value);
+    // for (let i = 0; i < lyricList.value.length; i++) {
+    //   const lyric = lyricList.value[i];
+    //   if (newVal > msToSec(lyric[i]?.time) && newVal < msToSec(lyric[i + 1]?.time)) {
+    //     activeLyricIndex.value = i;
+    //   }
+    // }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+const getLyric = () => {
+  axios
+    .get(
+      `https://api.lolimi.cn/API/kggc/api.php?msg=${playingMusic.value.name}-${playingMusic.value.singer}&n=1`
+    )
+    .then((res) => {
+      const { content } = res.data.data || {};
+      if (res.data.code === 1) {
+        useMusicStore.musicList[useMusicStore.activeIndex]["content"] = content;
+      }
+    });
 };
 
 const handleClose = () => {
@@ -284,8 +293,9 @@ const handlePrev = () => {
 const handleNext = () => {
   emit("handleNext");
 };
-const handleToggleMusicList = () => {
-  emit("toggleMusicList");
+const handleLyricJump = (item, idx) => {
+  emit("handleDurationChange", msToSec(item.time));
+  activeLyricIndex.value = idx;
 };
 </script>
 
@@ -396,6 +406,15 @@ const handleToggleMusicList = () => {
   .music-lyric {
     flex: 1;
     font-size: 1.4rem;
+    -webkit-mask: linear-gradient(
+      180deg,
+      hsla(0, 0%, 100%, 0),
+      hsla(0, 0%, 100%, 0.6) 15%,
+      #fff 25%,
+      #fff 75%,
+      hsla(0, 0%, 100%, 0.6) 85%,
+      hsla(0, 0%, 100%, 0)
+    );
     .no-lyric {
       height: 100%;
       display: flex;
@@ -415,9 +434,9 @@ const handleToggleMusicList = () => {
         margin: 2px 0;
         padding: 12px 0;
         text-align: center;
-        transition: all 0.3s;
+        transition: all 0.15s;
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 12px;
         &:hover {
           background-color: var(--theme-bg-color-a8);
           backdrop-filter: saturate(500%) blur(10px);

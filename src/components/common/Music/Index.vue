@@ -62,7 +62,6 @@
       :nextMusic="nextMusic"
       :musicMode="musicMode"
       @close="lyricVisible = false"
-      @toggleMusicList="musicListVisible = !musicListVisible"
       @handlePlay="handlePlay"
       @handlePause="handlePause"
       @handlePrev="handlePrev"

@@ -21,7 +21,13 @@
 
       <div>
         <p class="title">
-          <UnorderedListOutlined />播放列表（共 {{ useMusicStore.musicList.length }} 首）
+          <span><UnorderedListOutlined />播放列表（共 {{ useMusicStore.musicList.length }} 首）</span>
+          <a-popconfirm
+            title="确认清空列表？"
+            @confirm="handleClearList"
+          >
+            <span><DeleteOutlined />清空列表</span>
+          </a-popconfirm>
         </p>
         <a-empty
           v-if="!useMusicStore.musicList.length"
@@ -75,6 +81,7 @@ import {
   SearchOutlined,
   UnorderedListOutlined,
   EllipsisOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons-vue";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
@@ -95,6 +102,10 @@ const close = () => {
 const handleShowSearch = () => {
   emit("showSearch");
 };
+
+const handleClearList = () => {
+  useMusicStore.musicList = [];
+}
 
 // 立即播放
 const handlePlayNow = (idx) => {
@@ -134,8 +145,21 @@ const handleDownload = (item) => {
     padding: 12px 8px;
     font-size: 16px;
     display: flex;
+    justify-content: space-between;
+    align-items: end;
     .anticon {
       margin: 2px 4px 0 0;
+    }
+    span {
+      &:nth-of-type(2) {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        cursor: pointer;
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
     }
   }
   .scroll-bar {
@@ -145,15 +169,16 @@ const handleDownload = (item) => {
     padding: 4px;
     .music-item {
       display: flex;
-      padding: 4px 8px 4px 4px;
+      padding: 8px 12px 8px 8px;
       border-radius: 8px;
       cursor: pointer;
       border-bottom: 1px solid var(--theme-bg-color-a8);
+      transition: all .3s ease-in-out;
       .music-cover {
-        width: 44px;
-        height: 44px;
+        width: 36px;
+        height: 36px;
         object-fit: cover;
-        border-radius: 8px;
+        border-radius: 6px;
         overflow: hidden;
       }
       .music-info {
@@ -162,7 +187,7 @@ const handleDownload = (item) => {
         font-size: 16px;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
         span {
           font-size: 12px;
         }

@@ -5,7 +5,7 @@
       <div class="mask"></div>
     </div>
     <div class="music-info">
-      <img class="cover" :src="playingMusic.cover" alt="" />
+      <img class="cover" @click="flag = !flag" :class="{playing: flag || useMusicStore.settings.playing}" :src="playingMusic.cover" alt="" />
       <p>{{ playingMusic.name }}</p>
       <span>{{ playingMusic.singer }}</span>
     </div>
@@ -44,6 +44,8 @@ const props = defineProps({
     default: false,
   }
 })
+
+const flag = ref(false);
 
 const fullscreenRef = ref(null);
 const { isFullscreen, toggle, exit } = useFullscreen(fullscreenRef);
@@ -140,7 +142,7 @@ const handleClose = () => {
     }
   }
   .music-info {
-    width: 30%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -148,8 +150,12 @@ const handleClose = () => {
     line-height: 1.8;
     color: #eee;
     .cover {
-      max-width: 80%;
+      max-width: 56%;
       margin-bottom: 20px;
+      transition: all .3s ease-in-out;
+      &.playing {
+        max-width: 80%;
+      }
     }
     p {
       font-size: 32px;
@@ -158,7 +164,6 @@ const handleClose = () => {
   .music-lyric {
     flex: 1;
     font-size: 1.4rem;
-    padding: 88px 0;
     .no-lyric {
       height: 100%;
       display: flex;
@@ -171,7 +176,7 @@ const handleClose = () => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 50px;
+      padding: 88px 50px;
       p {
         width: 100%;
         color: #eee;
@@ -182,11 +187,12 @@ const handleClose = () => {
         cursor: pointer;
         border-radius: 8px;
         &:hover {
-          background-color: var(--grey-1-a9);
+          background-color: var(--theme-bg-color-a8);
+          backdrop-filter: saturate(500%) blur(10px);
           color: var(--primary-color);
         }
         &.active {
-          font-size: 1.8rem;
+          font-size: 2rem;
           color: var(--primary-color);
         }
       }

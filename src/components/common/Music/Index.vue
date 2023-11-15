@@ -93,13 +93,13 @@ const showSearchF = () => {
     border-radius: 10px 10px 0 0;
     cursor: pointer;
     &.up {
-      top: -36px;
+      top: -54px;
       .anticon {
         transform: rotate(90deg);
       }
     }
     &.down {
-      top: -78px;
+      top: -96px;
       .anticon {
         transform: rotate(-90deg);
       }

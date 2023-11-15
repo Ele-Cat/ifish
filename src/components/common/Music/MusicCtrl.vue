@@ -285,7 +285,7 @@ const audioEnded = () => {
 
 const showLyric = () => {
   emit("showLyric");
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -293,6 +293,7 @@ const showLyric = () => {
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 12px;
   .info {
     margin: 0 12px 0 0;
@@ -323,7 +324,7 @@ const showLyric = () => {
         width: 100%;
         height: 100%;
         position: absolute;
-        background-color: rgba(0, 0, 0, .3);
+        background-color: rgba(0, 0, 0, 0.3);
         top: 0;
         left: 0;
         z-index: 1;
@@ -334,24 +335,32 @@ const showLyric = () => {
         position: absolute;
         width: 32px;
         height: 32px;
-        border: 2px solid #FFF;
+        border: 2px solid #fff;
         border-radius: 6px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        -webkit-mask: conic-gradient( from -90deg at 16px 16px, red 90deg, transparent 0deg);
-        -webkit-mask-position:-8px -8px;
+        -webkit-mask: conic-gradient(
+          from -90deg at 16px 16px,
+          red 90deg,
+          transparent 0deg
+        );
+        -webkit-mask-position: -8px -8px;
         z-index: 2;
         display: none;
       }
       &:hover {
-        &::before, &::after {
+        &::before,
+        &::after {
           display: block;
         }
       }
     }
   }
   .center {
+    position: absolute;
+    left: 260px;
+    right: 260px;
     font-size: 22px;
     flex: 1;
     height: 100%;
@@ -370,7 +379,8 @@ const showLyric = () => {
     }
     .progress-box {
       width: 66%;
-      min-width: 120px;
+      min-width: 200px;
+      max-width: 560px;
       display: flex;
       align-items: center;
       p {
@@ -380,7 +390,7 @@ const showLyric = () => {
         flex: 1;
         margin: 0 12px;
         :deep(.ant-slider-rail) {
-          background-color: #FFF;
+          background-color: #fff;
         }
         :deep(.ant-slider-track) {
           background-color: var(--primary-color);
@@ -427,7 +437,7 @@ const showLyric = () => {
         width: 66px;
       }
       :deep(.ant-slider-rail) {
-        background-color: #FFF;
+        background-color: #fff;
       }
       :deep(.ant-slider-track) {
         background-color: var(--primary-color);

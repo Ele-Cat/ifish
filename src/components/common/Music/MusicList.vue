@@ -29,10 +29,13 @@
             <span><DeleteOutlined />清空列表</span>
           </a-popconfirm>
         </p>
-        <a-empty
-          v-if="!useMusicStore.musicList.length"
-          description="暂无歌曲，请搜索添加"
-        ></a-empty>
+        <a-empty class="list-empty" v-if="!useMusicStore.musicList.length">
+          <template #description>
+            <span class="description">
+              暂无歌曲，请<a @click="handleShowSearch">搜索添加</a>
+            </span>
+          </template>
+        </a-empty>
         <perfect-scrollbar class="scroll-bar">
           <div class="music-list">
             <div
@@ -159,6 +162,14 @@ const handleDownload = (item) => {
         &:hover {
           color: var(--primary-color);
         }
+      }
+    }
+  }
+  .list-empty {
+    margin-top: 100px;
+    .description {
+      a {
+        color: var(--primary-color);
       }
     }
   }

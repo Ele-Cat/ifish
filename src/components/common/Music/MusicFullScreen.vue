@@ -64,7 +64,7 @@ const playingMusic = ref({});
 watch(
   () => [useMusicStore.activeIndex, useMusicStore.settings.playing],
   () => {
-    playingMusic.value = useMusicStore.musicList[useMusicStore.activeIndex];
+    playingMusic.value = useMusicStore.musicList[useMusicStore.activeIndex] || {};
   },
   {
     immediate: true,
@@ -90,7 +90,7 @@ const getLyric = () => {
       `https://api.lolimi.cn/API/kggc/api.php?msg=${playingMusic.value.name}-${playingMusic.value.singer}&n=1`
     )
     .then((res) => {
-      const { content } = res.data.data;
+      const { content } = res.data.data || {};
       if (res.data.code === 1) {
         useMusicStore.musicList[useMusicStore.activeIndex]["content"] = content;
       }

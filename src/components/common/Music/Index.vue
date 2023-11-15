@@ -2,7 +2,7 @@
   <div class="music">
     <div
       class="toggle-icon bf"
-      :title="useMusicStore.visible ? '关闭播放器' : '打开播放器'"
+      :title="useMusicStore.visible ? '隐藏播放器' : '显示播放器'"
       :class="[useMusicStore.visible ? 'down' : 'up']"
       @click="handleToggleMusicVisible"
     >

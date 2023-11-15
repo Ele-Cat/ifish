@@ -54,7 +54,21 @@
       <MusicSearch />
     </IDialog>
 
-    <MusicFullScreen :open="lyricVisible" @close="lyricVisible = false" />
+    <MusicFullScreen
+      :open="lyricVisible"
+      :musicCurrentTime="musicCurrentTime"
+      :musicDuration="musicDuration"
+      :prevMusic="prevMusic"
+      :nextMusic="nextMusic"
+      :musicMode="musicMode"
+      @close="lyricVisible = false"
+      @toggleMusicList="musicListVisible = !musicListVisible"
+      @handlePlay="handlePlay"
+      @handlePause="handlePause"
+      @handlePrev="handlePrev"
+      @handleNext="handleNext"
+      @handleDurationChange="handleDurationChange"
+    />
   </div>
 </template>
 
@@ -67,6 +81,7 @@ import MusicCtrl from "./MusicCtrl.vue";
 import MusicList from "./MusicList.vue";
 import MusicSearch from "./MusicSearch.vue";
 import MusicFullScreen from "./MusicFullScreen.vue";
+import { getRandomIntInRange } from "@/utils/utils";
 
 onMounted(() => {
   useMusicStore.settings.playing = false;

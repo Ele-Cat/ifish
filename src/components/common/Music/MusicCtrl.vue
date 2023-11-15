@@ -114,8 +114,18 @@ import {
 } from "@ant-design/icons-vue";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
-import { secToMs, getRandomIntInRange } from "@/utils/utils";
-const emit = defineEmits(["toggleMusicList", "showSearch", "showLyric", "handlePlay"]);
+import { secToMs } from "@/utils/utils";
+
+const emit = defineEmits([
+  "toggleMusicList",
+  "showSearch",
+  "handleDurationChange",
+  "handlePlay",
+  "handlePause",
+  "handlePrev",
+  "handleNext",
+  "showLyric",
+]);
 const props = defineProps({
   musicCurrentTime: {
     // 当前播放进度

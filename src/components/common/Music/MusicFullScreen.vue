@@ -14,6 +14,87 @@
       />
       <p>{{ playingMusic.name }}</p>
       <span>{{ playingMusic.singer }}</span>
+      <div class="progress-box">
+        <p>{{ secToMs(currentTime) }}</p>
+        <a-slider
+          class="play-slider"
+          :min="0"
+          :max="musicDuration"
+          @change="handleDurationChange"
+          v-model:value="currentTime"
+          :tipFormatter="progressTipFormatter"
+        />
+        <p>{{ secToMs(musicDuration) }}</p>
+      </div>
+      <div class="prev-next">
+        <div class="mode">
+          <a-tooltip :title="musicMode">
+            <i
+              class="ifishfont ifish-musicListLoop"
+              title="列表循环"
+              v-if="useMusicStore.settings.mode === 'listCycle'"
+              @click="handleChangeMode('singleCycle')"
+            ></i>
+            <i
+              class="ifishfont ifish-musicSingleCycle"
+              title="单曲循环"
+              v-if="useMusicStore.settings.mode === 'singleCycle'"
+              @click="handleChangeMode('randomPlay')"
+            ></i>
+            <i
+              class="ifishfont ifish-musicRandomPlay"
+              title="随机播放"
+              v-if="useMusicStore.settings.mode === 'randomPlay'"
+              @click="handleChangeMode('listCycle')"
+            ></i>
+          </a-tooltip>
+        </div>
+        <a-tooltip :title="`上一首${prevMusic ? '：' : ''}${prevMusic}`">
+          <VerticalRightOutlined @click="handlePrev" />
+        </a-tooltip>
+        <a-tooltip :title="useMusicStore.settings.playing ? '点击暂停' : '点击播放'">
+          <PlayCircleOutlined
+            class="play"
+            @click="handlePlay"
+            v-if="!useMusicStore.settings.playing"
+          />
+          <PauseCircleOutlined class="pause" @click="handlePause" v-else />
+        </a-tooltip>
+        <a-tooltip :title="`下一首${nextMusic ? '：' : ''}${nextMusic}`">
+          <VerticalLeftOutlined @click="handleNext" />
+        </a-tooltip>
+        <a-popover placement="rightBottom">
+          <template #content>
+            <perfect-scrollbar class="scroll-music">
+              <div class="music-list">
+                <div
+                  class="music-item"
+                  v-for="(item, index) in useMusicStore.musicList"
+                  :key="index"
+                  :class="{ active: useMusicStore.activeIndex === index }"
+                  @click="handlePlayNow(index)"
+                >
+                  <div class="music-cover">
+                    <img
+                      :src="item.cover"
+                      onerror="this.src='./images/music.png'"
+                      alt=""
+                    />
+                  </div>
+                  <div class="music-info">
+                    <p>{{ item.name }}</p>
+                    <span>{{ item.singer }}</span>
+                  </div>
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </template>
+          <template #title>
+            <span>播放列表</span>
+          </template>
+          <MenuUnfoldOutlined @click="handleToggleMusicList" />
+        </a-popover>
+      </div>
     </div>
     <div class="music-lyric">
       <p class="no-lyric" v-if="!lyricList.length">暂无歌词</p>
@@ -41,17 +122,56 @@ import {
   DoubleRightOutlined,
   FullscreenOutlined,
   FullscreenExitOutlined,
+  VerticalRightOutlined,
+  PlayCircleOutlined,
+  PauseCircleOutlined,
+  VerticalLeftOutlined,
+  MenuUnfoldOutlined,
 } from "@ant-design/icons-vue";
+
 import axios from "axios";
 import { useFullscreen } from "@vueuse/core";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
+import { secToMs } from "@/utils/utils";
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits([
+  "close",
+  "handleDurationChange",
+  "handlePlay",
+  "handlePause",
+  "handlePrev",
+  "handleNext",
+]);
 const props = defineProps({
   open: {
     type: Boolean,
     default: false,
+  },
+  musicCurrentTime: {
+    // 当前播放进度
+    type: Number,
+    default: 0,
+  },
+  musicDuration: {
+    // 音乐时长
+    type: Number,
+    default: 0,
+  },
+  prevMusic: {
+    // 上一首
+    type: String,
+    default: "",
+  },
+  nextMusic: {
+    // 下一首
+    type: String,
+    default: "",
+  },
+  musicMode: {
+    // 播放模式
+    type: String,
+    default: "",
   },
 });
 
@@ -65,6 +185,18 @@ watch(
   () => [useMusicStore.activeIndex, useMusicStore.settings.playing],
   () => {
     playingMusic.value = useMusicStore.musicList[useMusicStore.activeIndex] || {};
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+const currentTime = ref(0);
+watch(
+  () => props.musicCurrentTime,
+  (newVal) => {
+    currentTime.value = newVal;
   },
   {
     immediate: true,
@@ -120,6 +252,41 @@ const handleClose = () => {
   exit();
   emit("close");
 };
+// 立即播放
+const handlePlayNow = (idx) => {
+  useMusicStore.playMusic(idx);
+};
+// 切换模式
+const handleChangeMode = (mode) => {
+  useMusicStore.changeMode(mode);
+};
+// 进度条时间格式化
+const progressTipFormatter = (val) => {
+  return secToMs(val);
+};
+// 拖拽进度条
+const handleDurationChange = (currentTime) => {
+  emit("handleDurationChange", currentTime);
+};
+// 执行播放
+const handlePlay = () => {
+  emit("handlePlay");
+};
+// 执行暂停
+const handlePause = () => {
+  emit("handlePause");
+};
+// 播放上一首
+const handlePrev = () => {
+  emit("handlePrev");
+};
+// 播放下一首
+const handleNext = () => {
+  emit("handleNext");
+};
+const handleToggleMusicList = () => {
+  emit("toggleMusicList");
+};
 </script>
 
 <style lang="less" scoped>
@@ -163,8 +330,16 @@ const handleClose = () => {
     justify-content: center;
     line-height: 1.8;
     color: #eee;
+    .anticon {
+      margin: 0 8px;
+      cursor: pointer;
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
     .cover {
       max-width: 56%;
+      max-width: 80%;
       margin-bottom: 20px;
       transition: all 0.3s ease-in-out;
       &.playing {
@@ -173,6 +348,49 @@ const handleClose = () => {
     }
     p {
       font-size: 32px;
+    }
+    .progress-box {
+      width: 66%;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      p {
+        font-size: 12px;
+      }
+      .play-slider {
+        flex: 1;
+        margin: 0 12px;
+        :deep(.ant-slider-rail) {
+          background-color: #fff;
+        }
+        :deep(.ant-slider-track) {
+          background-color: var(--primary-color);
+        }
+      }
+    }
+    .mode {
+      margin: 0 4px;
+      cursor: pointer;
+      position: relative;
+      top: 1px;
+      i {
+        font-size: 32px;
+      }
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+    .prev-next {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      font-size: 24px;
+      .play,
+      .pause {
+        font-size: 36px;
+        margin: 0 12px;
+      }
     }
   }
   .music-lyric {
@@ -230,6 +448,48 @@ const handleClose = () => {
       &:hover {
         color: var(--primary-color);
       }
+    }
+  }
+}
+</style>
+
+<style lang="less">
+.scroll-music {
+  max-height: 360px;
+}
+.music-list {
+  padding: 4px;
+  .music-item {
+    display: flex;
+    padding: 8px 12px 8px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--theme-bg-color-a8);
+    transition: all 0.3s ease-in-out;
+    .music-cover {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .music-info {
+      padding: 0 10px;
+      flex: 1;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      span {
+        font-size: 12px;
+      }
+    }
+    &:hover {
+      color: var(--primary-color);
+    }
+    &.active {
+      color: var(--primary-color);
+      background-color: var(--theme-bg-color-a8);
     }
   }
 }

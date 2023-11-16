@@ -1,15 +1,36 @@
 <template>
-  <div ref="contextMenuRef" class="custom-menu bf" v-show="useContextMenuStore.menuVisible"
-    :style="{ top: useContextMenuStore.menuTop + 'px', left: useContextMenuStore.menuLeft + 'px' }" @contextmenu="e => e.preventDefault()">
+  <div
+    ref="contextMenuRef"
+    class="custom-menu bf"
+    v-show="useContextMenuStore.menuVisible"
+    :style="{
+      top: useContextMenuStore.menuTop + 'px',
+      left: useContextMenuStore.menuLeft + 'px',
+    }"
+    @contextmenu="(e) => e.preventDefault()"
+  >
     <ul>
-      <li 
-        v-for="contextMenu in contextMenuList" 
-        :key="contextMenu.value" 
-        :class="{ 'border-top': contextMenu.borderTop, 'red': contextMenu.value === 'delete', 'layout-li': contextMenu.value === 'layout' }"
-        @click.stop="handleMenuClick(contextMenu.value)">
-        {{ contextMenu.label }}<CaretRightOutlined class="caret-right" v-if="contextMenu.value === 'layout'" />
+      <li
+        v-for="contextMenu in contextMenuList"
+        :key="contextMenu.value"
+        :class="{
+          'border-top': contextMenu.borderTop,
+          red: contextMenu.value === 'delete',
+          'layout-li': contextMenu.value === 'layout',
+        }"
+        @click.stop="handleMenuClick(contextMenu.value)"
+      >
+        {{ contextMenu.label
+        }}<CaretRightOutlined class="caret-right" v-if="contextMenu.value === 'layout'" />
         <ul class="layout-box bf" v-if="contextMenu.value === 'layout'">
-          <li v-for="item in appLayout" @click="handleEditLayout(item)" :class="{active: liActive(item)}" :key="item.label">{{ item.label }}</li>
+          <li
+            v-for="item in appLayout"
+            @click="handleEditLayout(item)"
+            :class="{ active: liActive(item) }"
+            :key="item.label"
+          >
+            {{ item.label }}
+          </li>
         </ul>
       </li>
     </ul>
@@ -17,14 +38,14 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import { CaretRightOutlined } from '@ant-design/icons-vue';
-import useStore from '@/store';
+import { ref, watch } from "vue";
+import { CaretRightOutlined } from "@ant-design/icons-vue";
+import useStore from "@/store";
 const { useContextMenuStore, useSystemStore, useAppStore } = useStore();
-import { useElementBounding } from '@vueuse/core';
+import { useElementBounding } from "@vueuse/core";
 import { toast } from "@/utils/feedback";
 import { appLayout } from "@/utils/enums";
-import eventBus from '@/utils/eventBus';
+import eventBus from "@/utils/eventBus";
 
 const contextMenuRef = ref(null);
 
@@ -33,7 +54,7 @@ const handleMenuClick = (type) => {
   const { id } = useContextMenuStore.activeApp;
   if (type === "addApps") {
     eventBus.emit("addApps", {
-      type: "add"
+      type: "add",
     });
   } else if (type === "edit") {
     eventBus.emit("addApps", {
@@ -47,106 +68,115 @@ const handleMenuClick = (type) => {
   } else if (type === "settings") {
     eventBus.emit("openSettings");
   } else if (type === "delete") {
-    useAppStore.lists.splice(useAppStore.lists.findIndex(app => app.id == id), 1)
+    useAppStore.lists.splice(
+      useAppStore.lists.findIndex((app) => app.id == id),
+      1
+    );
   }
   useContextMenuStore.activeApp = {};
   useContextMenuStore.menuVisible = false;
-}
+};
 
 const liActive = (item) => {
-  const activeApp = useContextMenuStore.activeApp
+  const activeApp = useContextMenuStore.activeApp;
   if (activeApp && activeApp.gridSize) {
-    return activeApp?.gridSize[0] === item?.value[0] && activeApp?.gridSize[1] === item?.value[1]
+    return (
+      activeApp?.gridSize[0] === item?.value[0] &&
+      activeApp?.gridSize[1] === item?.value[1]
+    );
   } else {
     return false;
   }
-}
+};
 const handleEditLayout = (item) => {
-  useAppStore.lists.map(app => {
+  useAppStore.lists.map((app) => {
     if (app.id === useContextMenuStore.activeApp.id) {
       app.gridSize = item.value;
     }
-  })
+  });
   // useContextMenuStore.activeApp = {};
   useContextMenuStore.menuVisible = false;
-}
+};
 
 // 根据点击的对象展示对应的菜单列表
-const contextMenuList = ref([])
+const contextMenuList = ref([]);
 
-watch(() => useContextMenuStore.activeApp, (newVal) => {
-  if (newVal) {
-    // const { x, y, top, right, bottom, left, width, height } = useElementBounding(contextMenuRef);
-    // console.log('x, y, top, right, bottom, left, width, height: ', x, y, top, right, bottom, left, width, height);
-    if (newVal.type === "page") {
-      if (useSystemStore.activeMenu === "home") {
+watch(
+  () => useContextMenuStore.activeApp,
+  (newVal) => {
+    if (newVal) {
+      // const { x, y, top, right, bottom, left, width, height } = useElementBounding(contextMenuRef);
+      // console.log('x, y, top, right, bottom, left, width, height: ', x, y, top, right, bottom, left, width, height);
+      if (newVal.type === "page") {
+        if (useSystemStore.activeMenu === "home") {
+          contextMenuList.value = [
+            {
+              label: "添加导航",
+              value: "addApps",
+            },
+            {
+              label: "随机壁纸",
+              value: "randomBg",
+            },
+            {
+              label: "壁纸设置",
+              value: "bgSettings",
+            },
+            {
+              label: "打开设置",
+              value: "settings",
+              borderTop: true,
+            },
+          ];
+        } else {
+          contextMenuList.value = [
+            {
+              label: "随机壁纸",
+              value: "randomBg",
+            },
+            {
+              label: "壁纸设置",
+              value: "bgSettings",
+            },
+            {
+              label: "打开设置",
+              value: "settings",
+              borderTop: true,
+            },
+          ];
+        }
+      } else if (newVal.type === "bookmark") {
         contextMenuList.value = [
           {
-            label: "添加导航",
-            value: "addApps",
+            label: "布局",
+            value: "layout",
           },
           {
-            label: "随机壁纸",
-            value: "randomBg",
+            label: "修改",
+            value: "edit",
           },
           {
-            label: "壁纸设置",
-            value: "bgSettings",
-          },
-          {
-            label: "打开设置",
-            value: "settings",
+            label: "删除",
+            value: "delete",
             borderTop: true,
           },
-        ]
-      } else {
+        ];
+      } else if (newVal.type === "component") {
         contextMenuList.value = [
           {
-            label: "随机壁纸",
-            value: "randomBg",
+            label: "布局",
+            value: "layout",
           },
           {
-            label: "壁纸设置",
-            value: "bgSettings",
-          },
-          {
-            label: "打开设置",
-            value: "settings",
+            label: "删除",
+            value: "delete",
             borderTop: true,
           },
-        ]
+        ];
       }
-    } else if (newVal.type === "bookmark") {
-      contextMenuList.value = [
-        {
-          label: "布局",
-          value: "layout",
-        },
-        {
-          label: "修改",
-          value: "edit",
-        },
-        {
-          label: "删除",
-          value: "delete",
-          borderTop: true,
-        },
-      ]
-    } else if (newVal.type === "component") {
-      contextMenuList.value = [
-        {
-          label: "布局",
-          value: "layout",
-        },
-        {
-          label: "删除",
-          value: "delete",
-          borderTop: true,
-        },
-      ]
     }
   }
-})
+);
 </script>
 
 <style lang="less" scoped>
@@ -162,7 +192,7 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
   box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
   z-index: 99;
   // overflow: hidden;
-  >ul {
+  > ul {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -186,7 +216,7 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
         color: #ff4d4f;
       }
       &:hover {
-        background-color: #E2E2E2;
+        background-color: #e2e2e2;
         background-color: var(--theme-bg-color-a8);
       }
       .layout-box {
@@ -201,12 +231,25 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
         display: none;
         li {
           list-style: none;
-          border-radius: 4px;
+          // border-radius: 4px;
           padding: 0 10px;
-          &.active, &:hover {
+          &.active,
+          &:hover {
             background-color: var(--theme-bg-color);
           }
+          &:nth-of-type(1) {
+            border-radius: 4px 4px 0 0;
+          }
+          &:nth-last-of-type(1) {
+            border-radius: 0 0 4px 4px;
+          }
         }
+      }
+      &:nth-of-type(1) {
+        border-radius: 4px 4px 0 0;
+      }
+      &:nth-last-of-type(1) {
+        border-radius: 0 0 4px 4px;
       }
       &.layout-li {
         &:hover {
@@ -217,7 +260,13 @@ watch(() => useContextMenuStore.activeApp, (newVal) => {
       }
     }
     .border-top {
-      border-top: 1px solid #EDEDED;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        left: 0;
+        border-top: 1px solid #ededed;
+      }
     }
   }
   &.show {

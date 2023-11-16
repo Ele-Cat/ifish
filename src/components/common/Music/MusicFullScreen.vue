@@ -102,8 +102,8 @@
           :key="index"
           @click="handleLyricJump(item, index)"
         >
-        <span v-show="false">{{ msToSec(item.time) }}</span>
-        {{ item.lyric }}
+          <span>{{ item.time }}</span>
+          {{ item.lyric }}
         </p>
       </perfect-scrollbar>
     </div>
@@ -234,24 +234,42 @@ watch(
   }
 );
 
+const activeLyricIndex = ref(0);
 const shouldHighlight = (idx) => {
+  const skewing = 1.0;
   const currentLineTime = msToSec(lyricList.value[idx].time);
   const nextLineTime = msToSec(lyricList.value[idx + 1]?.time); // 下一行歌词的时间
-  const active = currentTime.value >= currentLineTime && (currentTime.value < nextLineTime || !nextLineTime);
-  const lyricDom = document.getElementById('lyric-list');
-  if (active && lyricDom) {
-    const listActive = lyricDom.querySelector('.active');
-    // console.log('listActive: ', listActive.scrollTop);
-    lyricDom.scrollTo({
-      top: 60 * idx,
-      behavior: "smooth",
-    })
-    // 滚动到条目中间
-    // listActive.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // listActive.scrollIntoView({ behavior: 'smooth', alignToTop: true });
+  const active =
+    currentTime.value + skewing >= currentLineTime &&
+    (currentTime.value + skewing < nextLineTime || !nextLineTime);
+  if (active) {
+    activeLyricIndex.value = idx;
   }
   return active;
-}
+};
+// 歌词自动滚动到中间
+watch(
+  () => activeLyricIndex.value,
+  () => {
+    let lyricDom = document.getElementById("lyric-list");
+    if (lyricDom) {
+      let activeElement = lyricDom.querySelector(".active");
+      if (activeElement) {
+        lyricDom.scrollTo({
+          top:
+            activeElement.offsetTop -
+            lyricDom.clientHeight / 2 +
+            activeElement.clientHeight / 2,
+          behavior: "smooth",
+        });
+      }
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
 
 const getLyric = () => {
   axios
@@ -304,10 +322,11 @@ const handleNext = () => {
 };
 const handleLyricJump = (item, idx) => {
   emit("handleDurationChange", msToSec(item.time));
+  emit("handlePlay");
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .music-fullscreen {
   position: fixed;
   left: 0;
@@ -436,6 +455,10 @@ const handleLyricJump = (item, idx) => {
       flex-direction: column;
       align-items: center;
       padding: 50vh 60px 50vh 0;
+      .ps__thumb-y,
+      .ps__thumb-y {
+        display: none !important;
+      }
       p {
         width: 100%;
         color: #eee;
@@ -445,10 +468,20 @@ const handleLyricJump = (item, idx) => {
         transition: all 0.15s;
         cursor: pointer;
         border-radius: 12px;
+        span {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          font-size: 14px;
+          display: none;
+        }
         &:hover {
           background-color: var(--theme-bg-color-a8);
           backdrop-filter: saturate(500%) blur(10px);
           color: var(--primary-color);
+          span {
+            display: block;
+          }
         }
         &.active {
           font-size: 2rem;

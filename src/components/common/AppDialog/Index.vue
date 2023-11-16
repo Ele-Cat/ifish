@@ -1,6 +1,6 @@
 <template>
-  <IDialog title="添加书签" :width="800" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
-    <a-tabs class="add-box" v-model:activeKey="activeMenu" tab-position="left">
+  <IDialog :title="editType ? '编辑书签' : '添加书签'" :width="800" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
+    <a-tabs v-if="editType === 'add'" class="add-box" v-model:activeKey="activeMenu" tab-position="left">
       <a-tab-pane v-for="tab in tabList" :disabled="tab.disabled" :key="tab.value">
         <template #tab>
           <span>
@@ -15,6 +15,7 @@
         </perfect-scrollbar>
       </a-tab-pane>
     </a-tabs>
+    <CustomTags class="add-box" v-else :editType="editType" :activeApp="activeApp" />
   </IDialog>
 </template>
 
@@ -22,8 +23,8 @@
 import { ref, defineAsyncComponent, reactive } from "vue";
 import { TagsFilled, TagFilled, AppstoreFilled } from '@ant-design/icons-vue';
 import eventBus from '@/utils/eventBus';
-const SystemTags = defineAsyncComponent(() => import('./SystemTags.vue'));
 const CustomTags = defineAsyncComponent(() => import('./CustomTags.vue'));
+const SystemTags = defineAsyncComponent(() => import('./SystemTags.vue'));
 const SystemComponents = defineAsyncComponent(() => import('./SystemComponents.vue'));
 
 const tabList = reactive([
@@ -49,7 +50,11 @@ const tabList = reactive([
 const dialogVisible = ref(false);
 const activeMenu = ref('1');
 
-eventBus.on("addApps", () => {
+const editType = ref("add");
+const activeApp = ref({});
+eventBus.on("addApps", ({type, app}) => {
+  editType.value = type;
+  activeApp.value = app;
   dialogVisible.value = true;
 })
 </script>

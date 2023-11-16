@@ -32,22 +32,24 @@ const contextMenuRef = ref(null);
 const handleMenuClick = (type) => {
   const { id } = useContextMenuStore.activeApp;
   if (type === "addApps") {
-    eventBus.emit("addApps");
+    eventBus.emit("addApps", {
+      type: "add"
+    });
+  } else if (type === "edit") {
+    eventBus.emit("addApps", {
+      type: "edit",
+      app: useContextMenuStore.activeApp,
+    });
   } else if (type === "randomBg") {
     useSystemStore.randomWallpaper();
   } else if (type === "bgSettings") {
     eventBus.emit("openBgSettings");
   } else if (type === "settings") {
     eventBus.emit("openSettings");
-  } else if (type === "edit") {
-    toast({
-      type: "warning",
-      content: "开发中...",
-    });
   } else if (type === "delete") {
     useAppStore.lists.splice(useAppStore.lists.findIndex(app => app.id == id), 1)
   }
-  useContextMenuStore.activeApp = {}; 
+  useContextMenuStore.activeApp = {};
   useContextMenuStore.menuVisible = false;
 }
 

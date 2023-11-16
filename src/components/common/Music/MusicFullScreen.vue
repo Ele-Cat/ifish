@@ -241,7 +241,7 @@ const shouldHighlight = (idx) => {
   const lyricDom = document.getElementById('lyric-list');
   if (active && lyricDom) {
     const listActive = lyricDom.querySelector('.active');
-    console.log('listActive: ', listActive.scrollTop);
+    // console.log('listActive: ', listActive.scrollTop);
     lyricDom.scrollTo({
       top: 60 * idx,
       behavior: "smooth",

@@ -17,7 +17,7 @@
           height: 88,
         }" :aspectRatio="1" allowClear @use="onIconUpload"></ImageEditor>
       </a-form-item>
-      <a-form-item :wrapper-col="{ span: 14, offset: 3 }">
+      <a-form-item label=" " :colon="false">
         <a-button type="primary" @click="onSubmit">保存</a-button>
         <a-button style="margin-left: 10px" @click="resetForm">重置</a-button>
       </a-form-item>
@@ -26,15 +26,37 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { ref, watch } from 'vue';
 import useStore from "@/store";
 const { useAppStore } = useStore();
 import { uuid } from "@/utils/utils";
 import { toast } from "@/utils/feedback";
 import ImageEditor from "@/components/common/ImageEditor.vue";
+import eventBus from '@/utils/eventBus';
+
+const props = defineProps({
+  editType: {
+    type: String,
+    default: "add",
+  },
+  activeApp: {
+    type: Object,
+    default: () => {},
+  },
+})
+
+const formState = ref({});
+watch(() => [props.editType, props.activeApp], () => {
+  if (props.editType === "edit") {
+    const {id, url, title, description, icon} = props.activeApp;
+    formState.value = {id, url, title, description, icon}
+  }
+}, {
+  immediate: true,
+  deep: true,
+})
 
 const formRef = ref();
-const formState = reactive({});
 const labelCol = {
   style: {
     width: '80px',
@@ -63,9 +85,8 @@ const rules = {
   ],
 };
 
-
 const onIconUpload = (url) => {
-  formState.icon = url;
+  formState.value.icon = url;
   formRef.value.validateFields(["icon"]);
 }
 
@@ -73,19 +94,32 @@ const onSubmit = () => {
   formRef.value
     .validate()
     .then(() => {
-      useAppStore.lists.push({
-        id: uuid(21),
-        type: "bookmark",
-        title: formState.title,
-        url: formState.url,
-        icon: formState.icon,
-        description: formState.description,
-        gridSize: [1, 1],
-      })
+      if (props.editType === "edit") {
+        const activeIndex = useAppStore.lists.findIndex(app => app.id === formState.value.id);
+        useAppStore.lists.splice(activeIndex, 1, {
+          id: formState.value.id,
+          type: "bookmark",
+          title: formState.value.title,
+          url: formState.value.url,
+          icon: formState.value.icon,
+          description: formState.value.description,
+          gridSize: [1, 1],
+        })
+      } else {
+        useAppStore.lists.push({
+          id: uuid(21),
+          type: "bookmark",
+          title: formState.value.title,
+          url: formState.value.url,
+          icon: formState.value.icon,
+          description: formState.value.description,
+          gridSize: [1, 1],
+        })
+        resetForm();
+      }
       toast({
-        content: "添加成功",
+        content: props.editType === "edit" ? "编辑成功" : "添加成功",
       });
-      resetForm();
     })
     .catch(error => {
       console.log('error', error);

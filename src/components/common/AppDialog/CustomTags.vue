@@ -8,7 +8,12 @@
         <a-input v-model:value="formState.title" placeholder="请输入网站名称" />
       </a-form-item>
       <a-form-item label="网站介绍" name="description">
-        <a-input v-model:value="formState.description" placeholder="请输入网站介绍" />
+        <!-- <a-input v-model:value="formState.description" placeholder="请输入网站介绍" /> -->
+        <a-textarea
+          v-model:value="formState.description"
+          placeholder="请输入网站介绍"
+          :auto-size="{ minRows: 2, maxRows: 5 }"
+        />
       </a-form-item>
       <a-form-item label="网站图标" name="icon">
         <ImageEditor :imageInfo="{
@@ -26,13 +31,12 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import useStore from "@/store";
 const { useAppStore } = useStore();
 import { uuid } from "@/utils/utils";
 import { toast } from "@/utils/feedback";
 import ImageEditor from "@/components/common/ImageEditor.vue";
-import eventBus from '@/utils/eventBus';
 
 const props = defineProps({
   editType: {
@@ -45,11 +49,17 @@ const props = defineProps({
   },
 })
 
-const formState = ref({});
+let formState = reactive({
+  id: "",
+  url: "",
+  title: "",
+  description: "",
+  icon: ""
+});
 watch(() => [props.editType, props.activeApp], () => {
   if (props.editType === "edit") {
     const {id, url, title, description, icon} = props.activeApp;
-    formState.value = {id, url, title, description, icon}
+    formState = {...formState, ...{id, url, title, description, icon}}
   }
 }, {
   immediate: true,
@@ -86,7 +96,7 @@ const rules = {
 };
 
 const onIconUpload = (url) => {
-  formState.value.icon = url;
+  formState.icon = url;
   formRef.value.validateFields(["icon"]);
 }
 
@@ -95,24 +105,24 @@ const onSubmit = () => {
     .validate()
     .then(() => {
       if (props.editType === "edit") {
-        const activeIndex = useAppStore.lists.findIndex(app => app.id === formState.value.id);
+        const activeIndex = useAppStore.lists.findIndex(app => app.id === formState.id);
         useAppStore.lists.splice(activeIndex, 1, {
-          id: formState.value.id,
+          id: formState.id,
           type: "bookmark",
-          title: formState.value.title,
-          url: formState.value.url,
-          icon: formState.value.icon,
-          description: formState.value.description,
+          title: formState.title,
+          url: formState.url,
+          icon: formState.icon,
+          description: formState.description,
           gridSize: [1, 1],
         })
       } else {
         useAppStore.lists.push({
           id: uuid(21),
           type: "bookmark",
-          title: formState.value.title,
-          url: formState.value.url,
-          icon: formState.value.icon,
-          description: formState.value.description,
+          title: formState.title,
+          url: formState.url,
+          icon: formState.icon,
+          description: formState.description,
           gridSize: [1, 1],
         })
         resetForm();

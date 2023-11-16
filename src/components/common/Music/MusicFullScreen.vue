@@ -442,6 +442,15 @@ const handleLyricJump = (item, idx) => {
       hsla(0, 0%, 100%, 0.6) 85%,
       hsla(0, 0%, 100%, 0)
     );
+    mask: linear-gradient(
+      180deg,
+      hsla(0, 0%, 100%, 0),
+      hsla(0, 0%, 100%, 0.6) 15%,
+      #fff 25%,
+      #fff 75%,
+      hsla(0, 0%, 100%, 0.6) 85%,
+      hsla(0, 0%, 100%, 0)
+    );
     .no-lyric {
       height: 100%;
       display: flex;

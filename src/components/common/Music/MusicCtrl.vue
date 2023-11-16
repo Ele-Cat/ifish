@@ -281,7 +281,9 @@ const showLyric = () => {
           red 90deg,
           transparent 0deg
         );
+        mask: conic-gradient(from -90deg at 16px 16px, red 90deg, transparent 0deg);
         -webkit-mask-position: -8px -8px;
+        mask-position: -8px -8px;
         z-index: 2;
         display: none;
       }

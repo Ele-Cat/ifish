@@ -202,7 +202,7 @@ const getMusic = async (item, idx) => {
         if (res.data.code === 200) {
           resolve(res.data);
         } else {
-          reject();
+          resolve({});
         }
       });
   });
@@ -213,11 +213,12 @@ const getMusic = async (item, idx) => {
         if (res.data.code === 1) {
           resolve(res.data.data);
         } else {
-          reject();
+          resolve({});
         }
       });
   });
   const values = await Promise.all([promise1, promise2]);
+  console.log("values: ", values);
   return { ...values[0], ...values[1] };
 };
 </script>

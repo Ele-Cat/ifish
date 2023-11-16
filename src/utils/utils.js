@@ -92,13 +92,17 @@ export function secToMs(sec) {
  * @returns 
  */
 export function msToSec(timeString) {
-  var timeArray = timeString.split(':');
-  var minutes = parseInt(timeArray[0], 10);
-  var secondsArray = timeArray[1].split('.');
-  var seconds = parseInt(secondsArray[0], 10);
-  var milliseconds = parseInt(secondsArray[1], 10);
-  var totalSeconds = minutes * 60 + seconds + milliseconds / 100;
-  return totalSeconds;
+  if (!timeString) return 0;
+  const [minutes, seconds] = timeString.split(':');
+  return parseInt(minutes) * 60 + seconds * 1;
+
+  // let timeArray = timeString.split(':');
+  // let minutes = parseInt(timeArray[0], 10);
+  // let secondsArray = timeArray[1].split('.');
+  // let seconds = parseInt(secondsArray[0], 10);
+  // let milliseconds = parseInt(secondsArray[1], 10);
+  // let totalSeconds = minutes * 60 + seconds + milliseconds / 100;
+  // return totalSeconds || 0;
 }
 
 /**

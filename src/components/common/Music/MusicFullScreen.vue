@@ -63,7 +63,7 @@
         <a-tooltip :title="`下一首${nextMusic ? '：' : ''}${nextMusic}`">
           <VerticalLeftOutlined @click="handleNext" />
         </a-tooltip>
-        <a-popover placement="rightBottom">
+        <a-popover title="播放列表" placement="rightBottom">
           <template #content>
             <perfect-scrollbar class="scroll-music">
               <div class="music-list">
@@ -89,23 +89,21 @@
               </div>
             </perfect-scrollbar>
           </template>
-          <template #title>
-            <span>播放列表</span>
-          </template>
           <MenuUnfoldOutlined />
         </a-popover>
       </div>
     </div>
     <div class="music-lyric">
       <p class="no-lyric" v-if="!lyricList.length">暂无歌词</p>
-      <perfect-scrollbar class="scroll-bar">
+      <perfect-scrollbar class="scroll-bar" id="lyric-list">
         <p
           v-for="(item, index) in lyricList"
-          :class="{ active: index === activeLyricIndex }"
+          :class="{ active: shouldHighlight(index) }"
           :key="index"
           @click="handleLyricJump(item, index)"
         >
-          {{ item.lyric }}
+        <span v-show="false">{{ msToSec(item.time) }}</span>
+        {{ item.lyric }}
         </p>
       </perfect-scrollbar>
     </div>
@@ -118,7 +116,7 @@
 </template>
 
 <script setup>
-import { computed, nextTick, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import {
   DoubleRightOutlined,
   FullscreenOutlined,
@@ -225,24 +223,35 @@ const lyricList = computed(() => {
 });
 
 const currentTime = ref(0);
-const activeLyricIndex = ref(0);
 watch(
   () => props.musicCurrentTime,
   (newVal) => {
     currentTime.value = newVal;
-    // console.log("lyricList: ", lyricList.value);
-    // for (let i = 0; i < lyricList.value.length; i++) {
-    //   const lyric = lyricList.value[i];
-    //   if (newVal > msToSec(lyric[i]?.time) && newVal < msToSec(lyric[i + 1]?.time)) {
-    //     activeLyricIndex.value = i;
-    //   }
-    // }
   },
   {
     immediate: true,
     deep: true,
   }
 );
+
+const shouldHighlight = (idx) => {
+  const currentLineTime = msToSec(lyricList.value[idx].time);
+  const nextLineTime = msToSec(lyricList.value[idx + 1]?.time); // 下一行歌词的时间
+  const active = currentTime.value >= currentLineTime && (currentTime.value < nextLineTime || !nextLineTime);
+  const lyricDom = document.getElementById('lyric-list');
+  if (active && lyricDom) {
+    const listActive = lyricDom.querySelector('.active');
+    console.log('listActive: ', listActive.scrollTop);
+    lyricDom.scrollTo({
+      top: 60 * idx,
+      behavior: "smooth",
+    })
+    // 滚动到条目中间
+    // listActive.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // listActive.scrollIntoView({ behavior: 'smooth', alignToTop: true });
+  }
+  return active;
+}
 
 const getLyric = () => {
   axios
@@ -295,7 +304,6 @@ const handleNext = () => {
 };
 const handleLyricJump = (item, idx) => {
   emit("handleDurationChange", msToSec(item.time));
-  activeLyricIndex.value = idx;
 };
 </script>
 
@@ -427,7 +435,7 @@ const handleLyricJump = (item, idx) => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 88px 60px 44px 0;
+      padding: 50vh 60px 50vh 0;
       p {
         width: 100%;
         color: #eee;

@@ -1,6 +1,6 @@
 <template>
   <div class="settings-news">
-    <p class="title">资讯【拖拽排序】</p>
+    <p class="title">支持拖拽排序、是否启用</p>
     <Draggable
     :list="useNewsStore.lists"
     :animation="100"

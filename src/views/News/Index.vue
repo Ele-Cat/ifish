@@ -7,7 +7,7 @@
           <p :title="`更新时间${newsType['updateTime']}`">{{ newsType['updateTime'] }}<ReloadOutlined v-if="!newsType.isFetching" :title="`拉取最新${newsType.label}`" @click="fetchNews(newsType, true)" /><LoadingOutlined v-else title="拉取中..." /></p>
         </div>
         <perfect-scrollbar class="scroll-bar">
-          <a-spin v-if="newsType.isFetching" tip="加载中..." size="large"></a-spin>
+          <a-spin v-if="newsType.isFetching" tip="加载中..."></a-spin>
           <a-empty v-else-if="!newsType.isFetching && !newsType['data']?.length" description="暂无数据" />
           <div v-else>
             <a class="news-info" v-for="(news, index) in newsType['data']" :key="index" :href="news.url" :title="news.title" target="_blank">
@@ -36,7 +36,7 @@ const newsTypes = computed(() => {
 const fetchNews = (item, flag) => {
   const url = `https://api.lolimi.cn/API/jhrb/?hot=${item.value}`;
   item["isFetching"] = true;
-  // item["data"] = [];
+  item["data"] = [];
   axios.get(url).then(res => {
     const {data, code, updateTime} = res.data;
     if (code === 200) {
@@ -74,10 +74,11 @@ const formatHot = (hot) => {
 
 <style lang="less" scoped>
 .news {
+  padding-bottom: 20px;
   .news-box {
     display: grid;
     grid-template-columns: repeat(3, minmax(0px, 1fr));
-    gap: 12px;
+    gap: 18px;
     .news-item {
       grid-column: span 1 / span 1;
       overflow: hidden;
@@ -116,7 +117,7 @@ const formatHot = (hot) => {
         box-shadow: 0 0 10px inset var(--grey-9-a1);
         .ant-spin-spinning {
           display: block;
-          margin: 66px auto;
+          margin: 88px auto;
         }
         .news-info {
           display: flex;

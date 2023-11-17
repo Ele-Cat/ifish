@@ -218,7 +218,6 @@ const getMusic = async (item, idx) => {
       });
   });
   const values = await Promise.all([promise1, promise2]);
-  console.log("values: ", values);
   return { ...values[0], ...values[1] };
 };
 </script>

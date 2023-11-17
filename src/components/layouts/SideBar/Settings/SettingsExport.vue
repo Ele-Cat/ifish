@@ -54,7 +54,6 @@ const handleImport = (e) => {
   const reader = new FileReader();
   reader.readAsText(file);
   reader.onload = (res) => {
-    console.log("res: ", res);
     const { type, data } = JSON.parse(res.target.result);
     if (!type || !["app", "system", "all"].includes(type) || !data) {
       toast({
@@ -62,7 +61,6 @@ const handleImport = (e) => {
         content: "JSON文件中的格式有问题，请检查后重试",
       });
     } else {
-      console.log(type, data);
       if (type === "app") {
         useAppStore.lists = data;
       } else if (type === "system") {

@@ -1,20 +1,20 @@
 <template>
   <div class="news">
-    <a-spin v-if="isFetching && !isFinished"></a-spin>
     <div class="news-box">
       <div class="news-item bf" v-for="newsType in newsTypes" :key="newsType.key">
         <div class="news-title">
           <p>{{ newsType.label }}</p>
-          <p :title="`更新时间${newsType['datas']['time']}`">{{ newsType['datas']['time'] }}<ReloadOutlined v-if="!newsType.isFetching" :title="`拉取最新${newsType.label}`" @click="handleRefresh(newsType.value)" /><LoadingOutlined v-else title="拉取中..." /></p>
+          <p :title="`更新时间${newsType['updateTime']}`">{{ newsType['updateTime'] }}<ReloadOutlined v-if="!newsType.isFetching" :title="`拉取最新${newsType.label}`" @click="fetchNews(newsType, true)" /><LoadingOutlined v-else title="拉取中..." /></p>
         </div>
         <perfect-scrollbar class="scroll-bar">
-          <div v-if="newsType['datas']['hotTops']?.length">
-            <a class="news-info" v-for="(news, index) in newsType['datas']['hotTops']" :key="index" :href="news.url" :title="news.title" target="_blank">
-              <span>{{ index + 1 }}.{{ news.title }}</span>
-              <span>{{ news.hotValue }}</span>
+          <a-spin v-if="newsType.isFetching" tip="加载中..." size="large"></a-spin>
+          <a-empty v-else-if="!newsType.isFetching && !newsType['data']?.length" description="暂无数据" />
+          <div v-else>
+            <a class="news-info" v-for="(news, index) in newsType['data']" :key="index" :href="news.url" :title="news.title" target="_blank">
+              <span>{{ index + 1 }}.<template v-if="newsType.value === '历史上的今天'">【{{ news.year }}年】</template>{{ news.title }}</span>
+              <span>{{ formatHot(news.hot) }}</span>
             </a>
           </div>
-          <a-empty v-else description="暂无数据" />
         </perfect-scrollbar>
       </div>
     </div>
@@ -22,120 +22,68 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { computed } from 'vue';
 import axios from 'axios';
 import { ReloadOutlined, LoadingOutlined } from '@ant-design/icons-vue';
+import dayjs from "dayjs";
+import useStore from "@/store";
+const { useNewsStore } = useStore();
 import { toast } from "@/utils/feedback";
 
-const newsTypes = reactive([
-  {
-    label: "知乎热议",
-    value: "zhihu",
-    datas: [],
-    isFetching: true,
-  },
-  {
-    label: "百度热搜",
-    value: "baidu",
-    datas: [],
-    isFetching: true,
-  },
-  {
-    label: "抖音热搜",
-    value: "douyin",
-    datas: [],
-    isFetching: true,
-  },
-  {
-    label: "微博热搜",
-    value: "weibo",
-    datas: [],
-    isFetching: true,
-  },
-  {
-    label: "b站热搜",
-    value: "bilibili",
-    datas: [],
-    isFetching: true,
-  },
-  {
-    label: "贴吧热议",
-    value: "tieba",
-    datas: [],
-    isFetching: true,
-  },
-  {
-    label: "头条热搜",
-    value: "toutiao",
-    datas: [],
-    isFetching: true,
-  },
-  {
-    label: "历史上的今天",
-    value: "history",
-    datas: [],
-    isFetching: true,
-  },
-  {
-    label: "52破解",
-    value: "pojie52",
-    datas: [],
-    isFetching: true,
-  },
-])
-
-const isFinished = ref(false);
-// http://hot.lolimi.cn
-axios.get('https://api.moyuduck.com/hot/all').then(res => {
-  for (const key in res.data.data) {
-    newsTypes.map(newsType => {
-      if (newsType.value === key) {
-        newsType["datas"] = res.data.data[key];
-      }
-      newsType["isFetching"] = false;
-    })
-  }
-  isFinished.value = true;
-})
-
-const handleRefresh = (type) => {
-  newsTypes.map(newsType => {
-    if (newsType["value"] === type) {
-      newsType["isFetching"] = true;
-    }
-  })
-  axios.get(`https://api.moyuduck.com/hot/top?type=${type}`).then(res => {
-    newsTypes.map(newsType => {
-      if (newsType["value"] === type) {
-        newsType["datas"] = res.data.data || [];
-        newsType["isFetching"] = false;
+const newsTypes = computed(() => {
+  return useNewsStore.lists.filter(item => item.visible);
+});
+const fetchNews = (item, flag) => {
+  const url = `https://api.lolimi.cn/API/jhrb/?hot=${item.value}`;
+  item["isFetching"] = true;
+  // item["data"] = [];
+  axios.get(url).then(res => {
+    const {data, code, updateTime} = res.data;
+    if (code === 200) {
+      item["data"] = data.sort((a, b) => b.hot - a.hot);
+      item["updateTime"] = formateTime(updateTime);
+      if (flag) {
         toast({
-          type: res.data.data ? "success" : "warning",
-          content: res.data.data ? `${newsType['label']}拉取成功` : `${newsType['label']}拉取失败`,
+          content: `${item.label}拉取成功！`
         })
       }
-    })
+    }
+    item["isFetching"] = false;
   }).catch(() => {
-    toast({
-      content: `拉取失败`,
-      type: "error"
-    })
+    item["isFetching"] = false;
   })
+}
+newsTypes.value.forEach(item => {
+  fetchNews(item, false);
+})
+
+const formateTime = (dateString) => {
+  return dayjs(dateString).format('YYYY-MM-DD HH:mm:ss');
+}
+const formatHot = (hot) => {
+  if (hot) {
+    let hotStr = hot.toString();
+    if (hotStr.indexOf("万") >= 0 || Number(hotStr) < 10000) {
+      return hotStr;
+    } else {
+      return (Number(hotStr) / 10000).toFixed(1) + "万";
+    }
+  }
 }
 </script>
 
 <style lang="less" scoped>
 .news {
   .news-box {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0px, 1fr));
+    gap: 12px;
     .news-item {
-      width: 32.3%;
+      grid-column: span 1 / span 1;
       overflow: hidden;
-      margin-bottom: 14px;
       background-color: var(--theme-bg-color-a8);
       border-radius: 8px 8px 0 0;
+      transition: all .3s;
       .news-title {
         display: flex;
         justify-content: space-between;
@@ -163,9 +111,13 @@ const handleRefresh = (type) => {
         }
       }
       .scroll-bar {
-        height: 200px;
+        height: 260px;
         padding: 10px 12px;
         box-shadow: 0 0 10px inset var(--grey-9-a1);
+        .ant-spin-spinning {
+          display: block;
+          margin: 66px auto;
+        }
         .news-info {
           display: flex;
           justify-content: space-between;
@@ -193,6 +145,9 @@ const handleRefresh = (type) => {
       .ant-empty {
         margin-top: 20px;
       }
+      &:hover {
+        box-shadow: 0 1px 2px -2px rgba(0, 0, 0, .08), 0 3px 6px 0 rgba(0, 0, 0, .06), 0 5px 12px 4px rgba(0, 0, 0, .04);
+      }
     }
   }
 }
@@ -201,24 +156,17 @@ html[theme = "dark"] {
     box-shadow: 0 0 4px inset var(--color-orange) !important;
   }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
   .news {
     .news-box {
-      .news-item {
-        width: 49%;
-        margin-bottom: 12px;
-        border-radius: 6px 6px 0 0;
-      }
+      grid-template-columns: repeat(2, minmax(0px, 1fr));
     }
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 976px) {
   .news {
     .news-box {
-      .news-item {
-        width: 100%;
-        border-radius: 4px 4px 0 0;
-      }
+      grid-template-columns: repeat(1, minmax(0px, 1fr));
     }
   }
 }

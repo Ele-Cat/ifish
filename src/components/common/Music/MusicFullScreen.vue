@@ -212,6 +212,7 @@ const solveLyric = (content) => {
 
 const lyricList = computed(() => {
   let list = [];
+  if (useMusicStore.activeIndex < 0) return [];
   if (!playingMusic.value?.content?.length) {
     // 重拉歌词
     getLyric();

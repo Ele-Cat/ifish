@@ -1,5 +1,6 @@
 import { useAppStore } from "./modules/app";
 import { useNavStore } from "./modules/nav";
+import { useNewsStore } from "./modules/news";
 import { useContextMenuStore } from "./modules/contextMenu";
 import { useMusicStore } from "./modules/music";
 import { useSystemStore } from "./modules/system";
@@ -8,6 +9,7 @@ import { useSystemStore } from "./modules/system";
 const useStore = () => ({
   useAppStore: useAppStore(),
   useNavStore: useNavStore(),
+  useNewsStore: useNewsStore(),
   useContextMenuStore: useContextMenuStore(),
   useMusicStore: useMusicStore(),
   useSystemStore: useSystemStore(),

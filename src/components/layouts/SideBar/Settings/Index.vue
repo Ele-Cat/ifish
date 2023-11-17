@@ -29,12 +29,11 @@
 </template>
 
 <script setup>
-import { ref, shallowRef, defineAsyncComponent } from "vue";
+import { ref, defineAsyncComponent } from "vue";
 const SettingsBasic = defineAsyncComponent(() => import("./SettingsBasic.vue"));
 const SettingsAppearance = defineAsyncComponent(() => import("./SettingsAppearance.vue"));
-const SettingsShortcutKey = defineAsyncComponent(() =>
-  import("./SettingsShortcutKey.vue")
-);
+const SettingsShortcutKey = defineAsyncComponent(() => import("./SettingsShortcutKey.vue"));
+const SettingsNews = defineAsyncComponent(() => import("./SettingsNews.vue"));
 const SettingsExport = defineAsyncComponent(() => import("./SettingsExport.vue"));
 
 const props = defineProps({
@@ -60,6 +59,11 @@ const settingsNavs = ref([
     label: "外观设置",
     value: "appearance",
     component: SettingsAppearance,
+  },
+  {
+    label: "资讯设置",
+    value: "news",
+    component: SettingsNews,
   },
   {
     label: "快捷键设置",

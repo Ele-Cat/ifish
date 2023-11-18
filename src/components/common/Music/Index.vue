@@ -8,7 +8,7 @@
       @timeupdate="updateProgress"
       @loadeddata="audioLoaded"
       @ended="audioEnded"
-      @error="audioEnded"
+      @error="audioError"
       v-show="false"
     ></audio>
 
@@ -220,6 +220,9 @@ const audioEnded = () => {
       )
     );
   }
+};
+const audioError = () => {
+  console.log("播放出错");
 };
 // 进度被拖拽时
 const handleDurationChange = (currentTime) => {

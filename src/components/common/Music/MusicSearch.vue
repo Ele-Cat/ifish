@@ -204,6 +204,17 @@ const handleDownload = async (item, idx) => {
 };
 // 获取音乐信息
 const getMusic = async (item, idx) => {
+  const promise0 = new Promise((resolve, reject) => {
+    axios
+      .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.song}-${item.singer}&n=1`)
+      .then((res) => {
+        if (res.data.code === 200) {
+          resolve(res.data);
+        } else {
+          resolve({});
+        }
+      });
+  });
   const promise1 = new Promise((resolve, reject) => {
     axios
       .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.song} ${item.singer}&n=1`)
@@ -226,7 +237,7 @@ const getMusic = async (item, idx) => {
         }
       });
   });
-  const values = await Promise.all([promise1, promise2]);
+  const values = await Promise.all([promise0, promise1, promise2]);
   return { ...values[0], ...values[1] };
 };
 </script>

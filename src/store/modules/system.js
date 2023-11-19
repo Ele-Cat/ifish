@@ -92,7 +92,7 @@ export const useSystemStore = defineStore("ifishSystem", {
       }
     },
     ctrlOrCommand() {
-      return this.platform === "win" ? "Ctrl" : "Command";
+      return this.platform === "win" ? "Ctrl" : "⌘";
     },
   },
   persist: {

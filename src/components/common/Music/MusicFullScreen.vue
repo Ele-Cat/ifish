@@ -127,8 +127,8 @@ import {
   VerticalLeftOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons-vue";
-
 import axios from "axios";
+import eventBus from "@/utils/eventBus";
 import { useFullscreen } from "@vueuse/core";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
@@ -175,12 +175,9 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  window.onkeydown = (e) => {
-    const { keyCode } = e;
-    if (keyCode === 27) {
-      handleClose();
-    }
-  };
+  eventBus.on("lyricClose", () => {
+    handleClose();
+  });
 });
 
 const flag = ref(false);
@@ -282,6 +279,7 @@ watch(
 );
 
 const getLyric = () => {
+  if (!playingMusic.value.name) return;
   axios
     .get(
       `https://api.lolimi.cn/API/kggc/api.php?msg=${playingMusic.value.name}-${playingMusic.value.singer}&n=1`

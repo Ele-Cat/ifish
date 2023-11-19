@@ -108,6 +108,14 @@ onMounted(() => {
   eventBus.on("nextMusic", () => {
     handleNext();
   });
+  eventBus.on("volChange", (val) => {
+    useMusicStore.settings.volume += val;
+    if (useMusicStore.settings.volume < 0) {
+      useMusicStore.settings.volume = 0;
+    } else if (useMusicStore.settings.volume > 100) {
+      useMusicStore.settings.volume = 100;
+    }
+  });
 });
 
 const fetchData = (item) => {

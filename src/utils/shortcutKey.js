@@ -8,8 +8,11 @@ const ctrlKey = 17,
   eKey = 69, // 背景e
   qKey = 81, // 暗黑模式q
   spaceKey = 32, // 空格 播放/暂停
-  leftKey = 37, // 空格 播放/暂停
-  rightKey = 39; // 空格 播放/暂停
+  escKey = 27, // Esc
+  leftKey = 37, // 上一首
+  rightKey = 39, // 下一首
+  upKey = 38, // 音量+
+  downKey = 40; // 音量-
 
 
 // 把这几个的Ctrl+组合键屏蔽掉，影响体验，具体看本文件底部的keyCodes键盘字典
@@ -22,6 +25,8 @@ const keymap = {
   [qKey]: darkMode,
   [leftKey]: prevMusic,
   [rightKey]: nextMusic,
+  [upKey]: volAdd,
+  [downKey]: volSub,
 };
 
 let isCtrlOrCommandDown = false;
@@ -30,7 +35,11 @@ export function listenGlobalKeyDown() {
   window.onkeydown = (e) => {
     const { keyCode } = e;
     if (keyCode === spaceKey) {
-      playOrPause();
+      // 播放/暂停
+      eventBus.emit("playOrPause");
+    } else if (keyCode === escKey) {
+      // 歌词关闭
+      eventBus.emit("lyricClose");
     } else if (keyCode === ctrlKey || keyCode === commandKey) {
       // 按下Ctrl || Command
       isCtrlOrCommandDown = true;
@@ -78,10 +87,6 @@ function randomWallpaper() {
   useSystemStore().randomWallpaper();
 }
 
-// 播放/暂停
-function playOrPause() {
-  eventBus.emit("playOrPause");
-};
 // 上一首
 function prevMusic() {
   eventBus.emit("prevMusic");
@@ -89,6 +94,14 @@ function prevMusic() {
 // 下一首
 function nextMusic() {
   eventBus.emit("nextMusic");
+};
+// 音量+
+function volAdd() {
+  eventBus.emit("volChange", 10);
+};
+// 音量-
+function volSub() {
+  eventBus.emit("volChange", -10);
 };
 
 // 键盘按键字典

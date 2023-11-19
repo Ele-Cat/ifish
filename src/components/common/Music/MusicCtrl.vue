@@ -16,6 +16,9 @@
     </div>
     <div class="center">
       <div class="prev-next">
+        <a-tooltip title="查看快捷键">
+          <i class="ifishfont ifish-music-shortkey" @click="handleShowShortkey()"></i>
+        </a-tooltip>
         <a-tooltip :title="`上一首${prevMusic ? '：' : ''}${prevMusic}`">
           <VerticalRightOutlined @click="handlePrev" />
         </a-tooltip>
@@ -29,6 +32,9 @@
         </a-tooltip>
         <a-tooltip :title="`下一首${nextMusic ? '：' : ''}${nextMusic}`">
           <VerticalLeftOutlined @click="handleNext" />
+        </a-tooltip>
+        <a-tooltip title="展开歌词">
+          <i class="ifishfont ifish-music-lyric" @click="showLyric"></i>
         </a-tooltip>
       </div>
       <div class="progress-box">
@@ -101,6 +107,15 @@
       </a-tooltip>
     </div>
   </div>
+  <IDialog
+    title="音乐快捷键"
+    :visible="musicShortkeyVisible"
+    :zIndex="1003"
+    @ok="musicShortkeyVisible = false"
+    @cancel="musicShortkeyVisible = false"
+  >
+    <MusicShortkey />
+  </IDialog>
 </template>
 
 <script setup>
@@ -115,6 +130,7 @@ import {
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import { secToMs } from "@/utils/utils";
+import MusicShortkey from "./MusicShortkey.vue";
 
 const emit = defineEmits([
   "toggleMusicList",
@@ -222,6 +238,11 @@ const handleNext = () => {
 const showLyric = () => {
   emit("showLyric");
 };
+
+const musicShortkeyVisible = ref(false);
+const handleShowShortkey = () => {
+  musicShortkeyVisible.value = true;
+};
 </script>
 
 <style lang="less" scoped>
@@ -313,6 +334,15 @@ const showLyric = () => {
       .play,
       .pause {
         font-size: 36px;
+      }
+      .ifishfont {
+        font-size: 22px;
+        margin: 0 6px;
+        cursor: pointer;
+        &.ifish-music-lyric {
+          font-size: 26px;
+          margin-top: 2px;
+        }
       }
     }
     .progress-box {

@@ -1,10 +1,16 @@
 import { useSystemStore } from "@/store/modules/system";
+import { useMusicStore } from "@/store/modules/music";
+import eventBus from '@/utils/eventBus';
 
 const ctrlKey = 17,
   commandKey = 91, // mac command
   lKey = 76, // 锁定l
   eKey = 69, // 背景e
-  qKey = 81; // mac command
+  qKey = 81, // 暗黑模式q
+  spaceKey = 32, // 空格 播放/暂停
+  leftKey = 37, // 空格 播放/暂停
+  rightKey = 39; // 空格 播放/暂停
+
 
 // 把这几个的Ctrl+组合键屏蔽掉，影响体验，具体看本文件底部的keyCodes键盘字典
 const ignoreKeyMap = [73, 77, 79, 80, 83, 85];
@@ -14,6 +20,8 @@ const keymap = {
   [lKey]: lock,
   [eKey]: randomWallpaper,
   [qKey]: darkMode,
+  [leftKey]: prevMusic,
+  [rightKey]: nextMusic,
 };
 
 let isCtrlOrCommandDown = false;
@@ -21,7 +29,9 @@ let isCtrlOrCommandDown = false;
 export function listenGlobalKeyDown() {
   window.onkeydown = (e) => {
     const { keyCode } = e;
-    if (keyCode === ctrlKey || keyCode === commandKey) {
+    if (keyCode === spaceKey) {
+      playOrPause();
+    } else if (keyCode === ctrlKey || keyCode === commandKey) {
       // 按下Ctrl || Command
       isCtrlOrCommandDown = true;
     } else if (isCtrlOrCommandDown) {
@@ -58,13 +68,28 @@ function lock() {
   useSystemStore().lock();
 }
 
+// 暗黑模式
 function darkMode() {
   useSystemStore().changeMode();
 }
 
+// 随机背景
 function randomWallpaper() {
   useSystemStore().randomWallpaper();
 }
+
+// 播放/暂停
+function playOrPause() {
+  eventBus.emit("playOrPause");
+};
+// 上一首
+function prevMusic() {
+  eventBus.emit("prevMusic");
+};
+// 下一首
+function nextMusic() {
+  eventBus.emit("nextMusic");
+};
 
 // 键盘按键字典
 const keyCodes = {

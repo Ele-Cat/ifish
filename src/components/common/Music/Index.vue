@@ -77,6 +77,7 @@ import { DoubleLeftOutlined } from "@ant-design/icons-vue";
 import axios from "axios";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
+import eventBus from "@/utils/eventBus";
 import MusicCtrl from "./MusicCtrl.vue";
 import MusicList from "./MusicList.vue";
 import MusicSearch from "./MusicSearch.vue";
@@ -97,6 +98,16 @@ onMounted(() => {
       audio.load();
     });
   }
+
+  eventBus.on("playOrPause", () => {
+    useMusicStore.settings.playing ? handlePause() : handlePlay();
+  });
+  eventBus.on("prevMusic", () => {
+    handlePrev();
+  });
+  eventBus.on("nextMusic", () => {
+    handleNext();
+  });
 });
 
 const fetchData = (item) => {

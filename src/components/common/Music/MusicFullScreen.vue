@@ -116,7 +116,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import {
   DoubleRightOutlined,
   FullscreenOutlined,
@@ -172,6 +172,15 @@ const props = defineProps({
     type: String,
     default: "",
   },
+});
+
+onMounted(() => {
+  window.onkeydown = (e) => {
+    const { keyCode } = e;
+    if (keyCode === 27) {
+      handleClose();
+    }
+  };
 });
 
 const flag = ref(false);
@@ -550,15 +559,20 @@ const handleLyricJump = (item, idx) => {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      color: var(--theme-text-color);
       span {
         font-size: 12px;
       }
     }
     &:hover {
-      color: var(--primary-color);
+      .music-info {
+        color: var(--primary-color);
+      }
     }
     &.active {
-      color: var(--primary-color);
+      .music-info {
+        color: var(--primary-color);
+      }
       background-color: var(--theme-bg-color-a8);
     }
   }

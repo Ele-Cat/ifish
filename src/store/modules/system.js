@@ -48,6 +48,7 @@ export const useSystemStore = defineStore("ifishSystem", {
       searchType: "https://www.baidu.com",
       backgroundUrl: "",
       qqGroupLink: "http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=FBr4JIxIckrUqgDK-rbdMkoQYfJT4BCs&authKey=Dl1dUP8%2BXRNefHTYG38DyEi3CAOf20Pc8yyIJwKQ7HlP5WX7nYhURs2vVtmttNHX&noverify=0&group_code=887911914", // 跳转加群链接
+      platform: "win",
     };
   },
   actions: {
@@ -79,6 +80,19 @@ export const useSystemStore = defineStore("ifishSystem", {
         this.settings.wallpaper.url = res.data[action.return];
         this.settings.wallpaper.type = "basic";
       })
+    },
+    getPlatform() {
+      let platform = window.navigator.platform;
+      if (platform.toLowerCase().indexOf('win') !== -1) {
+        this.platform = "win"
+      } else if (platform.toLowerCase().indexOf('mac') !== -1) {
+        this.platform = "mac"
+      } else {
+        console.log('当前操作系统不是 Windows 也不是 macOS');
+      }
+    },
+    ctrlOrCommand() {
+      return this.platform === "win" ? "Ctrl" : "Command";
     },
   },
   persist: {

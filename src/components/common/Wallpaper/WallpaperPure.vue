@@ -1,20 +1,46 @@
 <template>
   <div class="wallpaper-pure">
     <div class="pure-top">
-      <div class="pure-top-item" v-for="(item, index) in colorList" @click="handleChangeTop(index)" :class="{active: activeTop === index}" :key="index" :style="{backgroundColor: `${item.bgColor}`}"></div>
+      <div
+        class="pure-top-item"
+        v-for="(item, index) in colorList"
+        @click="handleChangeTop(index)"
+        :class="{ active: activeTop === index }"
+        :key="index"
+        :style="{ backgroundColor: `${item.bgColor}` }"
+      ></div>
     </div>
     <div class="pure-main">
       <div class="pure-box">
-        <div class="pure-item" v-for="(item, index) in colorList[activeTop]['list']" :key="index" :style="{backgroundImage: `linear-gradient(${useSystemStore.settings.wallpaper.angle}deg, ${item[0]} 15%, ${item[1]} 150%)`}" @click="handleSelectPure(item)">
-        </div>
+        <div
+          class="pure-item"
+          v-for="(item, index) in colorList[activeTop]['list']"
+          :key="index"
+          :style="{
+            backgroundImage: `linear-gradient(${useSystemStore.settings.wallpaper.angle}deg, ${item[0]} 15%, ${item[1]} 150%)`,
+          }"
+          @click="handleSelectPure(item)"
+        ></div>
       </div>
       <div class="pure-radius">
-        角度：
-        <a-slider v-model:value="useSystemStore.settings.wallpaper.angle" :min="0" :max="360" />
-        <!-- <a-input-number v-model:value="useSystemStore.settings.wallpaper.angle" :min="0" :max="360" /> -->
-        预览：
-        <div class="pure-preview" v-if="useSystemStore.settings.wallpaper.type === 'pure'" :style="{backgroundImage: `linear-gradient(${useSystemStore.settings.wallpaper.angle}deg, ${useSystemStore.settings.wallpaper.pure[0]} 15%, ${useSystemStore.settings.wallpaper.pure[1]} 150%)`}">
-        </div>
+        <a-form :model="formState" :label-col="labelCol">
+          <a-form-item label="角度">
+            <a-slider
+              v-model:value="useSystemStore.settings.wallpaper.angle"
+              :min="0"
+              :max="360"
+            />
+          </a-form-item>
+          <a-form-item label="预览">
+            <div
+              class="pure-preview"
+              v-if="useSystemStore.settings.wallpaper.type === 'pure'"
+              :style="{
+                backgroundImage: `linear-gradient(${useSystemStore.settings.wallpaper.angle}deg, ${useSystemStore.settings.wallpaper.pure[0]} 15%, ${useSystemStore.settings.wallpaper.pure[1]} 150%)`,
+              }"
+            ></div>
+          </a-form-item>
+        </a-form>
       </div>
     </div>
   </div>
@@ -22,18 +48,25 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-import useStore from '@/store';
+import useStore from "@/store";
 const { useSystemStore } = useStore();
+
+const formState = reactive({});
+const labelCol = {
+  style: {
+    width: "48px",
+  },
+};
 
 const activeTop = ref(0);
 const handleChangeTop = (idx) => {
   activeTop.value = idx;
-}
+};
 
 const handleSelectPure = (pure) => {
   useSystemStore.settings.wallpaper.pure = pure;
   useSystemStore.settings.wallpaper.type = "pure";
-}
+};
 
 const colorList = reactive([
   {
@@ -48,7 +81,7 @@ const colorList = reactive([
       ["#d93b3b", "#aefca7"],
       ["#941515", "#8bba14"],
       ["#f08d8d", "#f0a962"],
-    ]
+    ],
   },
   {
     bgColor: "#FF7D00",
@@ -134,7 +167,7 @@ const colorList = reactive([
       ["#f25af2", "#229c09"],
     ],
   },
-])
+]);
 </script>
 
 <style lang="less" scoped>
@@ -147,7 +180,8 @@ const colorList = reactive([
       margin-right: 8px;
       border-radius: 6px;
       cursor: pointer;
-      &:hover, &.active {
+      &:hover,
+      &.active {
         border: 1px solid var(--theme-text-color);
       }
     }
@@ -166,14 +200,14 @@ const colorList = reactive([
         margin-bottom: 10px;
         border-radius: 8px;
         cursor: pointer;
-        transition: all .3s;
+        transition: all 0.3s;
         &:hover {
           box-shadow: 0 6px 10px #666;
         }
       }
     }
     .pure-radius {
-      width: 36%;
+      width: 40%;
       margin-left: 20px;
       .pure-preview {
         height: 140px;

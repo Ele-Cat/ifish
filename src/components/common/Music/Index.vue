@@ -102,6 +102,9 @@ onMounted(() => {
   eventBus.on("playOrPause", () => {
     useMusicStore.settings.playing ? handlePause() : handlePlay();
   });
+  eventBus.on("searchMusic", () => {
+    musicSearchVisible.value = true;
+  });
   eventBus.on("prevMusic", () => {
     handlePrev();
   });

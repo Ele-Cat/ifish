@@ -9,6 +9,7 @@ const ctrlKey = 17,
   qKey = 81, // 暗黑模式q
   spaceKey = 32, // 空格 播放/暂停
   escKey = 27, // Esc
+  mKey = 77, // 上一首
   leftKey = 37, // 上一首
   rightKey = 39, // 下一首
   upKey = 38, // 音量+
@@ -23,6 +24,7 @@ const keymap = {
   [lKey]: lock,
   [eKey]: randomWallpaper,
   [qKey]: darkMode,
+  [mKey]: searchMusic,
   [leftKey]: prevMusic,
   [rightKey]: nextMusic,
   [upKey]: volAdd,
@@ -87,6 +89,10 @@ function randomWallpaper() {
   useSystemStore().randomWallpaper();
 }
 
+// 打开搜索
+function searchMusic() {
+  eventBus.emit("searchMusic");
+};
 // 上一首
 function prevMusic() {
   eventBus.emit("prevMusic");

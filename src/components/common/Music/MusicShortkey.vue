@@ -15,7 +15,7 @@
         <span>{{ useSystemStore.ctrlOrCommand() }}</span> + <span class="key">↓</span>
       </a-form-item>
       <a-form-item label="打开搜索">
-        <span>{{ useSystemStore.ctrlOrCommand() }}</span> + <span class="key">K</span>
+        <span>{{ useSystemStore.ctrlOrCommand() }}</span> + <span class="key">M</span>
       </a-form-item>
       <a-form-item label="关闭歌词"> <span>Esc</span> </a-form-item>
     </a-form>

@@ -74,6 +74,7 @@
 <script setup>
 import { onMounted, ref, watch, nextTick, computed } from "vue";
 import { DoubleLeftOutlined } from "@ant-design/icons-vue";
+import axios from "axios";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import MusicCtrl from "./MusicCtrl.vue";
@@ -84,7 +85,30 @@ import { getRandomIntInRange } from "@/utils/utils";
 
 onMounted(() => {
   useMusicStore.settings.playing = false;
+  if (useMusicStore.musicList) {
+    useMusicStore.musicList.map((item, index) => {
+      let audio = new Audio(item.url);
+      audio.onerror = function () {
+        // 音频无法播放，重新拉取链接
+        fetchData(item);
+      };
+
+      // 加载音频
+      audio.load();
+    });
+  }
 });
+
+const fetchData = (item) => {
+  axios
+    .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}-${item.singer}&n=1`)
+    .then((res) => {
+      const { code, url } = res.data;
+      if (code === 200) {
+        item["url"] = url;
+      }
+    });
+};
 
 const musicListVisible = ref(false);
 const musicSearchVisible = ref(false);

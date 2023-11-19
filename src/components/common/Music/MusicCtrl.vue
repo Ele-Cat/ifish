@@ -377,7 +377,9 @@ const handleShowShortkey = () => {
     font-size: 22px;
     display: flex;
     align-items: center;
-
+    .ant-divider-vertical {
+      border-inline-start: 1px solid var(--grey-6);
+    }
     .mode,
     .volume {
       margin: 0 8px;

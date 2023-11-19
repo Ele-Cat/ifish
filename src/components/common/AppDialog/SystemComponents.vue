@@ -1,30 +1,41 @@
 <template>
-  <div class="system-tags">
-    <div class="system-tag" v-for="(component, index) in systemComponents" :key="index" @click="addSystemComp(component)">
-      <div v-if="component.icon">
-        <img :src="component.icon" alt="">
+  <perfect-scrollbar class="scroll-bar">
+    <div class="system-tags">
+      <div
+        class="system-tag"
+        v-for="(component, index) in systemComponents"
+        :key="index"
+        @click="addSystemComp(component)"
+      >
+        <div v-if="component.icon">
+          <img :src="component.icon" alt="" />
+        </div>
+        <component v-else :is="components[component.component]" type="preview" />
+        <p>{{ component.title }}</p>
       </div>
-      <component v-else :is="components[component.component]" type="preview" />
-      <p>{{ component.title }}</p>
     </div>
-  </div>
+  </perfect-scrollbar>
 </template>
 
 <script setup>
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent } from "vue";
 import useStore from "@/store";
 const { useAppStore } = useStore();
 import { systemComponents } from "@/mock/app";
 import { uuid } from "@/utils/utils";
 import { toast } from "@/utils/feedback";
-const Tiangou = defineAsyncComponent(() => import('@/components/common/Apps/Tiangou.vue'));
-const Zhibuzhi = defineAsyncComponent(() => import('@/components/common/Apps/Zhibuzhi.vue'));
-const Gongde = defineAsyncComponent(() => import('@/components/common/Apps/Gongde.vue'));
+const Tiangou = defineAsyncComponent(() =>
+  import("@/components/common/Apps/Tiangou.vue")
+);
+const Zhibuzhi = defineAsyncComponent(() =>
+  import("@/components/common/Apps/Zhibuzhi.vue")
+);
+const Gongde = defineAsyncComponent(() => import("@/components/common/Apps/Gongde.vue"));
 const components = {
   tiangou: Tiangou,
   zhibuzhi: Zhibuzhi,
   gongde: Gongde,
-}
+};
 
 const addSystemComp = (comp) => {
   useAppStore.lists.push({
@@ -35,11 +46,11 @@ const addSystemComp = (comp) => {
     icon: comp.icon,
     component: comp.component,
     gridSize: [2, 2],
-  })
+  });
   toast({
     content: "添加成功",
   });
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -61,7 +72,7 @@ const addSystemComp = (comp) => {
     padding: 10px;
     cursor: pointer;
     text-align: center;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     img {
       max-width: 100%;
     }

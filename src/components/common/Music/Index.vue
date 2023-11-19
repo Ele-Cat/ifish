@@ -101,7 +101,7 @@ onMounted(() => {
 
 const fetchData = (item) => {
   axios
-    .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.name}-${item.singer}&n=1`)
+    .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.name} ${item.singer}&n=1`)
     .then((res) => {
       const { code, url } = res.data;
       if (code === 200) {

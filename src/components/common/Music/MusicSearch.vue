@@ -99,12 +99,21 @@ import axios from "axios";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import { uuid, downloadFile } from "@/utils/utils";
+import { toast } from "@/utils/feedback";
 
 const searchText = ref("");
 const searchResult = ref([]);
 const searchLoading = ref(false);
 
 const handleSearch = (searchTextValue) => {
+  searchResult.value = [];
+  if (!searchTextValue) {
+    toast({
+      type: "warning",
+      content: "请输入歌曲、歌手后搜索",
+    });
+    return;
+  }
   if (useMusicStore.searchHistory.indexOf(searchTextValue) < 0) {
     useMusicStore.searchHistory.unshift(searchTextValue);
   }
@@ -197,7 +206,7 @@ const handleDownload = async (item, idx) => {
 const getMusic = async (item, idx) => {
   const promise1 = new Promise((resolve, reject) => {
     axios
-      .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.song}-${item.singer}&n=1`)
+      .get(`https://xiaoapi.cn/API/yy_sq.php?msg=${item.song} ${item.singer}&n=1`)
       .then((res) => {
         if (res.data.code === 200) {
           resolve(res.data);
@@ -208,7 +217,7 @@ const getMusic = async (item, idx) => {
   });
   const promise2 = new Promise((resolve, reject) => {
     axios
-      .get(`https://api.lolimi.cn/API/kggc/api.php?msg=${item.song}-${item.singer}&n=1`)
+      .get(`https://api.lolimi.cn/API/kggc/api.php?msg=${item.song} ${item.singer}&n=1`)
       .then((res) => {
         if (res.data.code === 1) {
           resolve(res.data.data);

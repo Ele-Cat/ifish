@@ -9,7 +9,7 @@
             :placeholder="`例如：${useSystemStore.ctrlOrCommand()} + L`"
           />
         </a-form-item>
-        <a-form-item label="切换时">
+        <a-form-item label="执行时">
           <a-select v-model:value="formState.lock.target">
             <a-select-option value="_self">在本页打开</a-select-option>
             <a-select-option value="_blank">打开新页</a-select-option>
@@ -22,19 +22,16 @@
           >
             <template #dropdownRender="{ menuNode: menu }">
               <v-nodes :vnodes="menu" />
-              <a-divider style="margin: 4px 0" />
-              <p style="padding: 4px 8px">配置：</p>
-              <a-space style="padding: 4px 8px">
+              <a-divider style="margin: 6px 0 2px" />
+              <a-space style="padding: 4px 6px">
                 <a-input
                   size="small"
                   ref="inputRef"
                   v-model:value="addAction"
                   placeholder="请输入要打开的网址"
+                  style="width: 178px"
                 />
                 <a-button size="small" type="primary" @click="handleAddAction">
-                  <template #icon>
-                    <PlusOutlined />
-                  </template>
                   添加
                 </a-button>
               </a-space>
@@ -46,13 +43,10 @@
                   :max="formState.lock.actionList.length"
                   v-model:value="removeIndex"
                   placeholder="序号"
-                  style="width: 78px"
+                  style="width: 88px"
                 />
                 <p>个网址</p>
                 <a-button size="small" type="primary" danger @click="handleRemoveAction">
-                  <template #icon>
-                    <MinusOutlined />
-                  </template>
                   移除
                 </a-button>
               </a-space>
@@ -75,7 +69,6 @@
 
 <script setup>
 import { defineComponent, ref } from "vue";
-import { PlusOutlined, MinusOutlined } from "@ant-design/icons-vue";
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 import { toast } from "@/utils/feedback";

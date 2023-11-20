@@ -45,6 +45,11 @@ export const systemComponents = [
     component: "music",
     icon: "https://z1.ax1x.com/2023/11/20/piUts58.jpg",
   },
+  {
+    type: "component",
+    title: "休闲文字游戏",
+    component: "wordGames",
+  },
 ];
 
 export const lists = [
@@ -150,6 +155,13 @@ export const lists = [
     type: "component",
     title: "功德+1",
     component: "gongde",
+    gridSize: [2, 2],
+  },
+  {
+    id: "vV2KUKe7xDBsyaEV7OEaq",
+    type: "component",
+    title: "休闲文字游戏",
+    component: "wordGames",
     gridSize: [2, 2],
   },
   {

@@ -100,12 +100,16 @@ const Gongde = defineAsyncComponent(() =>
 const Music = defineAsyncComponent(() => 
   import("@/components/common/Apps/Music.vue")
 );
+const WordGames = defineAsyncComponent(() => 
+  import("@/components/common/Apps/WordGames.vue")
+);
 const components = {
   imgpreview: ImgPreview,
   tiangou: Tiangou,
   zhibuzhi: Zhibuzhi,
   gongde: Gongde,
   music: Music,
+  wordGames: WordGames,
 };
 
 const apps = ref([]);

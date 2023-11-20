@@ -7,6 +7,7 @@
       :mask="mask"
       :zIndex="zIndex"
       :wrap-style="{overflow: 'hidden'}"
+      :wrapClassName="wrapClassName"
       :footer="null"
       @ok="handleOk"
       @cancel="handleCancel"
@@ -14,7 +15,7 @@
       <slot />
       <template #title>
         <div ref="modalTitleRef" style="width: 100%; cursor: move">
-          {{ title }}
+          {{ title }}<slot name="titleLink"></slot>
         </div>
       </template>
       <template #modalRender="{ originVNode }">
@@ -35,6 +36,7 @@ const props = defineProps({
   title: { type: String, default: "标题" },
   width: { type: [String, Number], default: 520 },
   mask: { type: Boolean, default: true },
+  wrapClassName: { type: String, default: "" },
   zIndex: { type: Number, default: 1000 },
 })
 const emit = defineEmits(["ok", "cancel"])

@@ -50,6 +50,8 @@
       </div>
     </template>
   </Draggable>
+  
+  <!-- 首页书签弹框 -->
   <AppDialog />
 
   <!-- 随机一句一言API接口 https://api.vvhan.com/api/ian -->
@@ -92,12 +94,18 @@ const Tiangou = defineAsyncComponent(() =>
 const Zhibuzhi = defineAsyncComponent(() =>
   import("@/components/common/Apps/Zhibuzhi.vue")
 );
-const Gongde = defineAsyncComponent(() => import("@/components/common/Apps/Gongde.vue"));
+const Gongde = defineAsyncComponent(() => 
+  import("@/components/common/Apps/Gongde.vue")
+);
+const Music = defineAsyncComponent(() => 
+  import("@/components/common/Apps/Music.vue")
+);
 const components = {
   imgpreview: ImgPreview,
   tiangou: Tiangou,
   zhibuzhi: Zhibuzhi,
   gongde: Gongde,
+  music: Music,
 };
 
 const apps = ref([]);

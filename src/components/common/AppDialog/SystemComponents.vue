@@ -69,12 +69,13 @@ const addSystemComp = (comp) => {
     height: 10rem;
     background-color: var(--theme-bg-color);
     border-radius: 8px;
-    padding: 10px;
+    padding: 10px 10px 6px;
     cursor: pointer;
     text-align: center;
     transition: all 0.3s ease-in-out;
     img {
       max-width: 100%;
+      border-radius: 8px;
     }
     p {
       font-weight: bold;

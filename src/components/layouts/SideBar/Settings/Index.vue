@@ -71,7 +71,7 @@ const settingsNavs = ref([
     component: SettingsShortcutKey,
   },
   {
-    label: "导入导出",
+    label: "导入、导出",
     value: "export",
     component: SettingsExport,
   },

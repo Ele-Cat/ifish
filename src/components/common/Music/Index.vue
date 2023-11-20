@@ -100,6 +100,7 @@ onMounted(() => {
   }
 
   eventBus.on("playOrPause", () => {
+    useMusicStore.visible = true;
     useMusicStore.settings.playing ? handlePause() : handlePlay();
   });
   eventBus.on("searchMusic", () => {

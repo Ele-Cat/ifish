@@ -1,22 +1,10 @@
 <template>
-  <img :src="app.icon" alt="" @click.stop="dialogVisible = true">
-  <IDialog title="舔狗日记" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
-    <div class="tiangou">
-      <img src="https://z1.ax1x.com/2023/11/20/piUaYCT.jpg" alt="">
-      <div class="text">
-        <p>宝</p>
-        <p>{{ tiangou }}</p>
-      </div>
-      <button title="继续舔" @click="getTiangou"></button>
-      <p class="copy" :class="{copied: copied}" @click="handleCopy(tiangou)">{{ copied ? "已复制" : "点击复制" }}</p>
-    </div>
-  </IDialog>
+  <img :src="app.icon" alt="" @click.stop="showMusic">
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import axios from 'axios';
-import { useClipboard } from "@vueuse/core";
+import eventBus from '@/utils/eventBus';
+
 const props = defineProps({
   app: {
     type: Object,
@@ -24,17 +12,9 @@ const props = defineProps({
   }
 })
 
-const dialogVisible = ref(false);
-const tiangou = ref("");
-const getTiangou = () => {
-  axios.get('https://api.moyuduck.com/tiangou').then(res => {
-    tiangou.value = res.data.data;
-  })
+const showMusic = () => {
+  eventBus.emit("playOrPause");
 }
-
-getTiangou();
-
-const { copy: handleCopy, copied } = useClipboard({ tiangou });
 </script>
 
 <style lang="less" scoped>
@@ -43,9 +23,6 @@ const { copy: handleCopy, copied } = useClipboard({ tiangou });
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  img {
-    height: 120px;
-  }
   .text {
     margin: 20px 40px;
     user-select: text;
@@ -75,18 +52,6 @@ const { copy: handleCopy, copied } = useClipboard({ tiangou });
     outline: 0;
     &:hover {
       box-shadow: 0 0 1.2rem var(--primary-color);
-    }
-  }
-  .copy {
-    position: absolute;
-    right: 24px;
-    bottom: 20px;
-    cursor: pointer;
-    &.copied {
-      color: #389e0d !important;
-    }
-    &:hover {
-      color: var(--primary-color);
     }
   }
 }

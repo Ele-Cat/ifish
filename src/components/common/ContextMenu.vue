@@ -3,10 +3,7 @@
     ref="contextMenuRef"
     class="custom-menu bf"
     v-show="useContextMenuStore.menuVisible"
-    :style="{
-      top: useContextMenuStore.menuTop + 'px',
-      left: useContextMenuStore.menuLeft + 'px',
-    }"
+    :style="useContextMenuStore.position"
     @contextmenu="(e) => e.preventDefault()"
   >
     <ul>
@@ -42,7 +39,6 @@ import { ref, watch } from "vue";
 import { CaretRightOutlined } from "@ant-design/icons-vue";
 import useStore from "@/store";
 const { useContextMenuStore, useSystemStore, useAppStore } = useStore();
-import { useElementBounding } from "@vueuse/core";
 import { toast } from "@/utils/feedback";
 import { appLayout } from "@/utils/enums";
 import eventBus from "@/utils/eventBus";
@@ -53,21 +49,27 @@ const contextMenuRef = ref(null);
 const handleMenuClick = (type) => {
   const { id } = useContextMenuStore.activeApp;
   if (type === "addApps") {
+    // 添加app
     eventBus.emit("addApps", {
       type: "add",
     });
   } else if (type === "edit") {
+    // 编辑书签
     eventBus.emit("addApps", {
       type: "edit",
       app: useContextMenuStore.activeApp,
     });
   } else if (type === "randomBg") {
+    // 随机背景
     useSystemStore.randomWallpaper();
   } else if (type === "bgSettings") {
+    // 背景设置
     eventBus.emit("openBgSettings");
   } else if (type === "settings") {
+    // 打开设置
     eventBus.emit("openSettings");
   } else if (type === "delete") {
+    // 移除书签
     useAppStore.lists.splice(
       useAppStore.lists.findIndex((app) => app.id == id),
       1
@@ -105,8 +107,6 @@ watch(
   () => useContextMenuStore.activeApp,
   (newVal) => {
     if (newVal) {
-      // const { x, y, top, right, bottom, left, width, height } = useElementBounding(contextMenuRef);
-      // console.log('x, y, top, right, bottom, left, width, height: ', x, y, top, right, bottom, left, width, height);
       if (newVal.type === "page") {
         if (useSystemStore.activeMenu === "home") {
           contextMenuList.value = [
@@ -182,15 +182,15 @@ watch(
 <style lang="less" scoped>
 .custom-menu {
   position: fixed;
-  top: 0;
-  left: 0;
-  // width: 144px;
+  // top: 0;
+  // left: 0;
+  width: 88px;
   // background-color: #fff;
   background-color: var(--theme-bg-color-a8);
   border-radius: 4px;
   box-sizing: border-box;
   box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
-  z-index: 99;
+  z-index: 10086;
   // overflow: hidden;
   > ul {
     padding: 0;
@@ -205,6 +205,7 @@ watch(
       height: 28px;
       line-height: 28px;
       padding: 0 20px;
+      text-align: center;
       // border-radius: 4px;
       // overflow: hidden;
       .caret-right {

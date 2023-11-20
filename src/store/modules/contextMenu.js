@@ -4,17 +4,42 @@ export const useContextMenuStore = defineStore("toolContextMenu", {
   state: () => {
     return {
       menuVisible: false, // 是否显示右键菜单
-      menuLeft: 0, // 菜单位置横坐标
-      menuTop: 0, // 菜单位置纵坐标
+      position: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+      },
       activeApp: {},
     };
   },
   actions: {
     // 显示右键菜单
     showContextMenu(clientX, clientY, activeApp) {
+      const {innerWidth, innerHeight} = window;
+      this.position = {
+        top: clientY + "px",
+        left: clientX + "px",
+      }
+      if (clientX + 88 > innerWidth) {
+        this.position = {
+          top: clientY + "px",
+          right: 0,
+        }
+      }
+      if (clientY + 112 > innerHeight) {
+        this.position = {
+          bottom: 0,
+          left: clientX + "px",
+        }
+      }
+      if (clientX + 88 > innerWidth && clientY + 112 > innerHeight) {
+        this.position = {
+          bottom: 0,
+          right: 0,
+        }
+      }
       this.activeApp = activeApp;
-      this.menuLeft = clientX;
-      this.menuTop = clientY;
       this.menuVisible = true;
     },
     // 隐藏右键菜单

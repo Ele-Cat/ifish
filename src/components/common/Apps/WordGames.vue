@@ -28,6 +28,11 @@ const activeGame = ref({});
 const dialogVisible = ref(false);
 const wordGames = reactive([
   {
+    label: "小黑屋",
+    icon: "https://img.zhuayuya.com/element_icon/tavg/maomao.png",
+    url: "https://qiujunya.com/adarkroom/?lang=zh_cn",
+  },
+  {
     label: "猫国建设者",
     icon: "https://img.zhuayuya.com/element_icon/tavg/maomao.png",
     url: "https://likexia.gitee.io/cat-zh/#",

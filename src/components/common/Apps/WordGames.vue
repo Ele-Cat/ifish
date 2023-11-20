@@ -72,6 +72,11 @@ const wordGames = reactive([
     icon: "https://img.zhuayuya.com/element_icon/tavg/nengyuanshouji.png",
     url: "https://gityxs.github.io/planet-fall-idle/",
   },
+  {
+    label: "进化",
+    icon: "https://img.zhuayuya.com/element_icon/tavg/nengyuanshouji.png",
+    url: "https://pmotschmann.github.io/Evolve/",
+  },
 ])
 
 const iframeRef = ref(null);

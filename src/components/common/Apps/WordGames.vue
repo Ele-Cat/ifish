@@ -1,7 +1,12 @@
 <template>
   <div class="word-games">
     <perfect-scrollbar class="scroll-bar">
-      <div class="word-item" v-for="(item, index) in wordGames" :key="index" @click="handlePlayGame(item)">
+      <div
+        class="word-item"
+        v-for="(item, index) in wordGames"
+        :key="index"
+        @click="handlePlayGame(item)"
+      >
         <img
           :src="item.icon"
           onerror="this.src='./images/website.svg'"
@@ -11,7 +16,13 @@
       </div>
     </perfect-scrollbar>
   </div>
-  <IDialog :title="activeGame.label" :width="1200" :visible="dialogVisible" wrapClassName="game-dialog" @cancel="dialogVisible = false">
+  <IDialog
+    :title="activeGame.label"
+    :width="1200"
+    :visible="dialogVisible"
+    wrapClassName="game-dialog"
+    @cancel="dialogVisible = false"
+  >
     <template #titleLink>
       <a href="javascript:;" class="link" @click="toggle">全屏娱乐</a>
       <a :href="activeGame.url" target="_blank" class="link">点我进入原站</a>
@@ -29,7 +40,7 @@ const dialogVisible = ref(false);
 const wordGames = reactive([
   {
     label: "小黑屋",
-    icon: "https://img.zhuayuya.com/element_icon/tavg/maomao.png",
+    icon: "https://qiujunya.com/adarkroom/favicon.ico",
     url: "https://qiujunya.com/adarkroom/?lang=zh_cn",
   },
   {
@@ -77,14 +88,14 @@ const wordGames = reactive([
     icon: "https://img.zhuayuya.com/element_icon/tavg/nengyuanshouji.png",
     url: "https://gityxs.github.io/planet-fall-idle/",
   },
-])
+]);
 
 const iframeRef = ref(null);
 const { toggle } = useFullscreen(iframeRef);
 const handlePlayGame = (game) => {
   dialogVisible.value = true;
   activeGame.value = game;
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -92,12 +103,16 @@ const handlePlayGame = (game) => {
   width: 100%;
   height: 100%;
   padding: 6px;
+  .scroll-bar {
+    height: 100%;
+  }
   .word-item {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
     padding: 2px;
     border-radius: 18px;
+    transition: all 0.3s;
     img {
       width: 32px;
       border-radius: 50%;
@@ -105,6 +120,7 @@ const handlePlayGame = (game) => {
     }
     &:hover {
       background-color: var(--primary-color);
+      color: #f8fafc;
     }
   }
 }
@@ -129,9 +145,10 @@ const handlePlayGame = (game) => {
   }
   .ant-modal-content {
     padding: 0 !important;
-    .ant-modal-body, iframe {
+    .ant-modal-body,
+    iframe {
       width: 100%;
-      height: 600px;
+      height: 80vh;
       border-radius: 8px;
     }
   }

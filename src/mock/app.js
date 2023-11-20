@@ -25,7 +25,7 @@ export const systemComponents = [
     type: "component",
     title: "这班上的值不值",
     component: "zhibuzhi",
-    icon: "./images/apps/zhibuzhi.png",
+    icon: "https://i.postimg.cc/d1L6MWTm/image.webp",
   },
   {
     type: "component",
@@ -141,7 +141,7 @@ export const lists = [
     id: "LGLaNrO8s02Vm9ocuTLWd",
     type: "component",
     title: "这班上的值不值",
-    icon: "./images/apps/zhibuzhi.png",
+    icon: "https://i.postimg.cc/d1L6MWTm/image.webp",
     component: "zhibuzhi",
     gridSize: [2, 2],
   },

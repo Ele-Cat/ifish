@@ -1,5 +1,5 @@
 <template>
-  <div class="word-games" :class="{preview: type === 'preview'}">
+  <div class="word-games" :class="{ preview: type === 'preview' }">
     <perfect-scrollbar class="scroll-bar">
       <div
         class="word-item"
@@ -27,16 +27,34 @@
     <template #titleLink>
       <span class="title-link">
         <a href="javascript:;" class="link" title="全屏娱乐" @click="toggle">全屏</a>
-        <a :href="activeGame.url" target="_blank" class="link" title="点击进入原站">进入原站</a>
+        <a href="javascript:;" class="link" title="点击进入原站" @click="toOrigin"
+          >进入原站</a
+        >
         <a-space>
           窗口大小
-          <a-input-number :min="480" v-model:value="useAppStore.wordGames.width" size="small" />*
-          <a-input-number :min="360" v-model:value="useAppStore.wordGames.height" size="small" />
+          <a-input-number
+            :min="480"
+            v-model:value="useAppStore.wordGames.width"
+            size="small"
+          />*
+          <a-input-number
+            :min="360"
+            v-model:value="useAppStore.wordGames.height"
+            size="small"
+          />
         </a-space>
       </span>
     </template>
     <a-spin :spinning="gameLoading" tip="加载中，请耐心等待...">
-      <iframe ref="iframeRef" :src="activeGame.url" :style="{height: useAppStore.wordGames.height + 'px',backgroundColor: isFullscreen ? '#FFF' : 'transparent'}" frameborder="0"></iframe>
+      <iframe
+        ref="iframeRef"
+        :src="activeGame.url"
+        :style="{
+          height: useAppStore.wordGames.height + 'px',
+          backgroundColor: isFullscreen ? '#FFF' : 'transparent',
+        }"
+        frameborder="0"
+      ></iframe>
     </a-spin>
   </IDialog>
 </template>
@@ -51,8 +69,8 @@ const props = defineProps({
   type: {
     type: String,
     default: "use",
-  }
-})
+  },
+});
 
 const activeGame = ref({});
 const dialogVisible = ref(false);
@@ -115,13 +133,18 @@ const { isFullscreen, toggle } = useFullscreen(iframeRef);
 const handlePlayGame = (game) => {
   activeGame.value = {};
   dialogVisible.value = true;
-  gameLoading.value = true;
+  // gameLoading.value = true;
   activeGame.value = game;
   nextTick(() => {
     iframeRef.value.addEventListener("load", () => {
+      console.log("loaded");
       gameLoading.value = false;
-    })
-  })
+    });
+  });
+};
+
+const toOrigin = () => {
+  window.open(activeGame.value.url, "_blank");
 };
 </script>
 
@@ -184,7 +207,7 @@ const handlePlayGame = (game) => {
     line-height: 32px;
     padding: 4px 0 0 12px;
     margin-bottom: 0;
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid #ccc;
   }
   .ant-modal-content {
     padding: 0 !important;
@@ -192,7 +215,7 @@ const handlePlayGame = (game) => {
     iframe {
       width: 100%;
       border-radius: 8px;
-      background-color: #FFF;
+      background-color: #fff;
     }
   }
 }

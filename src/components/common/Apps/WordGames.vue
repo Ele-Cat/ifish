@@ -153,9 +153,7 @@ const handlePlayGame = (game) => {
   &.preview {
     padding: 0;
     height: 120px;
-    .word-item {
-      pointer-events: none;
-    }
+    pointer-events: none;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <img :src="app.icon" class="app-img" alt="" @click.stop="dialogVisible = true">
 
-  <IDialog title="假装升级" :width="640" :visible="dialogVisible" @cancel="dialogVisible = false">
+  <IDialog title="伪装升级" :width="640" :visible="dialogVisible" @cancel="dialogVisible = false">
     <div class="fake-update">
       <p class="title">请选择一个主题</p>
       <div class="fakes">
@@ -32,7 +32,28 @@ const dialogVisible = ref(false);
 const activeFake = ref({});
 const fakes = reactive([
   {
+    label: "Windows XP",
     cover: "https://i.postimg.cc/PrG8Pb9Q/2.png",
+  },
+  {
+    label: "Windows Vista",
+    cover: "https://fakeupdate.net/assets/img/3.png",
+  },
+  {
+    label: "Windows 7",
+    cover: "https://fakeupdate.net/assets/img/4.png",
+  },
+  {
+    label: "Windows 8 / 10",
+    cover: "https://fakeupdate.net/assets/img/5.png",
+  },
+  {
+    label: "Windows 11",
+    cover: "https://fakeupdate.net/assets/img/win10u.png",
+  },
+  {
+    label: "MacOS",
+    cover: "https://fakeupdate.net/assets/img/6.png",
   }
 ])
 
@@ -54,9 +75,12 @@ const handleUseFake = (fake) => {
   }
   .fakes {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+    margin-top: 20px;
     .fake-item {
       width: 33%;
+      margin-right: 0.3%;
       cursor: pointer;
       img {
         width: 100%;

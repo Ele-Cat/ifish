@@ -11,12 +11,6 @@
 import { ref } from "vue";
 import useStore from "@/store";
 const { useAppStore } = useStore();
-const props = defineProps({
-  type: {
-    type: String,
-    default: "use",
-  }
-})
 
 const gongdeAudioRef = ref();
 const gongdeRef = ref();

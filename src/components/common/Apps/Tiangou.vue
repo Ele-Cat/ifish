@@ -1,5 +1,5 @@
 <template>
-  <img :src="app.icon" alt="" @click.stop="dialogVisible = true">
+  <img :src="app.icon" class="app-img" alt="" @click.stop="dialogVisible = true">
   <IDialog title="舔狗日记" :visible="dialogVisible" @ok="dialogVisible = false" @cancel="dialogVisible = false">
     <div class="tiangou">
       <img src="https://z1.ax1x.com/2023/11/20/piUaYCT.jpg" alt="">

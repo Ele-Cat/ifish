@@ -51,6 +51,12 @@ export const systemComponents = [
     title: "休闲文字游戏",
     component: "wordGames",
   },
+  {
+    type: "component",
+    title: "假装升级",
+    component: "fakeUpdate",
+    icon: "https://i.postimg.cc/pTnQhS6Z/UHjixmA.png",
+  },
 ];
 
 export const lists = [
@@ -88,6 +94,14 @@ export const lists = [
     url: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
     icon: "https://z1.ax1x.com/2023/11/20/piUts58.jpg",
     component: "music",
+    gridSize: [1, 1],
+  },
+  {
+    id: "vV2KUKe7xDBsyaEV7OEar",
+    type: "component",
+    title: "假装升级",
+    icon: "https://i.postimg.cc/pTnQhS6Z/UHjixmA.png",
+    component: "fakeUpdate",
     gridSize: [1, 1],
   },
   {

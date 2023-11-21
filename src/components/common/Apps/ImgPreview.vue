@@ -1,6 +1,6 @@
 <template>
-  <img :src="app.icon" alt="" @click.stop="handleClick">
-  <a-image :width="200" style="width:0;height:0" :preview="{
+  <img class="app-img" :src="app.icon" alt="" @click.stop="handleClick">
+  <a-image :preview="{
     visible: appImageVisible,
     onVisibleChange: setImagePreviewVisible,
   }" :src="app.url" />
@@ -31,7 +31,5 @@ const setImagePreviewVisible = value => {
 </script>
 
 <style lang="less" scoped>
-img {
-  max-height: 100%;
-}
+
 </style>

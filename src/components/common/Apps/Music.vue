@@ -1,5 +1,5 @@
 <template>
-  <img :src="app.icon" alt="" @click.stop="showMusic">
+  <img :src="app.icon" class="app-img" alt="" @click.stop="showMusic">
 </template>
 
 <script setup>

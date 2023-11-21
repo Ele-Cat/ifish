@@ -103,6 +103,9 @@ const Music = defineAsyncComponent(() =>
 const WordGames = defineAsyncComponent(() => 
   import("@/components/common/Apps/WordGames.vue")
 );
+const FakeUpdate = defineAsyncComponent(() => 
+  import("@/components/common/Apps/FakeUpdate/Index.vue")
+);
 const components = {
   imgpreview: ImgPreview,
   tiangou: Tiangou,
@@ -110,6 +113,7 @@ const components = {
   gongde: Gongde,
   music: Music,
   wordGames: WordGames,
+  fakeUpdate: FakeUpdate,
 };
 
 const apps = ref([]);

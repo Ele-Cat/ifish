@@ -1,12 +1,9 @@
 <template>
-  <div class="gongde" v-if="type == 'use'">
+  <div class="gongde">
     <p class="num">功德：<span>{{ useAppStore.gongde }}</span></p>
     <p class="tips" ref="tipRef">功德+1</p>
     <img ref="gongdeRef" @mousedown="handleMousedown" @mouseup="handleMouseup" class="gongde-img" src="/images/apps/gongde1.png" alt="">
     <audio ref="gongdeAudioRef" src="./images/apps/gongde3.aac"></audio>
-  </div>
-  <div class="gongde" v-else>
-    <img src="/images/apps/gongde1.png" alt="">
   </div>
 </template>
 

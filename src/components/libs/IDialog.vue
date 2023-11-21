@@ -14,7 +14,7 @@
     >
       <slot />
       <template #title>
-        <div ref="modalTitleRef" style="width: 100%; cursor: move">
+        <div ref="modalTitleRef" class="modal-title">
           {{ title }}<slot name="titleLink"></slot>
         </div>
       </template>
@@ -107,5 +107,10 @@ const transformStyle = computed(() => {
 </script>
 
 <style lang="less">
-
+.modal-title {
+  display: flex;
+  align-items: baseline;
+  width: 100%; 
+  cursor: move;
+}
 </style>

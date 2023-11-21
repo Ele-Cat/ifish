@@ -7,11 +7,11 @@
         :key="index"
         @click="addSystemComp(component)"
       >
-        <div v-if="component.icon">
+        <div class="system-icon" v-if="component.icon">
           <img :src="component.icon" alt="" />
         </div>
         <component v-else :is="components[component.component]" type="preview" />
-        <p>{{ component.title }}</p>
+        <p class="title">{{ component.title }}</p>
       </div>
     </div>
   </perfect-scrollbar>
@@ -24,17 +24,11 @@ const { useAppStore } = useStore();
 import { systemComponents } from "@/mock/app";
 import { uuid } from "@/utils/utils";
 import { toast } from "@/utils/feedback";
-const Tiangou = defineAsyncComponent(() =>
-  import("@/components/common/Apps/Tiangou.vue")
+const WordGames = defineAsyncComponent(() => 
+  import("@/components/common/Apps/WordGames.vue")
 );
-const Zhibuzhi = defineAsyncComponent(() =>
-  import("@/components/common/Apps/Zhibuzhi.vue")
-);
-const Gongde = defineAsyncComponent(() => import("@/components/common/Apps/Gongde.vue"));
 const components = {
-  tiangou: Tiangou,
-  zhibuzhi: Zhibuzhi,
-  gongde: Gongde,
+  wordGames: WordGames,
 };
 
 const addSystemComp = (comp) => {
@@ -66,18 +60,22 @@ const addSystemComp = (comp) => {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 10rem;
     background-color: var(--theme-bg-color);
     border-radius: 8px;
-    padding: 10px 10px 6px;
+    padding: 10px 10px 4px;
     cursor: pointer;
     text-align: center;
     transition: all 0.3s ease-in-out;
-    img {
-      max-width: 100%;
-      border-radius: 8px;
+    .system-icon {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
     }
-    p {
+    .title {
       font-weight: bold;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -85,7 +83,9 @@ const addSystemComp = (comp) => {
     }
     &:hover {
       box-shadow: 0 0 15px var(--theme-bg-color-a8);
-      color: var(--primary-color);
+      .title {
+        color: var(--primary-color);
+      }
     }
   }
 }

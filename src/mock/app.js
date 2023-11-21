@@ -31,6 +31,7 @@ export const systemComponents = [
     type: "component",
     title: "功德+1",
     component: "gongde",
+    icon: "./images/apps/gongde1.png",
   },
   {
     type: "component",
@@ -154,6 +155,7 @@ export const lists = [
     id: "vV2KUKe7xDBsyaEV7OEap",
     type: "component",
     title: "功德+1",
+    icon: "./images/apps/gongde1.png",
     component: "gongde",
     gridSize: [2, 2],
   },

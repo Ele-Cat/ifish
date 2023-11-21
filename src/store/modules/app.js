@@ -6,6 +6,10 @@ export const useAppStore = defineStore("ifishApp", {
     return {
       lists: lists,
       gongde: 0, // 功德
+      wordGames: {
+        width: 1280,
+        height: 768,
+      }
     };
   },
   actions: {

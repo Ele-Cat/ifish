@@ -1,5 +1,5 @@
 <template>
-  <div class="word-games">
+  <div class="word-games" :class="{preview: type === 'preview'}">
     <perfect-scrollbar class="scroll-bar">
       <div
         class="word-item"
@@ -18,30 +18,50 @@
   </div>
   <IDialog
     :title="activeGame.label"
-    :width="1200"
+    :width="useAppStore.wordGames.width"
     :visible="dialogVisible"
+    :zIndex="10010"
     wrapClassName="game-dialog"
     @cancel="dialogVisible = false"
   >
     <template #titleLink>
-      <a href="javascript:;" class="link" @click="toggle">全屏娱乐</a>
-      <a :href="activeGame.url" target="_blank" class="link">点我进入原站</a>
+      <span class="title-link">
+        <a href="javascript:;" class="link" title="全屏娱乐" @click="toggle">全屏</a>
+        <a :href="activeGame.url" target="_blank" class="link" title="点击进入原站">进入原站</a>
+        <a-space>
+          窗口大小
+          <a-input-number :min="480" v-model:value="useAppStore.wordGames.width" size="small" />*
+          <a-input-number :min="360" v-model:value="useAppStore.wordGames.height" size="small" />
+        </a-space>
+      </span>
     </template>
-    <iframe ref="iframeRef" :src="activeGame.url" frameborder="0"></iframe>
+    <a-spin :spinning="gameLoading" tip="加载中，请耐心等待...">
+      <iframe ref="iframeRef" :src="activeGame.url" :style="{height: useAppStore.wordGames.height + 'px',backgroundColor: isFullscreen ? '#FFF' : 'transparent'}" frameborder="0"></iframe>
+    </a-spin>
   </IDialog>
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { nextTick, reactive, ref } from "vue";
 import { useFullscreen } from "@vueuse/core";
+import useStore from "@/store";
+const { useAppStore } = useStore();
+
+const props = defineProps({
+  type: {
+    type: String,
+    default: "use",
+  }
+})
 
 const activeGame = ref({});
 const dialogVisible = ref(false);
+const gameLoading = ref(false);
 const wordGames = reactive([
   {
     label: "小黑屋",
     icon: "https://qiujunya.com/adarkroom/favicon.ico",
-    url: "https://qiujunya.com/adarkroom/?lang=zh_cn",
+    url: "http://doublespeakgames.github.io/adarkroom/?lang=zh_cn",
   },
   {
     label: "猫国建设者",
@@ -91,10 +111,17 @@ const wordGames = reactive([
 ]);
 
 const iframeRef = ref(null);
-const { toggle } = useFullscreen(iframeRef);
+const { isFullscreen, toggle } = useFullscreen(iframeRef);
 const handlePlayGame = (game) => {
+  activeGame.value = {};
   dialogVisible.value = true;
+  gameLoading.value = true;
   activeGame.value = game;
+  nextTick(() => {
+    iframeRef.value.addEventListener("load", () => {
+      gameLoading.value = false;
+    })
+  })
 };
 </script>
 
@@ -123,15 +150,32 @@ const handlePlayGame = (game) => {
       color: #f8fafc;
     }
   }
+  &.preview {
+    padding: 0;
+    height: 120px;
+    .word-item {
+      pointer-events: none;
+    }
+  }
 }
 </style>
 
 <style lang="less">
 .game-dialog {
-  .link {
-    font-weight: normal;
-    font-size: 14px;
-    margin-left: 12px;
+  .title-link {
+    display: flex;
+    align-items: center;
+    .link {
+      font-weight: normal;
+      font-size: 14px;
+      margin-left: 16px;
+    }
+    .ant-space {
+      margin-left: 16px;
+      .ant-input-number {
+        width: 66px;
+      }
+    }
   }
   .ant-modal-close {
     top: 7px;
@@ -142,14 +186,15 @@ const handlePlayGame = (game) => {
     line-height: 32px;
     padding: 4px 0 0 12px;
     margin-bottom: 0;
+    border-bottom: 1px solid #CCC;
   }
   .ant-modal-content {
     padding: 0 !important;
     .ant-modal-body,
     iframe {
       width: 100%;
-      height: 80vh;
       border-radius: 8px;
+      background-color: #FFF;
     }
   }
 }

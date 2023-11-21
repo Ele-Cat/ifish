@@ -116,7 +116,7 @@ const handleUseFake = (fake) => {
   .tips {
     font-size: 12px;
     color: #666;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 }
 </style>

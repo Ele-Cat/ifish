@@ -140,7 +140,6 @@ const handleUseFake = (fake) => {
   .fakes {
     display: flex;
     flex-wrap: wrap;
-    // justify-content: space-between;
     margin: 20px 0 10px;
     .fake-item {
       width: 32%;

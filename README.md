@@ -65,7 +65,7 @@
       - [x] 功德+1
       - [x] 音乐
       - [x] 休闲文字游戏
-      - [ ] 伪装更新
+      - [x] 伪装更新
       - [ ] 小游戏 https://hellokit.com.cn/web/game
   - [x] App布局
   - [x] 编辑

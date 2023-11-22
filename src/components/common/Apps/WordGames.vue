@@ -5,6 +5,7 @@
         class="word-item"
         v-for="(item, index) in wordGames"
         :key="index"
+        :title="item.label"
         @click="handlePlayGame(item)"
       >
         <img
@@ -161,12 +162,16 @@ const toOrigin = () => {
     align-items: center;
     margin-bottom: 4px;
     padding: 2px;
-    border-radius: 18px;
+    border-radius: 16px;
     transition: all 0.3s;
+    font-size: 12px;
     img {
-      width: 32px;
+      width: 28px;
       border-radius: 50%;
       margin-right: 6px;
+    }
+    p {
+      flex: 1;
     }
     &:hover {
       background-color: var(--primary-color);

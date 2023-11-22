@@ -11,6 +11,7 @@
       <p class="title">请选择一个主题</p>
       <div class="fakes">
         <!-- https://fakeupdate.net/ -->
+        <!-- https://hellokit.com.cn/fakeupdate -->
         <div
           class="fake-item"
           :title="fake.label"
@@ -19,14 +20,16 @@
           @click="handleUseFake(fake)"
         >
           <img :src="fake.cover" alt="" />
+          <p>{{ fake.label }}</p>
         </div>
       </div>
-      <p class="tips">
-        本功能会让你的电脑进入一个假更新的画面，让别人以为你的电脑正在升级，这时候你就可以休息一下，优雅地喝一杯咖啡。不要有内疚感，适当的休息可以让你的大脑重新充满活力，能面对更多挑战，更高效地完成工作。
-      </p>
+      <div class="tips">
+        <p>1.本功能会让你的电脑进入一个假更新的画面，让别人以为你的电脑正在升级，这时候你就可以休息一下，优雅地喝一杯咖啡。不要有内疚感，适当的休息可以让你的大脑重新充满活力，能面对更多挑战，更高效地完成工作。</p>
+        <p>2.全屏后，点击Esc退出伪装升级。</p>
+      </div>
     </div>
-    <component ref="fakeRef" v-if="activeFake.label" :is="activeFake.component" />
   </IDialog>
+  <component ref="fakeRef" v-show="isFullscreen" :is="activeFake.component" />
 </template>
 
 <script setup>
@@ -46,7 +49,7 @@ const activeFake = ref({});
 const fakes = reactive([
   {
     label: "Windows XP",
-    cover: "https://i.postimg.cc/PrG8Pb9Q/2.png",
+    cover: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/fakeupdate/assets/img/2.png",
     component: WindowsXp,
   },
   {
@@ -75,17 +78,10 @@ const fakeRef = ref(null);
 const { isFullscreen, toggle, enter, exit } = useFullscreen(fakeRef);
 
 const handleUseFake = (fake) => {
-  // activeFake.value = fake;
-  // nextTick(() => {
-  //   enter();
-  // });
-  // document.addEventListener("keydown", function (event) {
-  //   console.log("event: ", event);
-  //   if (event.key === "Escape") {
-  //     exit();
-  //     activeFake.value = {};
-  //   }
-  // });
+  activeFake.value = fake;
+  nextTick(() => {
+    enter();
+  });
 };
 </script>
 
@@ -99,24 +95,27 @@ const handleUseFake = (fake) => {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 20px;
+    margin: 20px 0 10px;
     .fake-item {
       width: 32%;
       margin: 0 0 10px 0;
+      text-align: center;
       cursor: pointer;
       img {
         width: 100%;
         height: 120px;
+        transition: box-shadow 0.2s ease 0s;
       }
       &:hover {
-        box-shadow: 0 0 6px red;
+        img {
+          box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px, rgba(255, 255, 255, 0.4) 0px 0px 3px;
+        }
       }
     }
   }
   .tips {
     font-size: 12px;
     color: #666;
-    margin-top: 10px;
   }
 }
 </style>

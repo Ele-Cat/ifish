@@ -179,10 +179,10 @@ const handleAppClick = (app) => {
         flex: 1;
         display: flex;
         background-color: rgba(255, 255, 255, 0.9);
-        // .logo {
-        //   height: 100%;
-        //   object-fit: cover;
-        // }
+        .logo {
+          height: 100%;
+          object-fit: cover;
+        }
         .description {
           flex: 1;
           display: flex;

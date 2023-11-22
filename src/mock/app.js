@@ -53,7 +53,7 @@ export const systemComponents = [
   },
   {
     type: "component",
-    title: "假装升级",
+    title: "伪装升级",
     component: "fakeUpdate",
     icon: "https://i.postimg.cc/pTnQhS6Z/UHjixmA.png",
   },
@@ -99,7 +99,7 @@ export const lists = [
   {
     id: "vV2KUKe7xDBsyaEV7OEar",
     type: "component",
-    title: "假装升级",
+    title: "伪装升级",
     icon: "https://i.postimg.cc/pTnQhS6Z/UHjixmA.png",
     component: "fakeUpdate",
     gridSize: [1, 1],

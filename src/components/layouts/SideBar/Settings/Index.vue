@@ -34,7 +34,7 @@ const SettingsBasic = defineAsyncComponent(() => import("./SettingsBasic.vue"));
 const SettingsAppearance = defineAsyncComponent(() => import("./SettingsAppearance.vue"));
 const SettingsShortcutKey = defineAsyncComponent(() => import("./SettingsShortcutKey.vue"));
 const SettingsNews = defineAsyncComponent(() => import("./SettingsNews.vue"));
-const SettingsExport = defineAsyncComponent(() => import("./SettingsExport.vue"));
+const SettingsData = defineAsyncComponent(() => import("./SettingsData.vue"));
 
 const props = defineProps({
   open: {
@@ -71,9 +71,9 @@ const settingsNavs = ref([
     component: SettingsShortcutKey,
   },
   {
-    label: "导入、导出",
+    label: "数据管理",
     value: "export",
-    component: SettingsExport,
+    component: SettingsData,
   },
 ]);
 </script>

@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
-import { lists } from "@/mock/app";
+import { appList } from "@/mock/app";
 
 export const useAppStore = defineStore("ifishApp", {
   state: () => {
     return {
-      lists: lists,
+      lists: appList,
       gongde: 0, // 功德
       wordGames: {
         width: 1280,
@@ -15,6 +15,9 @@ export const useAppStore = defineStore("ifishApp", {
   actions: {
     addGongde() {
       this.gongde++;
+    },
+    reset() {
+      this.lists = appList;
     },
   },
   persist: {

@@ -3,7 +3,7 @@
     <div class="system-tags">
       <div
         class="system-tag"
-        v-for="(nav, idx) in navList"
+        v-for="(nav, idx) in navs"
         :key="idx"
         @click="addSystemTag(nav)"
       >
@@ -25,16 +25,16 @@ import { ref, computed, onMounted } from "vue";
 import _ from "lodash";
 import useStore from "@/store";
 const { useAppStore } = useStore();
-import nav from "@/mock/nav";
+import { navList } from "@/mock/nav";
 import { toast } from "@/utils/feedback";
 import { renderIco, uuid } from "@/utils/utils";
 
 const pageSize = 48;
 const pageNo = ref(1);
-const navList = ref([]);
+const navs = ref([]);
 let navLists = [];
 onMounted(() => {
-  nav.map((nav1) => {
+  navList.map((nav1) => {
     nav1.nav.map((nav2) => {
       nav2.nav.map((nav3) => {
         nav3.nav.map((nav4) => {
@@ -49,7 +49,7 @@ onMounted(() => {
 const renderNavs = () => {
   const cloneNavs = _.cloneDeep(navLists);
   const nextNavs = cloneNavs.splice((pageNo.value - 1) * pageSize, pageSize);
-  navList.value = [...navList.value, ...nextNavs];
+  navs.value = [...navs.value, ...nextNavs];
 };
 
 const onSearchScroll = (event) => {

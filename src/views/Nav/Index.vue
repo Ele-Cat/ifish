@@ -33,7 +33,7 @@
 <script setup>
 import { computed, nextTick, ref, watch } from "vue";
 import { renderIco } from "@/utils/utils";
-import nav from "@/mock/nav";
+import { navList } from "@/mock/nav";
 import useStore from "@/store";
 const { useNavStore } = useStore();
 
@@ -41,9 +41,9 @@ const renderIcon = computed(() => (url) => {
   return renderIco(url);
 })
 
-const navsLeft = nav.map(nav => nav.title);
+const navsLeft = navList.map(nav => nav.title);
 const navsTop = computed(() => {
-  return nav[activeLeft.value]["nav"].map(nav => nav.title);
+  return navList[activeLeft.value]["nav"].map(nav => nav.title);
 })
 const activeLeft = ref(useNavStore.active[0] || 0);
 const activeTop = ref(useNavStore.active[1] || 0);
@@ -51,7 +51,7 @@ const activeNavs = ref([])
 watch(() => [activeLeft.value, activeTop.value], () => {
   activeNavs.value = [];
   nextTick(() => {
-    activeNavs.value = nav[activeLeft.value]["nav"][activeTop.value]["nav"];
+    activeNavs.value = navList[activeLeft.value]["nav"][activeTop.value]["nav"];
   })
 }, {
   immediate: true,

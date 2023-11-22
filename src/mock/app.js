@@ -59,7 +59,7 @@ export const systemComponents = [
   },
 ];
 
-export const lists = [
+export const appList = [
   {
     id: "ZGr1TVTtF59q1mne2m2G1",
     type: "bookmark",

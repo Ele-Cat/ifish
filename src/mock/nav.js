@@ -1,4 +1,4 @@
-const nav = [
+export const navList = [
   {
     "title": "实用工具",
     "nav": [
@@ -4152,6 +4152,4 @@ const nav = [
       }
     ],
   },
-]
-
-export default nav;
+];

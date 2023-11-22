@@ -11,23 +11,43 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
+import { ref, watch } from "vue";
+
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: false,
+  }
+})
 
 const percent = ref(0);
 let timer = null;
-onUnmounted(() => {
-  percent.value = 0;
-  timer && clearInterval(timer);
-})
+let interval = 5000;
 
-onMounted(() => {
-  percent.value = 0;
+const doInterval = () => {
   timer = setInterval(() => {
     percent.value++;
     if (percent.value >= 99) {
-      percent.value = 50;
+      percent.value = 0;
     }
-  }, 5000);
+  }, interval);
+}
+
+const clear = () => {
+  percent.value = 0;
+  timer && clearInterval(timer);
+}
+
+watch(() => props.visible, newVal => {
+  if (newVal) {
+    clear();
+    doInterval();
+  } else {
+    clear();
+  }
+}, {
+  immediate: true,
+  deep: true,
 })
 </script>
 

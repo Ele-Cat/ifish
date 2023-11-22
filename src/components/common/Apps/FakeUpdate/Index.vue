@@ -29,11 +29,11 @@
       </div>
     </div>
   </IDialog>
-  <component ref="fakeRef" v-show="isFullscreen" :is="activeFake.component" />
+  <component ref="fakeRef" v-show="isFullscreen" :visible="isFullscreen" :is="activeFake.component" />
 </template>
 
 <script setup>
-import { nextTick, onMounted, reactive, ref } from "vue";
+import { nextTick, reactive, ref } from "vue";
 import { useFullscreen } from "@vueuse/core";
 import { toast } from "@/utils/feedback";
 import WindowsXp from "./WindowsXp.vue";
@@ -84,6 +84,7 @@ const handleUseFake = (fake) => {
       type: "warning",
       content: "开发中..."
     })
+    return;
   }
   activeFake.value = fake;
   nextTick(() => {

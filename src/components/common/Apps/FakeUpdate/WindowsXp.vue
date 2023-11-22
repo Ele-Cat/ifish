@@ -56,10 +56,11 @@ onMounted(() => {
     align-items: end;
     justify-content: flex-end;
     .image_block {
+      position: relative;
+      left: 20px;
       width: 400px;
     }
     .font {
-      margin-top:20px;
       line-height: 1.4;
       span {
         margin-left: 6px;

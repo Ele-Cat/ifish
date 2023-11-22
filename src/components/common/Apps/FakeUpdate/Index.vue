@@ -35,6 +35,7 @@
 <script setup>
 import { nextTick, onMounted, reactive, ref } from "vue";
 import { useFullscreen } from "@vueuse/core";
+import { toast } from "@/utils/feedback";
 import WindowsXp from "./WindowsXp.vue";
 
 const props = defineProps({
@@ -75,9 +76,15 @@ const fakes = reactive([
 ]);
 
 const fakeRef = ref(null);
-const { isFullscreen, toggle, enter, exit } = useFullscreen(fakeRef);
+const { isFullscreen, enter } = useFullscreen(fakeRef);
 
 const handleUseFake = (fake) => {
+  if (!fake.component) {
+    toast({
+      type: "warning",
+      content: "开发中..."
+    })
+  }
   activeFake.value = fake;
   nextTick(() => {
     enter();

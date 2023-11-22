@@ -1,0 +1,1 @@
+import{_ as t,o as c,b as o,m as a,x as _}from"./index-8665418e.js";const p=["src","onClick"],n={__name:"Music",props:{app:{type:Object,default:()=>{}}},setup(e){const s=()=>{_.emit("playOrPause")};return(i,l)=>(c(),o("img",{src:e.app.icon,class:"app-img",alt:"",onClick:a(s,["stop"])},null,8,p))}},u=t(n,[["__scopeId","data-v-1b52d2ee"]]);export{u as default};

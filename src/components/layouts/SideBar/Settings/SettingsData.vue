@@ -53,7 +53,7 @@ const labelCol = {
     width: "68px",
   },
 };
-const exportTypes = {
+const dataTypes = {
   app: "首页配置",
   system: "系统配置",
   all: "全部配置",
@@ -89,7 +89,9 @@ const handleImport = (e) => {
       toast({
         content: "导入成功！",
       });
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000)
     }
     // 处理同文件上传无法获取文件信息问题
     e.target.value = null;
@@ -122,7 +124,7 @@ const handleExport = (type) => {
   });
   FileSaver.saveAs(
     blob,
-    `${exportTypes[type]} - ${dayjs().format("YYYYMMDDHHmmss")}.json`
+    `${dataTypes[type]} - ${dayjs().format("YYYYMMDDHHmmss")}.json`
   );
 };
 
@@ -135,6 +137,12 @@ const handleReset = (type) => {
     useAppStore.reset();
     useSystemStore.reset();
   }
+  toast({
+    content: `${dataTypes[type]}重置成功！`,
+  });
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000)
 };
 </script>
 

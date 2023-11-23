@@ -9,7 +9,11 @@ export const useAppStore = defineStore("ifishApp", {
       wordGames: {
         width: 1280,
         height: 768,
-      }
+      },
+      miniGames: {
+        width: 880,
+        height: 560,
+      },
     };
   },
   actions: {

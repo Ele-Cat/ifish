@@ -164,7 +164,7 @@ const toOrigin = () => {
     padding: 2px;
     border-radius: 16px;
     transition: all 0.3s;
-    font-size: 12px;
+    font-size: 14px;
     img {
       width: 28px;
       border-radius: 50%;
@@ -182,46 +182,6 @@ const toOrigin = () => {
     padding: 0;
     height: 120px;
     pointer-events: none;
-  }
-}
-</style>
-
-<style lang="less">
-.game-dialog {
-  .title-link {
-    display: flex;
-    align-items: center;
-    .link {
-      font-weight: normal;
-      font-size: 14px;
-      margin-left: 16px;
-    }
-    .ant-space {
-      margin-left: 16px;
-      .ant-input-number {
-        width: 66px;
-      }
-    }
-  }
-  .ant-modal-close {
-    top: 7px;
-    right: 12px;
-  }
-  .ant-modal-header {
-    height: 32px;
-    line-height: 32px;
-    padding: 4px 0 0 12px;
-    margin-bottom: 0;
-    border-bottom: 1px solid #ccc;
-  }
-  .ant-modal-content {
-    padding: 0 !important;
-    .ant-modal-body,
-    iframe {
-      width: 100%;
-      border-radius: 8px;
-      background-color: #fff;
-    }
   }
 }
 </style>

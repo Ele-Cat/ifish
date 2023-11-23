@@ -66,7 +66,7 @@
       - [x] 音乐
       - [x] 休闲文字游戏
       - [x] 伪装更新
-      - [ ] 小游戏 https://hellokit.com.cn/web/game
+      - [x] 小游戏
   - [x] App布局
   - [x] 编辑
   - [x] 删除

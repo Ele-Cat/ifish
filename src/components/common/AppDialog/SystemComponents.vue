@@ -28,8 +28,13 @@ import { toast } from "@/utils/feedback";
 const WordGames = defineAsyncComponent(() => 
   import("@/components/common/Apps/WordGames.vue")
 );
+const OnlineMiniGames = defineAsyncComponent(() => 
+  import("@/components/common/Apps/OnlineMiniGames.vue")
+);
+
 const components = {
   wordGames: WordGames,
+  onlineMiniGames: OnlineMiniGames,
 };
 
 const addSystemComp = (comp) => {

@@ -53,28 +53,6 @@
   
   <!-- 首页书签弹框 -->
   <AppDialog />
-
-  <!-- 随机一句一言API接口 https://api.vvhan.com/api/ian -->
-  <!-- 随机笑话API接口 https://api.vvhan.com/api/joke -->
-  <!-- 随机一句情话API接口 https://api.vvhan.com/api/love -->
-  <!-- 随机一句骚话API接口 https://api.vvhan.com/api/sao -->
-  <!-- 美图API接口 https://api.vvhan.com/api/mobil.girl?type=json -->
-  <!-- https://api.vvhan.com/api/girl?type=json -->
-
-  <!-- 美女视频 https://www.nihaowua.com/v/video.php?_t=0.6096279598934722 -->
-  <!-- 美女写真 https://api.moyuduck.com/random/xiezhen -->
-
-  <!-- 猫咪进化 https://likexia.gitee.io/cat-zh/# -->
-  <!-- 超级进化 https://g8hh.github.io/evolve/ -->
-  <!-- 
-    摸鱼日报API https://dayu.qqsuu.cn/moyuribao/apis.php
-    摸鱼日历API https://dayu.qqsuu.cn/moyurili/apis.php
-    明星八卦API https://dayu.qqsuu.cn/mingxingbagua/apis.php
-    内涵段子API https://dayu.qqsuu.cn/neihanduanzi/apis.php
-    新闻简报API https://dayu.qqsuu.cn/weiyujianbao/apis.php
-    情感花园API https://dayu.qqsuu.cn/qingganhuayuan/apis.php
-    摸鱼日报美女视频版API https://dayu.qqsuu.cn/moyuribaoshipin/apis.php 
-  -->
 </template>
 
 <script setup>
@@ -106,6 +84,10 @@ const WordGames = defineAsyncComponent(() =>
 const FakeUpdate = defineAsyncComponent(() => 
   import("@/components/common/Apps/FakeUpdate/Index.vue")
 );
+const OnlineMiniGames = defineAsyncComponent(() => 
+  import("@/components/common/Apps/OnlineMiniGames.vue")
+);
+
 const components = {
   imgpreview: ImgPreview,
   tiangou: Tiangou,
@@ -114,6 +96,7 @@ const components = {
   music: Music,
   wordGames: WordGames,
   fakeUpdate: FakeUpdate,
+  onlineMiniGames: OnlineMiniGames,
 };
 
 const apps = ref([]);

@@ -42,14 +42,19 @@ export const systemComponents = [
   },
   {
     type: "component",
-    title: "音乐播放器",
-    component: "music",
-    icon: "https://z1.ax1x.com/2023/11/20/piUts58.jpg",
+    title: "休闲文字游戏",
+    component: "wordGames",
   },
   {
     type: "component",
-    title: "休闲文字游戏",
-    component: "wordGames",
+    title: "在线小游戏",
+    component: "onlineMiniGames",
+  },
+  {
+    type: "component",
+    title: "音乐播放器",
+    component: "music",
+    icon: "https://z1.ax1x.com/2023/11/20/piUts58.jpg",
   },
   {
     type: "component",
@@ -178,6 +183,13 @@ export const appList = [
     type: "component",
     title: "休闲文字游戏",
     component: "wordGames",
+    gridSize: [2, 2],
+  },
+  {
+    id: "vV2KUKe7xDBsyaEV7OEas",
+    type: "component",
+    title: "在线小游戏",
+    component: "onlineMiniGames",
     gridSize: [2, 2],
   },
   {

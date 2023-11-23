@@ -217,3 +217,45 @@ p {
 .bf {
   backdrop-filter: saturate(500%) blur(10px);
 }
+
+.game-dialog {
+  .title-link {
+    display: flex;
+    align-items: center;
+    .link {
+      font-weight: normal;
+      font-size: 14px;
+      margin-left: 16px;
+    }
+    .ant-space {
+      margin-left: 16px;
+      .ant-input-number {
+        width: 66px;
+      }
+    }
+  }
+  .ant-modal-close {
+    top: 7px;
+    right: 12px;
+  }
+  .ant-modal-header {
+    height: 32px;
+    line-height: 32px;
+    padding: 4px 0 0 12px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #ccc;
+  }
+  .ant-modal-content {
+    padding: 0 !important;
+    .ant-modal-body {
+      line-height: 0;
+      background-color: #fff;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      box-shadow: 0 0 20px inset #ddd;
+    }
+    iframe {
+      width: 100%;
+    }
+  }
+}

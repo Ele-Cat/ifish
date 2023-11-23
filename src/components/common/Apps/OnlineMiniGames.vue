@@ -1,17 +1,21 @@
 <template>
-  <div class="online-mini-game" :class="{ preview: type === 'preview' }" @click="handlePlayGame">
+  <div
+    class="online-mini-game"
+    :class="{ preview: type === 'preview' }"
+    @click="handlePlayGame"
+  >
     <div class="ctrl-game">
       <LeftOutlined @click.stop="handlePN(-1)" />
       <RightOutlined @click.stop="handlePN(1)" />
     </div>
-    <img :src="activeGame.icon" alt="">
+    <img :src="activeGame.icon" alt="" />
     <div class="active-game">
       <p>{{ activeGame.label }}</p>
       <p>点击开始游戏</p>
     </div>
   </div>
   <IDialog
-    :title="gameList[activeIndex]['label']"
+    :title="`在线小游戏 - ${gameList[activeIndex]['label']}`"
     :width="useAppStore.miniGames.width"
     :visible="dialogVisible"
     :zIndex="10010"
@@ -20,6 +24,13 @@
   >
     <template #titleLink>
       <span class="title-link">
+        <a
+          href="javascript:;"
+          class="link"
+          title="全屏娱乐"
+          @click="gameListVisible = !gameListVisible"
+          >{{ gameListVisible ? "隐藏" : "显示" }}游戏列表</a
+        >
         <a href="javascript:;" class="link" title="全屏娱乐" @click="toggle">全屏</a>
         <a href="javascript:;" class="link" title="点击进入原站" @click="toOrigin"
           >进入原站</a
@@ -40,11 +51,23 @@
       </span>
     </template>
     <div class="game-box">
-      <perfect-scrollbar class="scroll-bar" :style="{
+      <perfect-scrollbar
+        v-if="gameListVisible"
+        class="scroll-bar"
+        :style="{
           height: useAppStore.miniGames.height + 'px',
-        }">
+        }"
+      >
         <div class="game-list">
-          <p class="game-item" :class="{active: activeIndex === index}" v-for="(item, index) in gameList" :key="index" @click="activeIndex = index">{{ item.label }}</p>
+          <p
+            class="game-item"
+            :class="{ active: activeIndex === index }"
+            v-for="(item, index) in gameList"
+            :key="index"
+            @click="activeIndex = index"
+          >
+            {{ item.label }}
+          </p>
         </div>
       </perfect-scrollbar>
       <a-spin :spinning="gameLoading" tip="加载中，请耐心等待...">
@@ -64,7 +87,7 @@
 
 <script setup>
 import { computed, reactive, ref, nextTick } from "vue";
-import { LeftOutlined, RightOutlined } from '@ant-design/icons-vue';
+import { LeftOutlined, RightOutlined } from "@ant-design/icons-vue";
 import { useFullscreen } from "@vueuse/core";
 import useStore from "@/store";
 const { useAppStore } = useStore();
@@ -79,6 +102,7 @@ const props = defineProps({
 // https://hellokit.com.cn/web/game
 
 const activeIndex = ref(0);
+const gameListVisible = ref(true);
 const gameList = reactive([
   // {
   //   label: "俄罗斯方块",
@@ -87,12 +111,14 @@ const gameList = reactive([
   // },
   {
     label: "切方块",
-    icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/cut-the-box/cube.png",
+    icon:
+      "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/cut-the-box/cube.png",
     url: "https://hellokit.com.cn/cut-the-box",
   },
   {
     label: "盖塔楼",
-    icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/build-tower/box-icon.png",
+    icon:
+      "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/build-tower/box-icon.png",
     url: "https://hellokit.com.cn/build-tower",
   },
   {
@@ -114,11 +140,6 @@ const gameList = reactive([
     label: "数独",
     icon: "https://img.zhuayuya.com/icon/shudu.webp",
     url: "https://www.zhuayuya.com/sudoku_tow/index.html",
-  },
-  {
-    label: "切木块",
-    icon: "https://img.zhuayuya.com/images/y68.png",
-    url: "https://game.zhuayuya.com/yxmb/68/index.html",
   },
   {
     label: "西瓜插口红",
@@ -161,11 +182,6 @@ const gameList = reactive([
     url: "https://game.zhuayuya.com/yxmb/58/index.html",
   },
   {
-    label: "闯关小游戏",
-    icon: "https://img.zhuayuya.com/images/y32.png",
-    url: "https://game.zhuayuya.com/yxmb/32/index.html",
-  },
-  {
     label: "线条生存",
     icon: "https://img.zhuayuya.com/images/y19.png",
     url: "https://game.zhuayuya.com/yxmb/19/index.html",
@@ -175,10 +191,10 @@ const gameList = reactive([
     icon: "https://img.zhuayuya.com/images/y72.png",
     url: "https://game.zhuayuya.com/yxmb/72/index.html",
   },
-])
+]);
 const activeGame = computed(() => {
   return gameList[activeIndex.value];
-})
+});
 const dialogVisible = ref(false);
 const gameLoading = ref(false);
 
@@ -190,7 +206,7 @@ const handlePN = (val) => {
   if (activeIndex.value > gameList.length - 1) {
     activeIndex.value = 0;
   }
-}
+};
 
 const iframeRef = ref(null);
 const { isFullscreen, toggle } = useFullscreen(iframeRef);
@@ -213,7 +229,7 @@ const toOrigin = () => {
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg,#F093FF 0%,#C13DFF 100%);
+  background: linear-gradient(180deg, #f093ff 0%, #c13dff 100%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -225,17 +241,17 @@ const toOrigin = () => {
     top: 8px;
     display: flex;
     justify-content: space-between;
-    transition: all .2s;
+    transition: all 0.2s;
     .anticon {
       display: flex;
       width: 26px;
       justify-content: center;
       color: #fff;
       height: 26px;
-      background: rgba(255, 255, 255, .3);
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 18px;
       &:hover {
-        background: rgba(255, 255, 255, .5);
+        background: rgba(255, 255, 255, 0.5);
       }
     }
   }
@@ -248,7 +264,7 @@ const toOrigin = () => {
     top: 12%;
     left: 50%;
     margin-left: -29px;
-    box-shadow: 0 4px 26px rgba(0, 0, 0, .26);
+    box-shadow: 0 4px 26px rgba(0, 0, 0, 0.26);
     background-color: #fff;
     z-index: 99;
   }
@@ -260,7 +276,7 @@ const toOrigin = () => {
     bottom: 4%;
     left: 6%;
     border-radius: 16px;
-    background: linear-gradient(180deg,#F3A6FF 0%,#ca56ff 100%);
+    background: linear-gradient(180deg, #f3a6ff 0%, #ca56ff 100%);
     padding: 36px 0 6px;
     text-align: center;
     color: #fff;
@@ -297,19 +313,20 @@ const toOrigin = () => {
 .game-box {
   display: flex;
   .game-list {
-    width: 200px;
-    padding: 0 0 6px 0;
+    width: 160px;
+    min-height: 100%;
+    border-right: 1px solid var(--primary-color);
     .game-item {
-      margin: 6px 20px 0 20px;
       height: 36px;
       line-height: 36px;
       padding: 0 12px;
-      border-radius: 36px;
-      background-color: var(--grey-4);
+      // background-color: var(--grey-4);
+      border-bottom: 1px solid var(--primary-color);
       cursor: pointer;
-      &.active, &:hover {
+      &.active,
+      &:hover {
         background-color: var(--primary-color);
-        color: #FFF;
+        color: #fff;
       }
     }
   }

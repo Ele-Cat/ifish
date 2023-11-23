@@ -11,8 +11,8 @@ export const useAppStore = defineStore("ifishApp", {
         height: 768,
       },
       miniGames: {
-        width: 880,
-        height: 560,
+        width: 980,
+        height: 640,
       },
     };
   },

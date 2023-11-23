@@ -31,14 +31,14 @@
       </div>
     </div>
   </IDialog>
-  <component
-    ref="fakeRef"
-    v-show="isFullscreen"
-    :visible="isFullscreen"
-    :is="activeFake.component"
-  />
-
-  <!-- <WindowsVista :visible="true" /> -->
+  <Teleport to="body">
+    <component
+      ref="fakeRef"
+      v-show="isFullscreen"
+      :visible="isFullscreen"
+      :is="activeFake.component"
+    />
+  </Teleport>
 </template>
 
 <script setup>
@@ -144,7 +144,7 @@ const handleUseFake = (fake) => {
     margin: 20px 0 10px;
     .fake-item {
       width: 32%;
-      margin: 0 1.5% 10px 0;
+      margin: 0 2% 10px 0;
       text-align: center;
       cursor: pointer;
       &:nth-of-type(3n) {

@@ -42,17 +42,18 @@
 </template>
 
 <script setup>
-import { nextTick, reactive, ref } from "vue";
+import { nextTick, reactive, ref, defineAsyncComponent } from "vue";
 import { useFullscreen } from "@vueuse/core";
 import { toast } from "@/utils/feedback";
-import Windows98 from "./Windows98.vue";
-import WindowsXp from "./WindowsXp.vue";
-import WindowsVista from "./WindowsVista.vue";
-import Windows7 from "./Windows7.vue";
-import Windows8 from "./Windows8.vue";
-import Windows10 from "./Windows10.vue";
-import MacOS from "./MacOS.vue";
-import BlueScreen from "./BlueScreen.vue";
+
+const Windows98 = defineAsyncComponent(() => import("./Windows98.vue"));
+const WindowsXp = defineAsyncComponent(() => import("./WindowsXp.vue"));
+const WindowsVista = defineAsyncComponent(() => import("./WindowsVista.vue"));
+const Windows7 = defineAsyncComponent(() => import("./Windows7.vue"));
+const Windows8 = defineAsyncComponent(() => import("./Windows8.vue"));
+const Windows10 = defineAsyncComponent(() => import("./Windows10.vue"));
+const MacOS = defineAsyncComponent(() => import("./MacOS.vue"));
+const BlueScreen = defineAsyncComponent(() => import("./BlueScreen.vue"));
 
 const props = defineProps({
   app: {

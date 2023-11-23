@@ -7,8 +7,10 @@
 </template>
 
 <script setup>
-import SearchBox from './SearchBox.vue';
-import Apps from './Apps.vue';
+import { defineAsyncComponent } from "vue";
+
+const SearchBox = defineAsyncComponent(() => import("./SearchBox.vue"));
+const Apps = defineAsyncComponent(() => import("./Apps.vue"));
 </script>
 
 <style lang="less" scoped>

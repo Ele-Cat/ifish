@@ -33,7 +33,7 @@
 <script setup>
 import { computed, nextTick, ref, watch } from "vue";
 import { renderIco } from "@/utils/utils";
-import { navList } from "@/mock/nav";
+import navList from "@/mock/nav";
 import useStore from "@/store";
 const { useNavStore } = useStore();
 

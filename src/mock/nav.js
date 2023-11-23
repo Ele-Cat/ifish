@@ -1,4 +1,4 @@
-export const navList = [
+const navList = [
   {
     "title": "实用工具",
     "nav": [
@@ -4153,3 +4153,5 @@ export const navList = [
     ],
   },
 ];
+
+export default navList;

@@ -119,7 +119,7 @@
 </template>
 
 <script setup>
-import { computed, nextTick, ref, watch } from "vue";
+import { defineAsyncComponent, ref, watch } from "vue";
 import {
   PlayCircleOutlined,
   PauseCircleOutlined,
@@ -130,7 +130,7 @@ import {
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import { secToMs } from "@/utils/utils";
-import MusicShortkey from "./MusicShortkey.vue";
+const MusicShortkey = defineAsyncComponent(() => import('./MusicShortkey.vue'));
 
 const emit = defineEmits([
   "toggleMusicList",

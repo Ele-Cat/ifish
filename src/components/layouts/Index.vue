@@ -15,10 +15,10 @@ import { defineAsyncComponent } from 'vue';
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 
-import MainBg from '@/components/common/MainBg.vue';
-import SideBar from '@/components/layouts/SideBar/Index.vue';
-import MainBox from '@/components/layouts/MainBox/Index.vue';
-import MainFooter from '@/components/layouts/MainFooter/Index.vue';
+const MainBg = defineAsyncComponent(() => import('@/components/common/MainBg.vue'));
+const SideBar = defineAsyncComponent(() => import('@/components/layouts/SideBar/Index.vue'));
+const MainBox = defineAsyncComponent(() => import('@/components/layouts/MainBox/Index.vue'));
+const MainFooter = defineAsyncComponent(() => import('@/components/layouts/MainFooter/Index.vue'));
 const Music = defineAsyncComponent(() => import('@/components/common/Music/Index.vue'));
 const Wallpaper = defineAsyncComponent(() => import('@/components/common/Wallpaper/Index.vue'));
 </script>

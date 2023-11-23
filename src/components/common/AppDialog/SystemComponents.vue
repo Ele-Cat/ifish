@@ -24,6 +24,7 @@ const { useAppStore } = useStore();
 import { systemComponents } from "@/mock/app";
 import { uuid } from "@/utils/utils";
 import { toast } from "@/utils/feedback";
+
 const WordGames = defineAsyncComponent(() => 
   import("@/components/common/Apps/WordGames.vue")
 );

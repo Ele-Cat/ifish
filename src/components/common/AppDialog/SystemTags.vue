@@ -25,7 +25,7 @@ import { ref, computed, onMounted } from "vue";
 import _ from "lodash";
 import useStore from "@/store";
 const { useAppStore } = useStore();
-import { navList } from "@/mock/nav";
+import navList from "@/mock/nav";
 import { toast } from "@/utils/feedback";
 import { renderIco, uuid } from "@/utils/utils";
 

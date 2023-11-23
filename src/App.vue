@@ -13,16 +13,17 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from "vue";
+import { onMounted, watch, defineAsyncComponent } from "vue";
 import zhCN from "ant-design-vue/es/locale/zh_CN";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 dayjs.locale("zh-cn");
 import { listenGlobalKeyDown } from "@/utils/shortcutKey";
-import Layouts from "@/components/layouts/Index.vue";
 import useStore from "@/store";
 const { useSystemStore, useContextMenuStore } = useStore();
-import ContextMenu from "@/components/common/ContextMenu.vue";
+
+const Layouts = defineAsyncComponent(() => import("@/components/layouts/Index.vue"));
+const ContextMenu = defineAsyncComponent(() => import("@/components/common/ContextMenu.vue"));
 
 // 监听全局键盘事件
 onMounted(() => {

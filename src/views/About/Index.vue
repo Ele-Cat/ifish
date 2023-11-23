@@ -16,7 +16,6 @@
 <script setup>
 import { computed } from "vue";
 
-
 const daysToWeekend = computed(() => {
   const today = new Date();
   const dayOfWeek = today.getDay(); // 获取当前是星期几，0代表周日，1代表周一，以此类推

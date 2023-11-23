@@ -36,12 +36,13 @@
 </template>
 
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, defineAsyncComponent } from "vue";
 import useStore from "@/store";
 const { useAppStore } = useStore();
 import { uuid } from "@/utils/utils";
 import { toast } from "@/utils/feedback";
-import ImageEditor from "@/components/common/ImageEditor.vue";
+
+const ImageEditor = defineAsyncComponent(() => import("@/components/common/ImageEditor.vue"));
 
 const props = defineProps({
   editType: {

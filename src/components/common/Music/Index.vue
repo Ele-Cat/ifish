@@ -72,17 +72,18 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch, nextTick, computed } from "vue";
+import { onMounted, ref, watch, nextTick, computed, defineAsyncComponent } from "vue";
 import { DoubleLeftOutlined } from "@ant-design/icons-vue";
 import axios from "axios";
 import useStore from "@/store";
 const { useMusicStore } = useStore();
 import eventBus from "@/utils/eventBus";
-import MusicCtrl from "./MusicCtrl.vue";
-import MusicList from "./MusicList.vue";
-import MusicSearch from "./MusicSearch.vue";
-import MusicFullScreen from "./MusicFullScreen.vue";
 import { getRandomIntInRange } from "@/utils/utils";
+
+const MusicCtrl = defineAsyncComponent(() => import('./MusicCtrl.vue'));
+const MusicList = defineAsyncComponent(() => import('./MusicList.vue'));
+const MusicSearch = defineAsyncComponent(() => import('./MusicSearch.vue'));
+const MusicFullScreen = defineAsyncComponent(() => import('./MusicFullScreen.vue'));
 
 onMounted(() => {
   useMusicStore.settings.playing = false;

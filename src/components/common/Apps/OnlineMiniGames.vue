@@ -104,11 +104,11 @@ const props = defineProps({
 const activeIndex = ref(0);
 const gameListVisible = ref(true);
 const gameList = reactive([
-  // {
-  //   label: "俄罗斯方块",
-  //   icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/tetris/tetris.png",
-  //   url: "https://hellokit.com.cn/web/tetris",
-  // },
+  {
+    label: "俄罗斯方块",
+    icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/tetris/tetris.png",
+    url: "http://farter.cn/tetr.js/ ",
+  },
   {
     label: "切方块",
     icon:
@@ -316,6 +316,7 @@ const toOrigin = () => {
     width: 160px;
     min-height: 100%;
     border-right: 1px solid var(--primary-color);
+    background-color: var(--theme-bg-color-a8);
     .game-item {
       height: 36px;
       line-height: 36px;
@@ -323,6 +324,9 @@ const toOrigin = () => {
       // background-color: var(--grey-4);
       border-bottom: 1px solid var(--primary-color);
       cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       &.active,
       &:hover {
         background-color: var(--primary-color);

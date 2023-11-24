@@ -52,7 +52,7 @@ const tabList = reactive([
     component: SystemTags,
   },
   {
-    label: "系统组件",
+    label: "组件商城",
     value: "3",
     icon: AppstoreFilled,
     component: SystemComponents,

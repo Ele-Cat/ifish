@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const version = "1.0.0";
+
 /**
  * 生成固定长度随机字符串
  * @param {Number} length 字符串长度

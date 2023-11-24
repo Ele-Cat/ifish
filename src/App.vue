@@ -19,7 +19,9 @@ import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 dayjs.locale("zh-cn");
 import { listenGlobalKeyDown } from "@/utils/shortcutKey";
+import { version } from "@/utils/utils";
 import useStore from "@/store";
+import { notify } from "@/utils/feedback";
 const { useSystemStore, useContextMenuStore } = useStore();
 
 const Layouts = defineAsyncComponent(() => import("@/components/layouts/Index.vue"));
@@ -47,6 +49,16 @@ const ContextMenu = defineAsyncComponent(() => import("@/components/common/Conte
 onMounted(() => {
   listenGlobalKeyDown();
   useSystemStore.getPlatform();
+
+  if (useSystemStore.version != version) {
+    notify({
+      type: "warning",
+      title: "提示",
+      content: "系统组件更新啦，快去组件商城看看吧~",
+      duration: 0,
+    })
+    useSystemStore.version = version;
+  }
 });
 
 document.addEventListener("visibilitychange", handleVisibilityChange, false);

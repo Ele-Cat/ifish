@@ -8,14 +8,14 @@
       <LeftOutlined @click.stop="handlePN(-1)" />
       <RightOutlined @click.stop="handlePN(1)" />
     </div>
-    <img :src="activeGame.icon" alt="" />
+    <img :src="activeGame.icon || renderIcon(activeGame.url)" alt="" />
     <div class="active-game">
       <p>{{ activeGame.label }}</p>
       <p>点击开始游戏</p>
     </div>
   </div>
   <IDialog
-    :title="`在线小游戏 - ${gameList[activeIndex]['label']}`"
+    :title="`在线小游戏 - ${activeGame.label}`"
     :width="useAppStore.miniGames.width"
     :visible="dialogVisible"
     :zIndex="10010"
@@ -73,7 +73,7 @@
       <a-spin :spinning="gameLoading" tip="加载中，请耐心等待...">
         <iframe
           ref="iframeRef"
-          :src="gameList[activeIndex]['url']"
+          :src="activeGame.url"
           :style="{
             height: useAppStore.miniGames.height + 'px',
             backgroundColor: isFullscreen ? '#FFF' : 'transparent',
@@ -91,6 +91,7 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons-vue";
 import { useFullscreen } from "@vueuse/core";
 import useStore from "@/store";
 const { useAppStore } = useStore();
+import { renderIco } from "@/utils/utils";
 
 const props = defineProps({
   type: {
@@ -106,8 +107,18 @@ const gameListVisible = ref(true);
 const gameList = reactive([
   {
     label: "俄罗斯方块",
-    icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/tetris/tetris.png",
-    url: "http://farter.cn/tetr.js/ ",
+    icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/game.png",
+    url: "http://farter.cn/tetr.js/",
+  },
+  {
+    label: "简易华容道",
+    icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/game.png",
+    url: "https://sliding.toys/",
+  },
+  {
+    label: "迷宫大全",
+    icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/game.png",
+    url: "https://maze.toys/",
   },
   {
     label: "切方块",
@@ -192,6 +203,9 @@ const gameList = reactive([
     url: "https://game.zhuayuya.com/yxmb/72/index.html",
   },
 ]);
+const renderIcon = computed(() => (url) => {
+  return renderIco(url);
+})
 const activeGame = computed(() => {
   return gameList[activeIndex.value];
 });
@@ -220,7 +234,7 @@ const handlePlayGame = () => {
   });
 };
 const toOrigin = () => {
-  window.open(gameList[activeIndex.value]["url"], "_blank");
+  window.open(activeGame.value.url, "_blank");
 };
 </script>
 

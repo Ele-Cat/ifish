@@ -121,6 +121,14 @@ const gameList = reactive([
     url: "https://maze.toys/",
   },
   {
+    label: "球归色条",
+    url: "http://looptap.top",
+  },
+  {
+    label: "躲避小球",
+    url: "http://guiduo.top",
+  },
+  {
     label: "切方块",
     icon:
       "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/cut-the-box/cube.png",
@@ -146,6 +154,16 @@ const gameList = reactive([
     label: "2048",
     icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/2048/2048.jpeg",
     url: "https://hellokit.com.cn/2048",
+  },
+  {
+    label: "魔方",
+    icon: "https://img.zhuayuya.com/icon/mofang.webp",
+    url: "https://www.zhuayuya.com/cube/index.html",
+  },
+  {
+    label: "扫雷",
+    icon: "https://img.zhuayuya.com/icon/saolei.webp",
+    url: "https://www.zhuayuya.com/saolei_tow/index.html",
   },
   {
     label: "数独",
@@ -196,6 +214,22 @@ const gameList = reactive([
     label: "线条生存",
     icon: "https://img.zhuayuya.com/images/y19.png",
     url: "https://game.zhuayuya.com/yxmb/19/index.html",
+  },
+  {
+    label: "架子鼓",
+    url: "http://guozhivip.com/jzg/",
+  },
+  {
+    label: "对称绘画",
+    url: "http://weavesilk.com",
+  },
+  {
+    label: "流星雨",
+    url: "https://www.meteorshowers.org",
+  },
+  {
+    label: "孔明灯",
+    url: "https://henxiangsi.com/",
   },
   {
     label: "3d飞行兔子",

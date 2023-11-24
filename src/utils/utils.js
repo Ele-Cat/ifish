@@ -70,6 +70,25 @@ export function downloadFile(downloadUrl) {
 }
 
 /**
+ * 毫秒转 时:分:秒
+ * @param {Number} millisecond 毫秒
+ */
+export function millisecondToHms(millisecond) {
+  if (!millisecond) {
+    return "00:00:00";
+  }
+  const hours = Math.floor(millisecond / 1000 / 60 / 60);
+  const minutes = Math.floor((millisecond / 1000 / 60) % 60);
+  const remainingSeconds = Math.floor((millisecond / 1000) % 60);
+
+  const formattedHours = String(hours).padStart(2, '0');
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+}
+
+/**
  * 秒转 分:秒
  * @param {Number} sec 秒
  */

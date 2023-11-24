@@ -87,6 +87,9 @@ const FakeUpdate = defineAsyncComponent(() =>
 const OnlineMiniGames = defineAsyncComponent(() => 
   import("@/components/common/Apps/OnlineMiniGames.vue")
 );
+const OffWorkCountdown = defineAsyncComponent(() => 
+  import("@/components/common/Apps/OffWorkCountdown.vue")
+);
 
 const components = {
   imgpreview: ImgPreview,
@@ -97,6 +100,7 @@ const components = {
   wordGames: WordGames,
   fakeUpdate: FakeUpdate,
   onlineMiniGames: OnlineMiniGames,
+  offWorkCountdown: OffWorkCountdown,
 };
 
 const apps = ref([]);

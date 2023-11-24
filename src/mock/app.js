@@ -62,6 +62,12 @@ export const systemComponents = [
     component: "fakeUpdate",
     icon: "https://i.postimg.cc/pTnQhS6Z/UHjixmA.png",
   },
+  {
+    type: "component",
+    title: "下班倒计时",
+    component: "offWorkCountdown",
+    icon: "https://i.postimg.cc/L6vh5y1n/xiabandaojishi.jpg",
+  },
 ];
 
 export const appList = [
@@ -108,6 +114,14 @@ export const appList = [
     icon: "https://i.postimg.cc/pTnQhS6Z/UHjixmA.png",
     component: "fakeUpdate",
     gridSize: [1, 1],
+  },
+  {
+    id: "vV2KUKe7xDBsyaEV7OEaa",
+    type: "component",
+    title: "下班倒计时",
+    icon: "https://i.postimg.cc/L6vh5y1n/xiabandaojishi.jpg",
+    component: "offWorkCountdown",
+    gridSize: [2, 2],
   },
   {
     id: "ZGr1TVTtF59q1mne2m2GA",

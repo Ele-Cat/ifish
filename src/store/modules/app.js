@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { appList } from "@/mock/app";
+import dayjs from 'dayjs';
 
 export const useAppStore = defineStore("ifishApp", {
   state: () => {
@@ -13,6 +14,11 @@ export const useAppStore = defineStore("ifishApp", {
       miniGames: {
         width: 980,
         height: 640,
+      },
+      offWorkCountdown: {
+        workDays: [false, true, true, true, true, true, false],
+        workTimeStart: "08:30",
+        workTimeEnd: "17:30",
       },
     };
   },

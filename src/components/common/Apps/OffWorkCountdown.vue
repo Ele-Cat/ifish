@@ -2,9 +2,9 @@
   <div class="offwork" @click="dialogVisible = true">
     <div class="offwork-text">
       <p v-if="offTime.includes(':')">距离下班时间还有</p>
-      <p>{{offTime}}</p>
+      <p>{{ offTime }}</p>
     </div>
-    <img src="https://i.postimg.cc/pVzqwjn0/qipao.png" alt="">
+    <img src="https://i.postimg.cc/pVzqwjn0/qipao.png" alt="" />
   </div>
   <IDialog
     title="配置"
@@ -12,7 +12,7 @@
     :visible="dialogVisible"
     @cancel="dialogVisible = false"
   >
-    <a-form :model="formState" layout="vertical" style="padding-top: 20px;">
+    <a-form :model="formState" layout="vertical" style="padding-top: 20px">
       <a-form-item label="选择工作日">
         <a-checkable-tag
           v-for="(tag, index) in tagsData"
@@ -24,8 +24,18 @@
       </a-form-item>
       <a-form-item label="上下班时间">
         <a-space>
-          <a-time-picker v-model:value="formState.workTimeStart" placeholder="上班时间" :minute-step="10" format="HH:mm" />~
-          <a-time-picker v-model:value="formState.workTimeEnd" placeholder="下班时间" :minute-step="10" format="HH:mm" />
+          <a-time-picker
+            v-model:value="formState.workTimeStart"
+            placeholder="上班时间"
+            :minute-step="10"
+            format="HH:mm"
+          />~
+          <a-time-picker
+            v-model:value="formState.workTimeEnd"
+            placeholder="下班时间"
+            :minute-step="10"
+            format="HH:mm"
+          />
         </a-space>
       </a-form-item>
     </a-form>
@@ -33,62 +43,73 @@
 </template>
 
 <script setup>
-import { reactive, ref, watch } from 'vue';
-import dayjs from 'dayjs';
+import { reactive, ref, watch } from "vue";
+import dayjs from "dayjs";
 import useStore from "@/store";
 const { useAppStore } = useStore();
 import { millisecondToHms } from "@/utils/utils";
 
 const dialogVisible = ref(false);
-const tagsData = reactive(['周日', '周一', '周二', '周三', '周四', '周五', '周六']);
+const tagsData = reactive(["周日", "周一", "周二", "周三", "周四", "周五", "周六"]);
 const formState = reactive({
   workDays: useAppStore.offWorkCountdown.workDays,
-  workTimeStart: useAppStore.offWorkCountdown.workTimeStart ? dayjs(useAppStore.offWorkCountdown.workTimeStart, "HH:mm") : null,
-  workTimeEnd: useAppStore.offWorkCountdown.workTimeEnd ? dayjs(useAppStore.offWorkCountdown.workTimeEnd, "HH:mm") : null,
-})
+  workTimeStart: useAppStore.offWorkCountdown.workTimeStart
+    ? dayjs(useAppStore.offWorkCountdown.workTimeStart, "HH:mm")
+    : null,
+  workTimeEnd: useAppStore.offWorkCountdown.workTimeEnd
+    ? dayjs(useAppStore.offWorkCountdown.workTimeEnd, "HH:mm")
+    : null,
+});
 
 const offTime = ref("");
 let timer = null;
 
 const clearTimer = () => {
   timer && clearInterval(timer);
-}
+};
 
-watch(() => formState, newVal => {
-  let offTimeRes = "点击配置";
-  console.log('newVal.workTimeEnd: ', newVal.workTimeEnd);
-  clearTimer();
-  if (newVal.workTimeEnd) {
-    useAppStore.offWorkCountdown.workTimeStart = dayjs(newVal.workTimeStart).format("HH:mm");
-    useAppStore.offWorkCountdown.workTimeEnd = dayjs(newVal.workTimeEnd).format("HH:mm");
-    if (useAppStore.offWorkCountdown.workDays[dayjs().day()]) {
-      if (dayjs().isBefore(dayjs(newVal.workTimeStart))) {
-        offTimeRes = "还没上班呢~";
-      } else if (dayjs().isAfter(dayjs(newVal.workTimeEnd))) {
-        offTimeRes = "已经下班啦~";
+watch(
+  () => formState,
+  (newVal) => {
+    let offTimeRes = "点击配置";
+    clearTimer();
+    if (newVal.workTimeEnd) {
+      useAppStore.offWorkCountdown.workTimeStart = dayjs(newVal.workTimeStart).format(
+        "HH:mm"
+      );
+      useAppStore.offWorkCountdown.workTimeEnd = dayjs(newVal.workTimeEnd).format(
+        "HH:mm"
+      );
+      if (useAppStore.offWorkCountdown.workDays[dayjs().day()]) {
+        if (dayjs().isBefore(dayjs(newVal.workTimeStart))) {
+          offTimeRes = "还没上班呢~";
+        } else if (dayjs().isAfter(dayjs(newVal.workTimeEnd))) {
+          offTimeRes = "已经下班啦~";
+        } else {
+          timer = setInterval(() => {
+            const date1 = dayjs(newVal.workTimeEnd);
+            const date2 = dayjs();
+            offTimeRes = date1.diff(date2);
+            offTime.value = millisecondToHms(offTimeRes);
+          }, 1000);
+        }
       } else {
-        timer = setInterval(() => {
-          const date1 = dayjs(newVal.workTimeEnd);
-          const date2 = dayjs();
-          offTimeRes = date1.diff(date2);
-          offTime.value = millisecondToHms(offTimeRes);
-        }, 1000)
+        offTimeRes = "今天是休息日~";
       }
     } else {
-      offTimeRes = "今天是休息日~";
+      useAppStore.offWorkCountdown.workTimeEnd = null;
     }
-  } else {
-    useAppStore.offWorkCountdown.workTimeEnd = null;
-  }
-  if (!newVal.workTimeStart) {
-    useAppStore.offWorkCountdown.workTimeStart = null;
-  }
+    if (!newVal.workTimeStart) {
+      useAppStore.offWorkCountdown.workTimeStart = null;
+    }
 
-  offTime.value = offTimeRes;
-}, {
-  immediate: true,
-  deep: true,
-})
+    offTime.value = offTimeRes;
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
 </script>
 
 <style lang="less" scoped>

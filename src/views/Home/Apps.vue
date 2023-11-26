@@ -50,7 +50,7 @@
       </div>
     </template>
   </Draggable>
-  
+
   <!-- 首页书签弹框 -->
   <AppDialog />
 </template>
@@ -63,6 +63,9 @@ const { useAppStore, useContextMenuStore, useSystemStore } = useStore();
 const AppDialog = defineAsyncComponent(() =>
   import("@/components/common/AppDialog/Index.vue")
 );
+const ChatGpt = defineAsyncComponent(() =>
+  import("@/components/common/Apps/ChatGpt.vue")
+);
 const ImgPreview = defineAsyncComponent(() =>
   import("@/components/common/Apps/ImgPreview.vue")
 );
@@ -72,26 +75,23 @@ const Tiangou = defineAsyncComponent(() =>
 const Zhibuzhi = defineAsyncComponent(() =>
   import("@/components/common/Apps/Zhibuzhi.vue")
 );
-const Gongde = defineAsyncComponent(() => 
-  import("@/components/common/Apps/Gongde.vue")
-);
-const Music = defineAsyncComponent(() => 
-  import("@/components/common/Apps/Music.vue")
-);
-const WordGames = defineAsyncComponent(() => 
+const Gongde = defineAsyncComponent(() => import("@/components/common/Apps/Gongde.vue"));
+const Music = defineAsyncComponent(() => import("@/components/common/Apps/Music.vue"));
+const WordGames = defineAsyncComponent(() =>
   import("@/components/common/Apps/WordGames.vue")
 );
-const FakeUpdate = defineAsyncComponent(() => 
+const FakeUpdate = defineAsyncComponent(() =>
   import("@/components/common/Apps/FakeUpdate/Index.vue")
 );
-const OnlineMiniGames = defineAsyncComponent(() => 
+const OnlineMiniGames = defineAsyncComponent(() =>
   import("@/components/common/Apps/OnlineMiniGames.vue")
 );
-const OffWorkCountdown = defineAsyncComponent(() => 
+const OffWorkCountdown = defineAsyncComponent(() =>
   import("@/components/common/Apps/OffWorkCountdown.vue")
 );
 
 const components = {
+  chatGpt: ChatGpt,
   imgpreview: ImgPreview,
   tiangou: Tiangou,
   zhibuzhi: Zhibuzhi,

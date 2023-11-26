@@ -1,6 +1,12 @@
 export const systemComponents = [
   {
     type: "component",
+    title: "聚合GPT",
+    component: "chatGpt",
+    icon: "https://z1.ax1x.com/2023/11/20/piUYLHP.png",
+  },
+  {
+    type: "component",
     title: "摸鱼日报",
     component: "imgpreview",
     icon: "https://z1.ax1x.com/2023/11/20/piUU4hT.png",
@@ -73,12 +79,10 @@ export const systemComponents = [
 export const appList = [
   {
     id: "ZGr1TVTtF59q1mne2m2G1",
-    type: "bookmark",
-    title: "Chat GPT",
-    url: "https://ele-cat.gitee.io/comp-gpt/",
+    type: "component",
+    title: "聚合GPT",
     icon: "https://z1.ax1x.com/2023/11/20/piUYLHP.png",
-    description: "免费、无登录、不限次数的GPT网站",
-    background: "#F6490E",
+    component: "chatGpt",
     gridSize: [2, 2],
   },
   {
@@ -102,7 +106,6 @@ export const appList = [
     id: "mojf5GydjsGGGGIqTD6E2",
     type: "component",
     title: "音乐播放器",
-    url: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
     icon: "https://z1.ax1x.com/2023/11/20/piUts58.jpg",
     component: "music",
     gridSize: [1, 1],

@@ -5,8 +5,9 @@
       v-model:open="open"
       :width="width"
       :mask="mask"
+      :centered="centered"
       :zIndex="zIndex"
-      :wrap-style="{overflow: 'hidden'}"
+      :wrap-style="{ overflow: 'hidden' }"
       :wrapClassName="wrapClassName"
       :footer="null"
       @ok="handleOk"
@@ -36,17 +37,21 @@ const props = defineProps({
   title: { type: String, default: "标题" },
   width: { type: [String, Number], default: 520 },
   mask: { type: Boolean, default: true },
+  centered: { type: Boolean, default: false },
   wrapClassName: { type: String, default: "" },
   zIndex: { type: Number, default: 1000 },
-})
-const emit = defineEmits(["ok", "cancel"])
+});
+const emit = defineEmits(["ok", "cancel"]);
 
 const open = ref(false);
-watch(() => props.visible, newVal => {
-  if (newVal) {
-    open.value = true;
+watch(
+  () => props.visible,
+  (newVal) => {
+    if (newVal) {
+      open.value = true;
+    }
   }
-})
+);
 const modalTitleRef = ref(null);
 const { x, y, isDragging } = useDraggable(modalTitleRef);
 const handleOk = (e) => {
@@ -110,7 +115,7 @@ const transformStyle = computed(() => {
 .modal-title {
   display: flex;
   align-items: baseline;
-  width: 100%; 
+  width: 100%;
   cursor: move;
 }
 </style>

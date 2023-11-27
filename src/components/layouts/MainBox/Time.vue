@@ -8,55 +8,46 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue';
+import { ref, watch } from "vue";
+import dayjs from "dayjs";
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 
-const slice2 = (str) => {
-  return ("00" + str).slice(-2);
-}
-
 const getNowDate = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = slice2(now.getMonth() + 1);
-  const date = slice2(now.getDate());
   const weekends = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-  const day = now.getDay();
-  return `${year}年${month}月${date}日 ${weekends[day]}`;
-}
+  return `${dayjs().format("YYYY年MM月DD日")} ${weekends[dayjs().day()]}`;
+};
 
 const getNowTime = () => {
-  const now = new Date();
-  const hour = slice2(now.getHours());
-  const minute = slice2(now.getMinutes());
-  const second = slice2(now.getSeconds());
-  return `${hour}:${minute}:${second}`;
-}
+  return `${dayjs().format("HH:mm:ss")}`;
+};
 
 const nowDate = ref(getNowDate());
 const nowTime = ref(getNowTime());
 let timer = null;
-onMounted(() => {
-  runTimer();
-})
 
 const runTimer = () => {
+  nowDate.value = getNowDate();
+  nowTime.value = getNowTime();
   timer = setInterval(() => {
     nowDate.value = getNowDate();
     nowTime.value = getNowTime();
-  }, 1000)
-}
+  }, 1000);
+};
 
-watch(() => useSystemStore.settings.showTime, newVal => {
-  timer && clearInterval(timer);
-  if (newVal) {
-    runTimer();
+watch(
+  () => useSystemStore.settings.showTime,
+  (newVal) => {
+    timer && clearInterval(timer);
+    if (newVal) {
+      runTimer();
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
   }
-}, {
-  immediate: true,
-  deep: true,
-})
+);
 </script>
 
 <style lang="less" scoped>

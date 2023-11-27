@@ -1,9 +1,13 @@
 <template>
-  <img class="app-img" :src="app.icon" alt="" @click.stop="handleClick">
-  <a-image :preview="{
-    visible: appImageVisible,
-    onVisibleChange: setImagePreviewVisible,
-  }" :src="app.url" />
+  <img class="app-img" :src="app.icon" alt="" @click.stop="handleClick" />
+  <a-image
+    :preview="{
+      visible: appImageVisible,
+      onVisibleChange: setImagePreviewVisible,
+    }"
+    :src="app.url"
+  />
+  <img :src="app.url" v-show="false" alt="" />
 </template>
 
 <script setup>
@@ -17,19 +21,17 @@ const props = defineProps({
   app: {
     type: Object,
     default: () => {},
-  }
-})
+  },
+});
 
 const appImageVisible = ref(false);
 const handleClick = () => {
   setImagePreviewVisible(true);
-}
+};
 
-const setImagePreviewVisible = value => {
+const setImagePreviewVisible = (value) => {
   appImageVisible.value = value;
 };
 </script>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>

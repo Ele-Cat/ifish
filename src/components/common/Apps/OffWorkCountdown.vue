@@ -1,7 +1,7 @@
 <template>
   <div class="offwork" @click="dialogVisible = true">
     <div class="offwork-text">
-      <p v-if="offTime.includes(':')">距离下班时间还有</p>
+      <p v-if="offTime.indexOf(':') >= 0">距离下班时间还有</p>
       <p>{{ offTime }}</p>
     </div>
     <img src="https://i.postimg.cc/pVzqwjn0/qipao.png" alt="" />
@@ -80,22 +80,22 @@ watch(
       useAppStore.offWorkCountdown.workTimeEnd = dayjs(newVal.workTimeEnd).format(
         "HH:mm"
       );
-      if (useAppStore.offWorkCountdown.workDays[dayjs().day()]) {
-        if (dayjs().isBefore(dayjs(newVal.workTimeStart))) {
-          offTimeRes = "还没上班呢~";
-        } else if (dayjs().isAfter(dayjs(newVal.workTimeEnd))) {
-          offTimeRes = "已经下班啦~";
-        } else {
-          timer = setInterval(() => {
+      timer = setInterval(() => {
+        if (useAppStore.offWorkCountdown.workDays[dayjs().day()]) {
+          if (dayjs().isBefore(dayjs(newVal.workTimeStart))) {
+            offTimeRes = "还没上班呢~";
+          } else if (dayjs().isAfter(dayjs(newVal.workTimeEnd))) {
+            offTimeRes = "已经下班啦~";
+          } else {
             const date1 = dayjs(newVal.workTimeEnd);
             const date2 = dayjs();
-            offTimeRes = date1.diff(date2);
-            offTime.value = millisecondToHms(offTimeRes);
-          }, 1000);
+            offTimeRes = millisecondToHms(date1.diff(date2));
+          }
+        } else {
+          offTimeRes = "今天是休息日~";
         }
-      } else {
-        offTimeRes = "今天是休息日~";
-      }
+        offTime.value = offTimeRes;
+      }, 1000);
     } else {
       useAppStore.offWorkCountdown.workTimeEnd = null;
     }

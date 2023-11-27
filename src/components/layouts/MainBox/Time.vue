@@ -8,11 +8,15 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 
-const nowDate = computed(() => {
+const slice2 = (str) => {
+  return ("00" + str).slice(-2);
+}
+
+const getNowDate = () => {
   const now = new Date();
   const year = now.getFullYear();
   const month = slice2(now.getMonth() + 1);
@@ -20,10 +24,6 @@ const nowDate = computed(() => {
   const weekends = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
   const day = now.getDay();
   return `${year}年${month}月${date}日 ${weekends[day]}`;
-})
-
-const slice2 = (str) => {
-  return ("00" + str).slice(-2);
 }
 
 const getNowTime = () => {
@@ -34,10 +34,29 @@ const getNowTime = () => {
   return `${hour}:${minute}:${second}`;
 }
 
+const nowDate = ref(getNowDate());
 const nowTime = ref(getNowTime());
-setInterval(() => {
-  nowTime.value = getNowTime();
-}, 1000)
+let timer = null;
+onMounted(() => {
+  runTimer();
+})
+
+const runTimer = () => {
+  timer = setInterval(() => {
+    nowDate.value = getNowDate();
+    nowTime.value = getNowTime();
+  }, 1000)
+}
+
+watch(() => useSystemStore.settings.showTime, newVal => {
+  timer && clearInterval(timer);
+  if (newVal) {
+    runTimer();
+  }
+}, {
+  immediate: true,
+  deep: true,
+})
 </script>
 
 <style lang="less" scoped>

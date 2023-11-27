@@ -1,12 +1,16 @@
 <template>
   <div class="l-time">
-    <p>{{ nowDate }}</p>
-    <p class="time">{{ nowTime }}</p>
+    <template v-if="useSystemStore.settings.showTime">
+      <p v-if="useSystemStore.settings.showDate">{{ nowDate }}</p>
+      <p class="time">{{ nowTime }}</p>
+    </template>
   </div>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue';
+import useStore from "@/store";
+const { useSystemStore } = useStore();
 
 const nowDate = computed(() => {
   const now = new Date();

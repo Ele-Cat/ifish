@@ -1,28 +1,28 @@
 <template>
   <div>
-    <a-form :model="formState" :label-col="labelCol">
+    <a-form :label-col="labelCol">
       <a-form-item label="网站标题" extra="自定义本站的浏览器标题-摸鱼更安全">
-        <a-input v-model:value="formState.title" placeholder="例如：学习网站" @change="handleTitleChange" />
+        <a-input v-model:value="useSystemStore.settings.title" placeholder="例如：学习网站" />
+      </a-form-item>
+      <a-form-item label="显示时间" extra="是否显示主页时间控件">
+        <a-switch v-model:checked="useSystemStore.settings.showTime" />
+      </a-form-item>
+      <a-form-item label="显示日期" extra="是否显示时间控件中的日期">
+        <a-switch v-model:checked="useSystemStore.settings.showDate" />
       </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import useStore from "@/store";
 const { useSystemStore } = useStore();
 
-const formState = ref({...useSystemStore.settings});
 const labelCol = {
   style: {
     width: '88px',
   },
 };
-
-const handleTitleChange = (e) => {
-  useSystemStore.changeTitle(e.target.value);
-}
 </script>
 
 <style lang="less" scoped>

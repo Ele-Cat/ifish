@@ -7,6 +7,8 @@ import _ from "lodash";
 const settings = {
   title: "",
   darkMode: false,
+  showTime: true,
+  showDate: true,
   appRadius: 8,
   wallpaper: {
     key: "Ctrl + E",

@@ -68,9 +68,7 @@ function handleVisibilityChange() {
   } else {
     document.title = "摸鱼，是一种态度";
   }
-  if (useSystemStore.settings.title) {
-    document.title = useSystemStore.settings.title;
-  }
+  document.title = useSystemStore.settings.title || document.title;
 }
 
 watch(

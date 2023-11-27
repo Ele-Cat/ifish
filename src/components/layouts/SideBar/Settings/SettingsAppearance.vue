@@ -52,6 +52,12 @@ const handleSetWallpaper = () => {
 </script>
 
 <style lang="less">
+.ant-form-item {
+  margin-bottom: 12px;
+  &.bottom-0 {
+    margin-bottom: 0;
+  }
+}
 .settings-appearance {
   .ant-image {
     margin-top: 12px;

@@ -183,10 +183,6 @@ const gameList = reactive([
     url: "https://game.zhuayuya.com/yxmb/31/index.html",
   },
   {
-    label: "流星雨",
-    url: "https://www.meteorshowers.org",
-  },
-  {
     label: "孔明灯",
     url: "https://henxiangsi.com/",
   },

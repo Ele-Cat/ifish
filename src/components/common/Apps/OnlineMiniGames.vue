@@ -106,9 +106,10 @@ const activeIndex = ref(0);
 const gameListVisible = ref(true);
 const gameList = reactive([
   {
-    label: "俄罗斯方块",
-    icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/game.png",
-    url: "http://farter.cn/tetr.js/",
+    label: "盖塔楼",
+    icon:
+      "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/build-tower/box-icon.png",
+    url: "https://hellokit.com.cn/build-tower",
   },
   {
     label: "简易华容道",
@@ -121,24 +122,10 @@ const gameList = reactive([
     url: "https://maze.toys/",
   },
   {
-    label: "球归色条",
-    url: "http://looptap.top",
-  },
-  {
-    label: "躲避小球",
-    url: "http://guiduo.top",
-  },
-  {
     label: "切方块",
     icon:
       "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/cut-the-box/cube.png",
     url: "https://hellokit.com.cn/cut-the-box",
-  },
-  {
-    label: "盖塔楼",
-    icon:
-      "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/build-tower/box-icon.png",
-    url: "https://hellokit.com.cn/build-tower",
   },
   {
     label: "圣诞老人过桥",
@@ -170,16 +157,11 @@ const gameList = reactive([
     icon: "https://img.zhuayuya.com/icon/shudu.webp",
     url: "https://www.zhuayuya.com/sudoku_tow/index.html",
   },
-  {
-    label: "西瓜插口红",
-    icon: "https://img.zhuayuya.com/images/y69.png",
-    url: "https://game.zhuayuya.com/yxmb/69/index.html",
-  },
-  {
-    label: "贪吃蛇",
-    icon: "https://img.zhuayuya.com/images/y14.png",
-    url: "https://game.zhuayuya.com/yxmb/14/index.html",
-  },
+  // {
+  //   label: "西瓜插口红",
+  //   icon: "https://img.zhuayuya.com/images/y69.png",
+  //   url: "https://game.zhuayuya.com/yxmb/69/index.html",
+  // },
   {
     label: "中国象棋",
     icon: "https://img.zhuayuya.com/images/y65.png",
@@ -201,29 +183,6 @@ const gameList = reactive([
     url: "https://game.zhuayuya.com/yxmb/31/index.html",
   },
   {
-    label: "维京战争",
-    icon: "https://img.zhuayuya.com/images/y1.png",
-    url: "https://game.zhuayuya.com/yxmb/1/index.html",
-  },
-  {
-    label: "3D拳击",
-    icon: "https://img.zhuayuya.com/images/y58.png",
-    url: "https://game.zhuayuya.com/yxmb/58/index.html",
-  },
-  {
-    label: "线条生存",
-    icon: "https://img.zhuayuya.com/images/y19.png",
-    url: "https://game.zhuayuya.com/yxmb/19/index.html",
-  },
-  {
-    label: "架子鼓",
-    url: "http://guozhivip.com/jzg/",
-  },
-  {
-    label: "对称绘画",
-    url: "http://weavesilk.com",
-  },
-  {
     label: "流星雨",
     url: "https://www.meteorshowers.org",
   },
@@ -231,15 +190,10 @@ const gameList = reactive([
     label: "孔明灯",
     url: "https://henxiangsi.com/",
   },
-  {
-    label: "3d飞行兔子",
-    icon: "https://img.zhuayuya.com/images/y72.png",
-    url: "https://game.zhuayuya.com/yxmb/72/index.html",
-  },
 ]);
 const renderIcon = computed(() => (url) => {
   return renderIco(url);
-})
+});
 const activeGame = computed(() => {
   return gameList[activeIndex.value];
 });

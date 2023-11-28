@@ -22,7 +22,7 @@ import useStore from "@/store";
 const { useNewsStore } = useStore();
 import { toast } from "@/utils/feedback";
 
-const activeKey = ref(0);
+const activeKey = ref(useNewsStore.activeNews);
 
 const newsTypes = computed(() => {
   return useNewsStore.lists.filter(item => item.visible);
@@ -47,6 +47,7 @@ const fetchNews = () => {
 }
 
 watch(() => [activeKey.value, newsTypes.value], newVal => {
+  useNewsStore.activeNews = activeKey.value;
   fetchNews();
 }, {
   immediate: true,

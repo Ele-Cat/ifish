@@ -11,6 +11,7 @@ export const useNewsStore = defineStore("ifishNews", {
           visible: true,
         }
       }),
+      activeNews: 0,
     };
   },
   actions: {

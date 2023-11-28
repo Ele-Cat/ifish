@@ -43,16 +43,18 @@
   width: 100%;
 }
 
-.ant-tabs.ant-tabs-left {
+.ant-tabs {
   color: var(--theme-text-color);
-  .ant-tabs-tab {
-    justify-content: flex-end;
-    padding: 8px 12px !important;
-    &+.ant-tabs-tab {
-      margin: 6px 0 0 0 !important;
-    }
-    &.ant-tabs-tab-disabled {
-      color: var(--grey-6);
+  &.ant-tabs-left {
+    .ant-tabs-tab {
+      justify-content: flex-end;
+      padding: 8px 12px !important;
+      &+.ant-tabs-tab {
+        margin: 6px 0 0 0 !important;
+      }
+      &.ant-tabs-tab-disabled {
+        color: var(--grey-6);
+      }
     }
   }
   .ant-tabs-tabpane {

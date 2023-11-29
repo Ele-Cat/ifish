@@ -37,6 +37,7 @@
       v-show="isFullscreen"
       :visible="isFullscreen"
       :is="activeFake.component"
+      @contextmenu="(e) => e.preventDefault()"
     />
   </Teleport>
 </template>
@@ -54,6 +55,7 @@ const Windows8 = defineAsyncComponent(() => import("./Windows8.vue"));
 const Windows10 = defineAsyncComponent(() => import("./Windows10.vue"));
 const MacOS = defineAsyncComponent(() => import("./MacOS.vue"));
 const BlueScreen = defineAsyncComponent(() => import("./BlueScreen.vue"));
+const TheMatrix = defineAsyncComponent(() => import("./TheMatrix.vue"));
 
 const props = defineProps({
   app: {
@@ -111,6 +113,11 @@ const fakes = reactive([
     label: "蓝屏",
     cover: "https://hellokit.com.cn/fakeupdate/assets/img/SSa5BPv.png",
     component: BlueScreen,
+  },
+  {
+    label: "黑客帝国",
+    cover: "https://i.postimg.cc/cC9Jvv3R/image.png",
+    component: TheMatrix,
   },
 ]);
 

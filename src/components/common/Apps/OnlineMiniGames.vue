@@ -183,6 +183,10 @@ const gameList = reactive([
     url: "https://game.zhuayuya.com/yxmb/31/index.html",
   },
   {
+    label: "烟花模拟器",
+    url: "https://haiyong.site/tools/yanhua/",
+  },
+  {
     label: "孔明灯",
     url: "https://henxiangsi.com/",
   },

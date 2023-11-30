@@ -117,6 +117,30 @@ const gameList = reactive([
     url: "https://haiyong.site/moyu/towergame/",
   },
   {
+    label: "超级玛丽",
+    url: "https://wanghao221.github.io/mario/",
+  },
+  {
+    label: "无限跑酷",
+    url: "https://haiyong.site/moyu/wuxianpaoku.html",
+  },
+  {
+    label: "吃豆人",
+    url: "https://haiyong.site/moyu/dou.html",
+  },
+  {
+    label: "俄罗斯方块",
+    url: "https://haiyong.site/moyu/eluosi.html",
+  },
+  {
+    label: "跳房子",
+    url: "https://haiyong.site/moyu/tiaofangzi.html",
+  },
+  {
+    label: "一个都不能死",
+    url: "https://haiyong.site/moyu/yigedoubunengsi/",
+  },
+  {
     label: "简易华容道",
     icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/game.png",
     url: "https://sliding.toys/",
@@ -200,6 +224,14 @@ const gameList = reactive([
     url: "https://haiyong.site/moyu/qmfjdz/",
   },
   {
+    label: "疯狂飙车",
+    url: "https://haiyong.site/moyu/saiche/",
+  },
+  {
+    label: "危险货车",
+    url: "https://haiyong.site/moyu/weixiandehuoche/",
+  },
+  {
     label: "飞跃奶酪",
     url: "https://haiyong.site/moyu/flyingcheese/",
   },
@@ -220,12 +252,28 @@ const gameList = reactive([
     url: "https://haiyong.site/moyu/xygsz/",
   },
   {
+    label: "保护堆芯",
+    url: "https://haiyong.site/moyu/baohuduixin.html",
+  },
+  {
     label: "西部牛仔",
     url: "https://haiyong.site/moyu/xbnz/",
   },
   {
     label: "只因你最美",
     url: "https://wanghao221.github.io/ji/",
+  },
+  {
+    label: "逗猫",
+    url: "https://haiyong.site/moyu/doumao.html",
+  },
+  {
+    label: "爱吹风的小狮子",
+    url: "https://haiyong.site/moyu/lion.html",
+  },
+  {
+    label: "喷火龙",
+    url: "https://haiyong.site/moyu/penhuolong.html",
   },
   {
     label: "烟花模拟器",

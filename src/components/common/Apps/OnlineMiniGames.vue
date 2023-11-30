@@ -203,6 +203,10 @@ const gameList = reactive([
     url: "https://haiyong.site/moyu/zsjfy/",
   },
   {
+    label: "繁衍战争",
+    url: "https://haiyong.site/moyu/fanyan/",
+  },
+  {
     label: "青蛙吃苍蝇",
     url: "https://haiyong.site/moyu/qwccy/",
   },

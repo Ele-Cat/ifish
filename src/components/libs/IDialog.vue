@@ -6,6 +6,7 @@
       :width="width"
       :mask="mask"
       :centered="centered"
+      :destroyOnClose="destroyOnClose"
       :zIndex="zIndex"
       :wrap-style="{ overflow: 'hidden' }"
       :wrapClassName="wrapClassName"
@@ -38,6 +39,7 @@ const props = defineProps({
   width: { type: [String, Number], default: 520 },
   mask: { type: Boolean, default: true },
   centered: { type: Boolean, default: false },
+  destroyOnClose: { type: Boolean, default: false },
   wrapClassName: { type: String, default: "" },
   zIndex: { type: Number, default: 1000 },
 });

@@ -19,6 +19,7 @@
     :width="useAppStore.miniGames.width"
     :visible="dialogVisible"
     :zIndex="10010"
+    :destroyOnClose="true"
     wrapClassName="game-dialog"
     @cancel="dialogVisible = false"
   >
@@ -132,6 +133,10 @@ const gameList = reactive([
     url: "https://hellokit.com.cn/cut-the-box",
   },
   {
+    label: "水果忍者",
+    url: "https://haiyong.site/moyu/shuiguorenzhe/",
+  },
+  {
     label: "圣诞老人过桥",
     icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/game.png",
     url: "https://hellokit.com.cn/bridge",
@@ -217,6 +222,10 @@ const gameList = reactive([
   {
     label: "西部牛仔",
     url: "https://haiyong.site/moyu/xbnz/",
+  },
+  {
+    label: "只因你最美",
+    url: "https://wanghao221.github.io/ji/",
   },
   {
     label: "烟花模拟器",

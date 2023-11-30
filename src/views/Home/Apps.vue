@@ -66,6 +66,9 @@ const AppDialog = defineAsyncComponent(() =>
 const ChatGpt = defineAsyncComponent(() =>
   import("@/components/common/Apps/ChatGpt.vue")
 );
+const ReadWorld = defineAsyncComponent(() =>
+  import("@/components/common/Apps/ReadWorld.vue")
+);
 const ImgPreview = defineAsyncComponent(() =>
   import("@/components/common/Apps/ImgPreview.vue")
 );
@@ -93,6 +96,7 @@ const OffWorkCountdown = defineAsyncComponent(() =>
 const components = {
   chatGpt: ChatGpt,
   imgpreview: ImgPreview,
+  readWorld: ReadWorld,
   tiangou: Tiangou,
   zhibuzhi: Zhibuzhi,
   gongde: Gongde,

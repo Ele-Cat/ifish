@@ -16,10 +16,8 @@ export const systemComponents = [
   {
     type: "component",
     title: "60s读懂世界",
-    component: "imgpreview",
+    component: "readWorld",
     icon: "https://z1.ax1x.com/2023/11/20/piUUbu9.jpg",
-    url: "https://v2.alapi.cn/api/zaobao?token=nWFMxBYTIMdmOKox&format=image",
-    // url: "http://dwz.2xb.cn/zaob",
   },
   {
     type: "component",
@@ -99,7 +97,7 @@ export const appList = [
     type: "component",
     title: "60s读懂世界",
     icon: "https://z1.ax1x.com/2023/11/20/piUUbu9.jpg",
-    component: "imgpreview",
+    component: "readWorld",
     gridSize: [1, 1],
   },
   {

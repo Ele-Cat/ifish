@@ -112,6 +112,10 @@ const gameList = reactive([
     url: "https://hellokit.com.cn/build-tower",
   },
   {
+    label: "盖楼游戏",
+    url: "https://haiyong.site/moyu/towergame/",
+  },
+  {
     label: "简易华容道",
     icon: "https://oss-cn-hangzhou.aliyuncs.com/codingsky/tuboshu/tools/game.png",
     url: "https://sliding.toys/",
@@ -181,6 +185,34 @@ const gameList = reactive([
     label: "飞机大战",
     icon: "https://img.zhuayuya.com/images/y31.png",
     url: "https://game.zhuayuya.com/yxmb/31/index.html",
+  },
+  {
+    label: "飞机大战2",
+    url: "https://haiyong.site/moyu/fjdz/",
+  },
+  {
+    label: "飞机大战3",
+    url: "https://haiyong.site/moyu/qmfjdz/",
+  },
+  {
+    label: "飞跃奶酪",
+    url: "https://haiyong.site/moyu/flyingcheese/",
+  },
+  {
+    label: "打僵尸",
+    url: "https://haiyong.site/moyu/zsjfy/",
+  },
+  {
+    label: "青蛙吃苍蝇",
+    url: "https://haiyong.site/moyu/qwccy/",
+  },
+  {
+    label: "下一个数字",
+    url: "https://haiyong.site/moyu/xygsz/",
+  },
+  {
+    label: "西部牛仔",
+    url: "https://haiyong.site/moyu/xbnz/",
   },
   {
     label: "烟花模拟器",

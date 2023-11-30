@@ -11,7 +11,6 @@ export const systemComponents = [
     component: "imgpreview",
     icon: "https://z1.ax1x.com/2023/11/20/piUU4hT.png",
     url: "https://api.vvhan.com/api/moyu",
-    // url: "https://dayu.qqsuu.cn/moyuribao/apis.php",
   },
   {
     type: "component",

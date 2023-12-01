@@ -12,7 +12,7 @@
           <div v-else>
             <a class="news-info" v-for="(news, index) in newsType['data']" :key="index" :href="news.url" :title="news.title" target="_blank">
               <span>{{ index + 1 }}.<template v-if="newsType.value === '历史上的今天'">【{{ news.year }}年】</template>{{ news.title }}</span>
-              <span>{{ formatHot(news.hotValue) }}</span>
+              <span>{{ news.hotValue }}</span>
             </a>
           </div>
         </perfect-scrollbar>
@@ -40,7 +40,7 @@ const fetchNews = (item, flag) => {
   axios.get(url).then(res => {
     const {data, code} = res.data;
     if (code === 200) {
-      item["data"] = data.hotTops.sort((a, b) => b.hotValue - a.hotValue);
+      item["data"] = data.hotTops;
       item["updateTime"] = formateTime(data.time);
       if (flag) {
         toast({
@@ -59,16 +59,6 @@ newsTypes.value.forEach(item => {
 
 const formateTime = (dateString) => {
   return dayjs(dateString).format('YYYY-MM-DD HH:mm:ss');
-}
-const formatHot = (hot) => {
-  if (hot) {
-    let hotStr = hot.toString();
-    if (hotStr.indexOf("万") >= 0 || Number(hotStr) < 10000) {
-      return hotStr;
-    } else {
-      return (Number(hotStr) / 10000).toFixed(1) + "万";
-    }
-  }
 }
 </script>
 

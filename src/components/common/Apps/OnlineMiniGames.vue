@@ -125,6 +125,10 @@ const gameList = reactive([
     url: "https://haiyong.site/moyu/wuxianpaoku.html",
   },
   {
+    label: "密室逃生",
+    url: "https://haiyong.site/moyu/msts/",
+  },
+  {
     label: "吃豆人",
     url: "https://haiyong.site/moyu/dou.html",
   },
@@ -209,6 +213,10 @@ const gameList = reactive([
     label: "最强眼力",
     icon: "https://img.zhuayuya.com/images/y36.png",
     url: "https://game.zhuayuya.com/yxmb/36/index.html",
+  },
+  {
+    label: "纸牌记忆",
+    url: "https://haiyong.site/moyu/zhipaijiyi.html",
   },
   {
     label: "飞机大战",

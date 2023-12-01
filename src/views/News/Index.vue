@@ -12,7 +12,7 @@
           <div v-else>
             <a class="news-info" v-for="(news, index) in newsType['data']" :key="index" :href="news.url" :title="news.title" target="_blank">
               <span>{{ index + 1 }}.<template v-if="newsType.value === '历史上的今天'">【{{ news.year }}年】</template>{{ news.title }}</span>
-              <span>{{ formatHot(news.hot) }}</span>
+              <span>{{ formatHot(news.hotValue) }}</span>
             </a>
           </div>
         </perfect-scrollbar>
@@ -34,13 +34,14 @@ const newsTypes = computed(() => {
   return useNewsStore.lists.filter(item => item.visible);
 });
 const fetchNews = (item, flag) => {
-  const url = `https://api.lolimi.cn/API/jhrb/?hot=${item.value}`;
+  const url = `https://api.moyuduck.com/hot/top?type=${item.value}`;
   item["isFetching"] = true;
   item["data"] = [];
   axios.get(url).then(res => {
+    console.log('res: ', res);
     const {data, code, updateTime} = res.data;
     if (code === 200) {
-      item["data"] = data.sort((a, b) => b.hot - a.hot);
+      item["data"] = data.hotTops.sort((a, b) => b.hotValue - a.hotValue);
       item["updateTime"] = formateTime(updateTime);
       if (flag) {
         toast({

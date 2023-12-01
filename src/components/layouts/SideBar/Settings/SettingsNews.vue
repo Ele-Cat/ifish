@@ -34,9 +34,9 @@ const { useNewsStore } = useStore();
   .title {
     padding: 0 4px 8px;
   }
-  .scroll-bar {
-    height: calc(100vh - 280px);
-  }
+  // .scroll-bar {
+  //   height: calc(100vh - 280px);
+  // }
   .news-box {
     display: flex;
     flex-wrap: wrap;

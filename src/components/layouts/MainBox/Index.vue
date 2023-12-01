@@ -17,9 +17,9 @@
 
 <script setup>
 import { shallowRef, defineAsyncComponent } from "vue";
-import Time from "./Time.vue";
 import useStore from "@/store";
 const { useSystemStore } = useStore();
+const Time = defineAsyncComponent(() => import("./Time.vue"));
 const Home = defineAsyncComponent(() => import("@/views/Home/Index.vue"));
 const News = defineAsyncComponent(() => import("@/views/News/Index.vue"));
 const Nav = defineAsyncComponent(() => import("@/views/Nav/Index.vue"));

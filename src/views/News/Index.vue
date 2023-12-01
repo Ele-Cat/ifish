@@ -38,11 +38,10 @@ const fetchNews = (item, flag) => {
   item["isFetching"] = true;
   item["data"] = [];
   axios.get(url).then(res => {
-    console.log('res: ', res);
-    const {data, code, updateTime} = res.data;
+    const {data, code} = res.data;
     if (code === 200) {
       item["data"] = data.hotTops.sort((a, b) => b.hotValue - a.hotValue);
-      item["updateTime"] = formateTime(updateTime);
+      item["updateTime"] = formateTime(data.time);
       if (flag) {
         toast({
           content: `${item.label}拉取成功！`

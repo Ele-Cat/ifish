@@ -62,6 +62,7 @@
         <div class="game-list">
           <p
             class="game-item"
+            :id="`game-${item.label}`"
             :class="{ active: activeIndex === index }"
             v-for="(item, index) in gameList"
             :key="index"
@@ -317,6 +318,8 @@ const handlePlayGame = () => {
   dialogVisible.value = true;
   // gameLoading.value = true;
   nextTick(() => {
+    const game = document.getElementById(`game-${activeGame.value.label}`);
+    game.scrollIntoView({block: "center", inline: "nearest"});
     iframeRef.value.addEventListener("load", () => {
       gameLoading.value = false;
     });

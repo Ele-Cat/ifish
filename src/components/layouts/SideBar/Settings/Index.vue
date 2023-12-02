@@ -29,7 +29,9 @@
 </template>
 
 <script setup>
-import { ref, defineAsyncComponent } from "vue";
+import { ref, watch, defineAsyncComponent } from "vue";
+import useStore from "@/store";
+const { useSystemStore } = useStore();
 const SettingsBasic = defineAsyncComponent(() => import("./SettingsBasic.vue"));
 const SettingsAppearance = defineAsyncComponent(() => import("./SettingsAppearance.vue"));
 const SettingsShortcutKey = defineAsyncComponent(() => import("./SettingsShortcutKey.vue"));
@@ -76,6 +78,15 @@ const settingsNavs = ref([
     component: SettingsData,
   },
 ]);
+
+watch(() => props.open, newVal => {
+  if (useSystemStore.activeMenu === "news") {
+    activeKey.value = "news";
+  }
+}, {
+  immediate: true,
+  deep: true,
+})
 </script>
 
 <style lang="less">

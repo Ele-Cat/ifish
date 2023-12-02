@@ -29,6 +29,11 @@ import dayjs from "dayjs";
 import useStore from "@/store";
 const { useNewsStore } = useStore();
 import { toast } from "@/utils/feedback";
+import eventBus from "@/utils/eventBus";
+
+eventBus.on("resetNews", () => {
+  initNews();
+})
 
 const newsTypes = computed(() => {
   return useNewsStore.lists.filter(item => item.visible);
@@ -53,9 +58,13 @@ const fetchNews = (item, flag) => {
     item["isFetching"] = false;
   })
 }
-newsTypes.value.forEach(item => {
-  fetchNews(item, false);
-})
+const initNews = () => {
+  newsTypes.value.forEach(item => {
+    fetchNews(item, false);
+  })
+}
+
+initNews();
 
 const formateTime = (dateString) => {
   return dayjs(dateString).format('YYYY-MM-DD HH:mm:ss');

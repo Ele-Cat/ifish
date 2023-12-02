@@ -1,6 +1,15 @@
 <template>
   <div class="settings-news">
-    <p class="title">支持拖拽排序、是否启用</p>
+    <div class="header">
+      <p>支持拖拽排序、是否启用</p>
+      <a-popconfirm
+        title="确认重置资讯设置？"
+        placement="left"
+        @confirm="handleResetNews"
+      >
+        <a-button size="small" type="primary">重置</a-button>
+      </a-popconfirm>
+    </div>
     <perfect-scrollbar class="scroll-bar">
       <Draggable
         :list="useNewsStore.lists"
@@ -27,11 +36,18 @@
 import Draggable from "vuedraggable";
 import useStore from "@/store";
 const { useNewsStore } = useStore();
+
+const handleResetNews = () => {
+  useNewsStore.reset();
+} 
 </script>
 
 <style lang="less" scoped>
 .settings-news {
-  .title {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 0 4px 8px;
   }
   // .scroll-bar {

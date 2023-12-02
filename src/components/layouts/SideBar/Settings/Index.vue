@@ -34,8 +34,8 @@ import useStore from "@/store";
 const { useSystemStore } = useStore();
 const SettingsBasic = defineAsyncComponent(() => import("./SettingsBasic.vue"));
 const SettingsAppearance = defineAsyncComponent(() => import("./SettingsAppearance.vue"));
-const SettingsShortcutKey = defineAsyncComponent(() => import("./SettingsShortcutKey.vue"));
 const SettingsNews = defineAsyncComponent(() => import("./SettingsNews.vue"));
+const SettingsShortcutKey = defineAsyncComponent(() => import("./SettingsShortcutKey.vue"));
 const SettingsData = defineAsyncComponent(() => import("./SettingsData.vue"));
 
 const props = defineProps({

@@ -80,7 +80,7 @@ const wordGames = reactive([
   {
     label: "小黑屋",
     icon: "https://qiujunya.com/adarkroom/favicon.ico",
-    url: "http://doublespeakgames.github.io/adarkroom/?lang=zh_cn",
+    url: "https://game.ur1.fun/adarkroom/?lang=cn",
   },
   {
     label: "猫国建设者",

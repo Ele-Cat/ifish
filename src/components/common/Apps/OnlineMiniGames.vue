@@ -130,6 +130,10 @@ const gameList = reactive([
     url: "https://haiyong.site/moyu/msts/",
   },
   {
+    label: "恐龙快跑",
+    url: "https://game.ur1.fun/dinosaur/",
+  },
+  {
     label: "吃豆人",
     url: "https://haiyong.site/moyu/dou.html",
   },

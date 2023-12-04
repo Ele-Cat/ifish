@@ -40,6 +40,8 @@ const newsTypes = computed(() => {
 });
 const fetchNews = (item, flag) => {
   // const url = `https://api.moyuduck.com/hot/top?type=${item.value}`;
+
+  // https://hot.ahfi.cn/#/
   const url = `https://dailyhot-api.ahfi.cn/${item.value}`;
   item["isFetching"] = true;
   item["data"] = [];

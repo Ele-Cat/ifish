@@ -19,7 +19,7 @@ const getNowDate = () => {
 };
 
 const getNowTime = () => {
-  return `${dayjs().format("HH:mm:ss")}`;
+  return useSystemStore.settings.showSeconds ? `${dayjs().format("HH:mm:ss")}` : `${dayjs().format("HH:mm")}`;
 };
 
 const nowDate = ref(getNowDate());

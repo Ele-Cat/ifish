@@ -9,6 +9,7 @@ const settings = {
   darkMode: false,
   showTime: true,
   showDate: true,
+  showSeconds: true,
   appRadius: 8,
   wallpaper: {
     key: "Ctrl + E",

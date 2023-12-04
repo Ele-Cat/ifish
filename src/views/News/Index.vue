@@ -35,6 +35,12 @@ eventBus.on("resetNews", () => {
   initNews();
 })
 
+axios.get("https://dailyhot-api.ahfi.cn/zhihu/").then(res => {
+  console.log('res: ', res);
+}).catch(() => {
+  item["isFetching"] = false;
+})
+
 const newsTypes = computed(() => {
   return useNewsStore.lists.filter(item => item.visible);
 });

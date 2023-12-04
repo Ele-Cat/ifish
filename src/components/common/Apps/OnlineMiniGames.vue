@@ -102,8 +102,6 @@ const props = defineProps({
   },
 });
 
-// https://hellokit.com.cn/web/game
-
 const activeIndex = ref(0);
 const gameListVisible = ref(true);
 const gameList = reactive([

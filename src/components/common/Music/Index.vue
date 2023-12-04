@@ -1,5 +1,5 @@
 <template>
-  <div class="music">
+  <div class="music" :class="[useMusicStore.visible ? 'show' : '']">
     <audio
       ref="audioRef"
       controls
@@ -297,7 +297,10 @@ const musicMode = computed(() => {
   position: fixed;
   bottom: 0;
   width: 100%;
-  z-index: 1001;
+  z-index: 999;
+  &.show {
+    z-index: 1001;
+  }
   .toggle-icon {
     position: absolute;
     width: 28px;
@@ -307,7 +310,7 @@ const musicMode = computed(() => {
     right: 20px;
     background-color: var(--theme-bg-color-a8);
     color: var(--theme-text-color);
-    transition: top 0.45s ease-in-out;
+    transition: top 0.2s ease-in-out;
     border-radius: 10px 10px 0 0;
     cursor: pointer;
     &.up {

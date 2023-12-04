@@ -113,8 +113,33 @@ export const newsList = [
     visible: true,
   },
   {
-    label: "历史上的今天",
-    value: "history",
+    label: "腾讯新闻",
+    value: "newsqq",
+    visible: true,
+  },
+  {
+    label: "澎湃新闻",
+    value: "thepaper",
+    visible: true,
+  },
+  {
+    label: "36氪",
+    value: "36kr",
+    visible: true,
+  },
+  {
+    label: "少数派",
+    value: "sspai",
+    visible: true,
+  },
+  {
+    label: "IT之家",
+    value: "ithome",
+    visible: true,
+  },
+  {
+    label: "稀土掘金",
+    value: "juejin",
     visible: true,
   },
 ];

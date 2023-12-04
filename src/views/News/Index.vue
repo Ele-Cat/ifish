@@ -12,7 +12,7 @@
           <div v-else>
             <a class="news-info" v-for="(news, index) in newsType['data']" :key="index" :href="news.url" :title="news.title" target="_blank">
               <span>{{ index + 1 }}.<template v-if="newsType.value === '历史上的今天'">【{{ news.year }}年】</template>{{ news.title }}</span>
-              <span>{{ news.hotValue }}</span>
+              <span>{{ formatHot(news.hot) }}</span>
             </a>
           </div>
         </perfect-scrollbar>
@@ -35,24 +35,19 @@ eventBus.on("resetNews", () => {
   initNews();
 })
 
-axios.get("https://dailyhot-api.ahfi.cn/zhihu/").then(res => {
-  console.log('res: ', res);
-}).catch(() => {
-  item["isFetching"] = false;
-})
-
 const newsTypes = computed(() => {
   return useNewsStore.lists.filter(item => item.visible);
 });
 const fetchNews = (item, flag) => {
-  const url = `https://api.moyuduck.com/hot/top?type=${item.value}`;
+  // const url = `https://api.moyuduck.com/hot/top?type=${item.value}`;
+  const url = `https://dailyhot-api.ahfi.cn/${item.value}`;
   item["isFetching"] = true;
   item["data"] = [];
   axios.get(url).then(res => {
     const {data, code} = res.data;
     if (code === 200) {
-      item["data"] = data.hotTops;
-      item["updateTime"] = formateTime(data.time);
+      item["data"] = data.sort((a, b) => b.hot - a.hot);
+      item["updateTime"] = formateTime(data.updateTime);
       if (flag) {
         toast({
           content: `${item.label}拉取成功！`
@@ -74,6 +69,16 @@ initNews();
 
 const formateTime = (dateString) => {
   return dayjs(dateString).format('YYYY-MM-DD HH:mm:ss');
+}
+const formatHot = (hot) => {
+  if (hot) {
+    let hotStr = hot.toString();
+    if (hotStr.indexOf("万") >= 0 || Number(hotStr) < 10000) {
+      return hotStr;
+    } else {
+      return (Number(hotStr) / 10000).toFixed(1) + "万";
+    }
+  }
 }
 </script>
 

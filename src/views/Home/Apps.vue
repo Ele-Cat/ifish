@@ -268,4 +268,9 @@ const handleAppClick = (app) => {
     }
   }
 }
+@media screen and (max-width: 768px) {
+  :root {
+    --grid-size: 4.6rem;
+  }
+}
 </style>

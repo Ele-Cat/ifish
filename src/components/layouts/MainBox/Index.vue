@@ -67,7 +67,7 @@ const mainComponents = shallowRef({
 @media screen and (max-width: 640px) {
   .main-box {
     .scroll-bar {
-      padding: 10px 76px 0;
+      padding: 10px 58px 0;
     }
   }
 }

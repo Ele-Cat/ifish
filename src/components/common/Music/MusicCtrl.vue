@@ -12,7 +12,9 @@
           alt=""
         />
       </div>
-      {{ playingMusic.name }} - {{ playingMusic.singer }}
+      <div>
+        <span class="name">{{ playingMusic.name }}</span><span class="line"> - </span><span class="singer">{{ playingMusic.singer }}</span>
+      </div>
     </div>
     <div class="center">
       <div class="prev-next">
@@ -256,6 +258,12 @@ const handleShowShortkey = () => {
     margin: 0 12px 0 0;
     display: flex;
     align-items: center;
+    font-weight: bold;
+    .line {
+      display: inline-block;
+      padding: 0 4px;
+      font-weight: normal;
+    }
     .add {
       color: var(--primary-color);
       cursor: pointer;
@@ -421,6 +429,32 @@ const handleShowShortkey = () => {
   }
   100% {
     transform: rotate(-360deg);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .music-box {
+    .info {
+      font-size: 12px;
+      .name {
+        font-size: 16px;
+        display: block;
+        margin-bottom: 6px;
+      }
+      .line {
+        display: none;
+      }
+    }
+    .center {
+      left: 30%;
+      right: 30%;
+    }
+    .ifish-music-shortkey, .ifish-music-lyric, .progress-box, .volume {
+      display: none !important;
+    }
+    .prev-next {
+      margin: 0 !important;
+    }
   }
 }
 </style>

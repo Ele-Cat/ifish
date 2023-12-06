@@ -12,8 +12,102 @@
         :src="playingMusic.cover"
         alt=""
       />
-      <p>{{ playingMusic.name }}</p>
-      <span>{{ playingMusic.singer }}</span>
+      <p class="name">{{ playingMusic.name }}</p>
+      <span class="singer">{{ playingMusic.singer }}</span>
+      <div class="progress-box">
+        <p>{{ secToMs(currentTime) }}</p>
+        <a-slider
+          class="play-slider"
+          :min="0"
+          :max="musicDuration"
+          @change="handleDurationChange"
+          v-model:value="currentTime"
+          :tipFormatter="progressTipFormatter"
+        />
+        <p>{{ secToMs(musicDuration) }}</p>
+      </div>
+      <div class="prev-next">
+        <div class="mode">
+          <a-tooltip :title="musicMode">
+            <i
+              class="ifishfont ifish-musicListLoop"
+              title="列表循环"
+              v-if="useMusicStore.settings.mode === 'listCycle'"
+              @click="handleChangeMode('singleCycle')"
+            ></i>
+            <i
+              class="ifishfont ifish-musicSingleCycle"
+              title="单曲循环"
+              v-if="useMusicStore.settings.mode === 'singleCycle'"
+              @click="handleChangeMode('randomPlay')"
+            ></i>
+            <i
+              class="ifishfont ifish-musicRandomPlay"
+              title="随机播放"
+              v-if="useMusicStore.settings.mode === 'randomPlay'"
+              @click="handleChangeMode('listCycle')"
+            ></i>
+          </a-tooltip>
+        </div>
+        <a-tooltip :title="`上一首${prevMusic ? '：' : ''}${prevMusic}`">
+          <VerticalRightOutlined @click="handlePrev" />
+        </a-tooltip>
+        <a-tooltip :title="useMusicStore.settings.playing ? '点击暂停' : '点击播放'">
+          <PlayCircleOutlined
+            class="play"
+            @click="handlePlay"
+            v-if="!useMusicStore.settings.playing"
+          />
+          <PauseCircleOutlined class="pause" @click="handlePause" v-else />
+        </a-tooltip>
+        <a-tooltip :title="`下一首${nextMusic ? '：' : ''}${nextMusic}`">
+          <VerticalLeftOutlined @click="handleNext" />
+        </a-tooltip>
+        <a-popover title="播放列表" placement="rightBottom">
+          <template #content>
+            <perfect-scrollbar class="scroll-music">
+              <div class="music-list">
+                <div
+                  class="music-item"
+                  v-for="(item, index) in useMusicStore.musicList"
+                  :key="index"
+                  :class="{ active: useMusicStore.activeIndex === index }"
+                  @click="handlePlayNow(index)"
+                >
+                  <div class="music-cover">
+                    <img
+                      :src="item.cover"
+                      onerror="this.src='./images/music.png'"
+                      alt=""
+                    />
+                  </div>
+                  <div class="music-info">
+                    <p>{{ item.name }}</p>
+                    <span>{{ item.singer }}</span>
+                  </div>
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </template>
+          <MenuUnfoldOutlined class="list-ico" />
+        </a-popover>
+      </div>
+    </div>
+    <div class="music-lyric">
+      <p class="no-lyric" v-if="!lyricList.length">暂无歌词</p>
+      <perfect-scrollbar class="scroll-bar" id="lyric-list">
+        <p
+          v-for="(item, index) in lyricList"
+          :class="{ active: shouldHighlight(index) }"
+          :key="index"
+          @click="handleLyricJump(item, index)"
+        >
+          <span>{{ item.time }}</span>
+          {{ item.lyric }}
+        </p>
+      </perfect-scrollbar>
+    </div>
+    <div class="ctrl-btm">
       <div class="progress-box">
         <p>{{ secToMs(currentTime) }}</p>
         <a-slider
@@ -92,20 +186,6 @@
           <MenuUnfoldOutlined />
         </a-popover>
       </div>
-    </div>
-    <div class="music-lyric">
-      <p class="no-lyric" v-if="!lyricList.length">暂无歌词</p>
-      <perfect-scrollbar class="scroll-bar" id="lyric-list">
-        <p
-          v-for="(item, index) in lyricList"
-          :class="{ active: shouldHighlight(index) }"
-          :key="index"
-          @click="handleLyricJump(item, index)"
-        >
-          <span>{{ item.time }}</span>
-          {{ item.lyric }}
-        </p>
-      </perfect-scrollbar>
     </div>
     <div class="action">
       <DoubleRightOutlined class="close" title="关闭歌词" @click="handleClose" />
@@ -334,7 +414,7 @@ const handleLyricJump = (item, idx) => {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .music-fullscreen {
   position: fixed;
   left: 0;
@@ -384,58 +464,11 @@ const handleLyricJump = (item, idx) => {
     }
     .cover {
       max-width: 56%;
-      max-width: 80%;
       margin-bottom: 20px;
       transition: all 0.3s ease-in-out;
-      &.playing {
-        max-width: 80%;
-      }
     }
-    p {
+    .name {
       font-size: 32px;
-    }
-    .progress-box {
-      width: 66%;
-      min-width: 200px;
-      display: flex;
-      align-items: center;
-      margin-top: 20px;
-      p {
-        font-size: 12px;
-      }
-      .play-slider {
-        flex: 1;
-        margin: 0 12px;
-        :deep(.ant-slider-rail) {
-          background-color: #fff;
-        }
-        :deep(.ant-slider-track) {
-          background-color: var(--primary-color);
-        }
-      }
-    }
-    .mode {
-      margin: 0 4px;
-      cursor: pointer;
-      position: relative;
-      top: 1px;
-      i {
-        font-size: 32px;
-      }
-      &:hover {
-        color: var(--primary-color);
-      }
-    }
-    .prev-next {
-      display: flex;
-      align-items: center;
-      margin-top: 20px;
-      font-size: 24px;
-      .play,
-      .pause {
-        font-size: 36px;
-        margin: 0 12px;
-      }
     }
   }
   .music-lyric {
@@ -507,6 +540,9 @@ const handleLyricJump = (item, idx) => {
       }
     }
   }
+  .ctrl-btm {
+    display: none;
+  }
   .action {
     position: absolute;
     top: 20px;
@@ -528,9 +564,55 @@ const handleLyricJump = (item, idx) => {
     }
   }
 }
+.progress-box {
+  width: 66%;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  p {
+    font-size: 12px;
+  }
+  .play-slider {
+    flex: 1;
+    margin: 0 12px;
+    :deep(.ant-slider-rail) {
+      background-color: #fff;
+    }
+    :deep(.ant-slider-track) {
+      background-color: var(--primary-color);
+    }
+  }
+}
+.mode {
+  margin: 0 14px;
+  cursor: pointer;
+  position: relative;
+  top: 1px;
+  i {
+    font-size: 32px;
+  }
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+.prev-next {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 24px;
+  .play,
+  .pause {
+    font-size: 36px;
+    margin: 0 12px;
+  }
+}
+.anticon-menu-unfold {
+  margin: 0 14px;
+}
 </style>
 
-<style lang="less">
+<style lang="less" scoped>
 .scroll-music {
   max-height: 360px;
 }
@@ -572,6 +654,55 @@ const handleLyricJump = (item, idx) => {
         color: var(--primary-color);
       }
       background-color: var(--theme-bg-color-a8);
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .music-fullscreen {
+    flex-direction: column;
+    justify-content: space-between;
+    .music-info {
+      width: 100%;
+      height: 30vh;
+      .cover {
+        max-width: 14vh;
+        margin: 10px 0;
+      }
+      .name {
+        font-size: 24px;
+      }
+      .progress-box, .prev-next {
+        display: none;
+      }
+    }
+    .music-lyric {
+      height: 50vh;
+      .scroll-bar {
+        padding: 30vh 0 30vh 0;
+        p {
+          font-size: 16px;
+          padding: 6px 0;
+          &:hover {
+            background-color: transparent;
+            backdrop-filter: saturate(100%) blur(0);
+            color: #eee;
+            span {
+              display: none;
+            }
+          }
+          &.active {
+            font-size: 22px;
+            color: var(--primary-color);
+          }
+        }
+      }
+    }
+    .ctrl-btm {
+      height: 16vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #eee;
     }
   }
 }

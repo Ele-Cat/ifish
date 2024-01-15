@@ -39,7 +39,9 @@ export function fileToBase64(file) {
  */
 export function renderIco(url) {
   // const apiUrl = "https://api.vvhan.com/api/ico?url=" + url.replace(/^https?:\/\//i, '');
-  const apiUrl = "https://api.iowen.cn/favicon/" + url.replace(/^https?:\/\//i, '') + ".png";
+  // const apiUrl = "https://api.iowen.cn/favicon/" + url.replace(/^https?:\/\//i, '') + ".png";
+  const apiUrl = `https://icon.7udh.com/${url.replace("http://", "").replace("https://", "").split('/')[0]}.png`
+
   return apiUrl;
 }
 

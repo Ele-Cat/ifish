@@ -4,7 +4,7 @@
       <p v-if="offTime.indexOf(':') >= 0">距离下班时间还有</p>
       <p>{{ offTime }}</p>
     </div>
-    <img src="https://i.postimg.cc/pVzqwjn0/qipao.png" alt="" />
+    <img src="https://tucdn.wpon.cn/2024/05/28/d895272cf7406.png" alt="" />
   </div>
   <IDialog
     title="配置"

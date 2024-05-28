@@ -13,7 +13,7 @@
     <a-spin :spinning="false" tip="加载中，请耐心等待...">
       <iframe
         ref="iframeRef"
-        src="https://ele-cat.gitee.io/comp-gpt/"
+        src="https://ele-cat.github.io/comp-gpt/"
         :style="{
           height: 'calc(100vh - 60px)',
         }"

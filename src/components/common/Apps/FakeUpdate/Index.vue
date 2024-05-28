@@ -116,7 +116,7 @@ const fakes = reactive([
   },
   {
     label: "黑客帝国",
-    cover: "https://i.postimg.cc/cC9Jvv3R/image.png",
+    cover: "https://tucdn.wpon.cn/2024/05/28/17f338d50c46a.jpg",
     component: TheMatrix,
   },
 ]);

@@ -27,8 +27,8 @@ const props = defineProps({
 const dialogVisible = ref(false);
 const tiangou = ref("");
 const getTiangou = () => {
-  axios.get('https://api.moyuduck.com/tiangou').then(res => {
-    tiangou.value = res.data.data;
+  axios.get('https://api.lolimi.cn/API/tgrj/api.php').then(res => {
+    tiangou.value = res.data;
   })
 }
 

@@ -49,7 +49,7 @@
               :key="index"
               @click="handlePlayNow(item, index)"
             >
-              <p title="立即播放">{{ item.song }} - {{ item.singers }}</p>
+              <p title="立即播放">{{ item.SongName }} - {{ item.SingerName }}</p>
               <div class="search-action">
                 <a-dropdown placement="bottomLeft" arrow>
                   <EllipsisOutlined />
@@ -127,7 +127,8 @@ const handleSearchRes = (item) => {
   searchText.value = item;
   searchLoading.value = true;
 
-  const url = `https://api.lolimi.cn/API/qqdg/api.php?msg=${item}&p=${pageNo.value}&sc=${pageSize}`;
+  const url = `http://www.dreamling.top/API/kugou/android_lite/music/api.php?keyword=${item}&page=${pageNo.value}&pagenum=${pageSize}&format=json`;
+  // const url = `https://api.lolimi.cn/API/qqdg/api.php?msg=${item}&p=${pageNo.value}&sc=${pageSize}`;
   // const url = `https://xiaoapi.cn/API/yy_sq.php?msg=${item}`
   axios.get(url).then((res) => {
     if (res.data.code === 1) {

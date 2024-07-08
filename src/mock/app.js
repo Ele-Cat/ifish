@@ -15,8 +15,10 @@ export const systemComponents = [
   {
     type: "component",
     title: "60s读懂世界",
-    component: "readWorld",
+    // component: "readWorld",
+    component: "imgpreview",
     icon: "https://z1.ax1x.com/2023/11/20/piUUbu9.jpg",
+    url: "https://api.03c3.cn/api/zb",
   },
   {
     type: "component",
